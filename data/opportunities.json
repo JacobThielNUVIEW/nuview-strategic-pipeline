@@ -1,89 +1,72 @@
 {
   "opportunities": [
     {
-      "id": "6437",
-      "title": "ESA Living Planet Fellowship",
-      "pillar": "International",
-      "deadline": "2025-09-28",
-      "forecast_value": "\u20ac60k",
-      "next_action": "Draft Proposal",
-      "owner": "TBD",
-      "link": "https://sam.gov"
-    },
-    {
-      "id": "7800",
+      "id": "dod/diu-311",
       "title": "DIU \u2014 Project DRM-3 (Alternative PNT)",
-      "pillar": "Defense",
-      "deadline": "2025-11-16",
-      "forecast_value": "$3M\u2013$8M",
-      "next_action": "Submit Demo Brief",
-      "owner": "TBD",
-      "link": "https://sam.gov"
-    },
-    {
-      "id": "8850",
-      "title": "USGS GPSC Subcontracting (High-Revisit)",
       "pillar": "Federal",
+      "forecast_value": "$5,000,000",
+      "link": "https://sam.gov",
+      "deadline": "2025-11-16",
+      "next_action": "Submit Demo Brief",
+      "timeline": {
+        "daysUntil": -2,
+        "urgency": "urgent"
+      },
+      "funding": {
+        "amountUSD": 5000000
+      }
+    },
+    {
+      "id": "usgs-863",
+      "title": "USGS GPSC Subcontracting",
+      "pillar": "Federal",
+      "forecast_value": "$850,000,000",
+      "link": "https://sam.gov",
       "deadline": "2025-12-15",
-      "forecast_value": "$5M\u2013$25M",
       "next_action": "Prime Outreach",
-      "owner": "TBD",
-      "link": "https://sam.gov"
+      "timeline": {
+        "daysUntil": 27,
+        "urgency": "urgent"
+      },
+      "funding": {
+        "amountUSD": 850000000
+      }
     },
     {
-      "id": "1024",
-      "title": "Mining \u2014 Stockpile Volumetrics POC",
-      "pillar": "Commercial",
-      "deadline": "2025-12-31",
-      "forecast_value": "$50k\u2013$400k/yr",
-      "next_action": "Identify Site",
-      "owner": "TBD",
-      "link": "https://sam.gov"
-    },
-    {
-      "id": "9049",
+      "id": "fl gio-504",
       "title": "Florida Seafloor Mapping",
-      "pillar": "State/Local",
+      "pillar": "Federal",
+      "forecast_value": "$10,000,000",
+      "link": "https://sam.gov",
       "deadline": "2025-12-31",
-      "forecast_value": "$10M (BIL)",
       "next_action": "Teaming Agreement",
-      "owner": "TBD",
-      "link": "https://sam.gov"
+      "timeline": {
+        "daysUntil": 43,
+        "urgency": "near"
+      },
+      "funding": {
+        "amountUSD": 10000000
+      }
     },
     {
-      "id": "4686",
+      "id": "nasa-541",
       "title": "NASA ROSES-2025 Omnibus",
       "pillar": "Federal",
+      "forecast_value": "$5,000,000",
+      "link": "https://sam.gov",
       "deadline": "2026-12-31",
-      "forecast_value": "$5M+",
       "next_action": "Proposal Dev",
-      "owner": "TBD",
-      "link": "https://sam.gov"
-    },
-    {
-      "id": "4550",
-      "title": "California Statewide LiDAR Refresh",
-      "pillar": "State/Local",
-      "deadline": "2027-01-01",
-      "forecast_value": "$20M\u2013$50M",
-      "next_action": "Capture Strategy",
-      "owner": "TBD",
-      "link": "https://sam.gov"
-    },
-    {
-      "id": "1985",
-      "title": "H.R. 187: MAPWaters Act",
-      "pillar": "Federal",
-      "deadline": "FY2026",
-      "forecast_value": "Appropriations",
-      "next_action": "Monitor",
-      "owner": "TBD",
-      "link": "https://sam.gov"
+      "timeline": {
+        "daysUntil": 408,
+        "urgency": "future"
+      },
+      "funding": {
+        "amountUSD": 5000000
+      }
     }
   ],
   "meta": {
-    "updated": "2025-11-17T14:49:39.067952Z",
-    "market_val": 14.13,
-    "cagr": 19.43
+    "updated": "2025-11-17T15:17:51.404884Z",
+    "totalCount": 4
   }
 }
