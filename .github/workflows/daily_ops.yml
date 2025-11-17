@@ -1,0 +1,34 @@
+name: NUVIEW Daily Intel
+on:
+  schedule: [{cron: '0 3 * * *'}]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  intel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # CRITICAL FOR REBASING
+      - uses: actions/setup-python@v4
+        with: {python-version: '3.10'}
+      - run: pip install requests pandas
+      - name: Run Forecast & Scrape
+        run: python scripts/scrapers/scrape_all.py
+      - name: Commit & Sync
+        run: |
+          git config --local user.email "bot@nuview.space"
+          git config --local user.name "NUVIEW Intel Bot"
+          git add data/opportunities.json
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          
+          git commit -m "Daily Intel Update"
+          
+          # SMART SYNC: Pull changes before pushing to prevent conflicts
+          git pull --rebase origin main
+          git push
