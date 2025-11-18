@@ -69,20 +69,35 @@
 async function init() {
     try {
         const res = await fetch('data/opportunities.json');
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const json = await res.json();
         
-        document.getElementById('market-val').innerText = "$" + json.meta.market_val + "B";
-        document.getElementById('market-cagr').innerText = json.meta.cagr + "%";
+        if (json.meta && json.meta.market_val) {
+            document.getElementById('market-val').innerText = "$" + json.meta.market_val + "B";
+        }
+        if (json.meta && json.meta.cagr) {
+            document.getElementById('market-cagr').innerText = json.meta.cagr + "%";
+        }
 
         const list = document.getElementById('action-list');
         list.innerHTML = '';
-        json.opportunities.forEach(o => {
-            const li = document.createElement('li');
-            li.style.marginBottom = "10px";
-            li.innerHTML = `<span class="badge bg-primary">${o.pillar}</span> <strong>${o.deadline}:</strong> ${o.title} — <span style="color:#EE3338; font-weight:bold;">${o.next_action}</span>`;
-            list.appendChild(li);
-        });
-    } catch(e) { document.getElementById('action-list').innerHTML = '<li>Using cached data...</li>'; }
+        
+        if (json.opportunities && json.opportunities.length > 0) {
+            json.opportunities.forEach(o => {
+                const li = document.createElement('li');
+                li.style.marginBottom = "10px";
+                li.innerHTML = `<span class="badge bg-primary">${o.pillar}</span> <strong>${o.deadline}:</strong> ${o.title} — <span style="color:#EE3338; font-weight:bold;">${o.next_action}</span>`;
+                list.appendChild(li);
+            });
+        } else {
+            list.innerHTML = '<li>No opportunities available.</li>';
+        }
+    } catch(e) { 
+        console.error('Error loading data:', e);
+        document.getElementById('action-list').innerHTML = '<li style="color:#EE3338;">Error loading data. Please check the console for details.</li>'; 
+    }
 }
 init();
 </script>

@@ -1,7 +1,7 @@
 {
   "opportunities": [
     {
-      "id": "dod/diu-987",
+      "id": "dod-diu-564",
       "title": "DIU \u2014 Project DRM-3 (Alternative PNT)",
       "pillar": "Federal",
       "forecast_value": "$5,000,000",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "id": "usgs-980",
+      "id": "usgs-764",
       "title": "USGS GPSC Subcontracting",
       "pillar": "Federal",
       "forecast_value": "$850,000,000",
@@ -33,7 +33,7 @@
       }
     },
     {
-      "id": "fl gio-414",
+      "id": "fl-gio-185",
       "title": "Florida Seafloor Mapping",
       "pillar": "Federal",
       "forecast_value": "$10,000,000",
@@ -49,7 +49,7 @@
       }
     },
     {
-      "id": "nasa-419",
+      "id": "nasa-283",
       "title": "NASA ROSES-2025 Omnibus",
       "pillar": "Federal",
       "forecast_value": "$5,000,000",
@@ -66,7 +66,9 @@
     }
   ],
   "meta": {
-    "updated": "2025-11-18T11:59:53.718392Z",
-    "totalCount": 4
+    "updated": "2025-11-18T12:02:23.179802+00:00",
+    "totalCount": 4,
+    "market_val": "14.13",
+    "cagr": "19.43"
   }
 }

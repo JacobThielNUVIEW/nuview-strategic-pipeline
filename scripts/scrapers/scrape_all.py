@@ -14,7 +14,7 @@ def get_urgency(days):
 
 def run_pipeline():
     print("🕷️  RUNNING DAILY INTEL UPDATE...")
-    current_time = datetime.datetime.utcnow().isoformat() + "Z"
+    current_time = datetime.datetime.now(datetime.UTC).isoformat()
     
     # --- 1. GENERATE CORE OPPORTUNITIES (opportunities.json) ---
     targets = [
@@ -29,7 +29,7 @@ def run_pipeline():
         days_until = (datetime.datetime.strptime(op['deadline'], "%Y-%m-%d") - datetime.datetime.now()).days
         
         processed.append({
-            "id": f"{op['agency'].lower()}-{random.randint(100,999)}",
+            "id": f"{op['agency'].lower().replace('/', '-').replace(' ', '-')}-{random.randint(100,999)}",
             "title": op['title'],
             "pillar": "Federal",
             "forecast_value": f"${op['funding']:,}",
@@ -41,7 +41,15 @@ def run_pipeline():
         })
     
     # Save opportunities.json
-    final_opps_json = { "opportunities": processed, "meta": { "updated": current_time, "totalCount": len(processed) } }
+    final_opps_json = { 
+        "opportunities": processed, 
+        "meta": { 
+            "updated": current_time, 
+            "totalCount": len(processed),
+            "market_val": "14.13",
+            "cagr": "19.43"
+        } 
+    }
     with open(OUTPUT_FILE, 'w') as f:
         json.dump(final_opps_json, f, indent=2)
     
