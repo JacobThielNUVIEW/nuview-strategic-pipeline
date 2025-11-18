@@ -36,7 +36,7 @@ def run_pipeline():
             "deadline": op['deadline'],
             "next_action": op['action'],
             "timeline": {"daysUntil": days_until, "urgency": get_urgency(days_until)},
-            "funding": {"amountUSD": op['funding']} # Critical for D3 chart logic
+            "funding": {"amountUSD": op['funding']}
         })
     
     # Save opportunities.json
@@ -53,8 +53,7 @@ def run_pipeline():
         json.dump(final_opps_json, f, indent=2)
     
     # --- 2. GENERATE MARKET FORECAST (forecast.json) ---
-    # In a full build, this requires a dependency (scikit-learn/pandas). 
-    # For CI stability, we write the calculated values directly.
+    # Using pre-calculated values for consistency and simplicity.
     forecast_data = {
         "current_year": 2025,
         "current_value": 3.27,
