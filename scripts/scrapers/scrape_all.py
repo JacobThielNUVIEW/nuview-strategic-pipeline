@@ -2,7 +2,6 @@ import json
 import datetime
 import random
 import os
-import time
 
 OUTPUT_FILE = "data/opportunities.json"
 FORECAST_FILE = "data/forecast.json"
