@@ -566,10 +566,10 @@ function renderTopOpportunities() {
     // Sort by value (descending) and urgency (urgent first)
     const sortedPrograms = uniquePrograms.sort((a, b) => {
         // Prioritize urgent items
-        if (a.urgency === 'urgent' && b.urgency !== 'urgent') return -1;
-        if (a.urgency !== 'urgent' && b.urgency === 'urgent') return 1;
+        if (a.timeline?.urgency === 'urgent' && b.timeline?.urgency !== 'urgent') return -1;
+        if (a.timeline?.urgency !== 'urgent' && b.timeline?.urgency === 'urgent') return 1;
         // Then sort by value
-        return (b.valueUSD || 0) - (a.valueUSD || 0);
+        return (b.funding?.amountUSD || 0) - (a.funding?.amountUSD || 0);
     });
     
     // Take top 10
@@ -596,10 +596,10 @@ function renderTopOpportunities() {
                 <span class="matrix-source-badge" role="note" aria-label="Source agency">${program.pillar || 'N/A'}</span>
             </td>
             <td role="cell">${program.category || 'N/A'}</td>
-            <td class="matrix-value" role="cell">${formatCurrency(program.valueUSD || 0)}</td>
-            <td role="cell">${program.deadline || 'TBD'} <small class="text-muted">(${program.daysUntil !== undefined ? program.daysUntil : 'N/A'} days)</small></td>
-            <td role="cell">${getUrgencyBadge(program.urgency)}</td>
-            <td role="cell" style="color: var(--nuview-red); font-weight: 600;">${program.nextAction || 'No action specified'}</td>
+            <td class="matrix-value" role="cell">${formatCurrency(program.funding?.amountUSD || 0)}</td>
+            <td role="cell">${program.deadline || 'TBD'} <small class="text-muted">(${program.timeline?.daysUntil !== undefined ? program.timeline.daysUntil : 'N/A'} days)</small></td>
+            <td role="cell">${getUrgencyBadge(program.timeline?.urgency)}</td>
+            <td role="cell" style="color: var(--nuview-red); font-weight: 600;">${program.next_action || 'No action specified'}</td>
             <td class="matrix-link" role="cell">
                 ${program.link && program.link !== '#' ? `
                 <a href="${program.link}" target="_blank" rel="noopener noreferrer" 
@@ -625,15 +625,15 @@ function renderTopOpportunities() {
 function createProgramCard(program) {
     const card = document.createElement('div');
     card.className = 'program-card';
-    card.setAttribute('data-searchable', `${program.title || ''} ${program.agency || ''} ${program.category || ''} ${program.nextAction || ''}`.toLowerCase());
+    card.setAttribute('data-searchable', `${program.title || ''} ${program.agency || ''} ${program.category || ''} ${program.next_action || ''}`.toLowerCase());
     
     const title = program.title || 'Untitled Program';
     const agency = program.agency || 'N/A';
-    const value = formatCurrency(program.valueUSD || 0);
+    const value = formatCurrency(program.funding?.amountUSD || 0);
     const deadline = program.deadline || 'TBD';
-    const daysUntil = program.daysUntil !== undefined ? program.daysUntil : 'N/A';
-    const urgency = program.urgency || 'future';
-    const nextAction = program.nextAction || 'No action specified';
+    const daysUntil = program.timeline?.daysUntil !== undefined ? program.timeline.daysUntil : 'N/A';
+    const urgency = program.timeline?.urgency || 'future';
+    const nextAction = program.next_action || 'No action specified';
     const description = program.description || 'No description available';
     const link = program.link || '#';
     
@@ -698,8 +698,8 @@ function updateOverview() {
     // Remove duplicates by ID
     const uniquePrograms = Array.from(new Map(allPrograms.map(p => [p.id, p])).values());
     
-    const totalValue = uniquePrograms.reduce((sum, p) => sum + (p.valueUSD || 0), 0);
-    const urgentCount = uniquePrograms.filter(p => p.urgency === 'urgent').length;
+    const totalValue = uniquePrograms.reduce((sum, p) => sum + (p.funding?.amountUSD || 0), 0);
+    const urgentCount = uniquePrograms.filter(p => p.timeline?.urgency === 'urgent').length;
     
     document.getElementById('total-programs').textContent = uniquePrograms.length;
     document.getElementById('total-value').textContent = formatCurrency(totalValue);
@@ -734,11 +734,27 @@ function setupGlobalSearch() {
 // Load programs data
 async function loadPrograms() {
     try {
-        const response = await fetch('../data/processed/programs.json');
+        const response = await fetch('../data/opportunities.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        programsData = await response.json();
+        const data = await response.json();
+        
+        // Transform opportunities.json format to match expected structure
+        const opportunities = data.opportunities || [];
+        
+        // Categorize programs based on category field
+        programsData = {
+            programs: {
+                funding: opportunities.filter(opp => opp.category === 'DaaS'),
+                lidar: opportunities.filter(opp => 
+                    opp.category === 'DaaS' || 
+                    (opp.title && opp.title.toLowerCase().includes('lidar'))
+                ),
+                spaceSystems: opportunities.filter(opp => opp.category === 'R&D'),
+                platform: opportunities.filter(opp => opp.category === 'Platform')
+            }
+        };
         
         // Render top 10 opportunities matrix
         renderTopOpportunities();

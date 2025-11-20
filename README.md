@@ -17,12 +17,15 @@ This project provides a real-time view of global LiDAR market opportunities, for
 
 ```
 .
-├── index.html              # Main dashboard UI
+├── index.html              # Main dashboard UI redirect
 ├── data/
 │   ├── opportunities.json  # Current opportunity pipeline (auto-updated)
 │   ├── forecast.json       # Market forecast data (auto-updated)
-│   └── priority_matrix.csv # Opportunity prioritization matrix
+│   └── processed/
+│       ├── priority_matrix.csv   # Global space agency programs data
+│       └── qc_report.json        # Quality control validation reports
 ├── scripts/
+│   ├── qc_validator.py     # Data quality validation script
 │   └── scrapers/
 │       └── scrape_all.py   # Daily data collection script
 ├── .github/

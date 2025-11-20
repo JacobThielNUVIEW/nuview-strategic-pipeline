@@ -1,5 +1,5 @@
 """
-QC Validator for NUVIEW Topographic Pipeline Data
+QC Validator for NUVIEW Strategic Pipeline Data
 Validates opportunities.json and forecast.json for quality and completeness
 Outputs qc_report.json with detailed validation results
 """
@@ -10,7 +10,7 @@ import sys
 from datetime import datetime, timezone
 
 # Required fields for opportunities
-REQUIRED_OPP_FIELDS = ['id', 'title', 'agency', 'pillar', 'category', 'forecast_value', 
+REQUIRED_OPP_FIELDS = ['id', 'title', 'agency', 'pillar', 'category', 'forecast_value',
                        'link', 'deadline', 'next_action', 'timeline', 'funding']
 REQUIRED_TIMELINE_FIELDS = ['daysUntil', 'urgency']
 REQUIRED_FUNDING_FIELDS = ['amountUSD']
@@ -18,10 +18,10 @@ VALID_CATEGORIES = ['DaaS', 'R&D', 'Platform']
 VALID_URGENCIES = ['urgent', 'near', 'future']
 
 # NUVIEW color codes for console output
-COLOR_GREEN = '\033[92m'  # Success
-COLOR_ORANGE = '\033[93m' # Warning
-COLOR_RED = '\033[91m'    # Error
-COLOR_BLUE = '\033[94m'   # Info
+COLOR_GREEN = '\033[92m'   # Success
+COLOR_ORANGE = '\033[93m'  # Warning
+COLOR_RED = '\033[91m'     # Error
+COLOR_BLUE = '\033[94m'    # Info
 COLOR_RESET = '\033[0m'
 
 def log_info(msg):
@@ -112,14 +112,16 @@ def validate_opportunities_file(filepath):
             if 'amountUSD' in funding and not isinstance(funding['amountUSD'], (int, float)):
                 errors.append(f"Opportunity {idx} ({opp.get('id', 'unknown')}): funding.amountUSD must be numeric")
         
-        # Check for topographic/LiDAR relevance
+        # Check for LiDAR/topographic relevance
         if 'title' in opp:
             title_lower = opp['title'].lower()
-            topographic_keywords = ['lidar', 'topographic', 'elevation', '3dep', 'dem', 'mapping', 'terrain']
+            topographic_keywords = ['lidar', 'topographic', 'elevation', '3dep', 'dem', 
+                                  'mapping', 'terrain', 'earth observation', 'geospatial']
             if not any(keyword in title_lower for keyword in topographic_keywords):
                 # Check category as well
                 if opp.get('category') != 'DaaS':
-                    warnings.append(f"Opportunity {idx} ({opp.get('id', 'unknown')}): May not be topographic-related (no relevant keywords found)")
+                    warnings.append(f"Opportunity {idx} ({opp.get('id', 'unknown')}): "
+                                  f"May not be topographic-related (no relevant keywords found)")
     
     # Validate meta.totalCount matches actual count
     if 'meta' in data and 'totalCount' in data['meta']:
@@ -205,7 +207,7 @@ def generate_qc_report(opp_errors, opp_warnings, forecast_errors, forecast_warni
 def main():
     """Main QC validation logic"""
     log_info("=" * 60)
-    log_info("NUVIEW TOPOGRAPHIC PIPELINE - QC VALIDATION")
+    log_info("NUVIEW STRATEGIC PIPELINE - QC VALIDATION")
     log_info("=" * 60)
     
     # Validate opportunities.json

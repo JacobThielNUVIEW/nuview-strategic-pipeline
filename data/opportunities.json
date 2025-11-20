@@ -2,93 +2,93 @@
   "meta": {
     "market_val": "14.13",
     "cagr": "19.43",
-    "updated": "2025-11-20T21:30:57.457466Z",
+    "updated": "2025-11-20T22:45:33.324697Z",
     "totalCount": 4
   },
   "opportunities": [
     {
+      "id": "usgs-946",
       "title": "USGS 3DEP LiDAR Acquisition 2026",
       "agency": "USGS",
-      "amountUSD": 217000000,
-      "daysUntilDeadline": 28,
-      "category": "DaaS",
-      "deadline": "2025-12-15",
-      "next_action": "Submit Demo Brief",
-      "id": "usgs-398",
-      "scrapedAt": "2025-11-20T21:30:57.457466Z",
+      "scrapedAt": "2025-11-20T22:45:33.324697Z",
       "pillar": "Federal",
+      "category": "DaaS",
       "forecast_value": "$217,000,000",
       "link": "https://sam.gov",
+      "deadline": "2025-12-15",
+      "next_action": "Submit Demo Brief",
       "timeline": {
         "daysUntil": 28,
         "urgency": "urgent"
       },
       "funding": {
         "amountUSD": 217000000
-      }
+      },
+      "amountUSD": 217000000,
+      "daysUntilDeadline": 28
     },
     {
+      "id": "nasa-782",
       "title": "NASA ROSES Omnibus Earth Observation",
       "agency": "NASA",
-      "amountUSD": 50000000,
-      "daysUntilDeadline": 120,
-      "category": "R&D",
-      "deadline": "2026-03-01",
-      "next_action": "Proposal Dev",
-      "id": "nasa-365",
-      "scrapedAt": "2025-11-20T21:30:57.457466Z",
+      "scrapedAt": "2025-11-20T22:45:33.324697Z",
       "pillar": "Federal",
+      "category": "R&D",
       "forecast_value": "$50,000,000",
       "link": "https://sam.gov",
+      "deadline": "2026-03-01",
+      "next_action": "Proposal Dev",
       "timeline": {
         "daysUntil": 120,
         "urgency": "future"
       },
       "funding": {
         "amountUSD": 50000000
-      }
+      },
+      "amountUSD": 50000000,
+      "daysUntilDeadline": 120
     },
     {
+      "id": "esa-603",
       "title": "ESA Digital Twin Earth Platform",
       "agency": "ESA",
-      "amountUSD": 8000000,
-      "daysUntilDeadline": 45,
-      "category": "Platform",
-      "deadline": "2026-01-20",
-      "next_action": "Consortium Lead",
-      "id": "esa-481",
-      "scrapedAt": "2025-11-20T21:30:57.457466Z",
+      "scrapedAt": "2025-11-20T22:45:33.324697Z",
       "pillar": "Federal",
+      "category": "Platform",
       "forecast_value": "$8,000,000",
       "link": "https://sam.gov",
+      "deadline": "2026-01-20",
+      "next_action": "Consortium Lead",
       "timeline": {
         "daysUntil": 45,
         "urgency": "near"
       },
       "funding": {
         "amountUSD": 8000000
-      }
+      },
+      "amountUSD": 8000000,
+      "daysUntilDeadline": 45
     },
     {
+      "id": "diu-968",
       "title": "DIU Spaceborne LiDAR BAA",
       "agency": "DIU",
-      "amountUSD": 10000000,
-      "daysUntilDeadline": 15,
-      "category": "R&D",
-      "deadline": "2025-12-01",
-      "next_action": "Submit Whitepaper",
-      "id": "diu-747",
-      "scrapedAt": "2025-11-20T21:30:57.457466Z",
+      "scrapedAt": "2025-11-20T22:45:33.324697Z",
       "pillar": "Federal",
+      "category": "R&D",
       "forecast_value": "$10,000,000",
       "link": "https://sam.gov",
+      "deadline": "2025-12-01",
+      "next_action": "Submit Whitepaper",
       "timeline": {
         "daysUntil": 15,
         "urgency": "urgent"
       },
       "funding": {
         "amountUSD": 10000000
-      }
+      },
+      "amountUSD": 10000000,
+      "daysUntilDeadline": 15
     }
   ]
 }
