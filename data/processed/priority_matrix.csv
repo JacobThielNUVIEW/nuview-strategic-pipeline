@@ -1,26 +1,21 @@
-country,agency_name,program_name,budget_amount_usd,nuview_priority_score,data_access,sources,agency_url,budget_source_url
-United States,NASA,Earth System Observatory,850000000,95,Open,https://science.nasa.gov/earth/,https://www.nasa.gov/,https://science.nasa.gov/earth-science/earth-system-observatory/
-United States,NOAA,GOES-R Series,650000000,92,Commercial,https://www.nesdis.noaa.gov/,https://www.noaa.gov/,https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/goes-r-series
-European Union,ESA,Copernicus Sentinel,720000000,94,Open,https://www.copernicus.eu/,https://www.esa.int/,https://www.esa.int/Applications/Observing_the_Earth/Copernicus
-China,CNSA,Gaofen Earth Observation,580000000,88,Restricted,https://www.cnsa.gov.cn/,https://www.cnsa.gov.cn/,http://www.cnsa.gov.cn/english/n6465652/n6465653/c6805513/content.html
-Japan,JAXA,ALOS-4 Advanced Land Observing,420000000,90,Open Partnership,https://global.jaxa.jp/,https://global.jaxa.jp/,https://global.jaxa.jp/projects/sat/alos4/
-United Kingdom,UK Space Agency,National Space Technology Programme,380000000,87,Open,https://www.gov.uk/ukspaceagency,https://www.gov.uk/government/organisations/uk-space-agency,https://www.gov.uk/government/publications/national-space-technology-programme
-Germany,DLR,TanDEM-X Mission,340000000,89,Open,https://www.dlr.de/,https://www.dlr.de/en,https://www.dlr.de/en/research-and-transfer/projects-and-missions/tandem-x
-India,ISRO,Cartosat-3 Series,310000000,86,Commercial,https://www.isro.gov.in/,https://www.isro.gov.in/,https://www.isro.gov.in/Cartosat3.html
-Canada,CSA,RADARSAT Constellation Mission,295000000,91,Open Partnership,https://www.asc-csa.gc.ca/,https://www.asc-csa.gc.ca/eng/,https://www.asc-csa.gc.ca/eng/satellites/radarsat/default.asp
-France,CNES,SPOT & Pleiades Neo,280000000,85,Commercial,https://cnes.fr/,https://cnes.fr/en,https://cnes.fr/en/pleiades-neo-constellation
-Australia,Space Agency,National Satellite Programme,245000000,84,Open,https://www.industry.gov.au/space,https://www.industry.gov.au/news-media/australian-space-agency-news,https://www.industry.gov.au/science-technology-and-innovation/space/australian-civil-space-strategy-2023-2033
-Italy,ASI,COSMO-SkyMed Second Generation,230000000,83,Government,https://www.asi.it/,https://www.asi.it/en/,https://www.asi.it/en/earth-science/cosmo-skymed/
-Brazil,AEB,Amazonia Satellite Programme,195000000,82,Open,https://www.gov.br/aeb/,https://www.gov.br/aeb/pt-br,https://www.gov.br/inpe/pt-br/assuntos/ultimas-noticias/satelite-amazonia-1
-South Korea,KARI,CAS500 Compact SAR Satellite,185000000,81,Commercial,https://www.kari.re.kr/,https://www.kari.re.kr/eng.do,https://www.kari.re.kr/eng/sub03_05_01.do
-Spain,INTA,PAZ Satellite Programme,170000000,80,Government,https://www.inta.es/,https://www.inta.es/en,https://www.inta.es/INTA/en/blogs/informacion-corporativa/satelite-paz
-Netherlands,NSO,SmallSat Earth Observation,155000000,79,Open,https://www.space-office.nl/,https://www.space-office.nl/en/,https://www.space-office.nl/en/satellite-data-portal/
-UAE,MBRSC,MBZ-SAT Programme,145000000,78,Open Partnership,https://www.mbrsc.ae/,https://www.mbrsc.ae/en,https://www.mbrsc.ae/en/mbz-sat
-Singapore,OSTIn,TeLEOS Earth Observation,125000000,77,Commercial,https://www.a-star.edu.sg/,https://www.a-star.edu.sg/,https://www.space.gov.sg/
-Israel,ISA,Ofek Satellite Programme,115000000,76,Government,https://space.gov.il/,https://space.gov.il/en/,https://space.gov.il/en/satellites
-Mexico,AEM,Mexsat Earth Observation,98000000,75,Open,https://www.gob.mx/aem,https://www.gob.mx/aem,https://www.gob.mx/aem/acciones-y-programas/satelites
-Argentina,CONAE,SAOCOM Constellation,92000000,74,Open Partnership,https://www.argentina.gob.ar/ciencia/conae,https://www.argentina.gob.ar/ciencia/conae,https://www.argentina.gob.ar/ciencia/conae/misiones-espaciales/saocom
-Norway,NSC,NorSat Microsatellite Programme,85000000,73,Open,https://www.romsenter.no/,https://www.romsenter.no/eng/,https://www.romsenter.no/norsat-programme
-Finland,Business Finland,Arctic Space Programme,78000000,72,Open,https://www.businessfinland.fi/,https://www.businessfinland.fi/en/,https://www.businessfinland.fi/en/for-finnish-customers/services/programs/arctic-space
-New Zealand,NZSA,Space Technology Development,72000000,71,Open,https://www.mbie.govt.nz/,https://www.mbie.govt.nz/,https://www.mbie.govt.nz/science-and-technology/science-and-innovation/agencies-policies-and-budget-initiatives/new-zealand-space-agency/
-Poland,POLSA,Earth Observation Initiative,65000000,70,Open,https://polsa.gov.pl/,https://polsa.gov.pl/en,https://polsa.gov.pl/en/polish-space-strategy
+Rank,Title,Agency,Category,Value USD,Priority Score,Priority Label,Deadline,Urgency,Next Action
+1,USGS 3DEP LiDAR Acquisition 2026 - Phase 1,USGS,DaaS,217000000,200,top USA: score 200,2025-12-18,urgent,Submit Demo Brief
+2,DIU Spaceborne LiDAR BAA,DIU,R&D,15000000,180,top USA: score 180,2025-12-05,urgent,Submit Whitepaper
+3,NGA Commercial Space-Based 3D Mapping,NGA,DaaS,45000000,170,top USA: score 170,2025-12-30,near,Security Clearance Prep
+4,NASA ROSES ICESat-2 Science Team Augmentation,NASA,R&D,12000000,168,top USA: score 168,2026-01-04,near,Proposal Preparation
+5,Google Earth Engine Global DEM Initiative,Google,Platform,30000000,166,top Global: score 166,2026-02-08,near,Data Partnership
+6,NASA Commercial Spaceborne LiDAR Partnership,NASA,R&D,25000000,160,top USA: score 160,2026-02-18,future,Partner Coordination
+7,JAXA ALOS-4 Topographic Mission Support,JAXA,R&D,18000000,160,top Japan: score 160,2026-03-20,future,International Partnership
+8,DLR TanDEM-X Follow-On LiDAR Mission,DLR,R&D,30000000,160,top Global: score 160,2026-02-28,future,Mission Planning
+9,ISRO National Topographic Mapping - LiDAR Phase,ISRO,DaaS,25000000,160,top Global: score 160,2026-03-10,future,India Partnership
+10,Horizon Europe Space-Based Earth Monitoring,EU Commission,R&D,35000000,160,top Global: score 160,2026-03-20,future,Consortium Formation
+11,CSA Arctic Topographic Mapping Program,CSA,DaaS,22000000,154,top Global: score 154,2026-02-13,near,Arctic Capability Demo
+12,UKSA Climate & Environment LiDAR Services,UKSA,DaaS,20000000,148,top Global: score 148,2026-02-18,future,UK Partnership Brief
+13,CNSA Belt & Road Topographic Mapping,CNSA,DaaS,40000000,148,top Global: score 148,2026-03-30,future,International Coordination
+14,AWS Earth on AWS - Elevation Data Partnership,Amazon Web Services,Platform,25000000,148,top Global: score 148,2026-01-29,near,AWS Partnership Brief
+15,Microsoft Planetary Computer Terrain Services,Microsoft,Platform,22000000,146,top Global: score 146,2026-02-13,near,Azure Integration
+16,MIT Lincoln Lab Space-Based Sensing Partnership,MIT,R&D,15000000,140,top Global: score 140,2026-03-10,future,Research Agreement
+17,ESA Digital Twin Earth LiDAR Platform,ESA,Platform,35000000,138,top Europe: score 138,2026-01-04,near,Consortium Lead
+18,Planet Fusion Platform - Elevation Layer Integration,Planet Labs,Platform,18000000,138,top Global: score 138,2026-02-03,near,Platform Integration
+19,USFS National Forest LiDAR Inventory,USDA Forest Service,DaaS,22000000,132,top USA: score 132,2026-02-08,near,Forest Demo
+20,ESRI Living Atlas Premium Elevation Layer,ESRI,Platform,20000000,131,top Global: score 131,2026-02-23,future,ESRI Partnership Meeting
