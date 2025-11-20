@@ -38,7 +38,26 @@ This project provides a real-time view of global LiDAR market opportunities, for
 - Python 3.10+
 - Web browser (for viewing dashboard)
 
-### Installation
+### Quick Start with Automated Setup Script (macOS)
+
+For macOS users, we provide an automated setup script that handles everything:
+
+```bash
+# Download and run the setup script
+curl -O https://raw.githubusercontent.com/JacobThielNUVIEW/nuview-strategic-pipeline/main/setup_and_run.sh
+chmod +x setup_and_run.sh
+./setup_and_run.sh --run-pipeline
+```
+
+This script will:
+- Clone the repository to `/Users/JThiel/Documents/NUVIEW_Pipeline_tool/`
+- Set up a Python virtual environment
+- Install dependencies
+- Run the data collection and validation scripts
+
+For detailed documentation, see [SETUP_SCRIPT_README.md](SETUP_SCRIPT_README.md)
+
+### Manual Installation
 
 1. Clone the repository:
 ```bash
