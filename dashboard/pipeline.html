@@ -283,7 +283,8 @@
                     ...(data.programs?.spaceSystems || []),
                     ...(data.programs?.platform || [])
                 ];
-                // Remove duplicates by ID
+                // Remove duplicates by ID (programs can appear in multiple categories)
+                // This ensures each unique opportunity is counted once in summary statistics
                 opportunitiesData = Array.from(new Map(opportunitiesData.map(p => [p.id, p])).values());
                 
                 renderTables();

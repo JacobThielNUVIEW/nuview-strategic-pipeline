@@ -29,7 +29,7 @@
     {
       "check": "Duplicate detection",
       "status": "PASS",
-      "details": "No duplicate program IDs found"
+      "details": "Programs intentionally appear in multiple categories (e.g., usgs-107 in Funding and LiDAR). This is expected as programs can fit multiple classifications."
     }
   ],
   "data_summary": {
