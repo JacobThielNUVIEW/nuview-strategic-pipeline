@@ -10,28 +10,238 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --nuview-red: #EE3338; --nuview-navy: #001F3F; --nuview-blue: #007BFF; --dark: #343a40; }
-        body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: var(--dark); margin: 0; padding: 0; }
-        .header { background: linear-gradient(135deg, var(--nuview-navy), var(--nuview-blue)); color: white; padding: 2.5rem 0; text-align: center; border-bottom: 5px solid var(--nuview-red); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .sidebar { position: fixed; left: 0; top: 0; height: 100%; width: 260px; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,0.04); z-index: 100; border-right: 2px solid var(--nuview-blue); padding-top: 2rem; overflow-y: auto; }
-        .sidebar a { color: var(--nuview-blue); text-decoration: none; display: block; padding: 0.5rem 1rem; margin-bottom: 5px; transition:0.2s; }
-        .sidebar a.active, .sidebar a:hover { background: #e6effc; color: var(--nuview-navy); border-left: 4px solid var(--nuview-red); }
-        .main-content { margin-left: 260px; padding: 30px; min-height: 100vh; }
-        .section { background: white; border-radius: 16px; padding: 1.8rem; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .section h2 { color: var(--nuview-blue); border-bottom: 3px solid var(--nuview-red); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.6rem; }
-        .heatmap-table th { background: var(--nuview-navy); color: white; }
-        .hot { background: #ffb7a1; font-weight: 700; }
-        .warmer { background: #ffe7c7; }
-        .matrix-cell { text-align: center; padding: 1.5rem; font-size: 1.1rem; border: 2px solid #ddd; }
-        .matrix-cell.empty { background: #f8f9fa; color: #999; }
-        .matrix-cell.low { background: #d4edda; color: #155724; }
-        .matrix-cell.medium { background: #fff3cd; color: #856404; }
-        .matrix-cell.high { background: #f8d7da; color: #721c24; }
-        .matrix-cell.critical { background: #EE3338; color: white; font-weight: bold; }
-        .search-container { padding: 1rem; background: white; margin: 1rem 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .search-input { width: 100%; padding: 0.75rem; border: 2px solid var(--nuview-blue); border-radius: 8px; font-size: 1rem; }
-        .program-card { background: white; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border-left: 4px solid var(--nuview-blue); box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: all 0.2s; }
-        .program-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
+        :root { 
+            --nuview-red: #EE3338; 
+            --nuview-navy: #001F3F; 
+            --nuview-blue: #007BFF; 
+            --nuview-gray: #6c757d;
+            --nuview-light-gray: #e9ecef;
+            --nuview-dark-gray: #495057;
+            --dark: #212529; 
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); 
+            color: var(--dark); 
+            margin: 0; 
+            padding: 0; 
+        }
+        .header { 
+            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%); 
+            color: white; 
+            padding: 2.5rem 0; 
+            text-align: center; 
+            border-bottom: 5px solid var(--nuview-red); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+        }
+        .sidebar { 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            height: 100%; 
+            width: 260px; 
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
+            box-shadow: 2px 0 12px rgba(0,0,0,0.08); 
+            z-index: 100; 
+            border-right: 3px solid var(--nuview-red); 
+            padding-top: 2rem; 
+            overflow-y: auto; 
+        }
+        .sidebar a { 
+            color: var(--nuview-navy); 
+            text-decoration: none; 
+            display: block; 
+            padding: 0.75rem 1.25rem; 
+            margin: 0.25rem 0.5rem; 
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .sidebar a:hover { 
+            background: linear-gradient(90deg, rgba(238, 51, 56, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%); 
+            color: var(--nuview-red); 
+            border-left: 4px solid var(--nuview-red); 
+            padding-left: 1rem;
+            transform: translateX(4px);
+        }
+        .sidebar a.active { 
+            background: linear-gradient(90deg, var(--nuview-red) 0%, var(--nuview-blue) 100%); 
+            color: white; 
+            border-left: 4px solid var(--nuview-navy); 
+            font-weight: 600;
+        }
+        .main-content { 
+            margin-left: 260px; 
+            padding: 30px; 
+            min-height: 100vh; 
+        }
+        .section { 
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
+            border-radius: 16px; 
+            padding: 2rem; 
+            margin: 2rem 0; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
+            border: 1px solid var(--nuview-light-gray);
+            transition: all 0.3s ease;
+        }
+        .section:hover {
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        .section h2 { 
+            color: var(--nuview-navy); 
+            border-bottom: 4px solid var(--nuview-red); 
+            padding-bottom: 0.75rem; 
+            margin-bottom: 1.5rem; 
+            font-size: 1.75rem; 
+            font-weight: 700;
+        }
+        @supports (background-clip: text) or (-webkit-background-clip: text) {
+            .section h2 {
+                background: linear-gradient(90deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+        }
+        
+        /* Top 10 Opportunity Matrix Styles */
+        .matrix-table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0; 
+            margin-top: 1.5rem;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .matrix-table thead th { 
+            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%); 
+            color: white; 
+            padding: 1rem; 
+            text-align: left; 
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 3px solid var(--nuview-red);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .matrix-table thead th:first-child { border-top-left-radius: 12px; }
+        .matrix-table thead th:last-child { border-top-right-radius: 12px; }
+        .matrix-table tbody tr { 
+            transition: all 0.2s ease;
+            background: white;
+        }
+        .matrix-table tbody tr:nth-child(odd) { 
+            background: linear-gradient(90deg, #ffffff 0%, #f8f9fa 100%); 
+        }
+        .matrix-table tbody tr:hover { 
+            background: linear-gradient(90deg, rgba(238, 51, 56, 0.08) 0%, rgba(0, 123, 255, 0.08) 100%);
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .matrix-table tbody td { 
+            padding: 1rem; 
+            border-bottom: 1px solid var(--nuview-light-gray);
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        .matrix-table tbody td:first-child { font-weight: 600; color: var(--nuview-navy); }
+        .matrix-rank { 
+            width: 50px; 
+            text-align: center; 
+            font-weight: 700; 
+            font-size: 1.1rem;
+            color: var(--nuview-red);
+            background: linear-gradient(135deg, rgba(238, 51, 56, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
+        }
+        .matrix-value { 
+            font-weight: 700; 
+            color: var(--nuview-red);
+            font-size: 1.05rem;
+        }
+        .matrix-link { 
+            text-align: center;
+        }
+        .matrix-link-btn { 
+            display: inline-block;
+            padding: 0.5rem 1rem; 
+            background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .matrix-link-btn:hover { 
+            background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
+            border-color: var(--nuview-navy);
+        }
+        .matrix-link-btn:focus {
+            outline: 3px solid rgba(0, 123, 255, 0.5);
+            outline-offset: 2px;
+        }
+        .matrix-source-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background: linear-gradient(135deg, var(--nuview-gray) 0%, var(--nuview-dark-gray) 100%);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .matrix-source-badge:hover {
+            background: linear-gradient(135deg, var(--nuview-dark-gray) 0%, var(--nuview-gray) 100%);
+            transform: scale(1.05);
+        }
+        
+        .search-container { 
+            padding: 1.25rem; 
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); 
+            margin: 1.5rem 0; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            border: 1px solid var(--nuview-light-gray);
+        }
+        .search-input { 
+            width: 100%; 
+            padding: 0.875rem; 
+            border: 2px solid var(--nuview-gray); 
+            border-radius: 10px; 
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--nuview-red);
+            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.1);
+        }
+        .program-card { 
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); 
+            border-radius: 12px; 
+            padding: 1.5rem; 
+            margin-bottom: 1.25rem; 
+            border-left: 5px solid var(--nuview-red); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            transition: all 0.3s ease;
+            border: 1px solid var(--nuview-light-gray);
+        }
+        .program-card:hover { 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+            transform: translateY(-4px); 
+            border-left-color: var(--nuview-navy);
+            background: linear-gradient(135deg, #ffffff 0%, rgba(0, 123, 255, 0.05) 100%);
+        }
         .program-card.hidden { display: none; }
         .urgency-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; }
         .urgency-urgent { background: var(--nuview-red); color: white; }
@@ -67,6 +277,7 @@
 <nav class="sidebar">
     <h3 style="padding-left:1rem; color:var(--nuview-navy); font-weight:800;">NUVIEW INTEL</h3>
     <a href="#overview" class="active"><i class="bi bi-house-door"></i> Overview</a>
+    <a href="#top-opportunities"><i class="bi bi-trophy"></i> Top 10 Matrix</a>
     <a href="#funding"><i class="bi bi-currency-dollar"></i> Funding</a>
     <a href="#lidar"><i class="bi bi-radar"></i> LiDAR</a>
     <a href="#space-systems"><i class="bi bi-rocket-takeoff"></i> Space Systems</a>
@@ -74,10 +285,13 @@
     <a href="pipeline.html"><i class="bi bi-funnel"></i> Pipeline Dashboard</a>
 </nav>
 
-<main class="main-content">
-    <header class="header">
-        <h1>NUVIEW Strategic Dashboard</h1>
-        <p style="opacity:0.9; font-size:1.1rem;">Global LiDAR Pipeline Tracker • 2025–2027 • DaaS Disruption</p>
+<main class="main-content" role="main">
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="header-logo" aria-label="NUVIEW logo">NUVIEW</div>
+            <h1>Global LiDAR Intelligence Tracker</h1>
+            <p class="header-subtitle">Strategic Pipeline Dashboard • 2025–2027 • DaaS Disruption</p>
+        </div>
     </header>
 
     <!-- Section 2: How It Works -->
@@ -246,6 +460,38 @@
         </div>
     </div>
 
+    <!-- Top 10 Opportunity Matrix -->
+    <div id="top-opportunities" class="section">
+        <h2><i class="bi bi-trophy"></i> Top 10 Opportunity Matrix</h2>
+        <p style="color: var(--nuview-dark-gray); margin-bottom: 1.5rem;">
+            Highest-value opportunities ranked by strategic importance and urgency
+        </p>
+        <div style="overflow-x: auto;">
+            <table class="matrix-table" role="table" aria-label="Top 10 opportunities matrix">
+                <thead>
+                    <tr>
+                        <th class="matrix-rank" scope="col">#</th>
+                        <th scope="col">Opportunity</th>
+                        <th scope="col">Agency <span class="matrix-source-badge">Source</span></th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Urgency</th>
+                        <th scope="col">Next Action</th>
+                        <th class="matrix-link" scope="col">Link</th>
+                    </tr>
+                </thead>
+                <tbody id="top-opportunities-body">
+                    <tr>
+                        <td colspan="9" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">
+                            Loading top opportunities...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div id="funding" class="section">
         <h2><i class="bi bi-currency-dollar"></i> Funding Opportunities</h2>
         <div id="funding-programs">
@@ -295,11 +541,83 @@ function formatCurrency(amount) {
 // Get urgency badge
 function getUrgencyBadge(urgency) {
     const badges = {
-        'urgent': '<span class="urgency-badge urgency-urgent">URGENT</span>',
-        'near': '<span class="urgency-badge urgency-near">NEAR</span>',
-        'future': '<span class="urgency-badge urgency-future">FUTURE</span>'
+        'urgent': '<span class="urgency-badge urgency-urgent" role="status" aria-label="Urgent priority">URGENT</span>',
+        'near': '<span class="urgency-badge urgency-near" role="status" aria-label="Near-term priority">NEAR</span>',
+        'future': '<span class="urgency-badge urgency-future" role="status" aria-label="Future priority">FUTURE</span>'
     };
     return badges[urgency || 'future'] || badges['future'];
+}
+
+// Render Top 10 Opportunities Matrix
+function renderTopOpportunities() {
+    if (!programsData || !programsData.programs) return;
+    
+    const allPrograms = [
+        ...(programsData.programs.funding || []),
+        ...(programsData.programs.lidar || []),
+        ...(programsData.programs.spaceSystems || []),
+        ...(programsData.programs.platform || [])
+    ];
+    
+    // Remove duplicates by ID
+    const uniquePrograms = Array.from(new Map(allPrograms.map(p => [p.id, p])).values());
+    
+    // Sort by value (descending) and urgency (urgent first)
+    const sortedPrograms = uniquePrograms.sort((a, b) => {
+        // Prioritize urgent items
+        if (a.urgency === 'urgent' && b.urgency !== 'urgent') return -1;
+        if (a.urgency !== 'urgent' && b.urgency === 'urgent') return 1;
+        // Then sort by value
+        return (b.valueUSD || 0) - (a.valueUSD || 0);
+    });
+    
+    // Take top 10
+    const top10 = sortedPrograms.slice(0, 10);
+    
+    const tbody = document.getElementById('top-opportunities-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    if (top10.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">No opportunities available.</td></tr>';
+        return;
+    }
+    
+    top10.forEach((program, index) => {
+        const row = document.createElement('tr');
+        row.setAttribute('role', 'row');
+        row.innerHTML = `
+            <td class="matrix-rank" role="cell">${index + 1}</td>
+            <td role="cell"><strong>${program.title || 'Untitled Program'}</strong></td>
+            <td role="cell">
+                ${program.agency || 'N/A'}
+                <span class="matrix-source-badge" role="note" aria-label="Source agency">${program.pillar || 'N/A'}</span>
+            </td>
+            <td role="cell">${program.category || 'N/A'}</td>
+            <td class="matrix-value" role="cell">${formatCurrency(program.valueUSD || 0)}</td>
+            <td role="cell">${program.deadline || 'TBD'} <small class="text-muted">(${program.daysUntil !== undefined ? program.daysUntil : 'N/A'} days)</small></td>
+            <td role="cell">${getUrgencyBadge(program.urgency)}</td>
+            <td role="cell" style="color: var(--nuview-red); font-weight: 600;">${program.nextAction || 'No action specified'}</td>
+            <td class="matrix-link" role="cell">
+                ${program.link && program.link !== '#' ? `
+                <a href="${program.link}" target="_blank" rel="noopener noreferrer" 
+                   class="matrix-link-btn" 
+                   aria-label="View ${program.title || 'program'} details"
+                   tabindex="0">
+                    View <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+                ` : `
+                <span class="matrix-link-btn" style="opacity: 0.5; cursor: not-allowed;" 
+                      aria-label="Link not available"
+                      tabindex="-1">
+                    N/A
+                </span>
+                `}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
 }
 
 // Create program card
@@ -337,7 +655,7 @@ function createProgramCard(program) {
                 <strong>Deadline:</strong> ${deadline} (${daysUntil} days)
             </div>
             <div class="col-md-3">
-                <strong>Link:</strong> <a href="${link}" target="_blank" style="color: var(--nuview-blue);">View</a>
+                <strong>Link:</strong> <a href="${link}" target="_blank" style="color: var(--nuview-red); font-weight: 600;">View</a>
             </div>
         </div>
         <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #eee;">
@@ -420,6 +738,9 @@ async function loadPrograms() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         programsData = await response.json();
+        
+        // Render top 10 opportunities matrix
+        renderTopOpportunities();
         
         // Render all sections with robust handling for missing data
         renderPrograms(programsData.programs?.funding || [], 'funding-programs');
