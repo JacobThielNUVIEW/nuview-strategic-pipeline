@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-20T22:47:27.673047Z",
+  "timestamp": "2025-11-20T22:49:01.843772Z",
   "qc_status": "PASS",
   "qc_percentage": 100,
   "total_errors": 0,
@@ -7,8 +7,8 @@
   "opportunities_validation": {
     "errors": [],
     "warnings": [
-      "Opportunity 'NASA ROSES Omnibus Earth Observation' (nasa-852): May not be topographic-related (no relevant keywords found)",
-      "Opportunity 'ESA Digital Twin Earth Platform' (esa-720): May not be topographic-related (no relevant keywords found)"
+      "Opportunity 'NASA ROSES Omnibus Earth Observation' (nasa-121): May not be topographic-related (no relevant keywords found)",
+      "Opportunity 'ESA Digital Twin Earth Platform' (esa-519): May not be topographic-related (no relevant keywords found)"
     ]
   },
   "forecast_validation": {
