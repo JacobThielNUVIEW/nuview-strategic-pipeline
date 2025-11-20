@@ -10,15 +10,99 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --nuview-red: #EE3338; --nuview-navy: #001F3F; --nuview-blue: #007BFF; --dark: #343a40; }
-        body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: var(--dark); margin: 0; padding: 0; }
-        .header { background: linear-gradient(135deg, var(--nuview-navy), var(--nuview-blue)); color: white; padding: 2.5rem 0; text-align: center; border-bottom: 5px solid var(--nuview-red); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .sidebar { position: fixed; left: 0; top: 0; height: 100%; width: 260px; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,0.04); z-index: 100; border-right: 2px solid var(--nuview-blue); padding-top: 2rem; overflow-y: auto; }
-        .sidebar a { color: var(--nuview-blue); text-decoration: none; display: block; padding: 0.5rem 1rem; margin-bottom: 5px; transition:0.2s; }
-        .sidebar a.active, .sidebar a:hover { background: #e6effc; color: var(--nuview-navy); border-left: 4px solid var(--nuview-red); }
+        :root { 
+            --nuview-red: #EE3338; 
+            --nuview-navy: #001F3F; 
+            --nuview-blue: #007BFF; 
+            --nuview-white: #FFFFFF; 
+            --dark: #1a1a1a; 
+            --light-gray: #f8f9fa; 
+            /* Header gradient overlay colors */
+            --header-overlay-start: rgba(255, 255, 255, 0.95);
+            --header-overlay-light: rgba(255, 255, 255, 0.85);
+            --header-overlay-red: rgba(238, 51, 56, 0.08);
+            --header-overlay-navy: rgba(0, 31, 63, 0.85);
+            --header-overlay-dark: rgba(0, 0, 0, 0.9);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--light-gray); color: var(--dark); margin: 0; padding: 0; }
+        .header { 
+            background: linear-gradient(135deg, var(--nuview-white) 0%, #f5f5f5 25%, var(--nuview-navy) 60%, var(--dark) 100%); 
+            color: var(--dark); 
+            padding: 3.5rem 2rem 3rem; 
+            text-align: center; 
+            border-bottom: 6px solid var(--nuview-red); 
+            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1); 
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                var(--header-overlay-start) 0%, 
+                var(--header-overlay-light) 20%,
+                var(--header-overlay-red) 40%,
+                var(--header-overlay-navy) 70%,
+                var(--header-overlay-dark) 100%
+            );
+            z-index: 1;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header-logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            color: var(--nuview-red); /* Fallback color for accessibility */
+            background: linear-gradient(135deg, var(--nuview-red) 0%, var(--nuview-navy) 50%, var(--dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.1));
+            line-height: 1.1;
+        }
+        @supports not (background-clip: text) {
+            .header-logo {
+                color: var(--nuview-red);
+                -webkit-text-fill-color: var(--nuview-red);
+            }
+        }
+        .header h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin: 0.75rem 0 1rem;
+            color: var(--nuview-navy);
+            letter-spacing: -0.5px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            line-height: 1.3;
+        }
+        .header-subtitle {
+            font-size: 1.25rem;
+            font-weight: 500;
+            opacity: 0.95;
+            color: var(--nuview-navy);
+            margin-top: 1rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .sidebar { position: fixed; left: 0; top: 0; height: 100%; width: 260px; background: var(--nuview-white); box-shadow: 2px 0 12px rgba(238, 51, 56, 0.08), 2px 0 4px rgba(0, 0, 0, 0.04); z-index: 100; border-right: 3px solid var(--nuview-red); padding-top: 2rem; overflow-y: auto; }
+        .sidebar h3 { padding-left: 1rem; color: var(--nuview-navy); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px; margin-bottom: 1.5rem; }
+        .sidebar a { color: var(--nuview-navy); text-decoration: none; display: block; padding: 0.75rem 1rem; margin-bottom: 0.25rem; transition: all 0.3s ease; font-weight: 500; }
+        .sidebar a.active, .sidebar a:hover { background: linear-gradient(90deg, rgba(238, 51, 56, 0.1) 0%, rgba(238, 51, 56, 0.05) 100%); color: var(--nuview-red); border-left: 5px solid var(--nuview-red); padding-left: calc(1rem - 5px); }
         .main-content { margin-left: 260px; padding: 30px; min-height: 100vh; }
-        .section { background: white; border-radius: 16px; padding: 1.8rem; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .section h2 { color: var(--nuview-blue); border-bottom: 3px solid var(--nuview-red); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.6rem; }
+        .section { background: var(--nuview-white); border-radius: 16px; padding: 2rem; margin: 1.5rem 0; box-shadow: 0 4px 16px rgba(238, 51, 56, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04); border-top: 3px solid var(--nuview-red); }
+        .section h2 { color: var(--nuview-navy); border-bottom: 4px solid var(--nuview-red); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.25px; }
         .heatmap-table th { background: var(--nuview-navy); color: white; }
         .hot { background: #ffb7a1; font-weight: 700; }
         .warmer { background: #ffe7c7; }
@@ -28,12 +112,38 @@
         .matrix-cell.medium { background: #fff3cd; color: #856404; }
         .matrix-cell.high { background: #f8d7da; color: #721c24; }
         .matrix-cell.critical { background: #EE3338; color: white; font-weight: bold; }
-        .search-container { padding: 1rem; background: white; margin: 1rem 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .search-input { width: 100%; padding: 0.75rem; border: 2px solid var(--nuview-blue); border-radius: 8px; font-size: 1rem; }
-        .program-card { background: white; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border-left: 4px solid var(--nuview-blue); box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: all 0.2s; }
-        .program-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
+        .search-container { padding: 1.25rem; background: var(--nuview-white); margin: 1.5rem 0; border-radius: 12px; box-shadow: 0 3px 10px rgba(238, 51, 56, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04); border: 2px solid rgba(238, 51, 56, 0.1); }
+        .search-input { width: 100%; padding: 0.875rem; border: 2px solid var(--nuview-red); border-radius: 10px; font-size: 1.05rem; transition: all 0.3s ease; outline: none; }
+        .search-input:focus { border-color: var(--nuview-navy); box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.1); }
+        .program-card { background: var(--nuview-white); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; border-left: 5px solid var(--nuview-red); box-shadow: 0 3px 8px rgba(238, 51, 56, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04); transition: all 0.3s ease; }
+        .program-card:hover { box-shadow: 0 6px 16px rgba(238, 51, 56, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08); transform: translateY(-3px); border-left-width: 6px; }
         .program-card.hidden { display: none; }
         .urgency-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; }
+        .card { background: linear-gradient(135deg, var(--nuview-white) 0%, #fafafa 100%); border: 2px solid rgba(238, 51, 56, 0.15); border-radius: 12px; padding: 1.5rem; box-shadow: 0 3px 10px rgba(238, 51, 56, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04); transition: all 0.3s ease; }
+        .card:hover { box-shadow: 0 6px 16px rgba(238, 51, 56, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+        .card h3 { color: var(--nuview-red); font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card .text-muted { color: var(--nuview-navy) !important; opacity: 0.75; font-weight: 500; font-size: 0.95rem; }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header { padding: 2.5rem 1.5rem 2rem; }
+            .header-logo { font-size: 2.5rem; letter-spacing: 1px; margin-bottom: 1rem; }
+            .header h1 { font-size: 2rem; margin: 0.5rem 0 0.75rem; }
+            .header-subtitle { font-size: 1rem; }
+            .sidebar { width: 220px; }
+            .main-content { margin-left: 220px; padding: 20px; }
+            .section h2 { font-size: 1.5rem; }
+            .card h3 { font-size: 2rem; }
+        }
+        
+        @media (max-width: 576px) {
+            .header { padding: 2rem 1rem 1.5rem; }
+            .header-logo { font-size: 2rem; }
+            .header h1 { font-size: 1.5rem; }
+            .header-subtitle { font-size: 0.9rem; }
+            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 3px solid var(--nuview-red); }
+            .main-content { margin-left: 0; padding: 15px; }
+        }
         .urgency-urgent { background: var(--nuview-red); color: white; }
         .urgency-near { background: #ffc107; color: #333; }
         .urgency-future { background: #28a745; color: white; }
@@ -41,21 +151,23 @@
 </head>
 <body>
 
-<nav class="sidebar">
-    <h3 style="padding-left:1rem; color:var(--nuview-navy); font-weight:800;">NUVIEW INTEL</h3>
-    <a href="#overview" class="active"><i class="bi bi-house-door"></i> Overview</a>
-    <a href="#funding"><i class="bi bi-currency-dollar"></i> Funding</a>
-    <a href="#lidar"><i class="bi bi-radar"></i> LiDAR</a>
-    <a href="#space-systems"><i class="bi bi-rocket-takeoff"></i> Space Systems</a>
-    <a href="#platform"><i class="bi bi-server"></i> Platform</a>
-    <a href="pipeline.html"><i class="bi bi-funnel"></i> Pipeline Dashboard</a>
-    <a href="global-tracker.html"><i class="bi bi-globe"></i> Global Tracker</a>
+<nav class="sidebar" role="navigation" aria-label="Main navigation">
+    <h3>NUVIEW INTEL</h3>
+    <a href="#overview" class="active" aria-current="page"><i class="bi bi-house-door" aria-hidden="true"></i> Overview</a>
+    <a href="#funding"><i class="bi bi-currency-dollar" aria-hidden="true"></i> Funding</a>
+    <a href="#lidar"><i class="bi bi-radar" aria-hidden="true"></i> LiDAR</a>
+    <a href="#space-systems"><i class="bi bi-rocket-takeoff" aria-hidden="true"></i> Space Systems</a>
+    <a href="#platform"><i class="bi bi-server" aria-hidden="true"></i> Platform</a>
+    <a href="pipeline.html"><i class="bi bi-funnel" aria-hidden="true"></i> Pipeline Dashboard</a>
 </nav>
 
-<main class="main-content">
-    <header class="header">
-        <h1>NUVIEW Strategic Dashboard</h1>
-        <p style="opacity:0.9; font-size:1.1rem;">Global LiDAR Pipeline Tracker • 2025–2027 • DaaS Disruption</p>
+<main class="main-content" role="main">
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="header-logo" aria-label="NUVIEW logo">NUVIEW</div>
+            <h1>Global LiDAR Intelligence Tracker</h1>
+            <p class="header-subtitle">Strategic Pipeline Dashboard • 2025–2027 • DaaS Disruption</p>
+        </div>
     </header>
 
     <!-- Global Search -->
@@ -190,7 +302,7 @@ function createProgramCard(program) {
                 <strong>Deadline:</strong> ${deadline} (${daysUntil} days)
             </div>
             <div class="col-md-3">
-                <strong>Link:</strong> <a href="${link}" target="_blank" style="color: var(--nuview-blue);">View</a>
+                <strong>Link:</strong> <a href="${link}" target="_blank" style="color: var(--nuview-red); font-weight: 600;">View</a>
             </div>
         </div>
         <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #eee;">
