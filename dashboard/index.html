@@ -10,7 +10,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --nuview-red: #EE3338; --nuview-navy: #001F3F; --nuview-blue: #007BFF; --nuview-white: #FFFFFF; --dark: #1a1a1a; --light-gray: #f8f9fa; }
+        :root { 
+            --nuview-red: #EE3338; 
+            --nuview-navy: #001F3F; 
+            --nuview-blue: #007BFF; 
+            --nuview-white: #FFFFFF; 
+            --dark: #1a1a1a; 
+            --light-gray: #f8f9fa; 
+            /* Header gradient overlay colors */
+            --header-overlay-start: rgba(255, 255, 255, 0.95);
+            --header-overlay-light: rgba(255, 255, 255, 0.85);
+            --header-overlay-red: rgba(238, 51, 56, 0.08);
+            --header-overlay-navy: rgba(0, 31, 63, 0.85);
+            --header-overlay-dark: rgba(0, 0, 0, 0.9);
+        }
         body { font-family: 'Inter', sans-serif; background: var(--light-gray); color: var(--dark); margin: 0; padding: 0; }
         .header { 
             background: linear-gradient(135deg, var(--nuview-white) 0%, #f5f5f5 25%, var(--nuview-navy) 60%, var(--dark) 100%); 
@@ -30,11 +43,11 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(255, 255, 255, 0.85) 20%,
-                rgba(238, 51, 56, 0.08) 40%,
-                rgba(0, 31, 63, 0.85) 70%,
-                rgba(0, 0, 0, 0.9) 100%
+                var(--header-overlay-start) 0%, 
+                var(--header-overlay-light) 20%,
+                var(--header-overlay-red) 40%,
+                var(--header-overlay-navy) 70%,
+                var(--header-overlay-dark) 100%
             );
             z-index: 1;
         }
@@ -45,18 +58,25 @@
             margin: 0 auto;
         }
         .header-logo {
+            font-family: 'Inter', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
             letter-spacing: 2px;
             margin-bottom: 1.25rem;
             text-transform: uppercase;
+            color: var(--nuview-red); /* Fallback color for accessibility */
             background: linear-gradient(135deg, var(--nuview-red) 0%, var(--nuview-navy) 50%, var(--dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.1));
             line-height: 1.1;
-            font-family: 'Inter', sans-serif;
+        }
+        @supports not (background-clip: text) {
+            .header-logo {
+                color: var(--nuview-red);
+                -webkit-text-fill-color: var(--nuview-red);
+            }
         }
         .header h1 {
             font-size: 2.75rem;
