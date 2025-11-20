@@ -20,7 +20,8 @@ set -e  # Exit on error
 
 # Configuration
 REPO_URL="https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline.git"
-INSTALL_DIR="/Users/JThiel/Documents/NUVIEW_Pipeline_tool"
+# Allow override via environment variable, default to specified path
+INSTALL_DIR="${NUVIEW_INSTALL_DIR:-$HOME/Documents/NUVIEW_Pipeline_tool}"
 REPO_NAME="nuview-strategic-pipeline"
 REPO_PATH="${INSTALL_DIR}/${REPO_NAME}"
 VENV_NAME="venv"
@@ -112,10 +113,13 @@ else
     print_info "Current branch: $CURRENT_BRANCH"
     
     # Check for local changes
+    STASH_CREATED=false
     if ! git diff-index --quiet HEAD --; then
         print_warning "Local changes detected in repository"
         print_warning "Stashing local changes before pulling..."
-        git stash save "Auto-stash before update $(date '+%Y-%m-%d %H:%M:%S')"
+        STASH_MESSAGE="Auto-stash before update $(date '+%Y-%m-%d %H:%M:%S')"
+        git stash push -m "$STASH_MESSAGE"
+        STASH_CREATED=true
     fi
     
     # Pull latest changes
@@ -126,8 +130,8 @@ else
         print_warning "Failed to pull changes (you may need to resolve conflicts manually)"
     fi
     
-    # Apply stashed changes if any
-    if git stash list | grep -q "Auto-stash"; then
+    # Apply stashed changes if we created a stash
+    if [ "$STASH_CREATED" = true ]; then
         print_info "Re-applying stashed changes..."
         git stash pop || print_warning "Could not re-apply stashed changes automatically"
     fi
@@ -171,7 +175,7 @@ if [ -f "requirements.txt" ]; then
     # Check if requirements.txt has actual dependencies
     if grep -q "^[^#]" requirements.txt; then
         print_info "Installing packages from requirements.txt..."
-        if pip install --upgrade pip > /dev/null 2>&1; then
+        if pip install --upgrade --quiet pip; then
             print_success "pip upgraded"
         fi
         

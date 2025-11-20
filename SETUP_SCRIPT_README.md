@@ -19,7 +19,22 @@ The `setup_and_run.sh` script is a ready-to-run shell script that automates the 
 
 ## Installation
 
-The script will automatically install to: `/Users/JThiel/Documents/NUVIEW_Pipeline_tool/`
+The script will automatically install to: `$HOME/Documents/NUVIEW_Pipeline_tool/` (typically `/Users/JThiel/Documents/NUVIEW_Pipeline_tool/`)
+
+### Custom Installation Directory
+
+You can customize the installation directory by setting the `NUVIEW_INSTALL_DIR` environment variable:
+
+```bash
+export NUVIEW_INSTALL_DIR="/path/to/your/directory"
+./setup_and_run.sh
+```
+
+Or inline:
+
+```bash
+NUVIEW_INSTALL_DIR="/path/to/your/directory" ./setup_and_run.sh
+```
 
 ### Initial Setup
 
