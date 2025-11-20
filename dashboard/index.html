@@ -243,90 +243,32 @@
             background: linear-gradient(135deg, #ffffff 0%, rgba(0, 123, 255, 0.05) 100%);
         }
         .program-card.hidden { display: none; }
-        .program-card h5 {
-            transition: color 0.3s ease;
-        }
-        .program-card:hover h5 {
-            color: var(--nuview-red);
-        }
-        .program-card a {
-            transition: all 0.2s ease;
-        }
-        .program-card a:hover {
-            color: var(--nuview-red);
-            text-decoration: underline;
-            font-weight: 600;
-        }
-        .urgency-badge { 
-            display: inline-block; 
-            padding: 0.4rem 0.9rem; 
-            border-radius: 20px; 
-            font-size: 0.8rem; 
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-        }
-        .urgency-urgent { 
-            background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%); 
-            color: white;
-            box-shadow: 0 2px 8px rgba(238, 51, 56, 0.3);
-        }
-        .urgency-near { 
-            background: linear-gradient(135deg, var(--nuview-gray) 0%, var(--nuview-dark-gray) 100%);
-            color: white;
-            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
-        }
-        .urgency-future { 
-            background: linear-gradient(135deg, var(--nuview-light-gray) 0%, var(--nuview-gray) 100%);
-            color: var(--dark);
-            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2);
-        }
-        .urgency-badge:hover {
-            transform: scale(1.05);
-        }
-        .text-muted {
-            color: var(--nuview-gray);
+        .urgency-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; }
+        .urgency-urgent { background: var(--nuview-red); color: white; }
+        .urgency-near { background: #ffc107; color: #333; }
+        .urgency-future { background: #28a745; color: white; }
+        
+        /* Pipeline Diagram Styles */
+        .pipeline-diagram-container { width: 100%; overflow-x: auto; padding: 1rem 0; }
+        .pipeline-svg { width: 100%; height: auto; min-width: 800px; }
+        .pipeline-stage { cursor: pointer; transition: all 0.3s ease; }
+        .pipeline-stage:hover rect { filter: url(#stageShadow) brightness(1.05); }
+        .pipeline-stage:hover text { fill: var(--nuview-blue); }
+        .pipeline-arrow { animation: flowAnimation 2s ease-in-out infinite; }
+        @keyframes flowAnimation {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
         
-        /* Responsive Design */
+        /* Tooltip Styles */
+        .pipeline-tooltip { position: absolute; background: var(--nuview-navy); color: white; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.9rem; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-width: 280px; border: 2px solid var(--nuview-red); }
+        .pipeline-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--nuview-red); }
+        .pipeline-tooltip.show { opacity: 1; }
+        
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-            .main-content {
-                margin-left: 200px;
-                padding: 15px;
-            }
-            .section {
-                padding: 1.25rem;
-                margin: 1rem 0;
-            }
-            .matrix-table {
-                font-size: 0.85rem;
-            }
-            .matrix-table thead th,
-            .matrix-table tbody td {
-                padding: 0.75rem 0.5rem;
-            }
-        }
-        @media (max-width: 576px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 3px solid var(--nuview-red);
-            }
-            .main-content {
-                margin-left: 0;
-                padding: 10px;
-            }
-            .matrix-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
+            .pipeline-svg { min-width: 600px; }
+            .pipeline-legend { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -351,6 +293,131 @@
             <p class="header-subtitle">Strategic Pipeline Dashboard • 2025–2027 • DaaS Disruption</p>
         </div>
     </header>
+
+    <!-- Section 2: How It Works -->
+    <div class="section" style="margin-top: 2rem;">
+        <h2><i class="bi bi-diagram-3"></i> How It Works</h2>
+        <p style="color: #666; margin-bottom: 2rem;">Our intelligent pipeline processes global opportunities through multiple stages to deliver actionable intelligence.</p>
+        
+        <div class="pipeline-diagram-container">
+            <svg viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" class="pipeline-svg">
+                <!-- Definitions for gradients and filters -->
+                <defs>
+                    <linearGradient id="stageGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="stageGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f1f3f5;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="stageShadow">
+                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+                    </filter>
+                    <linearGradient id="redAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#EE3338;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#d62d32;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- Stage 1: Data Sources -->
+                <g class="pipeline-stage" data-stage="sources">
+                    <rect x="30" y="80" width="220" height="140" rx="12" fill="url(#stageGradient1)" stroke="#001F3F" stroke-width="3" filter="url(#stageShadow)"/>
+                    <rect x="30" y="80" width="220" height="8" rx="12" fill="url(#redAccent)"/>
+                    <text x="140" y="115" text-anchor="middle" font-size="18" font-weight="700" fill="#001F3F">Data Sources</text>
+                    <text x="140" y="145" text-anchor="middle" font-size="12" fill="#495057">Federal Contracts</text>
+                    <text x="140" y="165" text-anchor="middle" font-size="12" fill="#495057">Research Programs</text>
+                    <text x="140" y="185" text-anchor="middle" font-size="12" fill="#495057">Market Intelligence</text>
+                    <text x="140" y="205" text-anchor="middle" font-size="12" fill="#495057">Industry Reports</text>
+                    <circle cx="140" cy="55" r="20" fill="#EE3338" opacity="0.1"/>
+                    <text x="140" y="62" text-anchor="middle" font-size="20" fill="#EE3338">📊</text>
+                </g>
+                
+                <!-- Arrow 1 -->
+                <g class="pipeline-arrow">
+                    <line x1="250" y1="150" x2="290" y2="150" stroke="#007BFF" stroke-width="4"/>
+                    <polygon points="290,150 280,145 280,155" fill="#007BFF"/>
+                </g>
+                
+                <!-- Stage 2: Engine -->
+                <g class="pipeline-stage" data-stage="engine">
+                    <rect x="310" y="80" width="220" height="140" rx="12" fill="url(#stageGradient2)" stroke="#001F3F" stroke-width="3" filter="url(#stageShadow)"/>
+                    <rect x="310" y="80" width="220" height="8" rx="12" fill="url(#redAccent)"/>
+                    <text x="420" y="115" text-anchor="middle" font-size="18" font-weight="700" fill="#001F3F">Processing Engine</text>
+                    <text x="420" y="145" text-anchor="middle" font-size="12" fill="#495057">Data Aggregation</text>
+                    <text x="420" y="165" text-anchor="middle" font-size="12" fill="#495057">Normalization</text>
+                    <text x="420" y="185" text-anchor="middle" font-size="12" fill="#495057">Entity Matching</text>
+                    <text x="420" y="205" text-anchor="middle" font-size="12" fill="#495057">Deduplication</text>
+                    <circle cx="420" cy="55" r="20" fill="#007BFF" opacity="0.1"/>
+                    <text x="420" y="62" text-anchor="middle" font-size="20" fill="#007BFF">⚙️</text>
+                </g>
+                
+                <!-- Arrow 2 -->
+                <g class="pipeline-arrow">
+                    <line x1="530" y1="150" x2="570" y2="150" stroke="#007BFF" stroke-width="4"/>
+                    <polygon points="570,150 560,145 560,155" fill="#007BFF"/>
+                </g>
+                
+                <!-- Stage 3: Scoring -->
+                <g class="pipeline-stage" data-stage="scoring">
+                    <rect x="590" y="80" width="220" height="140" rx="12" fill="url(#stageGradient1)" stroke="#001F3F" stroke-width="3" filter="url(#stageShadow)"/>
+                    <rect x="590" y="80" width="220" height="8" rx="12" fill="url(#redAccent)"/>
+                    <text x="700" y="115" text-anchor="middle" font-size="18" font-weight="700" fill="#001F3F">Scoring System</text>
+                    <text x="700" y="145" text-anchor="middle" font-size="12" fill="#495057">Value Assessment</text>
+                    <text x="700" y="165" text-anchor="middle" font-size="12" fill="#495057">Urgency Analysis</text>
+                    <text x="700" y="185" text-anchor="middle" font-size="12" fill="#495057">Strategic Fit</text>
+                    <text x="700" y="205" text-anchor="middle" font-size="12" fill="#495057">Risk Evaluation</text>
+                    <circle cx="700" cy="55" r="20" fill="#EE3338" opacity="0.1"/>
+                    <text x="700" y="62" text-anchor="middle" font-size="20" fill="#EE3338">🎯</text>
+                </g>
+                
+                <!-- Arrow 3 -->
+                <g class="pipeline-arrow">
+                    <line x1="810" y1="150" x2="850" y2="150" stroke="#007BFF" stroke-width="4"/>
+                    <polygon points="850,150 840,145 840,155" fill="#007BFF"/>
+                </g>
+                
+                <!-- Stage 4: Matrix -->
+                <g class="pipeline-stage" data-stage="matrix">
+                    <rect x="870" y="80" width="220" height="140" rx="12" fill="url(#stageGradient2)" stroke="#001F3F" stroke-width="3" filter="url(#stageShadow)"/>
+                    <rect x="870" y="80" width="220" height="8" rx="12" fill="url(#redAccent)"/>
+                    <text x="980" y="115" text-anchor="middle" font-size="18" font-weight="700" fill="#001F3F">Priority Matrix</text>
+                    <text x="980" y="145" text-anchor="middle" font-size="12" fill="#495057">Action Priorities</text>
+                    <text x="980" y="165" text-anchor="middle" font-size="12" fill="#495057">Dashboard Updates</text>
+                    <text x="980" y="185" text-anchor="middle" font-size="12" fill="#495057">Alert Generation</text>
+                    <text x="980" y="205" text-anchor="middle" font-size="12" fill="#495057">Report Distribution</text>
+                    <circle cx="980" cy="55" r="20" fill="#007BFF" opacity="0.1"/>
+                    <text x="980" y="62" text-anchor="middle" font-size="20" fill="#007BFF">📋</text>
+                </g>
+                
+                <!-- Data flow indicator -->
+                <text x="600" y="270" text-anchor="middle" font-size="14" font-weight="600" fill="#6c757d" opacity="0.7">
+                    <tspan x="600">← Continuous Data Flow →</tspan>
+                </text>
+            </svg>
+        </div>
+        
+        <div class="pipeline-legend" style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid var(--nuview-blue);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div>
+                    <strong style="color: var(--nuview-navy);">🔄 Real-time Updates:</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; color: #666;">Automated daily data collection from multiple sources</p>
+                </div>
+                <div>
+                    <strong style="color: var(--nuview-navy);">🤖 Smart Processing:</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; color: #666;">AI-powered analysis and categorization</p>
+                </div>
+                <div>
+                    <strong style="color: var(--nuview-navy);">🎯 Prioritization:</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; color: #666;">Strategic scoring based on value, urgency, and fit</p>
+                </div>
+                <div>
+                    <strong style="color: var(--nuview-navy);">📊 Actionable Insights:</strong>
+                    <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; color: #666;">Clear next steps and deadline tracking</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Global Search -->
     <div class="search-container">
@@ -702,7 +769,63 @@ async function loadPrograms() {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadPrograms();
+    initializePipelineTooltips();
 });
+
+// Pipeline stage tooltips
+function initializePipelineTooltips() {
+    // Tooltip positioning constants
+    const TOOLTIP_HORIZONTAL_OFFSET = 140; // Half tooltip width for centering
+    const TOOLTIP_VERTICAL_OFFSET = 15; // Gap between tooltip and element
+    
+    const tooltipData = {
+        sources: {
+            title: 'Data Sources',
+            description: 'We aggregate opportunities from federal contract databases (SAM.gov), NASA ROSES, research grants, and industry reports. Automated scrapers collect data daily to ensure comprehensive coverage.'
+        },
+        engine: {
+            title: 'Processing Engine',
+            description: 'Our engine normalizes data from various formats, matches duplicate entries across sources, and enriches records with additional context. This ensures clean, consistent data for analysis.'
+        },
+        scoring: {
+            title: 'Scoring System',
+            description: 'Each opportunity receives scores for financial value, strategic alignment with NUVIEW capabilities, deadline urgency, and execution risk. These scores drive prioritization and action planning.'
+        },
+        matrix: {
+            title: 'Priority Matrix',
+            description: 'High-scoring opportunities are organized into the priority matrix, generating alerts for urgent actions, updating dashboards in real-time, and distributing reports to stakeholders.'
+        }
+    };
+    
+    // Create tooltip element
+    const tooltip = document.createElement('div');
+    tooltip.className = 'pipeline-tooltip';
+    document.body.appendChild(tooltip);
+    
+    // Add event listeners to pipeline stages
+    const stages = document.querySelectorAll('.pipeline-stage');
+    stages.forEach(stage => {
+        stage.addEventListener('mouseenter', function(e) {
+            const stageType = this.getAttribute('data-stage');
+            const data = tooltipData[stageType];
+            
+            if (data) {
+                tooltip.innerHTML = `<strong style="color: var(--nuview-red);">${data.title}</strong><br><span style="color: #e9ecef;">${data.description}</span>`;
+                tooltip.classList.add('show');
+            }
+        });
+        
+        stage.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            tooltip.style.left = (e.clientX - TOOLTIP_HORIZONTAL_OFFSET) + 'px';
+            tooltip.style.top = (rect.top - tooltip.offsetHeight - TOOLTIP_VERTICAL_OFFSET + window.scrollY) + 'px';
+        });
+        
+        stage.addEventListener('mouseleave', function() {
+            tooltip.classList.remove('show');
+        });
+    });
+}
 </script>
 </body>
 </html>
