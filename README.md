@@ -87,6 +87,13 @@ The repository is configured with automated daily updates via GitHub Actions:
 3. **Current Opportunities**: Comprehensive table with DataTables for advanced filtering and sorting
 4. **Market Forecast Summary**: Key forecast metrics and legislative targets
 
+### Global Tracker (`dashboard/global-tracker.html`)
+1. **Top 10 Programs**: Card-based display of top 10 global space/LiDAR programs by priority score
+2. **Global Priority Matrix**: Comprehensive table showing all countries, agencies, programs, budgets, and NUVIEW priority scores
+3. **Smart Highlighting**: Programs with priority score > 90 are highlighted for quick identification
+4. **Data Access Information**: Shows data access type (Open, Commercial, Restricted, etc.) for each program
+5. **Source Links**: Direct links to official program sources
+
 ## Updating Dashboard Data
 
 The dashboards are fully data-driven and pull information from JSON files in the `/data` directory.
@@ -151,6 +158,24 @@ Edit `/data/forecast.json` to update market projections:
 }
 ```
 
+### Updating Global Tracker Data
+
+Edit `/data/processed/priority_matrix.csv` to add, modify, or remove global programs. Follow this schema:
+
+```csv
+country,agency_name,program_name,budget_amount_usd,nuview_priority_score,data_access,sources
+United States,NASA,Earth System Observatory,850000000,95,Open,https://science.nasa.gov/earth/
+```
+
+**Key Fields:**
+- `country`: Country or region name
+- `agency_name`: Space agency or organization name
+- `program_name`: Name of the space/LiDAR program
+- `budget_amount_usd`: Budget in USD (numeric value, no commas)
+- `nuview_priority_score`: Priority score from 0-100 (programs > 90 are highlighted)
+- `data_access`: Data access type (Open, Commercial, Restricted, Open Partnership, Government)
+- `sources`: URL to official program source (use first URL from comma-separated list)
+
 ### Testing Changes Locally
 
 After updating data files:
@@ -160,9 +185,10 @@ After updating data files:
    python -m http.server 8000
    ```
 
-2. Open browsers to test both dashboards:
+2. Open browsers to test all dashboards:
    - Main: `http://localhost:8000/dashboard/index.html`
    - Pipeline: `http://localhost:8000/dashboard/pipeline.html`
+   - Global Tracker: `http://localhost:8000/dashboard/global-tracker.html`
 
 3. Verify:
    - All tables populate correctly
