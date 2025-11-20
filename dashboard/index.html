@@ -14,151 +14,333 @@
             --nuview-red: #EE3338; 
             --nuview-navy: #001F3F; 
             --nuview-blue: #007BFF; 
-            --nuview-white: #FFFFFF; 
-            --dark: #1a1a1a; 
-            --light-gray: #f8f9fa; 
-            /* Header gradient overlay colors */
-            --header-overlay-start: rgba(255, 255, 255, 0.95);
-            --header-overlay-light: rgba(255, 255, 255, 0.85);
-            --header-overlay-red: rgba(238, 51, 56, 0.08);
-            --header-overlay-navy: rgba(0, 31, 63, 0.85);
-            --header-overlay-dark: rgba(0, 0, 0, 0.9);
+            --nuview-gray: #6c757d;
+            --nuview-light-gray: #e9ecef;
+            --nuview-dark-gray: #495057;
+            --dark: #212529; 
         }
-        body { font-family: 'Inter', sans-serif; background: var(--light-gray); color: var(--dark); margin: 0; padding: 0; }
-        .header { 
-            background: linear-gradient(135deg, var(--nuview-white) 0%, #f5f5f5 25%, var(--nuview-navy) 60%, var(--dark) 100%); 
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); 
             color: var(--dark); 
-            padding: 3.5rem 2rem 3rem; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .header { 
+            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%); 
+            color: white; 
+            padding: 2.5rem 0; 
             text-align: center; 
-            border-bottom: 6px solid var(--nuview-red); 
-            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1); 
-            position: relative;
-            overflow: hidden;
+            border-bottom: 5px solid var(--nuview-red); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
         }
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                var(--header-overlay-start) 0%, 
-                var(--header-overlay-light) 20%,
-                var(--header-overlay-red) 40%,
-                var(--header-overlay-navy) 70%,
-                var(--header-overlay-dark) 100%
-            );
-            z-index: 1;
+        .sidebar { 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            height: 100%; 
+            width: 260px; 
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
+            box-shadow: 2px 0 12px rgba(0,0,0,0.08); 
+            z-index: 100; 
+            border-right: 3px solid var(--nuview-red); 
+            padding-top: 2rem; 
+            overflow-y: auto; 
         }
-        .header-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
+        .sidebar a { 
+            color: var(--nuview-navy); 
+            text-decoration: none; 
+            display: block; 
+            padding: 0.75rem 1.25rem; 
+            margin: 0.25rem 0.5rem; 
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
-        .header-logo {
-            font-family: 'Inter', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 1.25rem;
-            text-transform: uppercase;
-            color: var(--nuview-red); /* Fallback color for accessibility */
-            background: linear-gradient(135deg, var(--nuview-red) 0%, var(--nuview-navy) 50%, var(--dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.1));
-            line-height: 1.1;
+        .sidebar a:hover { 
+            background: linear-gradient(90deg, rgba(238, 51, 56, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%); 
+            color: var(--nuview-red); 
+            border-left: 4px solid var(--nuview-red); 
+            padding-left: 1rem;
+            transform: translateX(4px);
         }
-        @supports not (background-clip: text) {
-            .header-logo {
-                color: var(--nuview-red);
-                -webkit-text-fill-color: var(--nuview-red);
+        .sidebar a.active { 
+            background: linear-gradient(90deg, var(--nuview-red) 0%, var(--nuview-blue) 100%); 
+            color: white; 
+            border-left: 4px solid var(--nuview-navy); 
+            font-weight: 600;
+        }
+        .main-content { 
+            margin-left: 260px; 
+            padding: 30px; 
+            min-height: 100vh; 
+        }
+        .section { 
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
+            border-radius: 16px; 
+            padding: 2rem; 
+            margin: 2rem 0; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
+            border: 1px solid var(--nuview-light-gray);
+            transition: all 0.3s ease;
+        }
+        .section:hover {
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        .section h2 { 
+            color: var(--nuview-navy); 
+            border-bottom: 4px solid var(--nuview-red); 
+            padding-bottom: 0.75rem; 
+            margin-bottom: 1.5rem; 
+            font-size: 1.75rem; 
+            font-weight: 700;
+        }
+        @supports (background-clip: text) or (-webkit-background-clip: text) {
+            .section h2 {
+                background: linear-gradient(90deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
             }
         }
-        .header h1 {
-            font-size: 2.75rem;
-            font-weight: 700;
-            margin: 0.75rem 0 1rem;
-            color: var(--nuview-navy);
-            letter-spacing: -0.5px;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-            line-height: 1.3;
+        
+        /* Top 10 Opportunity Matrix Styles */
+        .matrix-table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0; 
+            margin-top: 1.5rem;
+            overflow: hidden;
+            border-radius: 12px;
         }
-        .header-subtitle {
-            font-size: 1.25rem;
-            font-weight: 500;
-            opacity: 0.95;
-            color: var(--nuview-navy);
-            margin-top: 1rem;
+        .matrix-table thead th { 
+            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%); 
+            color: white; 
+            padding: 1rem; 
+            text-align: left; 
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            border-bottom: 3px solid var(--nuview-red);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
-        .sidebar { position: fixed; left: 0; top: 0; height: 100%; width: 260px; background: var(--nuview-white); box-shadow: 2px 0 12px rgba(238, 51, 56, 0.08), 2px 0 4px rgba(0, 0, 0, 0.04); z-index: 100; border-right: 3px solid var(--nuview-red); padding-top: 2rem; overflow-y: auto; }
-        .sidebar h3 { padding-left: 1rem; color: var(--nuview-navy); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px; margin-bottom: 1.5rem; }
-        .sidebar a { color: var(--nuview-navy); text-decoration: none; display: block; padding: 0.75rem 1rem; margin-bottom: 0.25rem; transition: all 0.3s ease; font-weight: 500; }
-        .sidebar a.active, .sidebar a:hover { background: linear-gradient(90deg, rgba(238, 51, 56, 0.1) 0%, rgba(238, 51, 56, 0.05) 100%); color: var(--nuview-red); border-left: 5px solid var(--nuview-red); padding-left: calc(1rem - 5px); }
-        .main-content { margin-left: 260px; padding: 30px; min-height: 100vh; }
-        .section { background: var(--nuview-white); border-radius: 16px; padding: 2rem; margin: 1.5rem 0; box-shadow: 0 4px 16px rgba(238, 51, 56, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04); border-top: 3px solid var(--nuview-red); }
-        .section h2 { color: var(--nuview-navy); border-bottom: 4px solid var(--nuview-red); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.25px; }
-        .heatmap-table th { background: var(--nuview-navy); color: white; }
-        .hot { background: #ffb7a1; font-weight: 700; }
-        .warmer { background: #ffe7c7; }
-        .matrix-cell { text-align: center; padding: 1.5rem; font-size: 1.1rem; border: 2px solid #ddd; }
-        .matrix-cell.empty { background: #f8f9fa; color: #999; }
-        .matrix-cell.low { background: #d4edda; color: #155724; }
-        .matrix-cell.medium { background: #fff3cd; color: #856404; }
-        .matrix-cell.high { background: #f8d7da; color: #721c24; }
-        .matrix-cell.critical { background: #EE3338; color: white; font-weight: bold; }
-        .search-container { padding: 1.25rem; background: var(--nuview-white); margin: 1.5rem 0; border-radius: 12px; box-shadow: 0 3px 10px rgba(238, 51, 56, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04); border: 2px solid rgba(238, 51, 56, 0.1); }
-        .search-input { width: 100%; padding: 0.875rem; border: 2px solid var(--nuview-red); border-radius: 10px; font-size: 1.05rem; transition: all 0.3s ease; outline: none; }
-        .search-input:focus { border-color: var(--nuview-navy); box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.1); }
-        .program-card { background: var(--nuview-white); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; border-left: 5px solid var(--nuview-red); box-shadow: 0 3px 8px rgba(238, 51, 56, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04); transition: all 0.3s ease; }
-        .program-card:hover { box-shadow: 0 6px 16px rgba(238, 51, 56, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08); transform: translateY(-3px); border-left-width: 6px; }
+        .matrix-table thead th:first-child { border-top-left-radius: 12px; }
+        .matrix-table thead th:last-child { border-top-right-radius: 12px; }
+        .matrix-table tbody tr { 
+            transition: all 0.2s ease;
+            background: white;
+        }
+        .matrix-table tbody tr:nth-child(odd) { 
+            background: linear-gradient(90deg, #ffffff 0%, #f8f9fa 100%); 
+        }
+        .matrix-table tbody tr:hover { 
+            background: linear-gradient(90deg, rgba(238, 51, 56, 0.08) 0%, rgba(0, 123, 255, 0.08) 100%);
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .matrix-table tbody td { 
+            padding: 1rem; 
+            border-bottom: 1px solid var(--nuview-light-gray);
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        .matrix-table tbody td:first-child { font-weight: 600; color: var(--nuview-navy); }
+        .matrix-rank { 
+            width: 50px; 
+            text-align: center; 
+            font-weight: 700; 
+            font-size: 1.1rem;
+            color: var(--nuview-red);
+            background: linear-gradient(135deg, rgba(238, 51, 56, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
+        }
+        .matrix-value { 
+            font-weight: 700; 
+            color: var(--nuview-red);
+            font-size: 1.05rem;
+        }
+        .matrix-link { 
+            text-align: center;
+        }
+        .matrix-link-btn { 
+            display: inline-block;
+            padding: 0.5rem 1rem; 
+            background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .matrix-link-btn:hover { 
+            background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
+            border-color: var(--nuview-navy);
+        }
+        .matrix-link-btn:focus {
+            outline: 3px solid rgba(0, 123, 255, 0.5);
+            outline-offset: 2px;
+        }
+        .matrix-source-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background: linear-gradient(135deg, var(--nuview-gray) 0%, var(--nuview-dark-gray) 100%);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .matrix-source-badge:hover {
+            background: linear-gradient(135deg, var(--nuview-dark-gray) 0%, var(--nuview-gray) 100%);
+            transform: scale(1.05);
+        }
+        
+        .search-container { 
+            padding: 1.25rem; 
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); 
+            margin: 1.5rem 0; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            border: 1px solid var(--nuview-light-gray);
+        }
+        .search-input { 
+            width: 100%; 
+            padding: 0.875rem; 
+            border: 2px solid var(--nuview-gray); 
+            border-radius: 10px; 
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--nuview-red);
+            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.1);
+        }
+        .program-card { 
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); 
+            border-radius: 12px; 
+            padding: 1.5rem; 
+            margin-bottom: 1.25rem; 
+            border-left: 5px solid var(--nuview-red); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            transition: all 0.3s ease;
+            border: 1px solid var(--nuview-light-gray);
+        }
+        .program-card:hover { 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+            transform: translateY(-4px); 
+            border-left-color: var(--nuview-navy);
+            background: linear-gradient(135deg, #ffffff 0%, rgba(0, 123, 255, 0.05) 100%);
+        }
         .program-card.hidden { display: none; }
-        .urgency-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; }
-        .card { background: linear-gradient(135deg, var(--nuview-white) 0%, #fafafa 100%); border: 2px solid rgba(238, 51, 56, 0.15); border-radius: 12px; padding: 1.5rem; box-shadow: 0 3px 10px rgba(238, 51, 56, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04); transition: all 0.3s ease; }
-        .card:hover { box-shadow: 0 6px 16px rgba(238, 51, 56, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
-        .card h3 { color: var(--nuview-red); font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .card .text-muted { color: var(--nuview-navy) !important; opacity: 0.75; font-weight: 500; font-size: 0.95rem; }
+        .program-card h5 {
+            transition: color 0.3s ease;
+        }
+        .program-card:hover h5 {
+            color: var(--nuview-red);
+        }
+        .program-card a {
+            transition: all 0.2s ease;
+        }
+        .program-card a:hover {
+            color: var(--nuview-red);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .urgency-badge { 
+            display: inline-block; 
+            padding: 0.4rem 0.9rem; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .urgency-urgent { 
+            background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%); 
+            color: white;
+            box-shadow: 0 2px 8px rgba(238, 51, 56, 0.3);
+        }
+        .urgency-near { 
+            background: linear-gradient(135deg, var(--nuview-gray) 0%, var(--nuview-dark-gray) 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+        }
+        .urgency-future { 
+            background: linear-gradient(135deg, var(--nuview-light-gray) 0%, var(--nuview-gray) 100%);
+            color: var(--dark);
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2);
+        }
+        .urgency-badge:hover {
+            transform: scale(1.05);
+        }
+        .text-muted {
+            color: var(--nuview-gray);
+        }
         
         /* Responsive Design */
         @media (max-width: 768px) {
-            .header { padding: 2.5rem 1.5rem 2rem; }
-            .header-logo { font-size: 2.5rem; letter-spacing: 1px; margin-bottom: 1rem; }
-            .header h1 { font-size: 2rem; margin: 0.5rem 0 0.75rem; }
-            .header-subtitle { font-size: 1rem; }
-            .sidebar { width: 220px; }
-            .main-content { margin-left: 220px; padding: 20px; }
-            .section h2 { font-size: 1.5rem; }
-            .card h3 { font-size: 2rem; }
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                margin-left: 200px;
+                padding: 15px;
+            }
+            .section {
+                padding: 1.25rem;
+                margin: 1rem 0;
+            }
+            .matrix-table {
+                font-size: 0.85rem;
+            }
+            .matrix-table thead th,
+            .matrix-table tbody td {
+                padding: 0.75rem 0.5rem;
+            }
         }
-        
         @media (max-width: 576px) {
-            .header { padding: 2rem 1rem 1.5rem; }
-            .header-logo { font-size: 2rem; }
-            .header h1 { font-size: 1.5rem; }
-            .header-subtitle { font-size: 0.9rem; }
-            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 3px solid var(--nuview-red); }
-            .main-content { margin-left: 0; padding: 15px; }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 3px solid var(--nuview-red);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+            .matrix-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
         }
-        .urgency-urgent { background: var(--nuview-red); color: white; }
-        .urgency-near { background: #ffc107; color: #333; }
-        .urgency-future { background: #28a745; color: white; }
     </style>
 </head>
 <body>
 
-<nav class="sidebar" role="navigation" aria-label="Main navigation">
-    <h3>NUVIEW INTEL</h3>
-    <a href="#overview" class="active" aria-current="page"><i class="bi bi-house-door" aria-hidden="true"></i> Overview</a>
-    <a href="#funding"><i class="bi bi-currency-dollar" aria-hidden="true"></i> Funding</a>
-    <a href="#lidar"><i class="bi bi-radar" aria-hidden="true"></i> LiDAR</a>
-    <a href="#space-systems"><i class="bi bi-rocket-takeoff" aria-hidden="true"></i> Space Systems</a>
-    <a href="#platform"><i class="bi bi-server" aria-hidden="true"></i> Platform</a>
-    <a href="pipeline.html"><i class="bi bi-funnel" aria-hidden="true"></i> Pipeline Dashboard</a>
+<nav class="sidebar">
+    <h3 style="padding-left:1rem; color:var(--nuview-navy); font-weight:800;">NUVIEW INTEL</h3>
+    <a href="#overview" class="active"><i class="bi bi-house-door"></i> Overview</a>
+    <a href="#top-opportunities"><i class="bi bi-trophy"></i> Top 10 Matrix</a>
+    <a href="#funding"><i class="bi bi-currency-dollar"></i> Funding</a>
+    <a href="#lidar"><i class="bi bi-radar"></i> LiDAR</a>
+    <a href="#space-systems"><i class="bi bi-rocket-takeoff"></i> Space Systems</a>
+    <a href="#platform"><i class="bi bi-server"></i> Platform</a>
+    <a href="pipeline.html"><i class="bi bi-funnel"></i> Pipeline Dashboard</a>
 </nav>
 
 <main class="main-content" role="main">
@@ -211,6 +393,38 @@
         </div>
     </div>
 
+    <!-- Top 10 Opportunity Matrix -->
+    <div id="top-opportunities" class="section">
+        <h2><i class="bi bi-trophy"></i> Top 10 Opportunity Matrix</h2>
+        <p style="color: var(--nuview-dark-gray); margin-bottom: 1.5rem;">
+            Highest-value opportunities ranked by strategic importance and urgency
+        </p>
+        <div style="overflow-x: auto;">
+            <table class="matrix-table" role="table" aria-label="Top 10 opportunities matrix">
+                <thead>
+                    <tr>
+                        <th class="matrix-rank" scope="col">#</th>
+                        <th scope="col">Opportunity</th>
+                        <th scope="col">Agency <span class="matrix-source-badge">Source</span></th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Urgency</th>
+                        <th scope="col">Next Action</th>
+                        <th class="matrix-link" scope="col">Link</th>
+                    </tr>
+                </thead>
+                <tbody id="top-opportunities-body">
+                    <tr>
+                        <td colspan="9" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">
+                            Loading top opportunities...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div id="funding" class="section">
         <h2><i class="bi bi-currency-dollar"></i> Funding Opportunities</h2>
         <div id="funding-programs">
@@ -260,11 +474,83 @@ function formatCurrency(amount) {
 // Get urgency badge
 function getUrgencyBadge(urgency) {
     const badges = {
-        'urgent': '<span class="urgency-badge urgency-urgent">URGENT</span>',
-        'near': '<span class="urgency-badge urgency-near">NEAR</span>',
-        'future': '<span class="urgency-badge urgency-future">FUTURE</span>'
+        'urgent': '<span class="urgency-badge urgency-urgent" role="status" aria-label="Urgent priority">URGENT</span>',
+        'near': '<span class="urgency-badge urgency-near" role="status" aria-label="Near-term priority">NEAR</span>',
+        'future': '<span class="urgency-badge urgency-future" role="status" aria-label="Future priority">FUTURE</span>'
     };
     return badges[urgency || 'future'] || badges['future'];
+}
+
+// Render Top 10 Opportunities Matrix
+function renderTopOpportunities() {
+    if (!programsData || !programsData.programs) return;
+    
+    const allPrograms = [
+        ...(programsData.programs.funding || []),
+        ...(programsData.programs.lidar || []),
+        ...(programsData.programs.spaceSystems || []),
+        ...(programsData.programs.platform || [])
+    ];
+    
+    // Remove duplicates by ID
+    const uniquePrograms = Array.from(new Map(allPrograms.map(p => [p.id, p])).values());
+    
+    // Sort by value (descending) and urgency (urgent first)
+    const sortedPrograms = uniquePrograms.sort((a, b) => {
+        // Prioritize urgent items
+        if (a.urgency === 'urgent' && b.urgency !== 'urgent') return -1;
+        if (a.urgency !== 'urgent' && b.urgency === 'urgent') return 1;
+        // Then sort by value
+        return (b.valueUSD || 0) - (a.valueUSD || 0);
+    });
+    
+    // Take top 10
+    const top10 = sortedPrograms.slice(0, 10);
+    
+    const tbody = document.getElementById('top-opportunities-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    if (top10.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">No opportunities available.</td></tr>';
+        return;
+    }
+    
+    top10.forEach((program, index) => {
+        const row = document.createElement('tr');
+        row.setAttribute('role', 'row');
+        row.innerHTML = `
+            <td class="matrix-rank" role="cell">${index + 1}</td>
+            <td role="cell"><strong>${program.title || 'Untitled Program'}</strong></td>
+            <td role="cell">
+                ${program.agency || 'N/A'}
+                <span class="matrix-source-badge" role="note" aria-label="Source agency">${program.pillar || 'N/A'}</span>
+            </td>
+            <td role="cell">${program.category || 'N/A'}</td>
+            <td class="matrix-value" role="cell">${formatCurrency(program.valueUSD || 0)}</td>
+            <td role="cell">${program.deadline || 'TBD'} <small class="text-muted">(${program.daysUntil !== undefined ? program.daysUntil : 'N/A'} days)</small></td>
+            <td role="cell">${getUrgencyBadge(program.urgency)}</td>
+            <td role="cell" style="color: var(--nuview-red); font-weight: 600;">${program.nextAction || 'No action specified'}</td>
+            <td class="matrix-link" role="cell">
+                ${program.link && program.link !== '#' ? `
+                <a href="${program.link}" target="_blank" rel="noopener noreferrer" 
+                   class="matrix-link-btn" 
+                   aria-label="View ${program.title || 'program'} details"
+                   tabindex="0">
+                    View <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+                ` : `
+                <span class="matrix-link-btn" style="opacity: 0.5; cursor: not-allowed;" 
+                      aria-label="Link not available"
+                      tabindex="-1">
+                    N/A
+                </span>
+                `}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
 }
 
 // Create program card
@@ -385,6 +671,9 @@ async function loadPrograms() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         programsData = await response.json();
+        
+        // Render top 10 opportunities matrix
+        renderTopOpportunities();
         
         // Render all sections with robust handling for missing data
         renderPrograms(programsData.programs?.funding || [], 'funding-programs');
