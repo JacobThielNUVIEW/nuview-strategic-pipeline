@@ -265,16 +265,123 @@
         .pipeline-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--nuview-red); }
         .pipeline-tooltip.show { opacity: 1; }
         
+        /* Table wrapper for horizontal scroll on mobile */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .pipeline-svg { min-width: 600px; }
-            .pipeline-legend { font-size: 0.85rem; }
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.mobile-active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 1.5rem 0;
+            }
+            
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .row {
+                flex-direction: column;
+            }
+            
+            .row > div {
+                width: 100% !important;
+                margin-bottom: 1rem;
+            }
+            
+            .section {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .section h2 {
+                font-size: 1.35rem;
+            }
+            
+            .matrix-table {
+                font-size: 0.8rem;
+            }
+            
+            .matrix-table thead th {
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+            
+            .matrix-table tbody td {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .matrix-link-btn {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.75rem;
+            }
+            
+            .pipeline-svg { 
+                min-width: 600px;
+            }
+            
+            .pipeline-legend { 
+                font-size: 0.85rem; 
+            }
+            
+            .program-card {
+                padding: 1rem;
+            }
+            
+            .search-container {
+                padding: 1rem;
+            }
+            
+            /* Mobile menu toggle button */
+            .mobile-menu-toggle {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 101;
+                background: var(--nuview-red);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 0.75rem;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+        }
+        
+        /* Desktop - hide mobile menu toggle */
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
-<nav class="sidebar">
+<!-- Mobile Menu Toggle -->
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+    <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+</button>
+
+<nav class="sidebar" id="sidebar">
     <h3 style="padding-left:1rem; color:var(--nuview-navy); font-weight:800;">NUVIEW INTEL</h3>
     <a href="#overview" class="active"><i class="bi bi-house-door"></i> Overview</a>
     <a href="#top-opportunities"><i class="bi bi-trophy"></i> Top 10 Matrix</a>
@@ -827,6 +934,24 @@ function initializePipelineTooltips() {
         });
     });
 }
+
+// Mobile menu toggle
+function toggleMobileMenu() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('mobile-active');
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (window.innerWidth <= 768) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+            sidebar.classList.remove('mobile-active');
+        }
+    }
+});
 </script>
 </body>
 </html>
