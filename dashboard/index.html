@@ -941,15 +941,18 @@ function toggleMobileMenu() {
     sidebar.classList.toggle('mobile-active');
 }
 
+// Use matchMedia for better performance instead of checking window.innerWidth on every click
+const isMobileQuery = window.matchMedia('(max-width: 768px)');
+
 // Close mobile menu when clicking outside
 document.addEventListener('click', function(event) {
+    if (!isMobileQuery.matches) return; // Only apply on mobile
+    
     const sidebar = document.getElementById('sidebar');
     const toggle = document.querySelector('.mobile-menu-toggle');
     
-    if (window.innerWidth <= 768) {
-        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-            sidebar.classList.remove('mobile-active');
-        }
+    if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+        sidebar.classList.remove('mobile-active');
     }
 });
 </script>
