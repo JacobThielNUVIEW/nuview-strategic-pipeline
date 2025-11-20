@@ -34,10 +34,12 @@
   ],
   "data_summary": {
     "total_programs": 8,
+    "note": "Programs can appear in multiple categories, so category totals sum to more than total unique programs",
     "funding_opportunities": 3,
     "lidar_programs": 3,
     "space_systems": 2,
     "platform_initiatives": 2,
+    "category_appearances_total": 10,
     "urgent_programs": 4,
     "near_term_programs": 2,
     "future_programs": 2,

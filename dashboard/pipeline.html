@@ -285,6 +285,8 @@
                 ];
                 // Remove duplicates by ID (programs can appear in multiple categories)
                 // This ensures each unique opportunity is counted once in summary statistics
+                // Note: When deduplicating, the last occurrence's category is kept
+                // This is acceptable as the program is valid in all its categories
                 opportunitiesData = Array.from(new Map(opportunitiesData.map(p => [p.id, p])).values());
                 
                 renderTables();
