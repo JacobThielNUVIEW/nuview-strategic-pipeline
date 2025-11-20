@@ -453,6 +453,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Pipeline stage tooltips
 function initializePipelineTooltips() {
+    // Tooltip positioning constants
+    const TOOLTIP_HORIZONTAL_OFFSET = 140; // Half tooltip width for centering
+    const TOOLTIP_VERTICAL_OFFSET = 15; // Gap between tooltip and element
+    
     const tooltipData = {
         sources: {
             title: 'Data Sources',
@@ -492,8 +496,8 @@ function initializePipelineTooltips() {
         
         stage.addEventListener('mousemove', function(e) {
             const rect = this.getBoundingClientRect();
-            tooltip.style.left = (e.clientX - 140) + 'px';
-            tooltip.style.top = (rect.top - tooltip.offsetHeight - 15 + window.scrollY) + 'px';
+            tooltip.style.left = (e.clientX - TOOLTIP_HORIZONTAL_OFFSET) + 'px';
+            tooltip.style.top = (rect.top - tooltip.offsetHeight - TOOLTIP_VERTICAL_OFFSET + window.scrollY) + 'px';
         });
         
         stage.addEventListener('mouseleave', function() {
