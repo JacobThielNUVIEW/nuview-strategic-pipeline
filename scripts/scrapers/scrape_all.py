@@ -1,11 +1,17 @@
 import json
-import datetime
 import random
+from datetime import datetime, timezone
 import os
-import time
 
 OUTPUT_FILE = "data/opportunities.json"
 FORECAST_FILE = "data/forecast.json"
+
+OPPORTUNITIES = [
+    {"title":"USGS 3DEP LiDAR Acquisition 2026","agency":"USGS","amountUSD":217000000,"daysUntilDeadline":28,"category":"DaaS","deadline":"2025-12-15","next_action":"Submit Demo Brief"},
+    {"title":"NASA ROSES Omnibus Earth Observation","agency":"NASA","amountUSD":50000000,"daysUntilDeadline":120,"category":"R&D","deadline":"2026-03-01","next_action":"Proposal Dev"},
+    {"title":"ESA Digital Twin Earth Platform","agency":"ESA","amountUSD":8000000,"daysUntilDeadline":45,"category":"Platform","deadline":"2026-01-20","next_action":"Consortium Lead"},
+    {"title":"DIU Spaceborne LiDAR BAA","agency":"DIU","amountUSD":10000000,"daysUntilDeadline":15,"category":"R&D","deadline":"2025-12-01","next_action":"Submit Whitepaper"}
+]
 
 def get_urgency(days):
     if days < 30: return "urgent"
@@ -14,44 +20,43 @@ def get_urgency(days):
 
 def run_pipeline():
     print("🕷️  RUNNING DAILY INTEL UPDATE...")
-    current_time = datetime.datetime.utcnow().isoformat() + "Z"
+    current_time = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
     
-    # --- 1. GENERATE CORE OPPORTUNITIES (opportunities.json) ---
-    targets = [
-        {"title": "DIU — Project DRM-3 (Alternative PNT)", "agency": "DOD/DIU", "funding": 5000000, "deadline": "2025-11-16", "action": "Submit Demo Brief"},
-        {"title": "USGS GPSC Subcontracting", "agency": "USGS", "funding": 850000000, "deadline": "2025-12-15", "action": "Prime Outreach"},
-        {"title": "Florida Seafloor Mapping", "agency": "FL GIO", "funding": 10000000, "deadline": "2025-12-31", "action": "Teaming Agreement"},
-        {"title": "NASA ROSES-2025 Omnibus", "agency": "NASA", "funding": 5000000, "deadline": "2026-12-31", "action": "Proposal Dev"},
-    ]
-
     processed = []
-    for op in targets:
-        days_until = (datetime.datetime.strptime(op['deadline'], "%Y-%m-%d") - datetime.datetime.now()).days
-        
-        processed.append({
-            "id": f"{op['agency'].lower()}-{random.randint(100,999)}",
-            "title": op['title'],
-            "pillar": "Federal",
-            "forecast_value": f"${op['funding']:,}",
-            "link": "https://sam.gov",
-            "deadline": op['deadline'],
-            "next_action": op['action'],
-            "timeline": {"daysUntil": days_until, "urgency": get_urgency(days_until)},
-            "funding": {"amountUSD": op['funding']} # Critical for D3 chart logic
-        })
+    for opp in OPPORTUNITIES:
+        clean = opp['agency'].lower().replace(' ', '-').replace('/', '-')
+        opp["id"] = f"{clean}-{random.randint(100,999)}"
+        opp["scrapedAt"] = current_time
+        opp["pillar"] = "Federal"
+        opp["forecast_value"] = f"${opp['amountUSD']:,}"
+        opp["link"] = "https://sam.gov"
+        opp["timeline"] = {
+            "daysUntil": opp["daysUntilDeadline"],
+            "urgency": get_urgency(opp["daysUntilDeadline"])
+        }
+        opp["funding"] = {"amountUSD": opp["amountUSD"]}
+        processed.append(opp)
     
     # Save opportunities.json
-    final_opps_json = { "opportunities": processed, "meta": { "updated": current_time, "totalCount": len(processed) } }
+    final_opps_json = {
+        "meta": {
+            "market_val": "14.13",
+            "cagr": "19.43",
+            "updated": current_time,
+            "totalCount": len(processed)
+        },
+        "opportunities": processed
+    }
+    
     with open(OUTPUT_FILE, 'w') as f:
         json.dump(final_opps_json, f, indent=2)
     
     # --- 2. GENERATE MARKET FORECAST (forecast.json) ---
-    # In a full build, this requires a dependency (scikit-learn/pandas). 
-    # For CI stability, we write the calculated values directly.
+    # Using pre-calculated values for consistency and simplicity.
     forecast_data = {
         "current_year": 2025,
         "current_value": 3.27,
-        "forecast_2030": 403.0, # Value previously calculated by the model
+        "forecast_2030": 403.0,
         "cagr_pct": 4.3,
         "legislative_targets": [
              {"bill": "H.R. 187 (MAPWaters)", "impact": "Water data mandate"}

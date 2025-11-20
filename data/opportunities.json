@@ -1,4 +1,96 @@
 {
+  "meta": {
+    "market_val": "14.13",
+    "cagr": "19.43",
+    "updated": "2025-11-18T13:31:16.569989Z",
+    "totalCount": 4
+  },
+  "opportunities": [
+    {
+      "title": "USGS 3DEP LiDAR Acquisition 2026",
+      "agency": "USGS",
+      "amountUSD": 217000000,
+      "daysUntilDeadline": 28,
+      "category": "DaaS",
+      "deadline": "2025-12-15",
+      "next_action": "Submit Demo Brief",
+      "id": "usgs-107",
+      "scrapedAt": "2025-11-18T13:31:16.569989Z",
+      "pillar": "Federal",
+      "forecast_value": "$217,000,000",
+      "link": "https://sam.gov",
+      "timeline": {
+        "daysUntil": 28,
+        "urgency": "urgent"
+      },
+      "funding": {
+        "amountUSD": 217000000
+      }
+    },
+    {
+      "title": "NASA ROSES Omnibus Earth Observation",
+      "agency": "NASA",
+      "amountUSD": 50000000,
+      "daysUntilDeadline": 120,
+      "category": "R&D",
+      "deadline": "2026-03-01",
+      "next_action": "Proposal Dev",
+      "id": "nasa-773",
+      "scrapedAt": "2025-11-18T13:31:16.569989Z",
+      "pillar": "Federal",
+      "forecast_value": "$50,000,000",
+      "link": "https://sam.gov",
+      "timeline": {
+        "daysUntil": 120,
+        "urgency": "future"
+      },
+      "funding": {
+        "amountUSD": 50000000
+      }
+    },
+    {
+      "title": "ESA Digital Twin Earth Platform",
+      "agency": "ESA",
+      "amountUSD": 8000000,
+      "daysUntilDeadline": 45,
+      "category": "Platform",
+      "deadline": "2026-01-20",
+      "next_action": "Consortium Lead",
+      "id": "esa-161",
+      "scrapedAt": "2025-11-18T13:31:16.569989Z",
+      "pillar": "Federal",
+      "forecast_value": "$8,000,000",
+      "link": "https://sam.gov",
+      "timeline": {
+        "daysUntil": 45,
+        "urgency": "near"
+      },
+      "funding": {
+        "amountUSD": 8000000
+      }
+    },
+    {
+      "title": "DIU Spaceborne LiDAR BAA",
+      "agency": "DIU",
+      "amountUSD": 10000000,
+      "daysUntilDeadline": 15,
+      "category": "R&D",
+      "deadline": "2025-12-01",
+      "next_action": "Submit Whitepaper",
+      "id": "diu-438",
+      "scrapedAt": "2025-11-18T13:31:16.569989Z",
+      "pillar": "Federal",
+      "forecast_value": "$10,000,000",
+      "link": "https://sam.gov",
+      "timeline": {
+        "daysUntil": 15,
+        "urgency": "urgent"
+      },
+      "funding": {
+        "amountUSD": 10000000
+      }
+    }
+  ]
   "opportunities": [
     {
       "id": "dod/diu-928",

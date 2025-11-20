@@ -1,2 +1,6 @@
-requests==2.31.0
-pandas==2.2.0
+# No external dependencies required
+# The script only uses Python standard library modules:
+# - json
+# - datetime
+# - random
+# - os
