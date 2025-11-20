@@ -185,6 +185,29 @@ After updating data files:
 - **Urgent Actions**: Counts opportunities with urgency = "urgent"
 - **Total Pipeline Value**: Sums all opportunity funding amounts
 
+## GitHub Pages Deployment
+
+This repository is configured to deploy to GitHub Pages automatically. The deployment workflow is triggered on every push to the `main` branch.
+
+### Initial Setup
+
+To enable GitHub Pages for the first time:
+
+1. Go to repository **Settings** → **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. The workflow will automatically deploy on the next push to `main`
+
+The dashboard will be accessible at: `https://jacobthielnuview.github.io/nuview-strategic-pipeline/`
+
+### SEO Privacy
+
+The site is configured with search engine privacy measures:
+- **robots.txt** at the repository root blocks all crawlers
+- **Meta robots tag** in pipeline.html prevents indexing
+- The dashboard link is kept unlisted (not advertised in README or main index)
+
+**Note:** This provides privacy through obscurity and noindex directives, not password protection.
+
 ## Contributing
 
 When adding new opportunities or updating market data:
