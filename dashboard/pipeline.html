@@ -255,13 +255,13 @@
         function updateSummary() {
             const totalOpps = opportunitiesData.length;
             const totalValue = opportunitiesData.reduce((sum, opp) => 
-                sum + (opp.funding?.amountUSD || 0), 0);
+                sum + (opp.valueUSD || 0), 0);
             const urgentCount = opportunitiesData.filter(opp => 
-                opp.timeline?.urgency === 'urgent').length;
+                opp.urgency === 'urgent').length;
             
-            // LiDAR-prioritized: DaaS category or specific keywords
+            // LiDAR-prioritized: LiDAR category or specific keywords
             const lidarPriority = opportunitiesData.filter(opp => 
-                opp.category === 'DaaS' || 
+                opp.category === 'LiDAR' || 
                 opp.title.toLowerCase().includes('lidar') ||
                 opp.title.toLowerCase().includes('3dep')).length;
 
@@ -274,9 +274,20 @@
         // Load opportunities data
         async function loadOpportunities() {
             try {
-                const response = await fetch('../data/opportunities.json');
+                const response = await fetch('../data/processed/programs.json');
                 const data = await response.json();
-                opportunitiesData = data.opportunities || [];
+                // Flatten all programs from different categories
+                opportunitiesData = [
+                    ...(data.programs?.funding || []),
+                    ...(data.programs?.lidar || []),
+                    ...(data.programs?.spaceSystems || []),
+                    ...(data.programs?.platform || [])
+                ];
+                // Remove duplicates by ID (programs can appear in multiple categories)
+                // This ensures each unique opportunity is counted once in summary statistics
+                // Note: When deduplicating, the last occurrence's category is kept
+                // This is acceptable as the program is valid in all its categories
+                opportunitiesData = Array.from(new Map(opportunitiesData.map(p => [p.id, p])).values());
                 
                 renderTables();
                 updateSummary();
@@ -339,25 +350,33 @@
                     <td>${opp.agency || 'N/A'}</td>
                     <td><strong>${opp.title}</strong></td>
                     <td>${opp.category || 'N/A'}</td>
-                    <td>${formatCurrency(opp.funding?.amountUSD || 0)}</td>
+                    <td>${formatCurrency(opp.valueUSD || 0)}</td>
                     <td>${opp.deadline || 'N/A'}</td>
-                    <td>${getUrgencyBadge(opp.timeline?.urgency)}</td>
-                    <td>${opp.next_action || 'N/A'}</td>
+                    <td>${getUrgencyBadge(opp.urgency)}</td>
+                    <td>${opp.nextAction || 'N/A'}</td>
                 `;
                 agencyBody.appendChild(row);
             });
 
             // Initialize or reinitialize DataTable for agency funnel
-            if (agencyTable) {
-                agencyTable.destroy();
+            try {
+                if (typeof $ !== 'undefined' && $.fn.DataTable) {
+                    if (agencyTable) {
+                        agencyTable.destroy();
+                    }
+                    agencyTable = $('#agencyTable').DataTable({
+                        pageLength: 10,
+                        order: [[3, 'desc']], // Sort by value descending
+                        columnDefs: [
+                            { targets: 3, type: 'num' } // Ensure proper numeric sorting
+                        ]
+                    });
+                } else {
+                    console.warn('DataTables library not available. Table displayed without advanced features.');
+                }
+            } catch (error) {
+                console.warn('Failed to initialize DataTable for agency funnel:', error);
             }
-            agencyTable = $('#agencyTable').DataTable({
-                pageLength: 10,
-                order: [[3, 'desc']], // Sort by value descending
-                columnDefs: [
-                    { targets: 3, type: 'num' } // Ensure proper numeric sorting
-                ]
-            });
 
             // Current Opportunities Table
             const oppsBody = document.getElementById('opportunitiesTableBody');
@@ -371,27 +390,35 @@
                     <td>${opp.agency || 'N/A'}</td>
                     <td>${opp.pillar || 'N/A'}</td>
                     <td>${opp.category || 'N/A'}</td>
-                    <td data-order="${opp.funding?.amountUSD || 0}">${formatCurrency(opp.funding?.amountUSD || 0)}</td>
-                    <td data-order="${opp.timeline?.daysUntil || 999}">${opp.timeline?.daysUntil || 'N/A'}</td>
+                    <td data-order="${opp.valueUSD || 0}">${formatCurrency(opp.valueUSD || 0)}</td>
+                    <td data-order="${opp.daysUntil || 999}">${opp.daysUntil || 'N/A'}</td>
                     <td>${opp.deadline || 'N/A'}</td>
-                    <td data-order="${opp.timeline?.urgency === 'urgent' ? 1 : opp.timeline?.urgency === 'near' ? 2 : 3}">${getUrgencyBadge(opp.timeline?.urgency)}</td>
-                    <td>${opp.next_action || 'N/A'}</td>
+                    <td data-order="${opp.urgency === 'urgent' ? 1 : opp.urgency === 'near' ? 2 : 3}">${getUrgencyBadge(opp.urgency)}</td>
+                    <td>${opp.nextAction || 'N/A'}</td>
                     <td><a href="${opp.link || '#'}" target="_blank" class="text-blue-600 hover:underline">View</a></td>
                 `;
                 oppsBody.appendChild(row);
             });
 
             // Initialize or reinitialize DataTable for opportunities
-            if (opportunitiesTable) {
-                opportunitiesTable.destroy();
+            try {
+                if (typeof $ !== 'undefined' && $.fn.DataTable) {
+                    if (opportunitiesTable) {
+                        opportunitiesTable.destroy();
+                    }
+                    opportunitiesTable = $('#opportunitiesTable').DataTable({
+                        pageLength: 10,
+                        order: [[8, 'asc'], [5, 'desc']], // Sort by urgency then value
+                        columnDefs: [
+                            { targets: [5, 6, 8], orderDataType: 'dom-data-order' }
+                        ]
+                    });
+                } else {
+                    console.warn('DataTables library not available. Table displayed without advanced features.');
+                }
+            } catch (error) {
+                console.warn('Failed to initialize DataTable for opportunities:', error);
             }
-            opportunitiesTable = $('#opportunitiesTable').DataTable({
-                pageLength: 10,
-                order: [[8, 'asc'], [5, 'desc']], // Sort by urgency then value
-                columnDefs: [
-                    { targets: [5, 6, 8], orderDataType: 'dom-data-order' }
-                ]
-            });
         }
 
         // Filter functionality
@@ -404,12 +431,18 @@
 
                 const filter = this.dataset.filter;
                 
-                if (agencyTable) {
-                    if (filter === 'all') {
-                        agencyTable.search('').draw();
-                    } else {
-                        agencyTable.columns(0).search(filter).draw();
+                if (agencyTable && typeof $ !== 'undefined') {
+                    try {
+                        if (filter === 'all') {
+                            agencyTable.search('').draw();
+                        } else {
+                            agencyTable.columns(0).search(filter).draw();
+                        }
+                    } catch (error) {
+                        console.warn('Filter functionality requires DataTables library');
                     }
+                } else {
+                    console.warn('Filter functionality requires DataTables library');
                 }
             });
         });
