@@ -55,7 +55,8 @@
         <th class="font-semibold">FY26 USD</th>
         <th class="font-semibold text-nuview-red">Score</th>
         <th class="font-semibold">Data</th>
-        <th class="font-semibold">Source</th>
+        <th class="font-semibold">Agency Link</th>
+        <th class="font-semibold">Budget Source</th>
       </tr></thead><tbody id="rows"></tbody></table>
     </div>
   </div>
@@ -85,12 +86,13 @@
           <tr class="${Number(r.nuview_priority_score) > 90 ? 'highlight-row' : ''}">
             <td class="px-4 py-3 font-bold text-nuview-red">${i+1}</td>
             <td>${r.country}</td>
-            <td>${r.agency_name}</td>
+            <td><a href="${r.agency_url || '#'}" target="_blank" class="underline text-white hover:text-nuview-red" title="Visit ${r.agency_name} website">${r.agency_name}</a></td>
             <td>${r.program_name}</td>
             <td>$${(Number(r.budget_amount_usd)/1e6).toFixed(1)}M</td>
             <td class="font-semibold text-nuview-red">${r.nuview_priority_score}</td>
             <td>${r.data_access}</td>
-            <td><a href="${(r.sources || '#').split(',')[0]}" target="_blank" class="underline text-nuview-red">Source</a></td>
+            <td><a href="${r.agency_url || '#'}" target="_blank" class="underline text-nuview-red" title="Visit agency homepage">Agency</a></td>
+            <td><a href="${r.budget_source_url || r.sources || '#'}" target="_blank" class="underline text-nuview-red" title="View budget/program source">Budget</a></td>
           </tr>`).join('');
       }
     });
