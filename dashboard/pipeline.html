@@ -300,7 +300,6 @@
             try {
                 const response = await fetch('../data/processed/programs.json');
                 const data = await response.json();
-                
                 // Flatten all programs from different categories
                 opportunitiesData = [
                     ...(data.programs?.funding || []),
@@ -308,7 +307,6 @@
                     ...(data.programs?.spaceSystems || []),
                     ...(data.programs?.platform || [])
                 ];
-                
                 // Remove duplicates by ID (programs can appear in multiple categories)
                 // This ensures each unique opportunity is counted once in summary statistics
                 // Note: When deduplicating, the last occurrence's category is kept
