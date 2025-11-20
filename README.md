@@ -74,16 +74,124 @@ The repository is configured with automated daily updates via GitHub Actions:
 
 ## Dashboard Sections
 
+### Main Dashboard (`dashboard/index.html`)
 1. **Executive Overview**: High-level market statistics and revenue targets
 2. **Market Forecast**: Regional growth projections with CAGR analysis
-3. **Critical Actions**: Live feed of upcoming deadlines and required actions
+3. **Priority Matrix**: Live data prioritization grid
+4. **Analytics**: Charts showing opportunity distribution
+5. **Critical Actions**: Live feed of upcoming deadlines and required actions
+
+### Pipeline Dashboard (`dashboard/pipeline.html`)
+1. **Summary Statistics**: Total opportunities, pipeline value, urgent actions, and LiDAR-prioritized count
+2. **Agency Budget Funnel**: Filterable table organized by agency with sorting capabilities
+3. **Current Opportunities**: Comprehensive table with DataTables for advanced filtering and sorting
+4. **Market Forecast Summary**: Key forecast metrics and legislative targets
+
+## Updating Dashboard Data
+
+The dashboards are fully data-driven and pull information from JSON files in the `/data` directory.
+
+### Updating Opportunities
+
+Edit `/data/opportunities.json` to add, modify, or remove opportunities. Follow this schema:
+
+```json
+{
+  "meta": {
+    "market_val": "14.13",
+    "cagr": "19.43",
+    "updated": "2025-11-20T03:58:04Z",
+    "totalCount": 8
+  },
+  "opportunities": [
+    {
+      "id": "unique-id",
+      "title": "Opportunity Title",
+      "agency": "Agency Name",
+      "pillar": "Federal/Commercial/Research",
+      "category": "DaaS/R&D/Platform",
+      "forecast_value": "$X,XXX,XXX",
+      "link": "https://link-to-opportunity",
+      "deadline": "YYYY-MM-DD",
+      "next_action": "Action description",
+      "timeline": {
+        "daysUntil": 30,
+        "urgency": "urgent/near/future"
+      },
+      "funding": {
+        "amountUSD": 1000000
+      }
+    }
+  ]
+}
+```
+
+**Key Fields:**
+- `urgency`: Set to "urgent" (< 30 days), "near" (30-90 days), or "future" (> 90 days)
+- `category`: Use "DaaS" for LiDAR-specific opportunities (they get prioritized in summary)
+- `amountUSD`: Numeric value in USD for proper sorting and calculations
+- `daysUntil`: Can be negative for past deadlines
+
+### Updating Market Forecast
+
+Edit `/data/forecast.json` to update market projections:
+
+```json
+{
+  "current_year": 2025,
+  "current_value": 3.27,
+  "forecast_2030": 403.0,
+  "cagr_pct": 4.3,
+  "legislative_targets": [
+    {
+      "bill": "Bill name or number",
+      "impact": "Description of impact"
+    }
+  ]
+}
+```
+
+### Testing Changes Locally
+
+After updating data files:
+
+1. Start local server:
+   ```bash
+   python -m http.server 8000
+   ```
+
+2. Open browsers to test both dashboards:
+   - Main: `http://localhost:8000/dashboard/index.html`
+   - Pipeline: `http://localhost:8000/dashboard/pipeline.html`
+
+3. Verify:
+   - All tables populate correctly
+   - Filtering and sorting work
+   - Summary statistics calculate properly
+   - No console errors
+
+### Using the Pipeline Dashboard
+
+**Filtering:**
+- Click agency buttons to filter the Agency Budget Funnel table
+- Use DataTables search boxes for custom filtering
+
+**Sorting:**
+- Click any column header to sort
+- Default sort: Urgency (ascending) then Value (descending)
+
+**Summary Calculations:**
+- **LiDAR-Prioritized**: Counts opportunities with category "DaaS" or containing "LiDAR" in title
+- **Urgent Actions**: Counts opportunities with urgency = "urgent"
+- **Total Pipeline Value**: Sums all opportunity funding amounts
 
 ## Contributing
 
 When adding new opportunities or updating market data:
 1. Ensure data follows the JSON schema in existing files
 2. Test locally before pushing
-3. Verify the dashboard renders correctly
+3. Verify both dashboards render correctly
+4. Update the `totalCount` in meta when adding/removing opportunities
 
 ## License
 
