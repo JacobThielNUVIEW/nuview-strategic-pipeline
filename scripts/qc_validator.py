@@ -119,7 +119,9 @@ def validate_opportunities_file(filepath):
             if not any(keyword in title_lower for keyword in topographic_keywords):
                 # Check category as well
                 if opp.get('category') != 'DaaS':
-                    warnings.append(f"Opportunity {idx} ({opp.get('id', 'unknown')}): May not be topographic-related (no relevant keywords found)")
+                    title = opp.get('title', 'Unknown Title')
+                    opp_id = opp.get('id', 'unknown')
+                    warnings.append(f"Opportunity '{title}' ({opp_id}): May not be topographic-related (no relevant keywords found)")
     
     # Validate meta.totalCount matches actual count
     if 'meta' in data and 'totalCount' in data['meta']:

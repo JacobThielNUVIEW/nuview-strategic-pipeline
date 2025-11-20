@@ -27,7 +27,7 @@ This project provides a real-time view of global LiDAR market opportunities, for
 │   ├── opportunities.json  # Current opportunity pipeline (auto-updated)
 │   ├── forecast.json       # Market forecast data (auto-updated)
 │   └── processed/
-│       ├── priority_matrix.csv # Global programs data for tracker
+│       ├── priority_matrix.csv # Global space programs with budget and priority scoring
 │       └── qc_report.json      # Quality control reports
 ├── scripts/
 │   ├── scrapers/
