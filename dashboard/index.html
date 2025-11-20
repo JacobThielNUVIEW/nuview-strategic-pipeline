@@ -274,10 +274,14 @@
         
         /* Respect user motion preferences */
         @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms;
-                animation-iteration-count: 1;
-                transition-duration: 0.01ms;
+            .sidebar,
+            .program-card,
+            .matrix-table tbody tr,
+            .section,
+            .pipeline-stage,
+            .matrix-link-btn {
+                animation: none;
+                transition: none;
             }
         }
         
@@ -372,6 +376,15 @@
                 padding: 0.75rem;
                 cursor: pointer;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            
+            .mobile-menu-toggle:focus {
+                outline: 3px solid var(--nuview-blue);
+                outline-offset: 2px;
+            }
+            
+            .mobile-menu-toggle:hover {
+                background: #c82630;
             }
         }
         
@@ -944,7 +957,7 @@ function initializePipelineTooltips() {
     });
 }
 
-// Mobile menu toggle with keyboard support
+// Mobile menu toggle with keyboard support and focus management
 function toggleMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     const isOpening = !sidebar.classList.contains('mobile-active');
@@ -957,10 +970,16 @@ function toggleMobileMenu() {
         if (firstLink) {
             firstLink.focus();
         }
+    } else {
+        // When closing, return focus to toggle button
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        if (toggle) {
+            toggle.focus();
+        }
     }
 }
 
-// Create media query once for efficiency
+// Create media query once for efficiency and listen for changes
 const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
 
 // Close mobile menu when clicking outside
@@ -971,7 +990,12 @@ document.addEventListener('click', function(event) {
     const toggle = document.querySelector('.mobile-menu-toggle');
     
     if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-        sidebar.classList.remove('mobile-active');
+        if (sidebar.classList.contains('mobile-active')) {
+            sidebar.classList.remove('mobile-active');
+            if (toggle) {
+                toggle.focus();
+            }
+        }
     }
 });
 
