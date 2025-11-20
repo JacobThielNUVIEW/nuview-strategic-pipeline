@@ -272,11 +272,27 @@
             margin: 1rem 0;
         }
         
+        /* Respect user motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
-                transition: transform 0.3s ease;
+            }
+            
+            @media (prefers-reduced-motion: no-preference) {
+                .sidebar {
+                    transition: transform 0.3s ease;
+                }
             }
             
             .sidebar.mobile-active {
@@ -301,7 +317,7 @@
             }
             
             .row > div {
-                width: 100% !important;
+                width: 100%;
                 margin-bottom: 1rem;
             }
             
@@ -935,24 +951,51 @@ function initializePipelineTooltips() {
     });
 }
 
-// Mobile menu toggle
+// Mobile menu toggle with keyboard support
 function toggleMobileMenu() {
     const sidebar = document.getElementById('sidebar');
+    const isOpening = !sidebar.classList.contains('mobile-active');
+    
     sidebar.classList.toggle('mobile-active');
+    
+    // Focus management for accessibility
+    if (isOpening) {
+        const firstLink = sidebar.querySelector('a');
+        if (firstLink) {
+            firstLink.focus();
+        }
+    }
 }
 
-// Use matchMedia for better performance instead of checking window.innerWidth on every click
-const isMobileQuery = window.matchMedia('(max-width: 768px)');
-
-// Close mobile menu when clicking outside
+// Close mobile menu when clicking outside or pressing Escape
 document.addEventListener('click', function(event) {
-    if (!isMobileQuery.matches) return; // Only apply on mobile
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    if (!mediaQuery.matches) return; // Only apply on mobile
     
     const sidebar = document.getElementById('sidebar');
     const toggle = document.querySelector('.mobile-menu-toggle');
     
     if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
         sidebar.classList.remove('mobile-active');
+    }
+});
+
+// Keyboard support for mobile menu
+document.addEventListener('keydown', function(event) {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    if (!mediaQuery.matches) return; // Only apply on mobile
+    
+    const sidebar = document.getElementById('sidebar');
+    
+    // Close menu on Escape key
+    if (event.key === 'Escape' && sidebar.classList.contains('mobile-active')) {
+        sidebar.classList.remove('mobile-active');
+        
+        // Return focus to toggle button
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        if (toggle) {
+            toggle.focus();
+        }
     }
 });
 </script>
