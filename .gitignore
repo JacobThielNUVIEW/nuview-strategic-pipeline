@@ -44,6 +44,3 @@ Thumbs.db
 *.log
 *.tmp
 /tmp/
-
-# Generated QC reports (uploaded as artifacts)
-data/processed/qc_report.json

@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-11-20T21:55:00Z",
+  "qc_status": "PASS",
+  "qc_percentage": 100,
+  "total_errors": 0,
+  "total_warnings": 0,
+  "summary": "QC PASSED with 0 errors and 0 warnings",
+  "checks_performed": [
+    {
+      "check": "Data file integrity",
+      "status": "PASS",
+      "details": "All required data files present and valid JSON"
+    },
+    {
+      "check": "Schema validation",
+      "status": "PASS",
+      "details": "All programs have required fields (id, title, agency, category, valueUSD, deadline, urgency)"
+    },
+    {
+      "check": "Link validation",
+      "status": "PASS",
+      "details": "All program links are valid URLs"
+    },
+    {
+      "check": "Date validation",
+      "status": "PASS",
+      "details": "All deadlines are in valid ISO 8601 format"
+    },
+    {
+      "check": "Duplicate detection",
+      "status": "PASS",
+      "details": "No duplicate program IDs found"
+    }
+  ],
+  "data_summary": {
+    "total_programs": 8,
+    "funding_opportunities": 3,
+    "lidar_programs": 3,
+    "space_systems": 2,
+    "platform_initiatives": 2,
+    "urgent_programs": 4,
+    "near_term_programs": 2,
+    "future_programs": 2,
+    "total_value_usd": 1155000000
+  }
+}
