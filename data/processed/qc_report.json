@@ -1,48 +1,19 @@
 {
-  "timestamp": "2025-11-20T21:55:00Z",
+  "timestamp": "2025-11-20T22:38:49.018735Z",
   "qc_status": "PASS",
   "qc_percentage": 100,
   "total_errors": 0,
-  "total_warnings": 0,
-  "summary": "QC PASSED with 0 errors and 0 warnings",
-  "checks_performed": [
-    {
-      "check": "Data file integrity",
-      "status": "PASS",
-      "details": "All required data files present and valid JSON"
-    },
-    {
-      "check": "Schema validation",
-      "status": "PASS",
-      "details": "All programs have required fields (id, title, agency, category, valueUSD, deadline, urgency)"
-    },
-    {
-      "check": "Link validation",
-      "status": "PASS",
-      "details": "All program links are valid URLs"
-    },
-    {
-      "check": "Date validation",
-      "status": "PASS",
-      "details": "All deadlines are in valid ISO 8601 format"
-    },
-    {
-      "check": "Duplicate detection",
-      "status": "PASS",
-      "details": "Programs intentionally appear in multiple categories (e.g., usgs-107 in Funding and LiDAR). This is expected as programs can fit multiple classifications."
-    }
-  ],
-  "data_summary": {
-    "total_programs": 8,
-    "note": "Programs can appear in multiple categories, so category totals sum to more than total unique programs",
-    "funding_opportunities": 3,
-    "lidar_programs": 3,
-    "space_systems": 2,
-    "platform_initiatives": 2,
-    "category_appearances_total": 10,
-    "urgent_programs": 4,
-    "near_term_programs": 2,
-    "future_programs": 2,
-    "total_value_usd": 1155000000
-  }
+  "total_warnings": 2,
+  "opportunities_validation": {
+    "errors": [],
+    "warnings": [
+      "Opportunity 1 (nasa-365): May not be topographic-related (no relevant keywords found)",
+      "Opportunity 2 (esa-481): May not be topographic-related (no relevant keywords found)"
+    ]
+  },
+  "forecast_validation": {
+    "errors": [],
+    "warnings": []
+  },
+  "summary": "QC PASSED with 0 errors and 2 warnings"
 }
