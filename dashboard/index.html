@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUVIEW Mastered Sales Sheet</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>NUVIEW Strategic Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -27,254 +28,279 @@
         .matrix-cell.medium { background: #fff3cd; color: #856404; }
         .matrix-cell.high { background: #f8d7da; color: #721c24; }
         .matrix-cell.critical { background: #EE3338; color: white; font-weight: bold; }
+        .search-container { padding: 1rem; background: white; margin: 1rem 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .search-input { width: 100%; padding: 0.75rem; border: 2px solid var(--nuview-blue); border-radius: 8px; font-size: 1rem; }
+        .program-card { background: white; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border-left: 4px solid var(--nuview-blue); box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: all 0.2s; }
+        .program-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-2px); }
+        .program-card.hidden { display: none; }
+        .urgency-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; }
+        .urgency-urgent { background: var(--nuview-red); color: white; }
+        .urgency-near { background: #ffc107; color: #333; }
+        .urgency-future { background: #28a745; color: white; }
     </style>
 </head>
 <body>
 
 <nav class="sidebar">
     <h3 style="padding-left:1rem; color:var(--nuview-navy); font-weight:800;">NUVIEW INTEL</h3>
-    <a href="#overview" class="active"><i class="bi bi-star"></i> Exec Overview</a>
+    <a href="#overview" class="active"><i class="bi bi-house-door"></i> Overview</a>
+    <a href="#funding"><i class="bi bi-currency-dollar"></i> Funding</a>
+    <a href="#lidar"><i class="bi bi-radar"></i> LiDAR</a>
+    <a href="#space-systems"><i class="bi bi-rocket-takeoff"></i> Space Systems</a>
+    <a href="#platform"><i class="bi bi-server"></i> Platform</a>
     <a href="pipeline.html"><i class="bi bi-funnel"></i> Pipeline Dashboard</a>
-    <a href="#heatmap"><i class="bi bi-graph-up"></i> Market Forecast</a>
-    <a href="#matrix"><i class="bi bi-grid-3x3"></i> Priority Matrix</a>
-    <a href="#charts"><i class="bi bi-pie-chart"></i> Analytics</a>
-    <a href="#schedule"><i class="bi bi-list-task"></i> Action Schedule</a>
 </nav>
 
 <main class="main-content">
     <header class="header">
-        <h1>NUVIEW Mastered Sales Sheet</h1>
+        <h1>NUVIEW Strategic Dashboard</h1>
         <p style="opacity:0.9; font-size:1.1rem;">Global LiDAR Pipeline Tracker • 2025–2027 • DaaS Disruption</p>
     </header>
 
+    <!-- Global Search -->
+    <div class="search-container">
+        <input 
+            type="text" 
+            id="globalSearch" 
+            class="search-input" 
+            placeholder="🔍 Search programs by title, agency, category, or action..."
+        >
+    </div>
+
     <div id="overview" class="section">
-        <h2><i class="bi bi-star"></i> Executive Overview</h2>
+        <h2><i class="bi bi-house-door"></i> Executive Overview</h2>
         <p>The global LiDAR market is projected to reach <strong id="market-val">$14.13B</strong> by 2034 (CAGR <span id="market-cagr">19.43%</span>). NUVIEW dominates DaaS with space-based data.</p>
-        <ul>
-            <li><strong>Market:</strong> $3.41B (2026) → $14.13B (2034)</li>
-            <li><strong>Goal:</strong> $50M revenue by Q4 2026</li>
-        </ul>
-    </div>
-
-    <div id="heatmap" class="section">
-        <h2><i class="bi bi-graph-up"></i> Global LiDAR Market Forecast</h2>
-        <table class="table table-bordered heatmap-table">
-            <thead><tr><th>Region</th><th>2026 Spend</th><th>2034 Forecast</th><th>CAGR</th><th>Status</th></tr></thead>
-            <tbody>
-                <tr class="hot"><td>North America</td><td>$1.3B</td><td>$5.6B</td><td><strong>22.5%</strong></td><td>Fastest Growing</td></tr>
-                <tr class="warmer"><td>Asia-Pacific</td><td>$1.4B</td><td>$5.8B</td><td>19.8%</td><td>Largest Share</td></tr>
-                <tr class="warmer"><td>Europe</td><td>$0.5B</td><td>$1.8B</td><td>18.5%</td><td>Structured Grants</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="matrix" class="section">
-        <h2><i class="bi bi-grid-3x3"></i> Priority Matrix (Live Data)</h2>
-        <p>Opportunities prioritized by urgency and category. Values represent total funding ($USD).</p>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th style="background: #EE3338; color: white;">URGENT</th>
-                    <th style="background: #ffc107; color: #333;">SOON</th>
-                    <th style="background: #28a745; color: white;">LATER</th>
-                </tr>
-            </thead>
-            <tbody id="matrix-body">
-                <tr><td colspan="4" style="text-align: center;">Loading matrix data...</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div id="charts" class="section">
-        <h2><i class="bi bi-pie-chart"></i> Analytics Dashboard</h2>
         <div class="row">
-            <div class="col-md-6">
-                <h5>Opportunities by Category</h5>
-                <canvas id="categoryChart" height="200"></canvas>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <h3 id="total-programs">0</h3>
+                    <p class="text-muted">Total Programs</p>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h5>Funding by Urgency</h5>
-                <canvas id="urgencyChart" height="200"></canvas>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <h3 id="total-value">$0</h3>
+                    <p class="text-muted">Total Value</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <h3 id="urgent-programs">0</h3>
+                    <p class="text-muted">Urgent Actions</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <h3 id="last-updated">Loading...</h3>
+                    <p class="text-muted">Last Updated</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="schedule" class="section">
-        <h2><i class="bi bi-list-task"></i> Critical Actions (Live Feed)</h2>
-        <ul id="action-list"><li>Loading live intelligence...</li></ul>
+    <div id="funding" class="section">
+        <h2><i class="bi bi-currency-dollar"></i> Funding Opportunities</h2>
+        <div id="funding-programs">
+            <p>Loading funding programs...</p>
+        </div>
+    </div>
+
+    <div id="lidar" class="section">
+        <h2><i class="bi bi-radar"></i> LiDAR Programs</h2>
+        <div id="lidar-programs">
+            <p>Loading LiDAR programs...</p>
+        </div>
+    </div>
+
+    <div id="space-systems" class="section">
+        <h2><i class="bi bi-rocket-takeoff"></i> Space Systems</h2>
+        <div id="space-systems-programs">
+            <p>Loading space systems programs...</p>
+        </div>
+    </div>
+
+    <div id="platform" class="section">
+        <h2><i class="bi bi-server"></i> Platform Initiatives</h2>
+        <div id="platform-programs">
+            <p>Loading platform programs...</p>
+        </div>
     </div>
 </main>
 
 <script>
-// Global chart instances
-let categoryChart = null;
-let urgencyChart = null;
+// Global data
+let programsData = null;
 
-async function loadPriorityMatrix() {
-    try {
-        const res = await fetch('../data/priority_matrix.csv');
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const text = await res.text();
-        
-        const lines = text.trim().split('\n');
-        const headers = lines[0].split(',');
-        const matrixBody = document.getElementById('matrix-body');
-        matrixBody.innerHTML = '';
-        
-        for (let i = 1; i < lines.length; i++) {
-            const values = lines[i].split(',');
-            const row = document.createElement('tr');
-            
-            for (let j = 0; j < values.length; j++) {
-                const cell = document.createElement(j === 0 ? 'th' : 'td');
-                const value = values[j];
-                
-                if (j === 0) {
-                    cell.textContent = value;
-                    cell.style.background = 'var(--nuview-navy)';
-                    cell.style.color = 'white';
-                } else {
-                    const amount = parseInt(value);
-                    if (amount === 0) {
-                        cell.textContent = '—';
-                        cell.className = 'matrix-cell empty';
-                    } else {
-                        cell.textContent = '$' + (amount / 1000000).toFixed(1) + 'M';
-                        cell.className = 'matrix-cell ' + 
-                            (amount >= 200000000 ? 'critical' : 
-                             amount >= 50000000 ? 'high' : 
-                             amount >= 10000000 ? 'medium' : 'low');
-                    }
-                }
-                row.appendChild(cell);
-            }
-            matrixBody.appendChild(row);
-        }
-    } catch(e) {
-        console.error('Error loading matrix:', e);
-        document.getElementById('matrix-body').innerHTML = 
-            '<tr><td colspan="4" style="color:#EE3338;">Error loading matrix data</td></tr>';
+// Format currency
+function formatCurrency(amount) {
+    if (!amount) return '$0';
+    if (amount >= 1000000000) {
+        return '$' + (amount / 1000000000).toFixed(2) + 'B';
+    } else if (amount >= 1000000) {
+        return '$' + (amount / 1000000).toFixed(1) + 'M';
+    } else if (amount >= 1000) {
+        return '$' + (amount / 1000).toFixed(0) + 'K';
     }
+    return '$' + amount.toFixed(0);
 }
 
-async function createCharts(opportunities) {
-    // Destroy existing charts if they exist
-    if (categoryChart) categoryChart.destroy();
-    if (urgencyChart) urgencyChart.destroy();
+// Get urgency badge
+function getUrgencyBadge(urgency) {
+    const badges = {
+        'urgent': '<span class="urgency-badge urgency-urgent">URGENT</span>',
+        'near': '<span class="urgency-badge urgency-near">NEAR</span>',
+        'future': '<span class="urgency-badge urgency-future">FUTURE</span>'
+    };
+    return badges[urgency || 'future'] || badges['future'];
+}
+
+// Create program card
+function createProgramCard(program) {
+    const card = document.createElement('div');
+    card.className = 'program-card';
+    card.setAttribute('data-searchable', `${program.title || ''} ${program.agency || ''} ${program.category || ''} ${program.nextAction || ''}`.toLowerCase());
     
-    // Category breakdown
-    const categories = {};
-    const urgencies = { urgent: 0, near: 0, future: 0 };
+    const title = program.title || 'Untitled Program';
+    const agency = program.agency || 'N/A';
+    const value = formatCurrency(program.valueUSD || 0);
+    const deadline = program.deadline || 'TBD';
+    const daysUntil = program.daysUntil !== undefined ? program.daysUntil : 'N/A';
+    const urgency = program.urgency || 'future';
+    const nextAction = program.nextAction || 'No action specified';
+    const description = program.description || 'No description available';
+    const link = program.link || '#';
     
-    opportunities.forEach(o => {
-        const cat = o.pillar || 'Unknown';
-        categories[cat] = (categories[cat] || 0) + 1;
-        
-        const urg = o.timeline?.urgency || 'future';
-        urgencies[urg] = (urgencies[urg] || 0) + (o.funding?.amountUSD || 0);
+    card.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+            <div>
+                <h5 style="margin: 0; color: var(--nuview-navy);">${title}</h5>
+                <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;">${description}</p>
+            </div>
+            ${getUrgencyBadge(urgency)}
+        </div>
+        <div class="row" style="margin-top: 1rem; font-size: 0.9rem;">
+            <div class="col-md-3">
+                <strong>Agency:</strong> ${agency}
+            </div>
+            <div class="col-md-3">
+                <strong>Value:</strong> ${value}
+            </div>
+            <div class="col-md-3">
+                <strong>Deadline:</strong> ${deadline} (${daysUntil} days)
+            </div>
+            <div class="col-md-3">
+                <strong>Link:</strong> <a href="${link}" target="_blank" style="color: var(--nuview-blue);">View</a>
+            </div>
+        </div>
+        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #eee;">
+            <strong style="color: var(--nuview-red);">Next Action:</strong> ${nextAction}
+        </div>
+    `;
+    
+    return card;
+}
+
+// Render programs in a section
+function renderPrograms(programs, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (!programs || programs.length === 0) {
+        container.innerHTML = '<p style="color: #999;">No programs in this category.</p>';
+        return;
+    }
+    
+    programs.forEach(program => {
+        container.appendChild(createProgramCard(program));
     });
+}
+
+// Update overview statistics
+function updateOverview() {
+    if (!programsData || !programsData.programs) return;
     
-    // Category Chart
-    const ctx1 = document.getElementById('categoryChart');
-    if (ctx1) {
-        categoryChart = new Chart(ctx1, {
-            type: 'doughnut',
-            data: {
-                labels: Object.keys(categories),
-                datasets: [{
-                    data: Object.values(categories),
-                    backgroundColor: ['#007BFF', '#28a745', '#ffc107', '#EE3338']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom' }
-                }
-            }
-        });
-    }
+    const allPrograms = [
+        ...(programsData.programs.funding || []),
+        ...(programsData.programs.lidar || []),
+        ...(programsData.programs.spaceSystems || []),
+        ...(programsData.programs.platform || [])
+    ];
     
-    // Urgency Chart
-    const ctx2 = document.getElementById('urgencyChart');
-    if (ctx2) {
-        urgencyChart = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Urgent', 'Near', 'Future'],
-                datasets: [{
-                    label: 'Total Funding ($M)',
-                    data: [
-                        urgencies.urgent / 1000000,
-                        urgencies.near / 1000000,
-                        urgencies.future / 1000000
-                    ],
-                    backgroundColor: ['#EE3338', '#ffc107', '#28a745']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Funding (Millions USD)'
-                        }
-                    }
-                }
-            }
-        });
+    // Remove duplicates by ID
+    const uniquePrograms = Array.from(new Map(allPrograms.map(p => [p.id, p])).values());
+    
+    const totalValue = uniquePrograms.reduce((sum, p) => sum + (p.valueUSD || 0), 0);
+    const urgentCount = uniquePrograms.filter(p => p.urgency === 'urgent').length;
+    
+    document.getElementById('total-programs').textContent = uniquePrograms.length;
+    document.getElementById('total-value').textContent = formatCurrency(totalValue);
+    document.getElementById('urgent-programs').textContent = urgentCount;
+    
+    if (programsData.meta && programsData.meta.updated) {
+        const date = new Date(programsData.meta.updated);
+        document.getElementById('last-updated').textContent = date.toLocaleDateString();
     }
 }
 
-async function init() {
+// Global search functionality - FIX: use e.target.value instead of this.value
+function setupGlobalSearch() {
+    const searchInput = document.getElementById('globalSearch');
+    if (!searchInput) return;
+    
+    searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase(); // FIXED: use e.target.value
+        const allCards = document.querySelectorAll('.program-card');
+        
+        allCards.forEach(card => {
+            const searchableText = card.getAttribute('data-searchable') || '';
+            if (searchableText.includes(searchTerm)) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    });
+}
+
+// Load programs data
+async function loadPrograms() {
     try {
-        const res = await fetch('../data/opportunities.json');
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+        const response = await fetch('../data/processed/programs.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const json = await res.json();
+        programsData = await response.json();
         
-        if (json.meta && json.meta.market_val) {
-            document.getElementById('market-val').innerText = "$" + json.meta.market_val + "B";
-        }
-        if (json.meta && json.meta.cagr) {
-            document.getElementById('market-cagr').innerText = json.meta.cagr + "%";
-        }
-
-        const list = document.getElementById('action-list');
-        list.innerHTML = '';
+        // Render all sections with robust handling for missing data
+        renderPrograms(programsData.programs?.funding || [], 'funding-programs');
+        renderPrograms(programsData.programs?.lidar || [], 'lidar-programs');
+        renderPrograms(programsData.programs?.spaceSystems || [], 'space-systems-programs');
+        renderPrograms(programsData.programs?.platform || [], 'platform-programs');
         
-        if (json.opportunities && json.opportunities.length > 0) {
-            json.opportunities.forEach(o => {
-                const li = document.createElement('li');
-                li.style.marginBottom = "10px";
-                li.innerHTML = `<span class="badge bg-primary">${o.pillar}</span> <strong>${o.deadline}:</strong> ${o.title} — <span style="color:#EE3338; font-weight:bold;">${o.next_action}</span>`;
-                list.appendChild(li);
-            });
-            
-            // Create charts with opportunity data
-            await createCharts(json.opportunities);
-        } else {
-            list.innerHTML = '<li>No opportunities available.</li>';
-        }
-    } catch(e) { 
-        console.error('Error loading data:', e);
-        document.getElementById('action-list').innerHTML = '<li style="color:#EE3338;">Error loading data. Please check the console for details.</li>'; 
+        // Update overview
+        updateOverview();
+        
+        // Setup global search
+        setupGlobalSearch();
+        
+    } catch (error) {
+        console.error('Error loading programs data:', error);
+        const containers = ['funding-programs', 'lidar-programs', 'space-systems-programs', 'platform-programs'];
+        containers.forEach(id => {
+            const container = document.getElementById(id);
+            if (container) {
+                container.innerHTML = '<p style="color: var(--nuview-red);">Error loading data. Please check the console for details.</p>';
+            }
+        });
     }
-    
-    // Load priority matrix
-    await loadPriorityMatrix();
 }
 
-init();
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadPrograms();
+});
 </script>
 </body>
 </html>
