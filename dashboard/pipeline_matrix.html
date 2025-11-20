@@ -785,6 +785,17 @@
             updateNodeData('dashboard', opp);
         }
 
+        /**
+         * Update individual pipeline node with data
+         * 
+         * @param {string} nodeName - The node identifier (scrape, qc, matrix, merge, dashboard)
+         * @param {object} data - The data to display in the node
+         * 
+         * Node-specific behaviors:
+         * - scrape: Shows last update time and total opportunities
+         * - qc: Shows QC percentage, errors, and warnings; updates status indicator
+         * - matrix: Shows total programs and high-priority count (DaaS category)
+         */
         function updateNodeData(nodeName, data) {
             if (nodeName === 'scrape' && data) {
                 const meta = data.meta || {};

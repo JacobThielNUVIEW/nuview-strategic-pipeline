@@ -251,7 +251,10 @@
             return badges[urgency] || '<span class="badge-future">FUTURE</span>';
         }
 
-        // Update summary statistics
+        /**
+         * Update summary statistics displayed at the top of the dashboard
+         * Calculates and displays: total opportunities, total pipeline value, urgent actions count, and LiDAR-prioritized count
+         */
         function updateSummary() {
             const totalOpps = opportunitiesData.length;
             const totalValue = opportunitiesData.reduce((sum, opp) => 
@@ -259,7 +262,8 @@
             const urgentCount = opportunitiesData.filter(opp => 
                 opp.urgency === 'urgent').length;
             
-            // LiDAR-prioritized: LiDAR category or specific keywords
+            // LiDAR-prioritized: Count opportunities with LiDAR category or LiDAR/3DEP keywords in title
+            // This provides comprehensive coverage for LiDAR-related opportunities regardless of categorization
             const lidarPriority = opportunitiesData.filter(opp => 
                 opp.category === 'LiDAR' || 
                 opp.title.toLowerCase().includes('lidar') ||
@@ -271,11 +275,17 @@
             document.getElementById('lidar-priority').textContent = lidarPriority;
         }
 
-        // Load opportunities data
+        /**
+         * Load opportunities data from programs.json
+         * Data structure: programs.json contains categorized programs (funding, lidar, spaceSystems, platform)
+         * Programs may appear in multiple categories (e.g., USGS 3DEP appears in both funding and lidar)
+         * Deduplication ensures each unique program (by ID) is counted only once in statistics
+         */
         async function loadOpportunities() {
             try {
                 const response = await fetch('../data/processed/programs.json');
                 const data = await response.json();
+                
                 // Flatten all programs from different categories
                 opportunitiesData = [
                     ...(data.programs?.funding || []),
@@ -283,6 +293,7 @@
                     ...(data.programs?.spaceSystems || []),
                     ...(data.programs?.platform || [])
                 ];
+                
                 // Remove duplicates by ID (programs can appear in multiple categories)
                 // This ensures each unique opportunity is counted once in summary statistics
                 // Note: When deduplicating, the last occurrence's category is kept
@@ -298,7 +309,10 @@
             }
         }
 
-        // Load forecast data
+        /**
+         * Load market forecast data from forecast.json
+         * Displays current market value, 2030 forecast, CAGR, and legislative targets
+         */
         async function loadForecast() {
             try {
                 const response = await fetch('../data/forecast.json');
@@ -338,7 +352,11 @@
             }
         }
 
-        // Render tables
+        /**
+         * Render data tables with DataTables.js for enhanced sorting and filtering
+         * Tables: Agency Budget Funnel and Current Opportunities
+         * Includes graceful fallback if DataTables library is not available
+         */
         function renderTables() {
             // Agency Budget Funnel Table
             const agencyBody = document.getElementById('agencyTableBody');
@@ -401,6 +419,7 @@
             });
 
             // Initialize or reinitialize DataTable for opportunities
+            // Default sort: urgency (ascending) then value (descending) - shows urgent items first with highest value
             try {
                 if (typeof $ !== 'undefined' && $.fn.DataTable) {
                     if (opportunitiesTable) {
@@ -421,7 +440,11 @@
             }
         }
 
-        // Filter functionality
+        /**
+         * Filter functionality for Agency Budget Funnel table
+         * Allows filtering by specific agencies (USGS, NASA, DIU, ESA) or showing all
+         * Requires DataTables library to be loaded
+         */
         document.querySelectorAll('.filter-button').forEach(button => {
             button.addEventListener('click', function() {
                 // Update active state

@@ -61,18 +61,34 @@
   </div>
 
   <script>
+    /**
+     * NUVIEW Global Tracker - Data Loading and Rendering
+     * 
+     * This script loads global space/LiDAR program data from priority_matrix.csv
+     * and renders it as:
+     * 1. Top 10 programs card display (by priority score)
+     * 2. Full priority matrix table with all programs
+     * 
+     * Data Source: ../data/processed/priority_matrix.csv
+     * CSV Columns: country, agency_name, program_name, budget_amount_usd, 
+     *              nuview_priority_score, data_access, sources
+     * 
+     * Highlighting: Programs with priority score > 90 are highlighted in red
+     */
     Papa.parse("../data/processed/priority_matrix.csv", {
       download: true,
       header: true,
       complete: function(results) {
+        // Filter out empty rows and sort by priority score (descending)
         const data = results.data.filter(r => r.country && r.nuview_priority_score).sort((a,b) => Number(b.nuview_priority_score) - Number(a.nuview_priority_score));
         const top10 = data.slice(0,10);
         
-        // Update last updated date
+        // Update last updated date to current date (data is auto-updated daily)
         const today = new Date();
         const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         document.getElementById("last-updated").textContent = `Daily auto-update — ${dateStr}`;
         
+        // Render Top 10 Programs as cards
         document.getElementById("top10").innerHTML = top10.map((r,i) => `
           <div class="card rounded-xl p-6 text-center border border-nuview-red">
             <div class="text-4xl font-extrabold text-nuview-red mb-1">#${i+1}</div>
@@ -81,6 +97,8 @@
             <div class="text-xl" style="color:#fff;">Score <span class="text-nuview-red">${r.nuview_priority_score}</span></div>
           </div>`).join('');
 
+        // Render Full Priority Matrix Table
+        // Note: Rows with priority score > 90 receive 'highlight-row' class for visual emphasis
         document.getElementById("rows").innerHTML = data.map((r,i) => `
           <tr class="${Number(r.nuview_priority_score) > 90 ? 'highlight-row' : ''}">
             <td class="px-4 py-3 font-bold text-nuview-red">${i+1}</td>
