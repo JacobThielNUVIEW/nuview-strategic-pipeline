@@ -490,18 +490,20 @@
                     <tr>
                         <th class="matrix-rank" scope="col">#</th>
                         <th scope="col">Opportunity</th>
-                        <th scope="col">Agency <span class="matrix-source-badge">Source</span></th>
+                        <th scope="col">Agency <span class="matrix-source-badge" role="note" aria-label="Clickable agency links">Link</span></th>
                         <th scope="col">Category</th>
                         <th scope="col">Value</th>
                         <th scope="col">Deadline</th>
                         <th scope="col">Urgency</th>
                         <th scope="col">Next Action</th>
-                        <th class="matrix-link" scope="col">Link</th>
+                        <th class="matrix-link" scope="col">Opp Link</th>
+                        <th class="matrix-link" scope="col">Budget Source</th>
                     </tr>
                 </thead>
                 <tbody id="top-opportunities-body">
                     <tr>
-                        <td colspan="9" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">
+                        <!-- Colspan must match total number of columns in table header (10 columns) -->
+                        <td colspan="10" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">
                             Loading top opportunities...
                         </td>
                     </tr>
@@ -598,7 +600,8 @@ function renderTopOpportunities() {
     tbody.innerHTML = '';
     
     if (top10.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">No opportunities available.</td></tr>';
+        // Colspan must match total number of columns in table header (10 columns)
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">No opportunities available.</td></tr>';
         return;
     }
     
@@ -609,8 +612,14 @@ function renderTopOpportunities() {
             <td class="matrix-rank" role="cell">${index + 1}</td>
             <td role="cell"><strong>${program.title || 'Untitled Program'}</strong></td>
             <td role="cell">
-                ${program.agency || 'N/A'}
-                <span class="matrix-source-badge" role="note" aria-label="Source agency">${program.pillar || 'N/A'}</span>
+                ${program.agencyLink ? `
+                <a href="${program.agencyLink}" target="_blank" rel="noopener noreferrer" 
+                   style="color: var(--nuview-navy); text-decoration: underline;"
+                   title="Visit ${program.agency || 'agency'} website">
+                    ${program.agency || 'N/A'}
+                </a>
+                ` : program.agency || 'N/A'}
+                <span class="matrix-source-badge" role="note" aria-label="Source type">${program.pillar || 'N/A'}</span>
             </td>
             <td role="cell">${program.category || 'N/A'}</td>
             <td class="matrix-value" role="cell">${formatCurrency(program.valueUSD || 0)}</td>
@@ -621,13 +630,29 @@ function renderTopOpportunities() {
                 ${program.link && program.link !== '#' ? `
                 <a href="${program.link}" target="_blank" rel="noopener noreferrer" 
                    class="matrix-link-btn" 
-                   aria-label="View ${program.title || 'program'} details"
+                   aria-label="View ${program.title || 'program'} opportunity"
                    tabindex="0">
                     View <i class="bi bi-box-arrow-up-right"></i>
                 </a>
                 ` : `
                 <span class="matrix-link-btn" style="opacity: 0.5; cursor: not-allowed;" 
                       aria-label="Link not available"
+                      tabindex="-1">
+                    N/A
+                </span>
+                `}
+            </td>
+            <td class="matrix-link" role="cell">
+                ${program.budgetSourceLink && program.budgetSourceLink !== '#' ? `
+                <a href="${program.budgetSourceLink}" target="_blank" rel="noopener noreferrer" 
+                   class="matrix-link-btn" 
+                   aria-label="View budget source for ${program.title || 'program'}"
+                   tabindex="0">
+                    Budget <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+                ` : `
+                <span class="matrix-link-btn" style="opacity: 0.5; cursor: not-allowed;" 
+                      aria-label="Budget source not available"
                       tabindex="-1">
                     N/A
                 </span>
@@ -646,6 +671,7 @@ function createProgramCard(program) {
     
     const title = program.title || 'Untitled Program';
     const agency = program.agency || 'N/A';
+    const agencyLink = program.agencyLink || '#';
     const value = formatCurrency(program.valueUSD || 0);
     const deadline = program.deadline || 'TBD';
     const daysUntil = program.daysUntil !== undefined ? program.daysUntil : 'N/A';
@@ -653,6 +679,7 @@ function createProgramCard(program) {
     const nextAction = program.nextAction || 'No action specified';
     const description = program.description || 'No description available';
     const link = program.link || '#';
+    const budgetSourceLink = program.budgetSourceLink || '#';
     
     card.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
@@ -664,7 +691,7 @@ function createProgramCard(program) {
         </div>
         <div class="row" style="margin-top: 1rem; font-size: 0.9rem;">
             <div class="col-md-3">
-                <strong>Agency:</strong> ${agency}
+                <strong>Agency:</strong> ${agencyLink !== '#' ? `<a href="${agencyLink}" target="_blank" style="color: var(--nuview-navy); text-decoration: underline;" title="Visit agency website">${agency}</a>` : agency}
             </div>
             <div class="col-md-3">
                 <strong>Value:</strong> ${value}
@@ -673,7 +700,8 @@ function createProgramCard(program) {
                 <strong>Deadline:</strong> ${deadline} (${daysUntil} days)
             </div>
             <div class="col-md-3">
-                <strong>Link:</strong> <a href="${link}" target="_blank" style="color: var(--nuview-red); font-weight: 600;">View</a>
+                <strong>Opp:</strong> <a href="${link}" target="_blank" style="color: var(--nuview-red); font-weight: 600;" title="View opportunity">View</a>
+                ${budgetSourceLink !== '#' ? ` | <strong>Budget:</strong> <a href="${budgetSourceLink}" target="_blank" style="color: var(--nuview-red); font-weight: 600;" title="View budget source">Source</a>` : ''}
             </div>
         </div>
         <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #eee;">
