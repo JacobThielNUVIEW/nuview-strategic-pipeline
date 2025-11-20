@@ -485,6 +485,7 @@
                 </thead>
                 <tbody id="top-opportunities-body">
                     <tr>
+                        <!-- Colspan must match total number of columns in table header (10 columns) -->
                         <td colspan="10" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">
                             Loading top opportunities...
                         </td>
@@ -582,6 +583,7 @@ function renderTopOpportunities() {
     tbody.innerHTML = '';
     
     if (top10.length === 0) {
+        // Colspan must match total number of columns in table header (10 columns)
         tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">No opportunities available.</td></tr>';
         return;
     }
