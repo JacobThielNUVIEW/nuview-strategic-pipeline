@@ -17,17 +17,26 @@ This project provides a real-time view of global LiDAR market opportunities, for
 
 ```
 .
-├── index.html              # Main dashboard UI
+├── index.html              # Main dashboard UI redirect
+├── dashboard/
+│   ├── index.html          # Main strategic dashboard
+│   ├── pipeline.html       # Pipeline view dashboard
+│   ├── pipeline_matrix.html # Interactive flow visualization
+│   └── global-tracker.html # Global opportunity tracker
 ├── data/
 │   ├── opportunities.json  # Current opportunity pipeline (auto-updated)
 │   ├── forecast.json       # Market forecast data (auto-updated)
-│   └── priority_matrix.csv # Opportunity prioritization matrix
+│   └── processed/
+│       ├── priority_matrix.csv # Global space programs with budget and priority scoring
+│       └── qc_report.json      # Quality control reports
 ├── scripts/
-│   └── scrapers/
-│       └── scrape_all.py   # Daily data collection script
+│   ├── scrapers/
+│   │   └── scrape_all.py   # Daily data collection script
+│   └── qc_validator.py     # Data quality validation
 ├── .github/
 │   └── workflows/
-│       └── daily_ops.yml   # Automated daily updates
+│       ├── daily_ops.yml   # Automated daily updates
+│       └── deploy-pages.yml # GitHub Pages deployment
 └── requirements.txt        # Python dependencies
 ```
 
