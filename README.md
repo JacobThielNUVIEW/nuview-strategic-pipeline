@@ -203,10 +203,52 @@ The dashboard will be accessible at: `https://jacobthielnuview.github.io/nuview-
 
 The site is configured with search engine privacy measures:
 - **robots.txt** at the repository root blocks all crawlers
-- **Meta robots tag** in pipeline.html prevents indexing
+- **Meta robots tag** (`<meta name="robots" content="noindex, nofollow">`) in dashboard pages prevents indexing
 - The dashboard link is kept unlisted (not advertised in README or main index)
 
 **Note:** This provides privacy through obscurity and noindex directives, not password protection.
+
+### Adding Password Protection (Future Enhancement)
+
+When password protection is needed, consider these options:
+
+#### Option 1: Static Site Password Protection (JavaScript-based)
+- **Pros**: Simple, no server required, works with GitHub Pages
+- **Cons**: Not highly secure (password visible in source), suitable for basic protection only
+- **Implementation**:
+  1. Add a password check script at the top of `dashboard/index.html`
+  2. Use SHA-256 hashing to verify password
+  3. Store hashed password in the HTML (not plaintext)
+  4. Example libraries: [PageCrypt](https://github.com/Greenheart/pagecrypt), [StatiCrypt](https://github.com/robinmoisson/staticrypt)
+
+#### Option 2: GitHub Pages with Cloudflare Access
+- **Pros**: Secure, professional authentication
+- **Cons**: Requires Cloudflare account, more setup
+- **Implementation**:
+  1. Point a custom domain to GitHub Pages
+  2. Configure Cloudflare DNS
+  3. Enable Cloudflare Access
+  4. Set up authentication rules (email OTP, SSO, etc.)
+
+#### Option 3: Move to Private Hosting
+- **Pros**: Full control, secure authentication, can use frameworks like Next.js with NextAuth
+- **Cons**: Requires hosting costs (Vercel, Netlify, AWS, etc.)
+- **Implementation**:
+  1. Deploy to Vercel/Netlify with private repository
+  2. Add authentication middleware
+  3. Use services like Auth0, NextAuth, or custom authentication
+
+#### Option 4: GitHub Pages with External Auth Service
+- **Pros**: Relatively simple, leverages existing services
+- **Cons**: Third-party dependency
+- **Implementation**:
+  1. Use services like Auth0, Firebase Auth, or AWS Cognito
+  2. Add authentication script to dashboard pages
+  3. Redirect unauthenticated users to login page
+
+**Recommended Approach**: For basic protection, use Option 1 (StatiCrypt). For production-grade security, use Option 2 (Cloudflare Access) or Option 3 (private hosting with proper authentication).
+
+**Current Status**: No password protection is implemented. The dashboard is accessible via direct link but not indexed by search engines.
 
 ## Contributing
 
