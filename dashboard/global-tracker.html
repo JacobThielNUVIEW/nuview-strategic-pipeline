@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NUVIEW Global Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg,#23272A 0%,#111217 85%,#090a0b 100%);
+      color: #fff;
+    }
+    .card {
+      background: rgba(30, 31, 33, 0.7);
+      border: 1.5px solid #46484b;
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 24px rgba(30, 31, 33, 0.12);
+    }
+    .text-nuview-red { color: #E41C24; }
+    .border-nuview-red { border-color: #E41C24; }
+    .bg-nuview-red { background-color: #E41C24; }
+    .divider { border-color: #46484b; }
+    .highlight-row { background: rgba(228, 28, 36, 0.12); }
+    h1, .dashboard-title { font-weight: 800; color: #fff; letter-spacing:0.02em;}
+  </style>
+</head>
+<body class="min-h-screen">
+  <header class="text-center py-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center mb-6">
+        <a href="index.html" class="text-sm" style="color:#888; text-decoration:none;">← Back to Dashboard</a>
+        <a href="pipeline.html" class="text-sm" style="color:#888; text-decoration:none;">Pipeline View →</a>
+      </div>
+    </div>
+    <img src="https://cdn.prod.website-files.com/65fabd41e845cdc83b42c42e/65fac100fad3b41357e35736_logo_nuview_site.svg" alt="NUVIEW" class="mx-auto mb-6" style="height:70px;"/>
+    <h1 class="text-5xl dashboard-title mb-2 tracking-tight">NUVIEW Global Tracker</h1>
+    <p class="text-lg mb-2" style="color:#ECECEC;">Global Opportunity & Funding Intelligence</p>
+    <p class="text-md" style="color:#BBB;">Live daily scoring and intelligence on global space-based mapping and LiDAR program funding.</p>
+    <p class="mt-2 text-sm" style="color:#888;" id="last-updated">Daily auto-update</p>
+  </header>
+  <hr class="divider my-10" />
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div id="top10" class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12"></div>
+    <div class="rounded-2xl border border-nuview-red card overflow-hidden">
+      <table id="matrix" class="w-full text-sm"><thead style="background:#222226;"><tr>
+        <th class="px-4 py-3 font-semibold text-nuview-red">Rank</th>
+        <th class="font-semibold">Country</th>
+        <th class="font-semibold">Agency</th>
+        <th class="font-semibold">Program</th>
+        <th class="font-semibold">FY26 USD</th>
+        <th class="font-semibold text-nuview-red">Score</th>
+        <th class="font-semibold">Data</th>
+        <th class="font-semibold">Source</th>
+      </tr></thead><tbody id="rows"></tbody></table>
+    </div>
+  </div>
+
+  <script>
+    Papa.parse("../data/processed/priority_matrix.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data.filter(r => r.country && r.nuview_priority_score).sort((a,b) => Number(b.nuview_priority_score) - Number(a.nuview_priority_score));
+        const top10 = data.slice(0,10);
+        
+        // Update last updated date
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById("last-updated").textContent = `Daily auto-update — ${dateStr}`;
+        
+        document.getElementById("top10").innerHTML = top10.map((r,i) => `
+          <div class="card rounded-xl p-6 text-center border border-nuview-red">
+            <div class="text-4xl font-extrabold text-nuview-red mb-1">#${i+1}</div>
+            <div class="text-2xl" style="color:#fff;">${r.country}</div>
+            <div class="text-3xl mt-4 text-nuview-red">$${Math.round(Number(r.budget_amount_usd)/1e6)}M</div>
+            <div class="text-xl" style="color:#fff;">Score <span class="text-nuview-red">${r.nuview_priority_score}</span></div>
+          </div>`).join('');
+
+        document.getElementById("rows").innerHTML = data.map((r,i) => `
+          <tr class="${Number(r.nuview_priority_score) > 90 ? 'highlight-row' : ''}">
+            <td class="px-4 py-3 font-bold text-nuview-red">${i+1}</td>
+            <td>${r.country}</td>
+            <td>${r.agency_name}</td>
+            <td>${r.program_name}</td>
+            <td>$${(Number(r.budget_amount_usd)/1e6).toFixed(1)}M</td>
+            <td class="font-semibold text-nuview-red">${r.nuview_priority_score}</td>
+            <td>${r.data_access}</td>
+            <td><a href="${(r.sources || '#').split(',')[0]}" target="_blank" class="underline text-nuview-red">Source</a></td>
+          </tr>`).join('');
+      }
+    });
+  </script>
+</body>
+</html>
