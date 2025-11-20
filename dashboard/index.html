@@ -95,10 +95,14 @@
             margin-bottom: 1.5rem; 
             font-size: 1.75rem; 
             font-weight: 700;
-            background: linear-gradient(90deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        }
+        @supports (background-clip: text) or (-webkit-background-clip: text) {
+            .section h2 {
+                background: linear-gradient(90deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
         }
         
         /* Top 10 Opportunity Matrix Styles */
@@ -280,6 +284,9 @@
         }
         .urgency-badge:hover {
             transform: scale(1.05);
+        }
+        .text-muted {
+            color: var(--nuview-gray);
         }
         
         /* Responsive Design */
@@ -519,16 +526,24 @@ function renderTopOpportunities() {
             </td>
             <td role="cell">${program.category || 'N/A'}</td>
             <td class="matrix-value" role="cell">${formatCurrency(program.valueUSD || 0)}</td>
-            <td role="cell">${program.deadline || 'TBD'} <small style="color: var(--nuview-gray);">(${program.daysUntil !== undefined ? program.daysUntil : 'N/A'} days)</small></td>
+            <td role="cell">${program.deadline || 'TBD'} <small class="text-muted">(${program.daysUntil !== undefined ? program.daysUntil : 'N/A'} days)</small></td>
             <td role="cell">${getUrgencyBadge(program.urgency)}</td>
             <td role="cell" style="color: var(--nuview-red); font-weight: 600;">${program.nextAction || 'No action specified'}</td>
             <td class="matrix-link" role="cell">
-                <a href="${program.link || '#'}" target="_blank" rel="noopener noreferrer" 
+                ${program.link && program.link !== '#' ? `
+                <a href="${program.link}" target="_blank" rel="noopener noreferrer" 
                    class="matrix-link-btn" 
                    aria-label="View ${program.title || 'program'} details"
                    tabindex="0">
                     View <i class="bi bi-box-arrow-up-right"></i>
                 </a>
+                ` : `
+                <span class="matrix-link-btn" style="opacity: 0.5; cursor: not-allowed;" 
+                      aria-label="Link not available"
+                      tabindex="-1">
+                    N/A
+                </span>
+                `}
             </td>
         `;
         tbody.appendChild(row);
