@@ -17,6 +17,10 @@ REQUIRED_FUNDING_FIELDS = ['amountUSD']
 VALID_CATEGORIES = ['DaaS', 'R&D', 'Platform']
 VALID_URGENCIES = ['urgent', 'near', 'future']
 
+# Topographic and LiDAR-related keywords for relevance checking
+TOPOGRAPHIC_KEYWORDS = ['lidar', 'topographic', 'elevation', '3dep', 'dem',
+                        'mapping', 'terrain', 'earth observation', 'geospatial']
+
 # NUVIEW color codes for console output
 COLOR_GREEN = '\033[92m'   # Success
 COLOR_ORANGE = '\033[93m'  # Warning
@@ -115,9 +119,7 @@ def validate_opportunities_file(filepath):
         # Check for LiDAR/topographic relevance
         if 'title' in opp:
             title_lower = opp['title'].lower()
-            topographic_keywords = ['lidar', 'topographic', 'elevation', '3dep', 'dem', 
-                                  'mapping', 'terrain', 'earth observation', 'geospatial']
-            if not any(keyword in title_lower for keyword in topographic_keywords):
+            if not any(keyword in title_lower for keyword in TOPOGRAPHIC_KEYWORDS):
                 # Check category as well
                 if opp.get('category') != 'DaaS':
                     warnings.append(f"Opportunity {idx} ({opp.get('id', 'unknown')}): "
