@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>NUVIEW Pipeline Matrix - Interactive Flow Visualization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           NUVIEW SPACE COLOR PALETTE
+           ============================================ */
+        :root {
+            --nuview-red-primary: #E41C24;
+            --nuview-red-bright: #EE3338;
+            --nuview-black: #000000;
+            --nuview-dark-gray: #1a1a1a;
+            --nuview-medium-gray: #333333;
+            --nuview-light-gray: #666666;
+            --nuview-white: #FFFFFF;
+            --nuview-bg-gray: #0a0a0a;
+            
+            /* Status colors using NUVIEW palette */
+            --status-operational: #EE3338;
+            --status-success: #FFFFFF;
+            --status-warning: #E41C24;
+            --status-loading: #666666;
+            --status-idle: #333333;
+        }
+
+        /* ============================================
+           GLOBAL STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-dark-gray) 100%);
+            color: var(--nuview-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-dark-gray) 50%, var(--nuview-black) 100%);
+            border-bottom: 3px solid var(--nuview-red-primary);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px rgba(228, 28, 36, 0.3);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--nuview-white) 0%, var(--nuview-red-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--nuview-light-gray);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--nuview-white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--nuview-medium-gray);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            border-color: var(--nuview-red-bright);
+            background: rgba(238, 51, 56, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           MAIN CONTAINER
+           ============================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ============================================
+           PIPELINE STATUS BAR
+           ============================================ */
+        .status-bar {
+            background: var(--nuview-dark-gray);
+            border: 1px solid var(--nuview-medium-gray);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .status-metric {
+            text-align: center;
+        }
+
+        .status-metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--nuview-red-bright) 0%, var(--nuview-white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-metric-label {
+            color: var(--nuview-light-gray);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           PIPELINE MATRIX GRID
+           ============================================ */
+        .pipeline-matrix {
+            position: relative;
+            padding: 3rem 0;
+            min-height: 600px;
+        }
+
+        /* SVG Canvas for connections */
+        .pipeline-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Pipeline nodes container */
+        .pipeline-nodes {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* Individual pipeline node */
+        .pipeline-node {
+            background: linear-gradient(135deg, var(--nuview-dark-gray) 0%, var(--nuview-medium-gray) 100%);
+            border: 2px solid var(--nuview-medium-gray);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pipeline-node::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--nuview-red-primary) 0%, var(--nuview-red-bright) 100%);
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .pipeline-node:hover::before {
+            opacity: 1;
+        }
+
+        .pipeline-node:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(238, 51, 56, 0.4);
+        }
+
+        /* Node status indicator */
+        .node-status {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .node-status.operational {
+            background: radial-gradient(circle, var(--nuview-red-bright) 0%, var(--nuview-red-primary) 100%);
+            box-shadow: 0 0 20px var(--nuview-red-bright);
+        }
+
+        .node-status.idle {
+            background: var(--nuview-light-gray);
+            animation: none;
+        }
+
+        .node-status.loading {
+            background: var(--nuview-light-gray);
+            animation: spin 1s linear infinite;
+        }
+
+        .node-status.fail {
+            background: var(--nuview-red-primary);
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        /* Node icon */
+        .node-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--nuview-red-primary) 0%, var(--nuview-red-bright) 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.3);
+        }
+
+        /* Node content */
+        .node-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--nuview-white);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .node-script {
+            font-size: 0.85rem;
+            color: var(--nuview-light-gray);
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin-bottom: 1rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--nuview-black);
+            border-radius: 4px;
+        }
+
+        .node-info {
+            font-size: 0.75rem;
+            color: var(--nuview-light-gray);
+            line-height: 1.6;
+        }
+
+        .node-info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid var(--nuview-medium-gray);
+        }
+
+        .node-info-label {
+            font-weight: 600;
+            color: var(--nuview-red-bright);
+        }
+
+        .node-info-value {
+            color: var(--nuview-white);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes flow {
+            0% {
+                stroke-dashoffset: 1000;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Flow animation for SVG paths */
+        .flow-arrow {
+            stroke-dasharray: 10 5;
+            animation: flow 3s linear infinite;
+        }
+
+        /* ============================================
+           TOOLTIP
+           ============================================ */
+        .tooltip {
+            position: absolute;
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-dark-gray) 100%);
+            border: 2px solid var(--nuview-red-bright);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 300px;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip-title {
+            font-weight: 700;
+            color: var(--nuview-red-bright);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .tooltip-content {
+            font-size: 0.85rem;
+            color: var(--nuview-white);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           LEGEND
+           ============================================ */
+        .legend {
+            background: var(--nuview-dark-gray);
+            border: 1px solid var(--nuview-medium-gray);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .legend-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--nuview-red-bright);
+            margin-bottom: 1rem;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-label {
+            font-size: 0.85rem;
+            color: var(--nuview-light-gray);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 1200px) {
+            .pipeline-nodes {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pipeline-nodes {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .status-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+        }
+
+        /* ============================================
+           EMBEDDING INSTRUCTIONS
+           ============================================ */
+        .embed-instructions {
+            background: var(--nuview-dark-gray);
+            border: 1px solid var(--nuview-medium-gray);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .embed-instructions h3 {
+            color: var(--nuview-red-bright);
+            margin-bottom: 1rem;
+        }
+
+        .embed-instructions pre {
+            background: var(--nuview-black);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            color: var(--nuview-white);
+            font-size: 0.85rem;
+        }
+
+        .embed-instructions code {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>🚀 NUVIEW Pipeline Matrix</h1>
+            <p>Interactive Data Processing Pipeline Visualization</p>
+            <nav class="nav-links">
+                <a href="index.html">← Main Dashboard</a>
+                <a href="pipeline.html">Pipeline Dashboard</a>
+                <a href="global-tracker.html">Global Tracker</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Pipeline Status Bar -->
+        <div class="status-bar">
+            <div class="status-metric">
+                <div class="status-metric-value" id="pipeline-status">OPERATIONAL</div>
+                <div class="status-metric-label">Pipeline Status</div>
+            </div>
+            <div class="status-metric">
+                <div class="status-metric-value" id="last-run">--</div>
+                <div class="status-metric-label">Last Run</div>
+            </div>
+            <div class="status-metric">
+                <div class="status-metric-value" id="total-records">0</div>
+                <div class="status-metric-label">Records Processed</div>
+            </div>
+            <div class="status-metric">
+                <div class="status-metric-value" id="qc-score">100%</div>
+                <div class="status-metric-label">QC Score</div>
+            </div>
+        </div>
+
+        <!-- Pipeline Matrix -->
+        <div class="pipeline-matrix">
+            <!-- SVG for flow arrows -->
+            <svg class="pipeline-svg" id="flow-svg">
+                <!-- Arrows will be dynamically generated -->
+            </svg>
+
+            <!-- Pipeline Nodes -->
+            <div class="pipeline-nodes">
+                <!-- Node 1: Scrape -->
+                <div class="pipeline-node" data-node="scrape">
+                    <div class="node-status operational"></div>
+                    <div class="node-icon">🕷️</div>
+                    <div class="node-title">SCRAPE</div>
+                    <div class="node-script">scrape_all.py</div>
+                    <div class="node-info">
+                        <div class="node-info-item">
+                            <span class="node-info-label">Status:</span>
+                            <span class="node-info-value" id="scrape-status">Operational</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Last Run:</span>
+                            <span class="node-info-value" id="scrape-lastrun">--</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Records:</span>
+                            <span class="node-info-value" id="scrape-records">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Node 2: QC -->
+                <div class="pipeline-node" data-node="qc">
+                    <div class="node-status operational"></div>
+                    <div class="node-icon">✅</div>
+                    <div class="node-title">QC</div>
+                    <div class="node-script">qc_validator.py</div>
+                    <div class="node-info">
+                        <div class="node-info-item">
+                            <span class="node-info-label">Status:</span>
+                            <span class="node-info-value" id="qc-status">Operational</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Last Run:</span>
+                            <span class="node-info-value" id="qc-lastrun">--</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Errors:</span>
+                            <span class="node-info-value" id="qc-errors">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Node 3: Matrix -->
+                <div class="pipeline-node" data-node="matrix">
+                    <div class="node-status operational"></div>
+                    <div class="node-icon">📊</div>
+                    <div class="node-title">MATRIX</div>
+                    <div class="node-script">priority_matrix.csv</div>
+                    <div class="node-info">
+                        <div class="node-info-item">
+                            <span class="node-info-label">Status:</span>
+                            <span class="node-info-value" id="matrix-status">Operational</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Programs:</span>
+                            <span class="node-info-value" id="matrix-programs">0</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">High Priority:</span>
+                            <span class="node-info-value" id="matrix-priority">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Node 4: Merge -->
+                <div class="pipeline-node" data-node="merge">
+                    <div class="node-status operational"></div>
+                    <div class="node-icon">🔗</div>
+                    <div class="node-title">MERGE</div>
+                    <div class="node-script">data_integration</div>
+                    <div class="node-info">
+                        <div class="node-info-item">
+                            <span class="node-info-label">Status:</span>
+                            <span class="node-info-value" id="merge-status">Operational</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Sources:</span>
+                            <span class="node-info-value" id="merge-sources">3</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Unified:</span>
+                            <span class="node-info-value" id="merge-unified">Yes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Node 5: Dashboard -->
+                <div class="pipeline-node" data-node="dashboard">
+                    <div class="node-status operational"></div>
+                    <div class="node-icon">📈</div>
+                    <div class="node-title">DASHBOARD</div>
+                    <div class="node-script">index.html</div>
+                    <div class="node-info">
+                        <div class="node-info-item">
+                            <span class="node-info-label">Status:</span>
+                            <span class="node-info-value" id="dashboard-status">Online</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Live Data:</span>
+                            <span class="node-info-value" id="dashboard-live">Yes</span>
+                        </div>
+                        <div class="node-info-item">
+                            <span class="node-info-label">Views:</span>
+                            <span class="node-info-value" id="dashboard-views">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">Status Indicators</div>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-indicator operational"></div>
+                    <span class="legend-label">Operational</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-indicator idle"></div>
+                    <span class="legend-label">Idle</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-indicator loading"></div>
+                    <span class="legend-label">Loading</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-indicator fail"></div>
+                    <span class="legend-label">Failed</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Embedding Instructions -->
+        <div class="embed-instructions">
+            <h3>📋 Embedding Instructions</h3>
+            <p style="color: var(--nuview-light-gray); margin-bottom: 1rem;">
+                To embed this pipeline matrix in another page, use an iframe or include it as a module:
+            </p>
+            <pre><code>&lt;!-- Option 1: Iframe Embed --&gt;
+&lt;iframe src="dashboard/pipeline_matrix.html" 
+        width="100%" 
+        height="800px" 
+        frameborder="0"
+        style="border-radius: 12px;"&gt;
+&lt;/iframe&gt;
+
+&lt;!-- Option 2: Direct Link --&gt;
+&lt;a href="dashboard/pipeline_matrix.html" 
+   class="pipeline-matrix-link"&gt;
+    View Pipeline Matrix →
+&lt;/a&gt;</code></pre>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip">
+        <div class="tooltip-title" id="tooltip-title"></div>
+        <div class="tooltip-content" id="tooltip-content"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ============================================
+        // DATA LOADING AND INITIALIZATION
+        // ============================================
+        
+        let pipelineData = {
+            opportunities: null,
+            qcReport: null,
+            forecast: null
+        };
+
+        // Demo/fallback data
+        const demoData = {
+            opportunities: {
+                meta: {
+                    market_val: "14.13",
+                    cagr: "19.43",
+                    updated: new Date().toISOString(),
+                    totalCount: 4
+                },
+                opportunities: [
+                    {id: "demo-1", title: "Demo Opportunity 1", agency: "DEMO", amountUSD: 1000000},
+                    {id: "demo-2", title: "Demo Opportunity 2", agency: "DEMO", amountUSD: 2000000},
+                    {id: "demo-3", title: "Demo Opportunity 3", agency: "DEMO", amountUSD: 3000000},
+                    {id: "demo-4", title: "Demo Opportunity 4", agency: "DEMO", amountUSD: 4000000}
+                ]
+            },
+            qcReport: {
+                timestamp: new Date().toISOString(),
+                qc_status: "PASS",
+                qc_percentage: 100,
+                total_errors: 0,
+                total_warnings: 0,
+                summary: "QC PASSED with 0 errors and 0 warnings"
+            }
+        };
+
+        // ============================================
+        // LOAD DATA FROM JSON FILES
+        // ============================================
+        async function loadPipelineData() {
+            try {
+                // Try to load opportunities.json
+                try {
+                    const oppResponse = await fetch('../data/opportunities.json');
+                    if (oppResponse.ok) {
+                        pipelineData.opportunities = await oppResponse.json();
+                    } else {
+                        console.warn('Using demo opportunities data');
+                        pipelineData.opportunities = demoData.opportunities;
+                    }
+                } catch (e) {
+                    console.warn('Using demo opportunities data:', e);
+                    pipelineData.opportunities = demoData.opportunities;
+                }
+
+                // Try to load qc_report.json
+                try {
+                    const qcResponse = await fetch('../data/processed/qc_report.json');
+                    if (qcResponse.ok) {
+                        pipelineData.qcReport = await qcResponse.json();
+                    } else {
+                        console.warn('Using demo QC data');
+                        pipelineData.qcReport = demoData.qcReport;
+                    }
+                } catch (e) {
+                    console.warn('Using demo QC data:', e);
+                    pipelineData.qcReport = demoData.qcReport;
+                }
+
+                // Update UI with loaded data
+                updatePipelineUI();
+            } catch (error) {
+                console.error('Error loading pipeline data:', error);
+                // Use demo data as fallback
+                pipelineData.opportunities = demoData.opportunities;
+                pipelineData.qcReport = demoData.qcReport;
+                updatePipelineUI();
+            }
+        }
+
+        // ============================================
+        // UPDATE UI WITH DATA
+        // ============================================
+        function updatePipelineUI() {
+            const opp = pipelineData.opportunities;
+            const qc = pipelineData.qcReport;
+
+            // Update status bar
+            if (qc) {
+                document.getElementById('pipeline-status').textContent = qc.qc_status || 'OPERATIONAL';
+                document.getElementById('qc-score').textContent = (qc.qc_percentage || 100) + '%';
+                
+                const timestamp = qc.timestamp || new Date().toISOString();
+                const lastRunDate = new Date(timestamp);
+                document.getElementById('last-run').textContent = formatTimeAgo(lastRunDate);
+            }
+
+            if (opp && opp.meta) {
+                document.getElementById('total-records').textContent = opp.meta.totalCount || 0;
+            }
+
+            // Update individual nodes
+            updateNodeData('scrape', opp);
+            updateNodeData('qc', qc);
+            updateNodeData('matrix', opp);
+            updateNodeData('merge', opp);
+            updateNodeData('dashboard', opp);
+        }
+
+        function updateNodeData(nodeName, data) {
+            if (nodeName === 'scrape' && data) {
+                const meta = data.meta || {};
+                document.getElementById('scrape-lastrun').textContent = 
+                    meta.updated ? formatTimeAgo(new Date(meta.updated)) : '--';
+                document.getElementById('scrape-records').textContent = meta.totalCount || 0;
+            }
+
+            if (nodeName === 'qc' && data) {
+                const timestamp = data.timestamp || new Date().toISOString();
+                document.getElementById('qc-lastrun').textContent = formatTimeAgo(new Date(timestamp));
+                document.getElementById('qc-errors').textContent = data.total_errors || 0;
+                
+                // Update status indicator
+                const qcNode = document.querySelector('[data-node="qc"] .node-status');
+                if (data.total_errors > 0) {
+                    qcNode.className = 'node-status fail';
+                } else if (data.total_warnings > 0) {
+                    qcNode.className = 'node-status operational';
+                } else {
+                    qcNode.className = 'node-status operational';
+                }
+            }
+
+            if (nodeName === 'matrix' && data) {
+                const opportunities = data.opportunities || [];
+                document.getElementById('matrix-programs').textContent = opportunities.length;
+                const highPriority = opportunities.filter(o => o.category === 'DaaS').length;
+                document.getElementById('matrix-priority').textContent = highPriority;
+            }
+        }
+
+        function formatTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+            return Math.floor(seconds / 86400) + 'd ago';
+        }
+
+        // ============================================
+        // DRAW FLOW ARROWS
+        // ============================================
+        function drawFlowArrows() {
+            const svg = document.getElementById('flow-svg');
+            const nodes = document.querySelectorAll('.pipeline-node');
+            
+            // Clear existing arrows
+            svg.innerHTML = '';
+
+            // Create defs for gradient and arrow marker
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            
+            // Gradient definition
+            const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+            gradient.setAttribute('id', 'flowGradient');
+            gradient.setAttribute('x1', '0%');
+            gradient.setAttribute('y1', '0%');
+            gradient.setAttribute('x2', '100%');
+            gradient.setAttribute('y2', '0%');
+            
+            const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            stop1.setAttribute('offset', '0%');
+            stop1.setAttribute('style', 'stop-color:#E41C24;stop-opacity:1');
+            
+            const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            stop2.setAttribute('offset', '100%');
+            stop2.setAttribute('style', 'stop-color:#EE3338;stop-opacity:1');
+            
+            gradient.appendChild(stop1);
+            gradient.appendChild(stop2);
+            
+            // Arrow marker
+            const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+            marker.setAttribute('id', 'arrowhead');
+            marker.setAttribute('markerWidth', '10');
+            marker.setAttribute('markerHeight', '10');
+            marker.setAttribute('refX', '9');
+            marker.setAttribute('refY', '3');
+            marker.setAttribute('orient', 'auto');
+            
+            const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '0 0, 10 3, 0 6');
+            polygon.setAttribute('fill', '#EE3338');
+            marker.appendChild(polygon);
+            
+            defs.appendChild(gradient);
+            defs.appendChild(marker);
+            svg.appendChild(defs);
+
+            // Draw arrows between consecutive nodes
+            for (let i = 0; i < nodes.length - 1; i++) {
+                const fromNode = nodes[i];
+                const toNode = nodes[i + 1];
+                
+                const fromRect = fromNode.getBoundingClientRect();
+                const toRect = toNode.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+                
+                const x1 = fromRect.right - svgRect.left;
+                const y1 = fromRect.top + fromRect.height / 2 - svgRect.top;
+                const x2 = toRect.left - svgRect.left;
+                const y2 = toRect.top + toRect.height / 2 - svgRect.top;
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const d = `M ${x1} ${y1} L ${x2} ${y2}`;
+                path.setAttribute('d', d);
+                path.setAttribute('stroke', 'url(#flowGradient)');
+                path.setAttribute('stroke-width', '3');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('marker-end', 'url(#arrowhead)');
+                path.setAttribute('class', 'flow-arrow');
+                
+                svg.appendChild(path);
+            }
+        }
+
+        // ============================================
+        // TOOLTIP FUNCTIONALITY
+        // ============================================
+        const tooltip = document.getElementById('tooltip');
+        const tooltipTitle = document.getElementById('tooltip-title');
+        const tooltipContent = document.getElementById('tooltip-content');
+
+        const nodeDescriptions = {
+            scrape: {
+                title: 'Data Scraping Stage',
+                content: 'Automated daily collection of federal and commercial LiDAR opportunities from SAM.gov, NASA, ESA, and other sources. Runs via GitHub Actions at 3:00 AM UTC.'
+            },
+            qc: {
+                title: 'Quality Control Stage',
+                content: 'Validates data integrity, checks required fields, ensures proper formatting, and generates quality reports. Identifies errors and warnings for data accuracy.'
+            },
+            matrix: {
+                title: 'Priority Matrix Stage',
+                content: 'Processes and prioritizes opportunities based on NUVIEW criteria. Categorizes by DaaS, R&D, and Platform opportunities. Calculates urgency and priority scores.'
+            },
+            merge: {
+                title: 'Data Integration Stage',
+                content: 'Merges data from multiple sources (opportunities, forecast, global tracker) into unified datasets. Ensures consistency and resolves conflicts.'
+            },
+            dashboard: {
+                title: 'Dashboard Visualization Stage',
+                content: 'Presents data through interactive dashboards including main dashboard, pipeline view, and global tracker. Updates in real-time with latest data.'
+            }
+        };
+
+        document.querySelectorAll('.pipeline-node').forEach(node => {
+            node.addEventListener('mouseenter', (e) => {
+                const nodeName = e.currentTarget.dataset.node;
+                const desc = nodeDescriptions[nodeName];
+                
+                if (desc) {
+                    tooltipTitle.textContent = desc.title;
+                    tooltipContent.textContent = desc.content;
+                    tooltip.classList.add('visible');
+                }
+            });
+
+            node.addEventListener('mousemove', (e) => {
+                tooltip.style.left = (e.pageX + 20) + 'px';
+                tooltip.style.top = (e.pageY + 20) + 'px';
+            });
+
+            node.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('visible');
+            });
+        });
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        window.addEventListener('load', () => {
+            loadPipelineData();
+            drawFlowArrows();
+        });
+
+        window.addEventListener('resize', () => {
+            drawFlowArrows();
+        });
+
+        // Auto-refresh data every 30 seconds
+        setInterval(() => {
+            loadPipelineData();
+        }, 30000);
+    </script>
+</body>
+</html>
