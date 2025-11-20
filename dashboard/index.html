@@ -274,12 +274,10 @@
         
         /* Respect user motion preferences */
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            * {
+                animation-duration: 0.01ms;
+                animation-iteration-count: 1;
+                transition-duration: 0.01ms;
             }
         }
         
@@ -287,12 +285,7 @@
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
-            }
-            
-            @media (prefers-reduced-motion: no-preference) {
-                .sidebar {
-                    transition: transform 0.3s ease;
-                }
+                transition: transform 0.3s ease;
             }
             
             .sidebar.mobile-active {
@@ -967,10 +960,12 @@ function toggleMobileMenu() {
     }
 }
 
-// Close mobile menu when clicking outside or pressing Escape
+// Create media query once for efficiency
+const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
+
+// Close mobile menu when clicking outside
 document.addEventListener('click', function(event) {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    if (!mediaQuery.matches) return; // Only apply on mobile
+    if (!mobileMediaQuery.matches) return; // Only apply on mobile
     
     const sidebar = document.getElementById('sidebar');
     const toggle = document.querySelector('.mobile-menu-toggle');
@@ -982,8 +977,7 @@ document.addEventListener('click', function(event) {
 
 // Keyboard support for mobile menu
 document.addEventListener('keydown', function(event) {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    if (!mediaQuery.matches) return; // Only apply on mobile
+    if (!mobileMediaQuery.matches) return; // Only apply on mobile
     
     const sidebar = document.getElementById('sidebar');
     
