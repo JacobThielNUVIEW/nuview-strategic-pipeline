@@ -132,7 +132,7 @@ jobs:
 
       - name: 📢 Notify if Backup Failed
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const timestamp = new Date().toISOString();
