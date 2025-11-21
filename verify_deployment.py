@@ -36,9 +36,10 @@ def check_file_exists(filepath, required=True):
     else:
         if required:
             log_error(f"Required file missing: {filepath}")
+            return False
         else:
             log_warning(f"Optional file missing: {filepath}")
-        return required
+            return True
 
 def validate_json_file(filepath):
     """Validate JSON file syntax"""
