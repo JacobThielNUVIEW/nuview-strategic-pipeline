@@ -48,25 +48,68 @@
     .divider { border-color: #46484b; }
     .highlight-row { background: rgba(238, 51, 56, 0.12); }
     h1, .dashboard-title { font-weight: 800; color: #fff; letter-spacing:0.02em;}
+    /* Screen reader only content */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
   </style>
 </head>
 <body class="min-h-screen">
-  <header class="text-center py-10">
+  <header class="text-center py-10" role="banner">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="flex justify-between items-center mb-6">
-        <a href="index.html" class="text-sm" style="color:#888; text-decoration:none;">← Back to Dashboard</a>
-        <a href="pipeline_matrix.html" class="text-sm" style="color:#888; text-decoration:none; margin-right: 1rem;">Pipeline Matrix</a>
-        <a href="pipeline.html" class="text-sm" style="color:#888; text-decoration:none;">Pipeline View →</a>
-      </div>
+      <nav class="flex justify-between items-center mb-6" aria-label="Dashboard navigation">
+        <a href="index.html" class="text-sm" style="color:#888; text-decoration:none;" aria-label="Return to main dashboard">← Back to Dashboard</a>
+        <a href="pipeline_matrix.html" class="text-sm" style="color:#888; text-decoration:none; margin-right: 1rem;" aria-label="View pipeline matrix">Pipeline Matrix</a>
+        <a href="pipeline.html" class="text-sm" style="color:#888; text-decoration:none;" aria-label="View pipeline dashboard">Pipeline View →</a>
+      </nav>
     </div>
+    <img src="../assets/nuview-logo.svg" alt="NUVIEW Space Technologies Logo" class="mx-auto mb-6" style="height:70px;"/>
+    <h1 class="text-5xl dashboard-title mb-2 tracking-tight">NUVIEW Global Tracker</h1>
+    <p class="text-lg mb-2" style="color:#ECECEC;">Global Opportunity & Funding Intelligence</p>
     <img src="../assets/nuview-logo.svg" alt="NUVIEW" class="mx-auto mb-6" style="height:70px;"/>
     <h1 class="text-5xl dashboard-title mb-2 tracking-tight">NUVIEW Opp Board - Global Tracker</h1>
     <p class="text-lg mb-2" style="color:#ECECEC;">Global Opportunity & Funding Intelligence • Agencies Worldwide</p>
     <p class="text-md" style="color:#BBB;">Live daily scoring and intelligence on global space-based mapping and LiDAR program funding.</p>
-    <p class="mt-2 text-sm" style="color:#888;" id="last-updated">Daily auto-update</p>
+    <p class="mt-2 text-sm" style="color:#888;" id="last-updated" aria-live="polite">Daily auto-update</p>
   </header>
   <hr class="divider my-10" />
 
+  <div class="max-w-7xl mx-auto px-6" role="main">
+    <!-- Top 10 Programs -->
+    <section aria-labelledby="top10-heading">
+      <h2 id="top10-heading" class="sr-only">Top 10 Global Programs by Priority Score</h2>
+      <div id="top10" class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12" role="list"></div>
+    </section>
+    
+    <!-- Global Priority Matrix Table -->
+    <section aria-labelledby="matrix-heading">
+      <h2 id="matrix-heading" class="sr-only">Global Priority Matrix - All Programs</h2>
+      <div class="rounded-2xl border border-nuview-red card overflow-hidden">
+        <table id="matrix" class="w-full text-sm" role="table" aria-label="Global priority matrix showing all space and LiDAR programs">
+          <thead style="background:#222226;">
+            <tr>
+              <th scope="col" class="px-4 py-3 font-semibold text-nuview-red">Rank</th>
+              <th scope="col" class="font-semibold">Country</th>
+              <th scope="col" class="font-semibold">Agency</th>
+              <th scope="col" class="font-semibold">Program</th>
+              <th scope="col" class="font-semibold">FY26 USD</th>
+              <th scope="col" class="font-semibold text-nuview-red">Score</th>
+              <th scope="col" class="font-semibold">Data</th>
+              <th scope="col" class="font-semibold">Source</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
   <div class="max-w-7xl mx-auto px-6">
     <div id="top10" class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12"></div>
     <div class="rounded-2xl border border-nuview-red card overflow-hidden">
@@ -84,18 +127,34 @@
   </div>
 
   <script>
+    /**
+     * NUVIEW Global Tracker - Data Loading and Rendering
+     * 
+     * This script loads global space/LiDAR program data from priority_matrix.csv
+     * and renders it as:
+     * 1. Top 10 programs card display (by priority score)
+     * 2. Full priority matrix table with all programs
+     * 
+     * Data Source: ../data/processed/priority_matrix.csv
+     * CSV Columns: country, agency_name, program_name, budget_amount_usd, 
+     *              nuview_priority_score, data_access, sources
+     * 
+     * Highlighting: Programs with priority score > 90 are highlighted in red
+     */
     Papa.parse("../data/processed/priority_matrix.csv", {
       download: true,
       header: true,
       complete: function(results) {
+        // Filter out empty rows and sort by priority score (descending)
         const data = results.data.filter(r => r.country && r.nuview_priority_score).sort((a,b) => Number(b.nuview_priority_score) - Number(a.nuview_priority_score));
         const top10 = data.slice(0,10);
         
-        // Update last updated date
+        // Update last updated date to current date (data is auto-updated daily)
         const today = new Date();
         const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         document.getElementById("last-updated").textContent = `Daily auto-update — ${dateStr}`;
         
+        // Render Top 10 Programs as cards
         document.getElementById("top10").innerHTML = top10.map((r,i) => `
           <div class="card rounded-xl p-6 text-center border border-nuview-red">
             <div class="text-4xl font-extrabold text-nuview-red mb-1">#${i+1}</div>
@@ -104,6 +163,8 @@
             <div class="text-xl" style="color:#fff;">Score <span class="text-nuview-red">${r.nuview_priority_score}</span></div>
           </div>`).join('');
 
+        // Render Full Priority Matrix Table
+        // Note: Rows with priority score > 90 receive 'highlight-row' class for visual emphasis
         document.getElementById("rows").innerHTML = data.map((r,i) => `
           <tr class="${Number(r.nuview_priority_score) > 90 ? 'highlight-row' : ''}">
             <td class="px-4 py-3 font-bold text-nuview-red">${i+1}</td>
