@@ -62,7 +62,7 @@ jobs:
           echo -e "\033[92m✅ Trigger signal created and pushed\033[0m"
 
       - name: 📢 Create GitHub Issue Notification
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const timestamp = new Date().toISOString();
