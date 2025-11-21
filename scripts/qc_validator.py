@@ -117,13 +117,15 @@ def validate_opportunities_file(filepath):
         # Check for topographic/LiDAR relevance
         if 'title' in opp:
             title_lower = opp['title'].lower()
+            description_lower = opp.get('description', '').lower()
+            combined_text = f"{title_lower} {description_lower}"
             topographic_keywords = ['lidar', 'topographic', 'elevation', '3dep', 'dem', 'mapping', 'terrain']
-            if not any(keyword in title_lower for keyword in topographic_keywords):
+            if not any(keyword in combined_text for keyword in topographic_keywords):
                 # Check category as well
                 if opp.get('category') != 'DaaS':
                     title = opp.get('title', 'Unknown Title')
                     opp_id = opp.get('id', 'unknown')
-                    warnings.append(f"Opportunity '{title}' ({opp_id}): May not be topographic-related (no relevant keywords found)")
+                    warnings.append(f"Opportunity '{title}' ({opp_id}): May not be topographic-related (no relevant keywords found in title or description)")
     
     # Validate meta.totalCount matches actual count
     if 'meta' in data and 'totalCount' in data['meta']:
