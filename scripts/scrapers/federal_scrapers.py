@@ -4,12 +4,13 @@ US Federal Agency Scrapers for Topographic/LiDAR Opportunities
 
 from base_scraper import BaseScraper
 
+
 class USGSScraper(BaseScraper):
     """USGS 3DEP and topographic mapping opportunities"""
-    
+
     def __init__(self):
         super().__init__("USGS 3DEP", "Federal", "USA")
-    
+
     def scrape(self):
         # USGS 3DEP LiDAR opportunities
         opportunities = [
@@ -36,16 +37,16 @@ class USGSScraper(BaseScraper):
                 agency_link="https://www.usgs.gov/programs/national-geospatial-program/national-map"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class NASAScraper(BaseScraper):
     """NASA space-based LiDAR and Earth observation opportunities"""
-    
+
     def __init__(self):
         super().__init__("NASA Space LiDAR", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -71,16 +72,16 @@ class NASAScraper(BaseScraper):
                 agency_link="https://science.nasa.gov/earth-science/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class NOAAScraper(BaseScraper):
     """NOAA coastal and bathymetric LiDAR opportunities"""
-    
+
     def __init__(self):
         super().__init__("NOAA Coastal", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -95,16 +96,16 @@ class NOAAScraper(BaseScraper):
                 agency_link="https://coast.noaa.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class USACEScraper(BaseScraper):
     """US Army Corps of Engineers topographic mapping"""
-    
+
     def __init__(self):
         super().__init__("USACE Mapping", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -119,16 +120,16 @@ class USACEScraper(BaseScraper):
                 agency_link="https://www.usace.army.mil/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class FEMAScraper(BaseScraper):
     """FEMA flood mapping and elevation data"""
-    
+
     def __init__(self):
         super().__init__("FEMA Flood", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -143,16 +144,16 @@ class FEMAScraper(BaseScraper):
                 agency_link="https://www.fema.gov/flood-maps"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class NGAScraper(BaseScraper):
     """National Geospatial-Intelligence Agency"""
-    
+
     def __init__(self):
         super().__init__("NGA Geoint", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -167,16 +168,16 @@ class NGAScraper(BaseScraper):
                 agency_link="https://www.nga.mil/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class DIUScraper(BaseScraper):
     """Defense Innovation Unit"""
-    
+
     def __init__(self):
         super().__init__("DIU Innovation", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -191,16 +192,16 @@ class DIUScraper(BaseScraper):
                 agency_link="https://www.diu.mil/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class USDAForestScraper(BaseScraper):
     """USDA Forest Service LiDAR for forestry"""
-    
+
     def __init__(self):
         super().__init__("USDA Forest", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -215,16 +216,16 @@ class USDAForestScraper(BaseScraper):
                 agency_link="https://www.fs.usda.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class BLMScraper(BaseScraper):
     """Bureau of Land Management"""
-    
+
     def __init__(self):
         super().__init__("BLM Mapping", "Federal", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -239,6 +240,6 @@ class BLMScraper(BaseScraper):
                 agency_link="https://www.blm.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities

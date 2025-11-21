@@ -5,54 +5,6 @@ Validates scraped data and merges it with existing opportunities
 Handles deduplication, priority scoring, and data quality checks
 """
 
-import pandas as pd
-import json
-import os
-import sys
-
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-
-def calculate_priority(budget_usd, num_keywords, data_access, confidence=0.9):
-    """
-    Calculate priority score based on budget, keywords, data access, and confidence.
-    
-    Args:
-        budget_usd (float): Budget in USD
-        num_keywords (int): Number of relevant keywords matched
-        data_access (int): Data access score (0-10)
-        confidence (float): Confidence level (0-1), default 0.9
-        
-    Returns:
-        int: Priority score (0-100)
-    """
-    # Normalize budget to 0-40 points (log scale for better distribution)
-    # $100K = 10 points, $1M = 20 points, $10M = 30 points, $100M+ = 40 points
-    if budget_usd >= 100000000:  # $100M+
-        budget_score = 40
-    elif budget_usd >= 10000000:  # $10M-$100M
-        budget_score = 30
-    elif budget_usd >= 1000000:  # $1M-$10M
-        budget_score = 20
-    elif budget_usd >= 100000:  # $100K-$1M
-        budget_score = 10
-    else:
-        budget_score = max(0, int(budget_usd / 10000))  # Scale smaller amounts
-    
-    # Normalize keywords to 0-30 points (cap at 30)
-    keyword_score = min(30, num_keywords * 3)
-    
-    # Normalize data access to 0-20 points
-    data_access_score = min(20, data_access * 2)
-    
-    # Confidence multiplier (0.5-1.0 range scaled to 0-10 points)
-    confidence_score = int((confidence - 0.5) * 20) if confidence >= 0.5 else 0
-    
-    # Calculate total score
-    score = budget_score + keyword_score + data_access_score + confidence_score
-    
-    # Return capped score
-    return min(100, int(score))
 
 # Function to source data for priority matrix
 

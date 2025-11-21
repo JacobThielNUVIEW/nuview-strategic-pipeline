@@ -259,20 +259,20 @@ HIGH_PRIORITY_SET = set(kw.lower() for kw in HIGH_PRIORITY_KEYWORDS)
 def calculate_keyword_score(text, case_sensitive=False):
     """
     Calculate relevance score based on keyword matches in text.
-    
+
     Args:
         text (str): Text to analyze
         case_sensitive (bool): Whether to perform case-sensitive matching
-        
+
     Returns:
         dict: Score breakdown with total_score and category scores
     """
     if not text:
         return {"total_score": 0, "matches": 0, "categories": {}}
-    
+
     # Normalize text for searching
     search_text = text if case_sensitive else text.lower()
-    
+
     # Count matches by category
     categories = {
         "core_lidar": sum(1 for kw in CORE_LIDAR_KEYWORDS if (kw if case_sensitive else kw.lower()) in search_text),
@@ -282,7 +282,7 @@ def calculate_keyword_score(text, case_sensitive=False):
         "daas": sum(1 for kw in DAAS_KEYWORDS if (kw if case_sensitive else kw.lower()) in search_text),
         "high_priority": sum(1 for kw in HIGH_PRIORITY_KEYWORDS if (kw if case_sensitive else kw.lower()) in search_text),
     }
-    
+
     # Calculate weighted score (high priority keywords count more)
     total_score = (
         categories["core_lidar"] * 10 +
@@ -292,9 +292,9 @@ def calculate_keyword_score(text, case_sensitive=False):
         categories["daas"] * 10 +
         categories["high_priority"] * 20
     )
-    
+
     total_matches = sum(categories.values())
-    
+
     return {
         "total_score": total_score,
         "matches": total_matches,
@@ -304,48 +304,48 @@ def calculate_keyword_score(text, case_sensitive=False):
 def is_topographic_relevant(text, min_score=10):
     """
     Check if text is relevant to topographic/LiDAR opportunities.
-    
+
     Args:
         text (str): Text to check
         min_score (int): Minimum score threshold for relevance
-        
+
     Returns:
         bool: True if text is relevant, False otherwise
     """
     if not text:
         return False
-    
+
     score_data = calculate_keyword_score(text)
     return score_data["total_score"] >= min_score
 
 def extract_matching_keywords(text, case_sensitive=False):
     """
     Extract all matching keywords from text.
-    
+
     Args:
         text (str): Text to analyze
         case_sensitive (bool): Whether to perform case-sensitive matching
-        
+
     Returns:
         list: List of matched keywords
     """
     if not text:
         return []
-    
+
     search_text = text if case_sensitive else text.lower()
     matched = []
-    
+
     for keyword in ALL_KEYWORDS:
         search_kw = keyword if case_sensitive else keyword.lower()
         if search_kw in search_text:
             matched.append(keyword)
-    
+
     return matched
 
 if __name__ == "__main__":
     # Test the keyword scoring system
     print("NUVIEW Strategic Pipeline - Global Keywords Test\n")
-    
+
     test_cases = [
         "USGS 3DEP LiDAR Acquisition for National Topographic Mapping",
         "ICESat-2 Mission Data Processing and Analysis",
@@ -356,7 +356,7 @@ if __name__ == "__main__":
         "Topographie laser et modèle numérique d'élévation",  # French
         "激光雷达地形测绘",  # Chinese
     ]
-    
+
     for i, test_text in enumerate(test_cases, 1):
         print(f"Test {i}: {test_text[:60]}...")
         score_data = calculate_keyword_score(test_text)

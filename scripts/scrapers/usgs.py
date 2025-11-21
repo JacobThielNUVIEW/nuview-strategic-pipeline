@@ -1,7 +1,8 @@
-import requests
-import pdfplumber
 import logging
 import re
+
+import pdfplumber
+import requests
 
 # Configure logging for NUVIEW
 logging.basicConfig(level=logging.INFO)
@@ -26,7 +27,7 @@ def scrape_usgs_data(url):
     except requests.RequestException as e:
         logger.error(f"Requests exception: {e}")
         return fallback_data()  # Use fallback if request fails
-    
+
     # Parsing PDF with pdfplumber
     with pdfplumber.open(response.content) as pdf:
         for page in pdf.pages:
