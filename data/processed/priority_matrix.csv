@@ -1,21 +1,2 @@
-Rank,Title,Agency,Category,Value USD,Priority Score,Priority Label,Deadline,Urgency,Next Action
-1,USGS 3DEP LiDAR Acquisition 2026 - Phase 1,USGS,DaaS,217000000,200,top USA: score 200,2025-12-18,urgent,Submit Demo Brief
-2,DIU Spaceborne LiDAR BAA,DIU,R&D,15000000,180,top USA: score 180,2025-12-05,urgent,Submit Whitepaper
-3,NGA Commercial Space-Based 3D Mapping,NGA,DaaS,45000000,170,top USA: score 170,2025-12-30,near,Security Clearance Prep
-4,NASA ROSES ICESat-2 Science Team Augmentation,NASA,R&D,12000000,168,top USA: score 168,2026-01-04,near,Proposal Preparation
-5,Google Earth Engine Global DEM Initiative,Google,Platform,30000000,166,top Global: score 166,2026-02-08,near,Data Partnership
-6,NASA Commercial Spaceborne LiDAR Partnership,NASA,R&D,25000000,160,top USA: score 160,2026-02-18,future,Partner Coordination
-7,JAXA ALOS-4 Topographic Mission Support,JAXA,R&D,18000000,160,top Japan: score 160,2026-03-20,future,International Partnership
-8,DLR TanDEM-X Follow-On LiDAR Mission,DLR,R&D,30000000,160,top Global: score 160,2026-02-28,future,Mission Planning
-9,ISRO National Topographic Mapping - LiDAR Phase,ISRO,DaaS,25000000,160,top Global: score 160,2026-03-10,future,India Partnership
-10,Horizon Europe Space-Based Earth Monitoring,EU Commission,R&D,35000000,160,top Global: score 160,2026-03-20,future,Consortium Formation
-11,CSA Arctic Topographic Mapping Program,CSA,DaaS,22000000,154,top Global: score 154,2026-02-13,near,Arctic Capability Demo
-12,UKSA Climate & Environment LiDAR Services,UKSA,DaaS,20000000,148,top Global: score 148,2026-02-18,future,UK Partnership Brief
-13,CNSA Belt & Road Topographic Mapping,CNSA,DaaS,40000000,148,top Global: score 148,2026-03-30,future,International Coordination
-14,AWS Earth on AWS - Elevation Data Partnership,Amazon Web Services,Platform,25000000,148,top Global: score 148,2026-01-29,near,AWS Partnership Brief
-15,Microsoft Planetary Computer Terrain Services,Microsoft,Platform,22000000,146,top Global: score 146,2026-02-13,near,Azure Integration
-16,MIT Lincoln Lab Space-Based Sensing Partnership,MIT,R&D,15000000,140,top Global: score 140,2026-03-10,future,Research Agreement
-17,ESA Digital Twin Earth LiDAR Platform,ESA,Platform,35000000,138,top Europe: score 138,2026-01-04,near,Consortium Lead
-18,Planet Fusion Platform - Elevation Layer Integration,Planet Labs,Platform,18000000,138,top Global: score 138,2026-02-03,near,Platform Integration
-19,USFS National Forest LiDAR Inventory,USDA Forest Service,DaaS,22000000,132,top USA: score 132,2026-02-08,near,Forest Demo
-20,ESRI Living Atlas Premium Elevation Layer,ESRI,Platform,20000000,131,top Global: score 131,2026-02-23,future,ESRI Partnership Meeting
+id,title,agency,pillar,category,amountUSD,daysUntilDeadline,deadline,next_action,scrapedAt,forecast_value,link,timeline,funding,valueUSD,urgency,calculatedPriority
+usgs-test,USGS 3DEP LiDAR Acquisition 2026,USGS,Federal,DaaS,217000000,28,2025-12-15,Submit Demo Brief,2025-11-21T13:06:40.773978Z,"$217,000,000",https://sam.gov,"{'daysUntil': 28, 'urgency': 'urgent'}",{'amountUSD': 217000000},217000000,urgent,67

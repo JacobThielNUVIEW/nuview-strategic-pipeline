@@ -1,6 +1,6 @@
 """
 NUVIEW Strategic Pipeline - Master Scraper
-Orchestrates all 34 specialized scrapers for topographic/LiDAR opportunities
+Orchestrates all 68 specialized scrapers for topographic/LiDAR opportunities
 Focus: Space-based LiDAR for large-area topographic collections (bare-earth/DEM/DSM)
 """
 
@@ -56,6 +56,17 @@ try:
         MITScraper,
         NIHGeospatialScraper,
         NSFScraper,
+    )
+    from scrapers.additional_international_scrapers import (
+        BrazilIBGEScraper, AustraliaGAScraper, NewZealandScraper, SouthKoreaScraper,
+        MexicoScraper, ArgentinaScraper, ChileScraper, SouthAfricaScraper,
+        NigeriaScraper, EgyptScraper, UAEScraper, SaudiArabiaScraper,
+        IsraelScraper, TurkeyScraper, PolandScraper, SwedenScraper,
+        NorwayScraper, FinlandScraper, SpainScraper, ItalyScraper,
+        FranceScraper, NetherlandsScraper, BelgiumScraper, SwitzerlandScraper,
+        AustriaScraper, ThailandScraper, IndonesiaScraper, MalaysiaScraper,
+        PhilippinesScraper, VietnamScraper, ColombiaScraper, PeruScraper,
+        PakistanScraper, BangladeshScraper
     )
     SCRAPERS_AVAILABLE = True
 except ImportError as e:
@@ -178,6 +189,42 @@ def run_all_scrapers():
         NYCScraper(),
         WorldBankScraper(),
         PlanetLabsScraper(),
+        
+        # Additional International Scrapers (34 scrapers)
+        BrazilIBGEScraper(),
+        AustraliaGAScraper(),
+        NewZealandScraper(),
+        SouthKoreaScraper(),
+        MexicoScraper(),
+        ArgentinaScraper(),
+        ChileScraper(),
+        SouthAfricaScraper(),
+        NigeriaScraper(),
+        EgyptScraper(),
+        UAEScraper(),
+        SaudiArabiaScraper(),
+        IsraelScraper(),
+        TurkeyScraper(),
+        PolandScraper(),
+        SwedenScraper(),
+        NorwayScraper(),
+        FinlandScraper(),
+        SpainScraper(),
+        ItalyScraper(),
+        FranceScraper(),
+        NetherlandsScraper(),
+        BelgiumScraper(),
+        SwitzerlandScraper(),
+        AustriaScraper(),
+        ThailandScraper(),
+        IndonesiaScraper(),
+        MalaysiaScraper(),
+        PhilippinesScraper(),
+        VietnamScraper(),
+        ColombiaScraper(),
+        PeruScraper(),
+        PakistanScraper(),
+        BangladeshScraper(),
     ]
 
     # Run scrapers in parallel with ThreadPoolExecutor
