@@ -1,0 +1,17 @@
+# Netlify Redirects File
+# This file provides fallback redirects if netlify.toml redirects don't work
+# Documentation: https://docs.netlify.com/routing/redirects/
+
+# Primary redirects
+/                           /dashboard/index.html         200
+/index.html                 /dashboard/index.html         200
+
+# Dashboard shortcuts
+/dashboard                  /dashboard/index.html         200
+/pipeline                   /dashboard/pipeline.html      200
+/matrix                     /dashboard/pipeline_matrix.html  200
+/tracker                    /dashboard/global-tracker.html   200
+
+# Legacy URLs (if any)
+/opportunities              /dashboard/index.html         301
+/forecast                   /dashboard/pipeline.html      301

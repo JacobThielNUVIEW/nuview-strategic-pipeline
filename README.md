@@ -19,9 +19,10 @@ The NUVIEW Strategic Pipeline is a fully automated, integrated workflow system t
 ## ✨ Key Features
 
 ### 1. 🔄 Continuous Integration & Deployment
-- Automatic deployment to GitHub Pages on every push to `main`
-- Live site updates within 2 minutes of data changes
+- Automatic deployment to GitHub Pages and Netlify on every push to `main`
+- Live site updates within 30-60 seconds (Netlify) or 2 minutes (GitHub Pages)
 - Integrated QC validation pipeline ensures data quality
+- Optimized with CDN, caching, and compression for maximum performance
 
 ### 2. 🚀 Remote Scrape Triggering
 - **Floating rocket button** on dashboard for easy access
@@ -85,8 +86,10 @@ The NUVIEW Strategic Pipeline is a fully automated, integrated workflow system t
 ## 📚 Documentation
 
 - **[Automation Setup Guide](AUTOMATION_SETUP.md)** - Complete setup instructions
+- **[Netlify Deployment Guide](NETLIFY_DEPLOYMENT.md)** - Netlify deployment and configuration
 - **[Setup Script README](SETUP_SCRIPT_README.md)** - Original setup documentation
 - **[Pipeline Matrix README](dashboard/PIPELINE_MATRIX_README.md)** - Dashboard features
+- **[Branding Updates](BRANDING_UPDATES.md)** - UI/UX branding guidelines
 
 ## 🏗️ Architecture
 
@@ -157,6 +160,14 @@ The NUVIEW Strategic Pipeline is a fully automated, integrated workflow system t
 
 1. **`NUVIEW_SCRAPE_TOKEN`** - Authentication token for triggering scrapes
 2. **`GH_PAT`** (Optional) - Personal Access Token for advanced features
+
+### Deployment Options
+
+This repository supports dual deployment:
+- **GitHub Pages**: Automatic deployment via `.github/workflows/deploy-pages.yml`
+- **Netlify**: Automatic deployment with enhanced performance and CDN
+  - See [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md) for setup instructions
+  - Configured via `netlify.toml` for optimal performance
 
 See [AUTOMATION_SETUP.md](AUTOMATION_SETUP.md) for detailed setup instructions.
 
