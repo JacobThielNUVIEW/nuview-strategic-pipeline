@@ -43,7 +43,7 @@ jobs:
 
       - name: 📦 Upload Scraped Data
         if: steps.check_changes.outputs.has_changes == 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: scraped-data
           path: |
@@ -61,15 +61,15 @@ jobs:
       qc_percentage: ${{ steps.qc_validation.outputs.qc_percentage }}
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🐍 Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: 📦 Download Scraped Data
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: scraped-data
           path: data/
@@ -91,7 +91,7 @@ jobs:
 
       - name: 📊 Upload QC Report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: qc-report
           path: data/processed/qc_report.json
@@ -104,43 +104,54 @@ jobs:
     if: needs.validate.outputs.qc_passed == 'true'
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: 🐍 Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: 📦 Download Validated Data
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: scraped-data
           path: data/
 
       - name: 📦 Download QC Report
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: qc-report
           path: data/processed/
+
+      - name: 🔄 Generate Programs Data
+        run: |
+          echo -e "\033[94m🔄 Generating programs.json from opportunities.json...\033[0m"
+          if python scripts/generate_programs.py; then
+            echo -e "\033[92m✅ Programs data generated successfully\033[0m"
+          else
+            echo -e "\033[91m❌ Failed to generate programs.json\033[0m"
+            exit 1
+          fi
 
       - name: 🔀 Prepare Merge
         run: |
           echo -e "\033[94m🔀 Preparing data merge...\033[0m"
           git config --local user.email "bot@nuview.space"
           git config --local user.name "NUVIEW Topographic Bot"
-          git add data/opportunities.json data/forecast.json data/processed/qc_report.json
+          git add data/opportunities.json data/forecast.json data/processed/qc_report.json data/processed/programs.json
           echo -e "\033[92m✅ Merge preparation complete\033[0m"
 
       - name: 📦 Upload Merge-Ready Data
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: merge-ready-data
           path: |
             data/opportunities.json
             data/forecast.json
             data/processed/qc_report.json
+            data/processed/programs.json
           retention-days: 7
 
   push:
@@ -150,12 +161,12 @@ jobs:
     if: needs.validate.outputs.qc_passed == 'true' && needs.validate.outputs.qc_percentage == '100'
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: 📦 Download Merge-Ready Data
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: merge-ready-data
           path: data/
@@ -166,7 +177,7 @@ jobs:
           git config --local user.email "bot@nuview.space"
           git config --local user.name "NUVIEW Topographic Bot"
           
-          git add data/opportunities.json data/forecast.json data/processed/qc_report.json
+          git add data/opportunities.json data/forecast.json data/processed/qc_report.json data/processed/programs.json
           
           if git diff --staged --quiet; then
             echo -e "\033[93m⚠️  No changes to commit\033[0m"
@@ -183,7 +194,7 @@ jobs:
           echo -e "\033[94mℹ️  Dashboard will auto-update via deploy-pages workflow\033[0m"
       
       - name: 📊 Create Success Notification
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const timestamp = new Date().toISOString();
@@ -200,6 +211,7 @@ jobs:
             ### Summary
             - Data scraped successfully
             - QC validation passed (100%)
+            - Programs data auto-generated for dashboard
             - Changes pushed to main branch
             - Dashboard updates automatically on Netlify and GitHub Pages
             
@@ -232,10 +244,10 @@ jobs:
     if: always() && needs.scrape.outputs.has_changes == 'true' && needs.validate.outputs.qc_passed == 'false'
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 📦 Download QC Report
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: qc-report
           path: data/processed/
@@ -258,7 +270,7 @@ jobs:
           fi
 
       - name: 📢 Create GitHub Issue Comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const summary = "${{ steps.parse_report.outputs.summary }}";

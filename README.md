@@ -1,216 +1,339 @@
-# NUVIEW Strategic Pipeline
+# 🚀 NUVIEW Strategic Pipeline
 
-**Fully Automated Intelligence & Data Platform for Strategic Opportunities**
+**Enterprise-Grade Automated Intelligence & Data Platform for Strategic Business Development**
 
 [![Deploy to GitHub Pages](https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline/actions/workflows/deploy-pages.yml)
 [![Daily Global Topographic Sweep](https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline/actions/workflows/daily_ops.yml/badge.svg)](https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline/actions/workflows/daily_ops.yml)
 
-## 🚀 Overview
+---
 
-The NUVIEW Strategic Pipeline is a fully automated, integrated workflow system that:
+## 🎯 Overview
 
-- **Automatically updates** code, dashboard, and site on every push
-- **Triggers local scraping** remotely via an interactive dashboard button
-- **Validates data quality** before deploying updates
-- **Backs up data** automatically to prevent data loss
-- **Monitors and alerts** on errors and failures
-- **Deploys continuously** to a live GitHub Pages site
+The NUVIEW Strategic Pipeline is a **fully automated, end-to-end business intelligence platform** that continuously monitors, analyzes, and prioritizes global opportunities in topographic mapping, LiDAR, and space-based Earth observation.
+
+**Key Differentiators:**
+- ✅ **100% Automated** - Zero manual intervention required
+- 📊 **Real-time Dashboard** - Live updates within 30-60 seconds
+- 🔄 **Continuous Data Flow** - Scraper → Validator → Generator → Dashboard
+- 🛡️ **Quality Assured** - Multi-stage validation with 100% QC pass requirement
+- 🌍 **Global Coverage** - 34 specialized scrapers across federal, international, research, and commercial sources
+
+---
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    AUTOMATED WORKFLOW SYSTEM                         │
+│                                                                      │
+│  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐       │
+│  │   GitHub     │     │   Scrapers   │     │   Quality    │       │
+│  │   Actions    │ ──> │   (34)       │ ──> │   Control    │       │
+│  │  Scheduler   │     │              │     │   Validator  │       │
+│  └──────────────┘     └──────────────┘     └──────┬───────┘       │
+│                                                     │               │
+│                                            ┌────────▼────────┐      │
+│                                            │   Programs      │      │
+│                                            │   Generator     │      │
+│                                            └────────┬────────┘      │
+│                                                     │               │
+│  ┌──────────────────────────────────────────────────▼──────────┐   │
+│  │              DATA REPOSITORY                                 │   │
+│  │  • opportunities.json  • forecast.json  • programs.json     │   │
+│  └──────────────────────────┬───────────────────────────────────┘   │
+│                             │                                       │
+│                             ▼                                       │
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │           LIVE DASHBOARD (Netlify + GitHub Pages)           │   │
+│  │  • Executive Summary  • Pipeline Matrix  • Global Tracker   │   │
+│  └─────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📂 Repository Structure
+
+```
+nuview-strategic-pipeline/
+├── 📁 .github/workflows/      # Automated CI/CD pipelines
+│   ├── daily_ops.yml          # Daily scraping & data update (3AM UTC)
+│   ├── deploy-pages.yml       # Dashboard deployment
+│   ├── backup.yml             # Automated backups (4AM UTC)
+│   └── trigger-local-scrape.yml # Remote scrape trigger
+│
+├── 📁 dashboard/              # Live web dashboard
+│   ├── index.html             # Main dashboard
+│   ├── pipeline.html          # Pipeline visualization
+│   ├── pipeline_matrix.html   # Top opportunities matrix
+│   ├── global-tracker.html    # Global opportunity tracker
+│   ├── executive-summary.html # Executive summary page
+│   └── scripts-documentation.html # Scripts documentation
+│
+├── 📁 scripts/                # Automation scripts & tools
+│   ├── scrapers/              # 34 specialized scrapers
+│   ├── generate_programs.py   # Auto-generate dashboard data
+│   ├── qc_validator.py        # Quality control validation
+│   └── local_monitor.py       # Local scrape monitor
+│
+├── 📁 data/                   # Live data repository
+│   ├── opportunities.json     # Raw opportunities data
+│   ├── forecast.json          # Market forecast data
+│   └── processed/
+│       ├── programs.json      # Processed dashboard data
+│       ├── qc_report.json     # Quality control report
+│       └── sources_matrix.csv # Source verification matrix
+│
+├── 📁 docs/                   # Comprehensive documentation
+│   ├── AUTOMATION_SETUP.md    # Setup guide
+│   ├── NETLIFY_DEPLOYMENT.md  # Deployment guide
+│   ├── BRANDING_UPDATES.md    # Branding guidelines
+│   └── README.md              # Documentation index
+│
+├── 📁 assets/                 # Static assets
+│   └── nuview-logo.svg        # NUVIEW logo
+│
+├── 📁 backups/                # Automated data backups
+│
+├── 📄 README.md               # This file
+├── 📄 requirements.txt        # Python dependencies
+├── 📄 netlify.toml            # Netlify configuration
+├── 📄 robots.txt              # SEO configuration
+└── 📄 CNAME                   # Custom domain configuration
+```
+
+---
 
 ## ✨ Key Features
 
-### 1. 🔄 Continuous Integration & Deployment
-- Automatic deployment to GitHub Pages and Netlify on every push to `main`
-- Live site updates within 30-60 seconds (Netlify) or 2 minutes (GitHub Pages)
-- Integrated QC validation pipeline ensures data quality
-- Optimized with CDN, caching, and compression for maximum performance
+### 🤖 Fully Automated Data Pipeline
 
-### 2. 🚀 Remote Scrape Triggering
-- **Floating rocket button** on dashboard for easy access
-- Password-protected for NUVIEW-only access
-- Signals local machine to execute scraping process
-- Automatic result propagation back to repository
+**Scraping → Validation → Generation → Deployment** - All automatic, no manual steps
 
-### 3. 📊 Automated Data Pipeline
-- Daily automated scraping at 3:00 AM UTC
-- Multi-stage validation and quality control
-- Smart merge and conflict resolution
-- Error detection and automated alerting
+1. **Data Collection** (Daily 3:00 AM UTC)
+   - 34 specialized scrapers across federal, international, research, and commercial sources
+   - Focus: Space-based LiDAR for large-area topographic collections
 
-### 4. 💾 Automated Backups
-- Daily backups of all data files
-- 30-day retention policy
-- Integrity verification
-- Compressed archives for efficient storage
+2. **Quality Control**
+   - Multi-stage validation ensures data integrity
+   - Required fields verification
+   - Source verification matrix generation
+   - 100% QC pass required before deployment
 
-### 5. 🔒 Security & Access Control
+3. **Dashboard Data Generation** (NEW!)
+   - Automatically generates `programs.json` from `opportunities.json`
+   - Categorizes into: Funding, LiDAR, Space Systems, Platform
+   - No manual code changes needed - fully automated
+
+4. **Continuous Deployment**
+   - Auto-deploys to Netlify (30-60 seconds)
+   - Auto-deploys to GitHub Pages (2 minutes)
+   - Live dashboard updates without intervention
+
+### 📊 Professional Dashboard
+
+- **Executive Summary** - High-level KPIs and metrics
+- **Pipeline Matrix** - Top 10 opportunities by value
+- **Global Tracker** - Comprehensive opportunity tracking
+- **Pipeline Visualization** - Interactive workflow diagram
+- **Remote Trigger** - Floating rocket button for on-demand updates
+
+### 🔒 Security & Reliability
+
 - Token-based authentication for critical operations
-- Secure credential management via GitHub Secrets
-- Access logging and audit trails
+- Automated daily backups with 30-day retention
+- Error detection and alerting
 - Rate limiting and abuse prevention
 
-### 6. 🎨 Professional Dashboard
-- Modern, responsive UI with NUVIEW branding
-- Real-time opportunity tracking
-- Interactive pipeline visualization
-- Top 10 opportunities matrix
+---
 
-## 🎯 Quick Start
+## 🚀 Quick Start
 
 ### For Dashboard Users
 
-1. **View the Live Dashboard**: 
+1. **View Live Dashboard**:
    - Primary: [https://salesnuviewspace.netlify.app](https://salesnuviewspace.netlify.app)
    - Alternative: [https://jacobthielnuview.github.io/nuview-strategic-pipeline/](https://jacobthielnuview.github.io/nuview-strategic-pipeline/)
 
-2. **Trigger a Data Update**:
-   - Click the floating 🚀 rocket button (bottom-right)
-   - Enter your NUVIEW authentication token
-   - Follow the instructions to trigger via GitHub Actions
+2. **Trigger Data Update**:
+   - Click floating 🚀 rocket button (bottom-right)
+   - Enter NUVIEW authentication token
+   - Follow instructions to trigger via GitHub Actions
 
 ### For Developers
 
-1. **Clone the Repository**:
+1. **Clone Repository**:
    ```bash
    git clone https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline.git
    cd nuview-strategic-pipeline
    ```
 
-2. **Run Local Monitor** (for automated scrape detection):
+2. **Install Dependencies**:
    ```bash
-   python3 scripts/local_monitor.py --watch
+   pip install -r requirements.txt
    ```
 
-3. **Manual Scrape**:
+3. **Run Scraper Manually**:
    ```bash
-   python3 scripts/scrapers/scrape_all.py
+   python scripts/scrapers/scrape_all.py
    ```
 
-## 📚 Documentation
+4. **Generate Dashboard Data**:
+   ```bash
+   python scripts/generate_programs.py
+   ```
 
-- **[Automation Setup Guide](AUTOMATION_SETUP.md)** - Complete setup instructions
-- **[Netlify Deployment Guide](NETLIFY_DEPLOYMENT.md)** - Netlify deployment and configuration
-- **[Setup Script README](SETUP_SCRIPT_README.md)** - Original setup documentation
-- **[Pipeline Matrix README](dashboard/PIPELINE_MATRIX_README.md)** - Dashboard features
-- **[Branding Updates](BRANDING_UPDATES.md)** - UI/UX branding guidelines
+5. **Validate Data Quality**:
+   ```bash
+   python scripts/qc_validator.py
+   ```
 
-## 🏗️ Architecture
+---
+
+## 📊 Data Flow
+
+### Automated Pipeline (Daily)
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                  AUTOMATED WORKFLOW SYSTEM                   │
-└─────────────────────────────────────────────────────────────┘
-
-                    ┌──────────────────┐
-                    │  GitHub Actions  │
-                    │   (Scheduler)    │
-                    └────────┬─────────┘
-                             │
-              ┌──────────────┼──────────────┐
-              │              │              │
-              ▼              ▼              ▼
-       ┌───────────┐  ┌───────────┐  ┌───────────┐
-       │  Daily    │  │  Backup   │  │  Deploy   │
-       │  Scrape   │  │  Data     │  │  Pages    │
-       └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
-             │              │              │
-             ▼              ▼              ▼
-       ┌─────────────────────────────────────┐
-       │        Data & Repository            │
-       │    (opportunities.json, etc.)       │
-       └────────────┬────────────────────────┘
-                    │
-                    ▼
-       ┌─────────────────────────────────────┐
-       │     GitHub Pages Dashboard          │
-       │   (Live Site with Rocket Button)    │
-       └─────────────────────────────────────┘
-                    │
-                    ▼
-       ┌─────────────────────────────────────┐
-       │      Local Monitor (Optional)       │
-       │   (Watches for trigger signals)     │
-       └─────────────────────────────────────┘
+1. GitHub Actions Scheduler (3:00 AM UTC)
+          ↓
+2. Run All Scrapers (scrape_all.py)
+   • Collects data from 34 sources
+   • Outputs: opportunities.json, forecast.json
+          ↓
+3. Quality Control (qc_validator.py)
+   • Validates data integrity
+   • Generates QC report & source matrix
+   • Must pass 100% to proceed
+          ↓
+4. Generate Programs Data (generate_programs.py) ✨ NEW!
+   • Converts opportunities → programs
+   • Categorizes by type
+   • Outputs: programs.json
+          ↓
+5. Commit & Push to Main Branch
+   • opportunities.json
+   • forecast.json
+   • programs.json
+   • qc_report.json
+          ↓
+6. Automatic Dashboard Deployment
+   • Netlify (30-60 seconds)
+   • GitHub Pages (2 minutes)
+          ↓
+7. Live Dashboard Updates 🎉
 ```
 
-## 🛠️ Workflows
-
-### 1. Daily Global Topographic Sweep
-- **Schedule**: Daily at 3:00 AM UTC
-- **Trigger**: Automatic / Manual
-- **File**: `.github/workflows/daily_ops.yml`
-- **Purpose**: Scrape, validate, and update data automatically
-
-### 2. Deploy to GitHub Pages
-- **Trigger**: On push to `main`
-- **File**: `.github/workflows/deploy-pages.yml`
-- **Purpose**: Continuous deployment of dashboard
-
-### 3. Trigger Local Scrape
-- **Trigger**: Manual (via dashboard or Actions)
-- **File**: `.github/workflows/trigger-local-scrape.yml`
-- **Purpose**: Signal local machine to execute scrape
-
-### 4. Automated Backup
-- **Schedule**: Daily at 4:00 AM UTC
-- **Trigger**: Automatic / Manual
-- **File**: `.github/workflows/backup.yml`
-- **Purpose**: Create and verify data backups
+---
 
 ## 🔧 Configuration
 
 ### Required GitHub Secrets
 
-1. **`NUVIEW_SCRAPE_TOKEN`** - Authentication token for triggering scrapes
-2. **`GH_PAT`** (Optional) - Personal Access Token for advanced features
+- **`NUVIEW_SCRAPE_TOKEN`** - Authentication for remote scrape triggering
+- **`GH_PAT`** (Optional) - Personal Access Token for advanced features
 
-### Deployment Options
+### Deployment Configuration
 
-This repository supports dual deployment:
-- **GitHub Pages**: Automatic deployment via `.github/workflows/deploy-pages.yml`
-- **Netlify**: Automatic deployment with enhanced performance and CDN
-  - See [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md) for setup instructions
-  - Configured via `netlify.toml` for optimal performance
+**Dual Deployment Setup:**
+- **Netlify** - Primary deployment with CDN and optimizations
+- **GitHub Pages** - Secondary deployment for redundancy
 
-See [AUTOMATION_SETUP.md](AUTOMATION_SETUP.md) for detailed setup instructions.
+See [`docs/NETLIFY_DEPLOYMENT.md`](docs/NETLIFY_DEPLOYMENT.md) for setup instructions.
 
-## 📈 Data Flow
+---
 
-1. **Data Source** → Scraper script (`scrape_all.py`)
-2. **Scraper** → Raw data (`opportunities.json`, `forecast.json`)
-3. **QC Validator** → Quality check (`qc_validator.py`)
-4. **Validation** → Commit to repository
-5. **Git Push** → Triggers deployment workflow
-6. **Deployment** → Live dashboard update
+## 📚 Documentation
 
-## 🎨 Dashboard Features
+### Setup & Configuration
+- **[Automation Setup Guide](docs/AUTOMATION_SETUP.md)** - Complete setup instructions
+- **[Setup Script README](docs/SETUP_SCRIPT_README.md)** - Original setup documentation
 
-- **Top 10 Opportunities Matrix** - Highest-value opportunities
-- **Pipeline Visualization** - Interactive workflow diagram
-- **Category Filtering** - Funding, LiDAR, Space Systems, Platform
-- **Global Search** - Find opportunities quickly
-- **Floating Rocket Button** - Trigger remote updates
-- **NUVIEW Branding** - Professional appearance
+### Deployment
+- **[Netlify Deployment Guide](docs/NETLIFY_DEPLOYMENT.md)** - Netlify setup and configuration
+- **[Final Deployment Summary](docs/FINAL_DEPLOYMENT_SUMMARY.md)** - Deployment status
+
+### Design & Development
+- **[Branding Guidelines](docs/BRANDING_UPDATES.md)** - UI/UX standards
+- **[Scripts Documentation](scripts/README.md)** - Script reference guide
+- **[Dashboard README](dashboard/PIPELINE_MATRIX_README.md)** - Dashboard features
+
+### Testing & Quality
+- **[Testing Report](docs/TESTING_REPORT.md)** - Comprehensive testing results
+- **[QC Summary](docs/QC_SUMMARY_REPORT.md)** - Quality control metrics
+- **[Optimization Checklist](docs/OPTIMIZATION_CHECKLIST.md)** - Performance improvements
+
+---
+
+## 🛠️ Workflows
+
+### 1. Daily Global Topographic Sweep
+- **File**: `.github/workflows/daily_ops.yml`
+- **Schedule**: Daily at 3:00 AM UTC
+- **Trigger**: Automatic / Manual
+- **Purpose**: Scrape, validate, generate, and deploy data automatically
+
+### 2. Deploy to GitHub Pages
+- **File**: `.github/workflows/deploy-pages.yml`
+- **Trigger**: On push to `main`
+- **Purpose**: Continuous dashboard deployment
+
+### 3. Automated Backup
+- **File**: `.github/workflows/backup.yml`
+- **Schedule**: Daily at 4:00 AM UTC
+- **Trigger**: Automatic / Manual
+- **Purpose**: Create and verify data backups
+
+### 4. Trigger Local Scrape
+- **File**: `.github/workflows/trigger-local-scrape.yml`
+- **Trigger**: Manual (via dashboard or Actions)
+- **Purpose**: Signal local machine to execute scrape
+
+---
+
+## 🔄 Recent Updates
+
+### Latest Enhancements
+
+✅ **Automated Data Pipeline** (Phase 2 Complete)
+- Created `generate_programs.py` to auto-generate dashboard data
+- Updated workflows to generate `programs.json` automatically
+- Dashboard now updates without any manual code intervention
+
+✅ **Version Standardization** (Phase 1 Complete)
+- All workflows use Python 3.11
+- Standardized GitHub Actions versions (checkout@v4, setup-python@v5, etc.)
+- Updated requirements.txt with explicit versions
+
+---
 
 ## 🤝 Contributing
 
-This is a private NUVIEW project. For questions or issues:
+This is a **private NUVIEW project**. For questions or issues:
 
 1. Open a GitHub Issue
-2. Contact the development team
+2. Contact the NUVIEW development team
 3. Review workflow logs in Actions tab
+
+---
 
 ## 📝 License
 
-Proprietary - NUVIEW Internal Use Only
+**Proprietary - NUVIEW Internal Use Only**
+
+---
 
 ## 🙏 Support
 
 For setup assistance or troubleshooting:
-- Review the [Automation Setup Guide](AUTOMATION_SETUP.md)
-- Check GitHub Actions logs
-- Create an issue in the repository
+- 📖 Review the [Documentation](docs/README.md)
+- 🔍 Check [GitHub Actions Logs](https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline/actions)
+- 🐛 Create an [Issue](https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline/issues)
+- 📧 Contact NUVIEW development team
 
 ---
 
 **Last Updated**: November 2024  
-**Maintained by**: NUVIEW Team
+**Version**: 2.0.0 (Automated Pipeline)  
+**Maintained by**: NUVIEW Team  
+**Status**: 🟢 Production - Fully Operational
