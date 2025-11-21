@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="NUVIEW Interactive Pipeline Matrix - Visual workflow representation with drag-and-drop opportunity management and status tracking.">
-    <meta name="theme-color" content="#EE3338">
+    <meta name="theme-color" content="#E10600">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>NUVIEW Opp Board - Interactive Pipeline Matrix</title>
@@ -15,8 +15,8 @@
            NUVIEW SPACE COLOR PALETTE
            ============================================ */
         :root {
-            --nuview-red-primary: #EE3338;
-            --nuview-red-bright: #EE3338;
+            --nuview-red-primary: #E10600;
+            --nuview-red-bright: #E10600;
             --nuview-black: #000000;
             --nuview-dark-gray: #1a1a1a;
             --nuview-medium-gray: #333333;
@@ -25,9 +25,9 @@
             --nuview-bg-gray: #0a0a0a;
             
             /* Status colors using NUVIEW palette */
-            --status-operational: #EE3338;
+            --status-operational: #E10600;
             --status-success: #FFFFFF;
-            --status-warning: #EE3338;
+            --status-warning: #E10600;
             --status-loading: #666666;
             --status-idle: #333333;
         }
@@ -98,7 +98,7 @@
 
         .nav-links a:hover {
             border-color: var(--nuview-red-bright);
-            background: rgba(238, 51, 56, 0.1);
+            background: rgba(225, 6, 0, 0.1);
             transform: translateY(-2px);
         }
 
@@ -216,7 +216,7 @@
 
         .zoom-btn:hover {
             background: linear-gradient(135deg, var(--nuview-red-primary) 0%, var(--nuview-red-bright) 100%);
-            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
+            box-shadow: 0 4px 12px rgba(225, 6, 0, 0.4);
             transform: translateY(-2px);
         }
 
@@ -323,7 +323,7 @@
 
         .pipeline-node:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(238, 51, 56, 0.4);
+            box-shadow: 0 12px 40px rgba(225, 6, 0, 0.4);
         }
 
         /* Node status indicator */
@@ -374,7 +374,7 @@
             font-size: 2rem;
             background: linear-gradient(135deg, var(--nuview-red-primary) 0%, var(--nuview-red-bright) 100%);
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.3);
+            box-shadow: 0 4px 12px rgba(225, 6, 0, 0.3);
         }
 
         /* Node content */
@@ -860,6 +860,73 @@
                     <div class="legend-indicator fail"></div>
                     <span class="legend-label">Failed</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Pipeline Scoring Explanation -->
+        <div class="embed-instructions" id="scoring-explanation">
+            <h3>📊 Pipeline Opportunity Scoring System</h3>
+            <p style="color: var(--nuview-light-gray); margin-bottom: 1rem;">
+                The NUVIEW Strategic Pipeline uses a comprehensive scoring algorithm to prioritize opportunities based on multiple factors. Understanding this system helps you identify the highest-value prospects for immediate action.
+            </p>
+            
+            <div style="background: var(--nuview-dark-gray); border: 1px solid var(--nuview-medium-gray); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--nuview-red-bright); margin-bottom: 1rem; font-size: 1.1rem;">Scoring Formula</h4>
+                <pre style="background: var(--nuview-black); padding: 1rem; border-radius: 6px; overflow-x: auto; color: var(--nuview-white); margin: 0;"><code>Overall Score = (Value Score × 50%) + (Strategic Fit × 20%) + (Timing Score × 20%) + (Probability × 10%)</code></pre>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div style="background: var(--nuview-dark-gray); border-left: 4px solid var(--nuview-red-bright); padding: 1.25rem; border-radius: 8px;">
+                    <h4 style="color: var(--nuview-red-bright); margin-bottom: 0.75rem; font-size: 1rem;">💰 Value Score (50%)</h4>
+                    <p style="color: var(--nuview-light-gray); font-size: 0.9rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                        <strong>Calculation:</strong> Normalized contract value in USD<br>
+                        <strong>Formula:</strong> <code style="color: var(--nuview-white); background: var(--nuview-black); padding: 0.2rem 0.4rem; border-radius: 3px;">min(valueUSD / 1M × 0.5, 50)</code><br>
+                        <strong>Impact:</strong> Larger opportunities receive higher scores, capped at 50 points
+                    </p>
+                </div>
+
+                <div style="background: var(--nuview-dark-gray); border-left: 4px solid var(--nuview-red-bright); padding: 1.25rem; border-radius: 8px;">
+                    <h4 style="color: var(--nuview-red-bright); margin-bottom: 0.75rem; font-size: 1rem;">🎯 Strategic Fit (20%)</h4>
+                    <p style="color: var(--nuview-light-gray); font-size: 0.9rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                        <strong>Factors:</strong> LiDAR capability match, space-based DaaS alignment, NUVIEW core competencies<br>
+                        <strong>Formula:</strong> <code style="color: var(--nuview-white); background: var(--nuview-black); padding: 0.2rem 0.4rem; border-radius: 3px;">keywordMatches × 4</code><br>
+                        <strong>Impact:</strong> Opportunities aligned with NUVIEW strengths score higher
+                    </p>
+                </div>
+
+                <div style="background: var(--nuview-dark-gray); border-left: 4px solid var(--nuview-red-bright); padding: 1.25rem; border-radius: 8px;">
+                    <h4 style="color: var(--nuview-red-bright); margin-bottom: 0.75rem; font-size: 1rem;">⏰ Timing Score (20%)</h4>
+                    <p style="color: var(--nuview-light-gray); font-size: 0.9rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                        <strong>Factors:</strong> Days until deadline, submission window<br>
+                        <strong>Urgency Levels:</strong> Urgent (<30 days), Near (30-90 days), Future (>90 days)<br>
+                        <strong>Impact:</strong> Imminent deadlines boost priority, balancing preparation time needs
+                    </p>
+                </div>
+
+                <div style="background: var(--nuview-dark-gray); border-left: 4px solid var(--nuview-red-bright); padding: 1.25rem; border-radius: 8px;">
+                    <h4 style="color: var(--nuview-red-bright); margin-bottom: 0.75rem; font-size: 1rem;">📈 Probability (10%)</h4>
+                    <p style="color: var(--nuview-light-gray); font-size: 0.9rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                        <strong>Factors:</strong> Data accessibility, agency relationship, past win rate<br>
+                        <strong>Formula:</strong> <code style="color: var(--nuview-white); background: var(--nuview-black); padding: 0.2rem 0.4rem; border-radius: 3px;">15pts (open) or 5pts (restricted) + confidence × 20</code><br>
+                        <strong>Impact:</strong> Higher probability of winning increases score
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: rgba(225, 6, 0, 0.1); border: 2px solid var(--nuview-red-bright); border-radius: 8px; padding: 1.25rem; margin-top: 1.5rem;">
+                <h4 style="color: var(--nuview-red-bright); margin-bottom: 0.75rem; font-size: 1rem;">🚀 Priority Thresholds</h4>
+                <ul style="color: var(--nuview-light-gray); font-size: 0.9rem; line-height: 1.8; list-style: none; padding-left: 0;">
+                    <li><strong style="color: var(--nuview-red-bright);">90-100:</strong> CRITICAL - Immediate action required, executive review</li>
+                    <li><strong style="color: var(--nuview-red-bright);">75-89:</strong> HIGH - Priority pursuit, assign resources</li>
+                    <li><strong style="color: var(--nuview-red-bright);">60-74:</strong> MEDIUM - Monitor closely, prepare materials</li>
+                    <li><strong style="color: var(--nuview-red-bright);">Below 60:</strong> LOW - Track for future, no immediate action</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--nuview-dark-gray); border-radius: 8px; border-left: 4px solid var(--nuview-red-bright);">
+                <p style="color: var(--nuview-light-gray); font-size: 0.85rem; font-style: italic; margin: 0;">
+                    <strong style="color: var(--nuview-white);">Note:</strong> Scores are recalculated daily based on updated data from scrapers and QC validation. The system ensures only quality-validated opportunities (QC pass rate >95%) are included in scoring.
+                </p>
             </div>
         </div>
 
@@ -1475,11 +1542,11 @@
             
             const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
             stop1.setAttribute('offset', '0%');
-            stop1.setAttribute('style', 'stop-color:#EE3338;stop-opacity:1');
+            stop1.setAttribute('style', 'stop-color:#E10600;stop-opacity:1');
             
             const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
             stop2.setAttribute('offset', '100%');
-            stop2.setAttribute('style', 'stop-color:#EE3338;stop-opacity:1');
+            stop2.setAttribute('style', 'stop-color:#E10600;stop-opacity:1');
             
             gradient.appendChild(stop1);
             gradient.appendChild(stop2);
@@ -1495,7 +1562,7 @@
             
             const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
             polygon.setAttribute('points', '0 0, 10 3, 0 6');
-            polygon.setAttribute('fill', '#EE3338');
+            polygon.setAttribute('fill', '#E10600');
             marker.appendChild(polygon);
             
             defs.appendChild(gradient);

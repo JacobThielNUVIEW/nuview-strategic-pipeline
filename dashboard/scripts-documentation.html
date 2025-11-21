@@ -14,19 +14,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <style>
+        /* ============================================
+           NUVIEW SPACEX-INSPIRED THEME - CSS VARIABLES
+           ============================================
+           
+           PURPOSE:
+           SpaceX-inspired deep space-black theme with minimal accent red.
+           Red is used ONLY for highlights: active states, badges, borders.
+           Regular text uses clean off-greys and whites for readability.
+           
+           DESIGN PRINCIPLES:
+           - Deep space-black backgrounds (#000, #0a0a0a, #1a1a1a)
+           - Clean, high-contrast text (white/off-grey)
+           - Accent red (#E10600) for highlights only
+           - Modern card-style sections with soft shadows
+           - Bold headers with subtle drop shadows
+           - Mobile-friendly responsive design
+           
+           LAST UPDATED: 2025-11-21
+           ============================================ */
+        
         :root { 
-            --nuview-red: #EE3338; 
-            --nuview-navy: #001F3F; 
-            --nuview-blue: #007BFF; 
-            --nuview-gray: #6c757d;
-            --nuview-light-gray: #e9ecef;
-            --nuview-dark-gray: #495057;
-            --dark: #212529;
+            --nuview-red: #E10600; 
+            --nuview-black: #000000;
+            --nuview-space-dark: #0a0a0a;
+            --nuview-space-medium: #1a1a1a;
+            --nuview-space-light: #2a2a2a;
+            --nuview-white: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --border-primary: #2a2a2a;
         }
+        
         body { 
             font-family: 'Inter', sans-serif; 
-            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); 
-            color: var(--dark); 
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-space-dark) 50%, var(--nuview-black) 100%); 
+            color: var(--text-primary); 
             margin: 0; 
             padding: 0; 
         }
@@ -36,22 +60,22 @@
             top: 0; 
             height: 100%; 
             width: 260px; 
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
-            box-shadow: 2px 0 12px rgba(0,0,0,0.08); 
+            background: linear-gradient(180deg, var(--nuview-space-dark) 0%, var(--nuview-black) 100%); 
+            box-shadow: 4px 0 24px rgba(0,0,0,0.8); 
             z-index: 100; 
-            border-right: 3px solid var(--nuview-red); 
+            border-right: 2px solid var(--nuview-red); 
             padding-top: 2rem; 
             overflow-y: auto; 
         }
         .sidebar h3 {
             padding-left: 1rem;
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
             font-weight: 800;
             font-size: 1.1rem;
             margin-bottom: 1rem;
         }
         .sidebar a { 
-            color: var(--nuview-navy); 
+            color: var(--text-secondary); 
             text-decoration: none; 
             display: block; 
             padding: 0.75rem 1.25rem; 
@@ -61,30 +85,31 @@
             font-weight: 500;
         }
         .sidebar a:hover { 
-            background: linear-gradient(90deg, rgba(238, 51, 56, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%); 
-            color: var(--nuview-red); 
-            border-left: 4px solid var(--nuview-red); 
+            background: linear-gradient(90deg, rgba(225, 6, 0, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%); 
+            color: var(--nuview-white); 
+            border-left: 3px solid var(--nuview-red); 
             padding-left: 1rem;
             transform: translateX(4px);
         }
         .sidebar a.active { 
-            background: linear-gradient(90deg, var(--nuview-red) 0%, var(--nuview-blue) 100%); 
-            color: white; 
-            border-left: 4px solid var(--nuview-navy); 
+            background: linear-gradient(90deg, var(--nuview-red) 0%, rgba(225, 6, 0, 0.2) 100%); 
+            color: var(--nuview-white); 
+            border-left: 3px solid var(--nuview-white); 
             font-weight: 600;
         }
         .main-content { 
             margin-left: 260px; 
             padding: 30px; 
             min-height: 100vh; 
+            background: var(--nuview-black);
         }
         .header { 
-            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%); 
-            color: white; 
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-space-dark) 100%); 
+            color: var(--nuview-white); 
             padding: 2rem 0; 
             text-align: center; 
-            border-bottom: 5px solid var(--nuview-red); 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+            border-bottom: 3px solid var(--nuview-red); 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6); 
             border-radius: 16px;
             margin-bottom: 2rem;
         }
@@ -93,39 +118,56 @@
             font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--nuview-white) 0%, var(--nuview-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .section { 
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
+            background: linear-gradient(180deg, var(--nuview-space-dark) 0%, var(--nuview-space-medium) 100%); 
             border-radius: 16px; 
             padding: 2rem; 
             margin: 2rem 0; 
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
-            border: 1px solid var(--nuview-light-gray);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.8); 
+            border: 1px solid var(--border-primary);
+            transition: all 0.3s ease;
+        }
+        .section:hover {
+            box-shadow: 0 16px 48px rgba(0,0,0,0.9), 0 0 0 1px var(--nuview-red);
+            transform: translateY(-2px);
         }
         .section h2 { 
-            color: var(--nuview-navy); 
-            border-bottom: 4px solid var(--nuview-red); 
+            color: var(--nuview-white); 
+            border-bottom: 3px solid var(--nuview-red); 
             padding-bottom: 0.75rem; 
             margin-bottom: 1.5rem; 
             font-size: 1.75rem; 
             font-weight: 700;
         }
+        @supports (background-clip: text) or (-webkit-background-clip: text) {
+            .section h2 {
+                background: linear-gradient(90deg, var(--nuview-white) 0%, var(--nuview-red) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+        }
         .section h3 {
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
             margin-top: 1.5rem;
             margin-bottom: 1rem;
             font-size: 1.3rem;
             font-weight: 600;
         }
         .info-box {
-            background: linear-gradient(135deg, rgba(0, 31, 63, 0.05) 0%, rgba(0, 123, 255, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(225, 6, 0, 0.05) 0%, rgba(0, 0, 0, 0.2) 100%);
             padding: 1.5rem;
             border-radius: 12px;
             margin-bottom: 1.5rem;
             border-left: 4px solid var(--nuview-red);
         }
         .info-box p {
-            color: var(--nuview-dark-gray);
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 0.5rem;
         }
@@ -148,20 +190,21 @@
             color: #abb2bf;
         }
         .command-box {
-            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-space-dark) 100%);
+            color: var(--nuview-white);
             padding: 1rem 1.5rem;
             border-radius: 8px;
             font-family: 'Courier New', monospace;
             margin: 1rem 0;
             font-weight: 600;
+            border: 1px solid var(--nuview-red);
         }
         .script-description {
-            background: #f8f9fa;
+            background: var(--nuview-space-medium);
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
-            border-left: 3px solid var(--nuview-blue);
+            border-left: 3px solid var(--nuview-red);
         }
         @media (max-width: 768px) {
             .sidebar {
