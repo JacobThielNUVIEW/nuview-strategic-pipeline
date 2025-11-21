@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-21T02:35:10.000769Z",
+  "timestamp": "2025-11-21T02:40:13.339804Z",
   "qc_status": "FAIL",
   "qc_percentage": 0,
   "total_errors": 1,
@@ -18,5 +18,15 @@
     "errors": [],
     "warnings": []
   },
-  "summary": "QC FAILED with 1 errors and 3 warnings"
+  "summary": "QC FAILED with 1 errors and 3 warnings",
+  "source_matrix_export": {
+    "status": "SUCCESS",
+    "output_path": "data/processed/sources_matrix.csv",
+    "statistics": {
+      "total_opportunities": 30,
+      "missing_sources": 0,
+      "bathymetry_flagged": 0,
+      "verified_opportunities": 30
+    }
+  }
 }

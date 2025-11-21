@@ -2,12 +2,14 @@
 QC Validator for NUVIEW Topographic Pipeline Data
 Validates opportunities.json and forecast.json for quality and completeness
 Outputs qc_report.json with detailed validation results
+Generates source verification matrix (sources_matrix.csv)
 """
 
 import json
 import os
 import sys
 from datetime import datetime, timezone
+import pandas as pd
 
 # Required fields for opportunities
 REQUIRED_OPP_FIELDS = ['id', 'title', 'agency', 'pillar', 'category', 'forecast_value', 
@@ -177,7 +179,204 @@ def validate_forecast_file(filepath):
     
     return errors, warnings, data
 
-def generate_qc_report(opp_errors, opp_warnings, forecast_errors, forecast_warnings):
+def extract_country_from_pillar(pillar, agency):
+    """Extract country from pillar or agency name"""
+    country_map = {
+        'Federal': 'USA',
+        'Commercial': 'USA',
+        'State': 'USA',
+        'USGS': 'USA',
+        'NASA': 'USA',
+        'NGA': 'USA',
+        'DIU': 'USA',
+        'USDA Forest Service': 'USA',
+        'JAXA': 'Japan',
+        'ISRO': 'India',
+        'DLR': 'Germany',
+        'ESA': 'Europe',
+        'EU Commission': 'Europe',
+        'UKSA': 'UK',
+        'CSA': 'Canada',
+        'CNSA': 'China'
+    }
+    
+    # Try agency first
+    if agency in country_map:
+        return country_map[agency]
+    
+    # Try pillar
+    if pillar in country_map:
+        return country_map[pillar]
+    
+    # Try to extract from pillar if it's descriptive
+    pillar_lower = pillar.lower() if pillar else ''
+    if 'japan' in pillar_lower:
+        return 'Japan'
+    elif 'india' in pillar_lower:
+        return 'India'
+    elif 'germany' in pillar_lower or 'german' in pillar_lower:
+        return 'Germany'
+    elif 'europe' in pillar_lower or 'eu' in pillar_lower:
+        return 'Europe'
+    elif 'uk' in pillar_lower or 'britain' in pillar_lower:
+        return 'UK'
+    elif 'canada' in pillar_lower:
+        return 'Canada'
+    elif 'china' in pillar_lower:
+        return 'China'
+    
+    # Default to Global if unknown
+    return 'Global'
+
+def is_bathymetry_only(title, description):
+    """Check if the opportunity is bathymetry-only (out of scope)"""
+    bathymetry_keywords = ['bathymetry', 'bathymetric', 'ocean floor', 'seafloor', 'underwater mapping', 
+                           'subsea', 'seabed', 'marine survey', 'hydrographic', 'ocean depth']
+    topographic_keywords = ['lidar', 'topographic', 'elevation', '3dep', 'dem', 'terrain', 'dtm', 'dsm',
+                           'terrestrial', 'land surface', 'above water']
+    
+    text = f"{title} {description}".lower()
+    
+    # Check if bathymetry keywords present
+    has_bathymetry = any(keyword in text for keyword in bathymetry_keywords)
+    
+    # Check if topographic keywords present
+    has_topographic = any(keyword in text for keyword in topographic_keywords)
+    
+    # It's bathymetry-only if it has bathymetry keywords but no topographic keywords
+    return has_bathymetry and not has_topographic
+
+def validate_source(url):
+    """Validate if a source URL is valid and not a placeholder"""
+    if not url or url == '#' or url == '' or url.lower() == 'none':
+        return False
+    
+    # Check if it's a real URL
+    if url.startswith('http://') or url.startswith('https://'):
+        return True
+    
+    return False
+
+def generate_source_verification_matrix(opportunities_data):
+    """
+    Generate source verification matrix from opportunities data
+    Returns: pandas DataFrame with verification matrix
+    """
+    log_info("Generating source verification matrix...")
+    
+    if not opportunities_data or 'opportunities' not in opportunities_data:
+        log_error("No opportunities data available for matrix generation")
+        return None, 0, 0
+    
+    opportunities = opportunities_data['opportunities']
+    matrix_rows = []
+    missing_sources_count = 0
+    bathymetry_flagged_count = 0
+    
+    for idx, opp in enumerate(opportunities):
+        # Extract base fields
+        agency_name = opp.get('agency', 'Unknown')
+        program_name = opp.get('title', 'Unknown')
+        budget_amount_usd = opp.get('amountUSD', 0)
+        nuview_priority_score = opp.get('priorityScore', 0)
+        data_access = opp.get('category', 'Unknown')
+        pillar = opp.get('pillar', '')
+        description = opp.get('description', '')
+        
+        # Extract country
+        country = extract_country_from_pillar(pillar, agency_name)
+        
+        # Collect all sources
+        link = opp.get('link', '')
+        budget_source_link = opp.get('budgetSourceLink', '')
+        agency_link = opp.get('agencyLink', '')
+        
+        # Build sources string
+        valid_sources = []
+        if validate_source(link):
+            valid_sources.append(link)
+        if validate_source(budget_source_link):
+            valid_sources.append(budget_source_link)
+        if validate_source(agency_link):
+            valid_sources.append(agency_link)
+        
+        sources_str = '; '.join(valid_sources) if valid_sources else 'NO_SOURCE'
+        
+        # Check if bathymetry-only
+        is_bathy_only = is_bathymetry_only(program_name, description)
+        
+        # Build verification note
+        verification_notes = []
+        
+        if not valid_sources:
+            verification_notes.append('MISSING_SOURCE')
+            missing_sources_count += 1
+            log_warning(f"Missing source for opportunity: {program_name} ({opp.get('id', 'unknown')})")
+        else:
+            verification_notes.append('SOURCE_VERIFIED')
+        
+        if is_bathy_only:
+            verification_notes.append('BATHYMETRY_ONLY_FLAGGED')
+            bathymetry_flagged_count += 1
+            log_warning(f"Bathymetry-only flagged: {program_name} ({opp.get('id', 'unknown')})")
+        
+        verification = ', '.join(verification_notes) if verification_notes else 'VERIFIED'
+        
+        # Create row
+        row = {
+            'textrank': idx + 1,  # Initial rank, will be re-sorted by priority
+            'country': country,
+            'agency_name': agency_name,
+            'program_name': program_name,
+            'budget_amount_usd': budget_amount_usd,
+            'nuview_priority_score': nuview_priority_score,
+            'data_access': data_access,
+            'sources': sources_str,
+            'verification': verification
+        }
+        
+        matrix_rows.append(row)
+    
+    # Create DataFrame
+    df = pd.DataFrame(matrix_rows)
+    
+    # Sort by priority score (descending) and re-assign textrank
+    df = df.sort_values(by='nuview_priority_score', ascending=False).reset_index(drop=True)
+    df['textrank'] = range(1, len(df) + 1)
+    
+    # Check for NaN values
+    if df.isnull().any().any():
+        log_warning("Matrix contains null/NaN values, filling with defaults...")
+        df = df.fillna({
+            'textrank': 0,
+            'country': 'Unknown',
+            'agency_name': 'Unknown',
+            'program_name': 'Unknown',
+            'budget_amount_usd': 0,
+            'nuview_priority_score': 0,
+            'data_access': 'Unknown',
+            'sources': 'NO_SOURCE',
+            'verification': 'UNVERIFIED'
+        })
+    
+    log_info(f"Matrix generated: {len(df)} opportunities")
+    log_info(f"Opportunities missing sources: {missing_sources_count}")
+    log_info(f"Bathymetry-only flagged: {bathymetry_flagged_count}")
+    
+    return df, missing_sources_count, bathymetry_flagged_count
+
+def export_source_matrix(df, output_path='data/processed/sources_matrix.csv'):
+    """Export source verification matrix to CSV"""
+    try:
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        df.to_csv(output_path, index=False)
+        log_success(f"Source matrix exported to {output_path}")
+        return True
+    except Exception as e:
+        log_error(f"Failed to export source matrix: {str(e)}")
+        return False
+
+def generate_qc_report(opp_errors, opp_warnings, forecast_errors, forecast_warnings, matrix_export_status=None, matrix_stats=None):
     """Generate QC report JSON"""
     total_errors = len(opp_errors) + len(forecast_errors)
     total_warnings = len(opp_warnings) + len(forecast_warnings)
@@ -202,6 +401,16 @@ def generate_qc_report(opp_errors, opp_warnings, forecast_errors, forecast_warni
         "summary": f"QC {'PASSED' if qc_pass else 'FAILED'} with {total_errors} errors and {total_warnings} warnings"
     }
     
+    # Add matrix export status if provided
+    if matrix_export_status is not None:
+        report["source_matrix_export"] = {
+            "status": "SUCCESS" if matrix_export_status else "FAILED",
+            "output_path": "data/processed/sources_matrix.csv"
+        }
+        
+        if matrix_stats:
+            report["source_matrix_export"]["statistics"] = matrix_stats
+    
     return report, qc_pass
 
 def main():
@@ -216,8 +425,34 @@ def main():
     # Validate forecast.json
     forecast_errors, forecast_warnings, forecast_data = validate_forecast_file('data/forecast.json')
     
-    # Generate report
-    report, qc_pass = generate_qc_report(opp_errors, opp_warnings, forecast_errors, forecast_warnings)
+    # Generate source verification matrix
+    log_info("")
+    log_info("=" * 60)
+    log_info("SOURCE VERIFICATION MATRIX GENERATION")
+    log_info("=" * 60)
+    
+    matrix_export_status = False
+    matrix_stats = None
+    
+    if opp_data and 'opportunities' in opp_data:
+        matrix_df, missing_sources, bathymetry_flagged = generate_source_verification_matrix(opp_data)
+        
+        if matrix_df is not None:
+            matrix_export_status = export_source_matrix(matrix_df)
+            
+            # Collect statistics
+            matrix_stats = {
+                "total_opportunities": len(matrix_df),
+                "missing_sources": missing_sources,
+                "bathymetry_flagged": bathymetry_flagged,
+                "verified_opportunities": len(matrix_df) - missing_sources
+            }
+    else:
+        log_error("Cannot generate source matrix: No opportunity data available")
+    
+    # Generate report with matrix status
+    report, qc_pass = generate_qc_report(opp_errors, opp_warnings, forecast_errors, forecast_warnings, 
+                                         matrix_export_status, matrix_stats)
     
     # Save report
     os.makedirs('data/processed', exist_ok=True)
@@ -225,6 +460,8 @@ def main():
     with open(report_path, 'w') as f:
         json.dump(report, f, indent=2)
     
+    log_info("")
+    log_info("=" * 60)
     log_info(f"QC report saved to {report_path}")
     log_info("")
     
@@ -254,6 +491,19 @@ def main():
         log_warning(f"Forecast validation: {len(forecast_warnings)} warning(s)")
         for warn in forecast_warnings:
             log_warning(f"  • {warn}")
+    
+    log_info("")
+    
+    # Display matrix export status
+    if matrix_export_status:
+        log_success("Source matrix export: SUCCESS")
+        if matrix_stats:
+            log_info(f"  • Total opportunities: {matrix_stats['total_opportunities']}")
+            log_info(f"  • Verified opportunities: {matrix_stats['verified_opportunities']}")
+            log_info(f"  • Missing sources: {matrix_stats['missing_sources']}")
+            log_info(f"  • Bathymetry flagged: {matrix_stats['bathymetry_flagged']}")
+    else:
+        log_error("Source matrix export: FAILED")
     
     log_info("")
     log_info("=" * 60)
