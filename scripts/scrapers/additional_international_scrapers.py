@@ -4,9 +4,10 @@ Additional International Scrapers for Topographic/LiDAR Opportunities
 Focus: Space-based LiDAR for large-area topographic collections
 """
 
-from base_scraper import BaseScraper
 import sys
 import os
+
+from base_scraper import BaseScraper
 
 # Add scripts directory to path to import global_keywords
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
