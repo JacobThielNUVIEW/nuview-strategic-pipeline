@@ -3,8 +3,10 @@
 
 [build]
   # No build command needed - static site
+  # Publish from root directory (current directory)
   publish = "."
-  
+  command = ""
+
   # Build environment
   [build.environment]
     NODE_VERSION = "18"
