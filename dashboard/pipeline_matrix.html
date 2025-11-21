@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>NUVIEW Pipeline Matrix - Interactive Flow Visualization</title>
+    <title>NUVIEW Opp Board - Pipeline Matrix</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* ============================================
@@ -468,10 +468,15 @@
 </head>
 <body>
     <!-- Header -->
+    <!-- 
+        NUVIEW OPP BOARD - PIPELINE MATRIX
+        Interactive flow visualization for strategic data processing and queue management.
+        Enables daily tactical operations including scraping global data and pipeline transitions.
+    -->
     <header class="header">
         <div class="header-content">
-            <h1>🚀 NUVIEW Pipeline Matrix</h1>
-            <p>Interactive Data Processing Pipeline Visualization</p>
+            <h1>🚀 NUVIEW Opp Board - Pipeline Matrix</h1>
+            <p>Interactive Data Processing Pipeline • Global Workflow Visualization</p>
             <nav class="nav-links">
                 <a href="index.html">← Main Dashboard</a>
                 <a href="pipeline.html">Pipeline Dashboard</a>
@@ -785,6 +790,17 @@
             updateNodeData('dashboard', opp);
         }
 
+        /**
+         * Update individual pipeline node with data
+         * 
+         * @param {string} nodeName - The node identifier (scrape, qc, matrix, merge, dashboard)
+         * @param {object} data - The data to display in the node
+         * 
+         * Node-specific behaviors:
+         * - scrape: Shows last update time and total opportunities
+         * - qc: Shows QC percentage, errors, and warnings; updates status indicator
+         * - matrix: Shows total programs and high-priority count (DaaS category)
+         */
         function updateNodeData(nodeName, data) {
             if (nodeName === 'scrape' && data) {
                 const meta = data.meta || {};

@@ -19,7 +19,9 @@
         "urgency": "urgent",
         "nextAction": "Prime Outreach",
         "description": "USGS Government-wide contract for geospatial services",
-        "link": "https://sam.gov"
+        "link": "https://sam.gov/opp/8c3a5e5f1c8b4d3ea9f0c1b2d3e4f5a6/view",
+        "agencyLink": "https://www.usgs.gov/",
+        "budgetSourceLink": "https://www.usgs.gov/about/organization/science-support/budget-and-performance"
       },
       {
         "id": "usgs-107",
@@ -34,7 +36,9 @@
         "urgency": "urgent",
         "nextAction": "Submit Demo Brief",
         "description": "3D Elevation Program LiDAR data acquisition",
-        "link": "https://sam.gov"
+        "link": "https://sam.gov/opp/3dep2026/view",
+        "agencyLink": "https://www.usgs.gov/",
+        "budgetSourceLink": "https://www.usgs.gov/core-science-systems/ngp/3dep"
       },
       {
         "id": "nasa-773",
@@ -49,7 +53,9 @@
         "urgency": "future",
         "nextAction": "Proposal Dev",
         "description": "Research Opportunities in Space and Earth Sciences",
-        "link": "https://sam.gov"
+        "link": "https://science.nasa.gov/researchers/solicitations/roses-2025/",
+        "agencyLink": "https://www.nasa.gov/",
+        "budgetSourceLink": "https://science.nasa.gov/earth-science/earth-science-data/budget/"
       }
     ],
     "lidar": [
@@ -66,7 +72,9 @@
         "urgency": "urgent",
         "nextAction": "Submit Demo Brief",
         "description": "3D Elevation Program LiDAR data acquisition",
-        "link": "https://sam.gov"
+        "link": "https://sam.gov/opp/3dep2026/view",
+        "agencyLink": "https://www.usgs.gov/",
+        "budgetSourceLink": "https://www.usgs.gov/core-science-systems/ngp/3dep"
       },
       {
         "id": "diu-438",
@@ -81,7 +89,9 @@
         "urgency": "urgent",
         "nextAction": "Submit Whitepaper",
         "description": "Broad Agency Announcement for spaceborne LiDAR technology",
-        "link": "https://sam.gov"
+        "link": "https://www.diu.mil/solicitations/spaceborne-lidar",
+        "agencyLink": "https://www.diu.mil/",
+        "budgetSourceLink": "https://www.diu.mil/latest/diu-fiscal-year-2025-budget"
       },
       {
         "id": "fl-gio-285",
@@ -96,7 +106,9 @@
         "urgency": "near",
         "nextAction": "Teaming Agreement",
         "description": "Bathymetric LiDAR for seafloor mapping",
-        "link": "https://sam.gov"
+        "link": "https://floridagio.gov/seafloor-mapping-rfp",
+        "agencyLink": "https://floridagio.gov/",
+        "budgetSourceLink": "https://floridagio.gov/about/funding/"
       }
     ],
     "spaceSystems": [
@@ -113,7 +125,9 @@
         "urgency": "urgent",
         "nextAction": "Submit Demo Brief",
         "description": "Alternative Position, Navigation, and Timing systems",
-        "link": "https://sam.gov"
+        "link": "https://www.diu.mil/solicitations/alternative-pnt",
+        "agencyLink": "https://www.diu.mil/",
+        "budgetSourceLink": "https://www.diu.mil/latest/diu-fiscal-year-2025-budget"
       },
       {
         "id": "nasa-488",
@@ -128,7 +142,9 @@
         "urgency": "future",
         "nextAction": "Proposal Dev",
         "description": "Research opportunities for space-based systems",
-        "link": "https://sam.gov"
+        "link": "https://science.nasa.gov/researchers/solicitations/roses-2025/",
+        "agencyLink": "https://www.nasa.gov/",
+        "budgetSourceLink": "https://science.nasa.gov/earth-science/earth-science-data/budget/"
       }
     ],
     "platform": [
@@ -145,7 +161,9 @@
         "urgency": "near",
         "nextAction": "Consortium Lead",
         "description": "Digital twin platform for Earth observation",
-        "link": "https://sam.gov"
+        "link": "https://www.esa.int/Applications/Observing_the_Earth/Digital_Twin_Earth",
+        "agencyLink": "https://www.esa.int/",
+        "budgetSourceLink": "https://www.esa.int/About_Us/Corporate_news/Funding"
       },
       {
         "id": "fl-gio-285",
@@ -160,7 +178,9 @@
         "urgency": "near",
         "nextAction": "Teaming Agreement",
         "description": "Platform for seafloor data management",
-        "link": "https://sam.gov"
+        "link": "https://floridagio.gov/seafloor-mapping-rfp",
+        "agencyLink": "https://floridagio.gov/",
+        "budgetSourceLink": "https://floridagio.gov/about/funding/"
       }
     ]
   }

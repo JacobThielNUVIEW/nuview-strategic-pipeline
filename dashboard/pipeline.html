@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>NUVIEW LiDAR Pipeline Dashboard</title>
+    <title>NUVIEW Opp Board - Pipeline Tracker</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -134,72 +134,81 @@
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
+    <header class="header" role="banner">
+    <!-- 
+        NUVIEW OPP BOARD - PIPELINE TRACKER
+        This dashboard provides real-time agency budget funnel and opportunity tracking.
+        Integrates LIDAR-enabled services with mapping metadata for visual interactivity.
+    -->
     <header class="header">
         <div class="container mx-auto">
-            <h1 class="text-3xl font-bold mb-2">NUVIEW LiDAR Pipeline Dashboard</h1>
+            <h1 class="text-3xl font-bold mb-2">NUVIEW Opp Board - Pipeline Tracker</h1>
             <p class="text-lg opacity-90">Real-time Agency Budget Funnel & Opportunity Tracker</p>
-            <div class="mt-4">
-                <a href="index.html" class="text-white hover:text-gray-200 underline mr-4">
-                    <i class="bi bi-arrow-left"></i> Back to Main Dashboard
+            <nav class="mt-4" aria-label="Dashboard navigation">
+                <a href="index.html" class="text-white hover:text-gray-200 underline mr-4" aria-label="Return to main dashboard">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i> Back to Main Dashboard
                 </a>
-                <a href="pipeline_matrix.html" class="text-white hover:text-gray-200 underline mr-4">
-                    <i class="bi bi-diagram-3"></i> Pipeline Matrix
+                <a href="pipeline_matrix.html" class="text-white hover:text-gray-200 underline mr-4" aria-label="View pipeline matrix visualization">
+                    <i class="bi bi-diagram-3" aria-hidden="true"></i> Pipeline Matrix
                 </a>
-                <a href="global-tracker.html" class="text-white hover:text-gray-200 underline">
-                    <i class="bi bi-globe"></i> Global Tracker
+                <a href="global-tracker.html" class="text-white hover:text-gray-200 underline" aria-label="View global tracker">
+                    <i class="bi bi-globe" aria-hidden="true"></i> Global Tracker
                 </a>
-            </div>
+            </nav>
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8" role="main">
         <!-- Summary Statistics -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <div class="stat-card">
-                <div class="text-3xl font-bold" id="total-opportunities">0</div>
-                <div class="text-sm mt-2">Total Opportunities</div>
+        <section aria-labelledby="summary-heading">
+            <h2 id="summary-heading" class="sr-only">Summary Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="stat-card" role="region" aria-label="Total opportunities">
+                    <div class="text-3xl font-bold" id="total-opportunities" aria-live="polite">0</div>
+                    <div class="text-sm mt-2">Total Opportunities</div>
+                </div>
+                <div class="stat-card" role="region" aria-label="Total pipeline value">
+                    <div class="text-3xl font-bold" id="total-value" aria-live="polite">$0</div>
+                    <div class="text-sm mt-2">Total Pipeline Value</div>
+                </div>
+                <div class="stat-card" role="region" aria-label="Urgent actions count">
+                    <div class="text-3xl font-bold" id="urgent-count" aria-live="polite">0</div>
+                    <div class="text-sm mt-2">Urgent Actions</div>
+                </div>
+                <div class="stat-card" role="region" aria-label="LiDAR-prioritized opportunities">
+                    <div class="text-3xl font-bold" id="lidar-priority" aria-live="polite">0</div>
+                    <div class="text-sm mt-2">LiDAR-Prioritized</div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="text-3xl font-bold" id="total-value">$0</div>
-                <div class="text-sm mt-2">Total Pipeline Value</div>
-            </div>
-            <div class="stat-card">
-                <div class="text-3xl font-bold" id="urgent-count">0</div>
-                <div class="text-sm mt-2">Urgent Actions</div>
-            </div>
-            <div class="stat-card">
-                <div class="text-3xl font-bold" id="lidar-priority">0</div>
-                <div class="text-sm mt-2">LiDAR-Prioritized</div>
-            </div>
-        </div>
+        </section>
 
         <!-- Agency Budget Funnel -->
-        <div class="card">
-            <h2 class="section-title">
-                <i class="bi bi-funnel"></i> Agency Budget Funnel
+        <section class="card" aria-labelledby="agency-funnel-heading">
+            <h2 id="agency-funnel-heading" class="section-title">
+                <i class="bi bi-funnel" aria-hidden="true"></i> Agency Budget Funnel
             </h2>
             <p class="text-gray-600 mb-4">Pipeline organized by agency and funding tier</p>
             
             <!-- Filters -->
-            <div class="filter-container">
-                <button class="filter-button active" data-filter="all">All Agencies</button>
-                <button class="filter-button" data-filter="USGS">USGS</button>
-                <button class="filter-button" data-filter="NASA">NASA</button>
-                <button class="filter-button" data-filter="DIU">DIU</button>
-                <button class="filter-button" data-filter="ESA">ESA</button>
+            <div class="filter-container" role="group" aria-label="Agency filters">
+                <button class="filter-button active" data-filter="all" aria-pressed="true">All Agencies</button>
+                <button class="filter-button" data-filter="USGS" aria-pressed="false">USGS</button>
+                <button class="filter-button" data-filter="NASA" aria-pressed="false">NASA</button>
+                <button class="filter-button" data-filter="DIU" aria-pressed="false">DIU</button>
+                <button class="filter-button" data-filter="ESA" aria-pressed="false">ESA</button>
             </div>
 
             <div class="overflow-x-auto">
-                <table id="agencyTable" class="display" style="width:100%">
+                <table id="agencyTable" class="display" style="width:100%" role="table" aria-label="Agency budget funnel">
                     <thead>
                         <tr>
-                            <th>Agency</th>
-                            <th>Opportunity</th>
-                            <th>Category</th>
-                            <th>Value</th>
-                            <th>Deadline</th>
-                            <th>Urgency</th>
-                            <th>Next Action</th>
+                            <th scope="col">Agency</th>
+                            <th scope="col">Opportunity</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Deadline</th>
+                            <th scope="col">Urgency</th>
+                            <th scope="col">Next Action</th>
                         </tr>
                     </thead>
                     <tbody id="agencyTableBody">
@@ -207,30 +216,30 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </section>
 
         <!-- Current Opportunities Table -->
-        <div class="card">
-            <h2 class="section-title">
-                <i class="bi bi-clipboard-check"></i> Current Opportunities
+        <section class="card" aria-labelledby="opportunities-heading">
+            <h2 id="opportunities-heading" class="section-title">
+                <i class="bi bi-clipboard-check" aria-hidden="true"></i> Current Opportunities
             </h2>
             <p class="text-gray-600 mb-4">Detailed view of all opportunities with sorting and filtering</p>
             
             <div class="overflow-x-auto">
-                <table id="opportunitiesTable" class="display" style="width:100%">
+                <table id="opportunitiesTable" class="display" style="width:100%" role="table" aria-label="Current opportunities">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Agency</th>
-                            <th>Pillar</th>
-                            <th>Category</th>
-                            <th>Value</th>
-                            <th>Days Until</th>
-                            <th>Deadline</th>
-                            <th>Urgency</th>
-                            <th>Next Action</th>
-                            <th>Link</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Agency</th>
+                            <th scope="col">Pillar</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Days Until</th>
+                            <th scope="col">Deadline</th>
+                            <th scope="col">Urgency</th>
+                            <th scope="col">Next Action</th>
+                            <th scope="col">Link</th>
                         </tr>
                     </thead>
                     <tbody id="opportunitiesTableBody">
@@ -238,17 +247,17 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </section>
 
         <!-- Market Forecast Summary -->
-        <div class="card">
-            <h2 class="section-title">
-                <i class="bi bi-graph-up"></i> Market Forecast Summary
+        <section class="card" aria-labelledby="forecast-heading">
+            <h2 id="forecast-heading" class="section-title">
+                <i class="bi bi-graph-up" aria-hidden="true"></i> Market Forecast Summary
             </h2>
-            <div id="forecastSummary" class="text-gray-700">
+            <div id="forecastSummary" class="text-gray-700" role="region" aria-live="polite">
                 Loading forecast data...
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
@@ -279,7 +288,10 @@
             return badges[urgency] || '<span class="badge-future">FUTURE</span>';
         }
 
-        // Update summary statistics
+        /**
+         * Update summary statistics displayed at the top of the dashboard
+         * Calculates and displays: total opportunities, total pipeline value, urgent actions count, and LiDAR-prioritized count
+         */
         function updateSummary() {
             const totalOpps = opportunitiesData.length;
             const totalValue = opportunitiesData.reduce((sum, opp) => 
@@ -287,7 +299,8 @@
             const urgentCount = opportunitiesData.filter(opp => 
                 opp.urgency === 'urgent').length;
             
-            // LiDAR-prioritized: LiDAR category or specific keywords
+            // LiDAR-prioritized: Count opportunities with LiDAR category or LiDAR/3DEP keywords in title
+            // This provides comprehensive coverage for LiDAR-related opportunities regardless of categorization
             const lidarPriority = opportunitiesData.filter(opp => 
                 opp.category === 'LiDAR' || 
                 opp.title.toLowerCase().includes('lidar') ||
@@ -299,7 +312,12 @@
             document.getElementById('lidar-priority').textContent = lidarPriority;
         }
 
-        // Load opportunities data
+        /**
+         * Load opportunities data from programs.json
+         * Data structure: programs.json contains categorized programs (funding, lidar, spaceSystems, platform)
+         * Programs may appear in multiple categories (e.g., USGS 3DEP appears in both funding and lidar)
+         * Deduplication ensures each unique program (by ID) is counted only once in statistics
+         */
         async function loadOpportunities() {
             try {
                 const response = await fetch('../data/processed/programs.json');
@@ -326,7 +344,10 @@
             }
         }
 
-        // Load forecast data
+        /**
+         * Load market forecast data from forecast.json
+         * Displays current market value, 2030 forecast, CAGR, and legislative targets
+         */
         async function loadForecast() {
             try {
                 const response = await fetch('../data/forecast.json');
@@ -366,7 +387,11 @@
             }
         }
 
-        // Render tables
+        /**
+         * Render data tables with DataTables.js for enhanced sorting and filtering
+         * Tables: Agency Budget Funnel and Current Opportunities
+         * Includes graceful fallback if DataTables library is not available
+         */
         function renderTables() {
             // Agency Budget Funnel Table
             const agencyBody = document.getElementById('agencyTableBody');
@@ -429,6 +454,7 @@
             });
 
             // Initialize or reinitialize DataTable for opportunities
+            // Default sort: urgency (ascending) then value (descending) - shows urgent items first with highest value
             try {
                 if (typeof $ !== 'undefined' && $.fn.DataTable) {
                     if (opportunitiesTable) {
@@ -449,13 +475,21 @@
             }
         }
 
-        // Filter functionality
+        /**
+         * Filter functionality for Agency Budget Funnel table
+         * Allows filtering by specific agencies (USGS, NASA, DIU, ESA) or showing all
+         * Requires DataTables library to be loaded
+         * Updates ARIA attributes for accessibility
+         */
         document.querySelectorAll('.filter-button').forEach(button => {
             button.addEventListener('click', function() {
-                // Update active state
-                document.querySelectorAll('.filter-button').forEach(btn => 
-                    btn.classList.remove('active'));
+                // Update active state and ARIA attributes
+                document.querySelectorAll('.filter-button').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
+                });
                 this.classList.add('active');
+                this.setAttribute('aria-pressed', 'true');
 
                 const filter = this.dataset.filter;
                 
