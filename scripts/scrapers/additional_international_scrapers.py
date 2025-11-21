@@ -111,7 +111,7 @@ class NewZealandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(114),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="New Zealand Regional Elevation Survey",
@@ -122,7 +122,7 @@ class NewZealandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(128),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -146,7 +146,7 @@ class SouthKoreaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(114),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="South Korea Regional Elevation Survey",
@@ -157,7 +157,7 @@ class SouthKoreaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(117),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Smart City Infrastructure",
@@ -168,7 +168,7 @@ class SouthKoreaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(130),
                 next_action="Technical Proposal",
                 description="Urban terrain for smart city development",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -192,7 +192,7 @@ class MexicoScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(116),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Mexico Regional Elevation Survey",
@@ -203,7 +203,7 @@ class MexicoScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(122),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Yucatan Peninsula Mapping",
@@ -214,7 +214,7 @@ class MexicoScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(115),
                 next_action="Technical Proposal",
                 description="Archaeological site terrain preservation",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -238,7 +238,7 @@ class ArgentinaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(89),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Argentina Regional Elevation Survey",
@@ -249,7 +249,7 @@ class ArgentinaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(126),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Tierra del Fuego Survey",
@@ -260,7 +260,7 @@ class ArgentinaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(135),
                 next_action="Technical Proposal",
                 description="Southern territory terrain mapping",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -284,7 +284,7 @@ class ChileScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(89),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Chile Regional Elevation Survey",
@@ -295,7 +295,7 @@ class ChileScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(126),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Atacama Desert Mapping",
@@ -306,7 +306,7 @@ class ChileScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(145),
                 next_action="Technical Proposal",
                 description="Extreme environment topography",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -330,7 +330,7 @@ class SouthAfricaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(85),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="South Africa Regional Elevation Survey",
@@ -341,7 +341,7 @@ class SouthAfricaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(107),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Cape Town Urban Update",
@@ -352,7 +352,7 @@ class SouthAfricaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(125),
                 next_action="Technical Proposal",
                 description="City infrastructure terrain",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -376,7 +376,7 @@ class NigeriaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(114),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Nigeria Regional Elevation Survey",
@@ -387,7 +387,7 @@ class NigeriaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(111),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -411,7 +411,7 @@ class EgyptScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(113),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Egypt Regional Elevation Survey",
@@ -422,7 +422,7 @@ class EgyptScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(124),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="New Capital City Planning",
@@ -433,7 +433,7 @@ class EgyptScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(130),
                 next_action="Technical Proposal",
                 description="Development zone topography",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -457,7 +457,7 @@ class UAEScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(104),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="UAE Regional Elevation Survey",
@@ -468,7 +468,7 @@ class UAEScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(106),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Mars City Infrastructure",
@@ -479,7 +479,7 @@ class UAEScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(110),
                 next_action="Technical Proposal",
                 description="Future development terrain planning",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -503,7 +503,7 @@ class SaudiArabiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(110),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Saudi Arabia Regional Elevation Survey",
@@ -514,7 +514,7 @@ class SaudiArabiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(100),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Desert Infrastructure Planning",
@@ -525,7 +525,7 @@ class SaudiArabiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(140),
                 next_action="Technical Proposal",
                 description="Urban expansion terrain data",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -549,7 +549,7 @@ class IsraelScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(117),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Israel Regional Elevation Survey",
@@ -560,7 +560,7 @@ class IsraelScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(134),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Negev Development Zone",
@@ -571,7 +571,7 @@ class IsraelScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(125),
                 next_action="Technical Proposal",
                 description="Desert development terrain",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -595,7 +595,7 @@ class TurkeyScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(87),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Turkey Regional Elevation Survey",
@@ -606,7 +606,7 @@ class TurkeyScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(111),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Black Sea Coastal Survey",
@@ -617,7 +617,7 @@ class TurkeyScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(135),
                 next_action="Technical Proposal",
                 description="Coastal infrastructure planning",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -641,7 +641,7 @@ class PolandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(115),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Poland Regional Elevation Survey",
@@ -652,7 +652,7 @@ class PolandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(115),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Warsaw Metro Expansion",
@@ -663,7 +663,7 @@ class PolandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(120),
                 next_action="Technical Proposal",
                 description="Urban infrastructure terrain",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -687,7 +687,7 @@ class SwedenScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(86),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Sweden Regional Elevation Survey",
@@ -698,7 +698,7 @@ class SwedenScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(134),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Lapland Mining Survey",
@@ -709,7 +709,7 @@ class SwedenScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(130),
                 next_action="Technical Proposal",
                 description="Resource extraction terrain",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -733,7 +733,7 @@ class NorwayScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(86),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Norway Regional Elevation Survey",
@@ -744,7 +744,7 @@ class NorwayScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(101),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Oslo Port Development",
@@ -755,7 +755,7 @@ class NorwayScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(115),
                 next_action="Technical Proposal",
                 description="Harbor infrastructure planning",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -779,7 +779,7 @@ class FinlandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(110),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Finland Regional Elevation Survey",
@@ -790,7 +790,7 @@ class FinlandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(139),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Helsinki Smart City",
@@ -801,7 +801,7 @@ class FinlandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(125),
                 next_action="Technical Proposal",
                 description="Urban development terrain",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -825,7 +825,7 @@ class SpainScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(106),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Spain Regional Elevation Survey",
@@ -836,7 +836,7 @@ class SpainScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(122),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Canary Islands Survey",
@@ -847,7 +847,7 @@ class SpainScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(140),
                 next_action="Technical Proposal",
                 description="Island territory mapping",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -871,7 +871,7 @@ class ItalyScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(87),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Italy Regional Elevation Survey",
@@ -882,7 +882,7 @@ class ItalyScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(121),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Venice Preservation",
@@ -893,7 +893,7 @@ class ItalyScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(130),
                 next_action="Technical Proposal",
                 description="Cultural heritage terrain monitoring",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -917,7 +917,7 @@ class FranceScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(92),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="France Regional Elevation Survey",
@@ -928,7 +928,7 @@ class FranceScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(106),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="French Overseas Territories",
@@ -939,7 +939,7 @@ class FranceScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(135),
                 next_action="Technical Proposal",
                 description="Global territory elevation data",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -963,7 +963,7 @@ class NetherlandsScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(112),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Netherlands Regional Elevation Survey",
@@ -974,7 +974,7 @@ class NetherlandsScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(122),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Rotterdam Port Expansion",
@@ -985,7 +985,7 @@ class NetherlandsScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(120),
                 next_action="Technical Proposal",
                 description="Harbor infrastructure terrain mapping",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1009,7 +1009,7 @@ class BelgiumScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(92),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Belgium Regional Elevation Survey",
@@ -1020,7 +1020,7 @@ class BelgiumScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(112),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1044,7 +1044,7 @@ class SwitzerlandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(114),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Switzerland Regional Elevation Survey",
@@ -1055,7 +1055,7 @@ class SwitzerlandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(110),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1079,7 +1079,7 @@ class AustriaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(90),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Austria Regional Elevation Survey",
@@ -1090,7 +1090,7 @@ class AustriaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(103),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1114,7 +1114,7 @@ class ThailandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(89),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Thailand Regional Elevation Survey",
@@ -1125,7 +1125,7 @@ class ThailandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(127),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Bangkok Flood Risk Assessment",
@@ -1136,7 +1136,7 @@ class ThailandScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(140),
                 next_action="Technical Proposal",
                 description="Urban flood modeling terrain",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1160,7 +1160,7 @@ class IndonesiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(102),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Indonesia Regional Elevation Survey",
@@ -1171,7 +1171,7 @@ class IndonesiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(102),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Java Island Urban Planning",
@@ -1182,7 +1182,7 @@ class IndonesiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(150),
                 next_action="Technical Proposal",
                 description="Dense population terrain mapping",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1206,7 +1206,7 @@ class MalaysiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(106),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Malaysia Regional Elevation Survey",
@@ -1217,7 +1217,7 @@ class MalaysiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(122),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1241,7 +1241,7 @@ class PhilippinesScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(101),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Philippines Regional Elevation Survey",
@@ -1252,7 +1252,7 @@ class PhilippinesScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(127),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1276,7 +1276,7 @@ class VietnamScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(106),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Vietnam Regional Elevation Survey",
@@ -1287,7 +1287,7 @@ class VietnamScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(123),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1311,7 +1311,7 @@ class ColombiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(92),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Colombia Regional Elevation Survey",
@@ -1322,7 +1322,7 @@ class ColombiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(115),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Coffee Region Terrain Study",
@@ -1333,7 +1333,7 @@ class ColombiaScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(140),
                 next_action="Technical Proposal",
                 description="Agricultural optimization mapping",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1357,7 +1357,7 @@ class PeruScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(108),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Peru Regional Elevation Survey",
@@ -1368,7 +1368,7 @@ class PeruScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(126),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1392,7 +1392,7 @@ class PakistanScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(102),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Pakistan Regional Elevation Survey",
@@ -1403,7 +1403,7 @@ class PakistanScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(138),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
@@ -1427,7 +1427,7 @@ class BangladeshScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(102),
                 next_action="Technical Proposal",
                 description="National terrain mapping with LiDAR",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
             self.generate_opportunity(
                 title="Bangladesh Regional Elevation Survey",
@@ -1438,7 +1438,7 @@ class BangladeshScraper(BaseScraper):
                 deadline_str=self.calculate_future_date(131),
                 next_action="Technical Proposal",
                 description="Regional topographic data collection",
-                agency_link="https://example.org/"
+                agency_link="https://www.gov.example"
             ),
         ]
 
