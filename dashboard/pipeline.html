@@ -102,17 +102,33 @@
             border-bottom: 3px solid var(--nuview-red);
             padding-bottom: 0.5rem;
         }
-        /* Screen reader only content */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .header p {
+                font-size: 0.9rem;
+            }
+            .stat-card {
+                margin-bottom: 1rem;
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            table thead th {
+                padding: 0.5rem;
+            }
+            table tbody td {
+                padding: 0.5rem;
+            }
+            .filter-button {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
