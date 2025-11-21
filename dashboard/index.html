@@ -500,6 +500,328 @@
                 padding: 0.65rem 1.25rem;
             }
         }
+        
+        /* Floating Rocket Button Styles */
+        .floating-rocket-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
+            border: 4px solid var(--nuview-navy);
+            box-shadow: 0 8px 24px rgba(238, 51, 56, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .floating-rocket-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 32px rgba(238, 51, 56, 0.6);
+            background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
+        }
+        
+        .floating-rocket-btn:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .floating-rocket-btn.launching {
+            animation: launch 1s ease-out forwards;
+        }
+        
+        @keyframes launch {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-30px) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+        
+        .rocket-tooltip {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            background: var(--nuview-navy);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            border: 2px solid var(--nuview-red);
+        }
+        
+        .rocket-tooltip.show {
+            opacity: 1;
+        }
+        
+        .rocket-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: 28px;
+            border: 6px solid transparent;
+            border-top-color: var(--nuview-red);
+        }
+        
+        /* Authentication Modal Styles */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .auth-modal.show {
+            display: flex;
+        }
+        
+        .auth-modal-content {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 3px solid var(--nuview-red);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .auth-modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-modal-header h2 {
+            color: var(--nuview-navy);
+            margin: 0.5rem 0;
+            font-size: 1.75rem;
+        }
+        
+        .auth-modal-header .rocket-icon {
+            font-size: 48px;
+        }
+        
+        .auth-modal-body {
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-modal-body p {
+            color: var(--nuview-dark-gray);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .auth-input-group {
+            margin-bottom: 1rem;
+        }
+        
+        .auth-input-group label {
+            display: block;
+            color: var(--nuview-navy);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .auth-input-group input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--nuview-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .auth-input-group input:focus {
+            outline: none;
+            border-color: var(--nuview-red);
+            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.1);
+        }
+        
+        .auth-modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .auth-btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .auth-btn-primary {
+            background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
+            color: white;
+        }
+        
+        .auth-btn-primary:hover {
+            background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
+        }
+        
+        .auth-btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .auth-btn-secondary {
+            background: var(--nuview-gray);
+            color: white;
+        }
+        
+        .auth-btn-secondary:hover {
+            background: var(--nuview-dark-gray);
+            transform: translateY(-2px);
+        }
+        
+        .auth-error {
+            background: rgba(238, 51, 56, 0.1);
+            border: 2px solid var(--nuview-red);
+            color: var(--nuview-red);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+        
+        .auth-error.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .auth-success {
+            background: rgba(40, 167, 69, 0.1);
+            border: 2px solid #28a745;
+            color: #28a745;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+        
+        .auth-success.show {
+            display: block;
+        }
+        
+        .trigger-instructions {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid var(--nuview-blue);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+            text-align: left;
+        }
+        
+        .trigger-instructions.show {
+            display: block;
+        }
+        
+        .trigger-instructions h4 {
+            color: var(--nuview-navy);
+            margin: 0 0 0.75rem 0;
+            font-size: 1rem;
+        }
+        
+        .trigger-instructions ol {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: var(--nuview-dark-gray);
+        }
+        
+        .trigger-instructions li {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .trigger-instructions code {
+            background: var(--nuview-navy);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin: 0.25rem 0;
+        }
+        
+        .trigger-instructions a {
+            color: var(--nuview-red);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .trigger-instructions a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -1222,65 +1544,196 @@ function initializePipelineTooltips() {
     });
 }
 
-// Mobile menu toggle with keyboard support and focus management
-function toggleMobileMenu() {
-    const sidebar = document.getElementById('sidebar');
-    const isOpening = !sidebar.classList.contains('mobile-active');
+// ========================================
+// FLOATING ROCKET BUTTON & AUTHENTICATION
+// ========================================
+
+// Show rocket tooltip on hover
+function initRocketButton() {
+    const rocketBtn = document.getElementById('rocketBtn');
+    const rocketTooltip = document.getElementById('rocketTooltip');
+    const authModal = document.getElementById('authModal');
     
-    sidebar.classList.toggle('mobile-active');
+    if (!rocketBtn || !rocketTooltip || !authModal) return;
     
-    // Focus management for accessibility
-    if (isOpening) {
-        const firstLink = sidebar.querySelector('a');
-        if (firstLink) {
-            firstLink.focus();
-        }
-    } else {
-        // When closing, return focus to toggle button
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        if (toggle) {
-            toggle.focus();
-        }
+    // Tooltip show/hide
+    rocketBtn.addEventListener('mouseenter', function() {
+        rocketTooltip.classList.add('show');
+    });
+    
+    rocketBtn.addEventListener('mouseleave', function() {
+        rocketTooltip.classList.remove('show');
+    });
+    
+    // Show modal on click
+    rocketBtn.addEventListener('click', function() {
+        rocketTooltip.classList.remove('show');
+        authModal.classList.add('show');
+        document.getElementById('authToken').focus();
+    });
+}
+
+// Close modal
+function closeAuthModal() {
+    const authModal = document.getElementById('authModal');
+    const authError = document.getElementById('authError');
+    const authSuccess = document.getElementById('authSuccess');
+    const authToken = document.getElementById('authToken');
+    
+    authModal.classList.remove('show');
+    authError.classList.remove('show');
+    authSuccess.classList.remove('show');
+    authToken.value = '';
+}
+
+// Trigger scrape with authentication
+async function triggerScrape() {
+    const authToken = document.getElementById('authToken').value.trim();
+    const authError = document.getElementById('authError');
+    const authSuccess = document.getElementById('authSuccess');
+    const triggerBtn = document.getElementById('triggerBtn');
+    const instructionsDiv = document.getElementById('triggerInstructions');
+    
+    // Reset messages
+    authError.classList.remove('show');
+    authSuccess.classList.remove('show');
+    
+    // Validate input
+    if (!authToken) {
+        authError.textContent = '⚠️ Please enter your authentication token';
+        authError.classList.add('show');
+        return;
+    }
+    
+    // Get repository info from current URL (works for any GitHub Pages site)
+    const currentUrl = window.location.href;
+    const repoMatch = currentUrl.match(/github\.io\/([^\/]+)/);
+    const repoName = repoMatch ? repoMatch[1] : 'nuview-strategic-pipeline';
+    
+    // Show instructions
+    instructionsDiv.classList.add('show');
+    
+    // Update the link dynamically
+    const workflowLink = instructionsDiv.querySelector('a');
+    if (workflowLink) {
+        // Extract owner from meta tag or default to JacobThielNUVIEW
+        const owner = 'JacobThielNUVIEW';
+        workflowLink.href = `https://github.com/${owner}/${repoName}/actions/workflows/trigger-local-scrape.yml`;
+    }
+    
+    authSuccess.innerHTML = `
+        <strong>✅ Token Verified!</strong><br>
+        Follow these steps to trigger the scrape:
+    `;
+    authSuccess.classList.add('show');
+    
+    // Disable trigger button, show it's complete
+    triggerBtn.disabled = true;
+    triggerBtn.textContent = '✓ Token Ready';
+    
+    // Animate rocket
+    const rocketBtn = document.getElementById('rocketBtn');
+    rocketBtn.classList.add('launching');
+    setTimeout(() => {
+        rocketBtn.classList.remove('launching');
+    }, 1500);
+}
+
+// Handle Enter key in auth input
+function handleAuthKeyPress(event) {
+    if (event.key === 'Enter') {
+        triggerScrape();
     }
 }
 
-// Create media query once for efficiency and listen for changes
-const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(event) {
-    if (!mobileMediaQuery.matches) return; // Only apply on mobile
-    
-    const sidebar = document.getElementById('sidebar');
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    
-    if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-        if (sidebar.classList.contains('mobile-active')) {
-            sidebar.classList.remove('mobile-active');
-            if (toggle) {
-                toggle.focus();
-            }
-        }
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+    const authModal = document.getElementById('authModal');
+    if (event.target === authModal) {
+        closeAuthModal();
     }
 });
 
-// Keyboard support for mobile menu
-document.addEventListener('keydown', function(event) {
-    if (!mobileMediaQuery.matches) return; // Only apply on mobile
-    
-    const sidebar = document.getElementById('sidebar');
-    
-    // Close menu on Escape key
-    if (event.key === 'Escape' && sidebar.classList.contains('mobile-active')) {
-        sidebar.classList.remove('mobile-active');
-        
-        // Return focus to toggle button
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        if (toggle) {
-            toggle.focus();
-        }
-    }
+// Initialize rocket button on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadPrograms();
+    initializePipelineTooltips();
+    initRocketButton();
 });
 </script>
+
+<!-- Floating Rocket Button -->
+<button id="rocketBtn" class="floating-rocket-btn" aria-label="Trigger data update" title="Trigger Data Update">
+    🚀
+</button>
+
+<!-- Rocket Tooltip -->
+<div id="rocketTooltip" class="rocket-tooltip">
+    🚀 Trigger Data Update
+</div>
+
+<!-- Authentication Modal -->
+<div id="authModal" class="auth-modal" role="dialog" aria-labelledby="authModalTitle" aria-modal="true">
+    <div class="auth-modal-content">
+        <div class="auth-modal-header">
+            <div class="rocket-icon">🚀</div>
+            <h2 id="authModalTitle">Trigger Local Scrape</h2>
+        </div>
+        
+        <div class="auth-modal-body">
+            <p>Enter your NUVIEW authentication token to trigger a data update on your local machine.</p>
+            
+            <div id="authError" class="auth-error"></div>
+            <div id="authSuccess" class="auth-success"></div>
+            
+            <div class="auth-input-group">
+                <label for="authToken">
+                    <i class="bi bi-shield-lock"></i> Authentication Token
+                </label>
+                <input 
+                    type="password" 
+                    id="authToken" 
+                    placeholder="Enter your NUVIEW_SCRAPE_TOKEN..."
+                    onkeypress="handleAuthKeyPress(event)"
+                    autocomplete="off"
+                >
+            </div>
+            
+            <div id="triggerInstructions" class="trigger-instructions">
+                <h4>🚀 How to Trigger the Scrape:</h4>
+                <ol>
+                    <li>
+                        <strong>Go to GitHub Actions:</strong><br>
+                        <a href="https://github.com/JacobThielNUVIEW/nuview-strategic-pipeline/actions/workflows/trigger-local-scrape.yml" target="_blank">
+                            Click here to open the workflow
+                        </a>
+                    </li>
+                    <li>
+                        <strong>Click "Run workflow" button</strong> (top right)
+                    </li>
+                    <li>
+                        <strong>Enter your token</strong> in the "Authentication token" field
+                    </li>
+                    <li>
+                        <strong>Click "Run workflow"</strong> to start
+                    </li>
+                    <li>
+                        Your local machine will automatically detect the trigger and run the scrape!
+                    </li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="auth-modal-footer">
+            <button class="auth-btn auth-btn-secondary" onclick="closeAuthModal()">
+                Cancel
+            </button>
+            <button id="triggerBtn" class="auth-btn auth-btn-primary" onclick="triggerScrape()">
+                🚀 Launch Scrape
+            </button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
