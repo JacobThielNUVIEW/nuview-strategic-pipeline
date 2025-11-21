@@ -17,7 +17,8 @@
             --nuview-gray: #6c757d;
             --nuview-light-gray: #e9ecef;
             --nuview-dark-gray: #495057;
-            --dark: #212529; 
+            --dark: #212529;
+            --responsive-margin: 20px;
         }
         body { 
             font-family: 'Inter', sans-serif; 
@@ -134,8 +135,8 @@
         }
         .launched-opps-box {
             position: fixed;
-            right: 20px;
-            top: 20px;
+            right: var(--responsive-margin);
+            top: var(--responsive-margin);
             width: 280px;
             max-height: calc(100vh - 40px);
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
@@ -197,6 +198,14 @@
             color: var(--nuview-gray);
             font-style: italic;
             padding: 2rem 0;
+        }
+        .launched-opp-link {
+            color: var(--nuview-red);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .launched-opp-link:hover {
+            color: var(--nuview-navy);
         }
         .section { 
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
@@ -400,7 +409,7 @@
         @media (max-width: 992px) {
             .main-content {
                 margin-left: 260px;
-                margin-right: 20px;
+                margin-right: var(--responsive-margin);
             }
             .launched-opps-box {
                 position: relative;
@@ -1004,6 +1013,13 @@ function setupGlobalSearch() {
     });
 }
 
+// Format deadline display
+function formatDeadlineDisplay(deadline, daysUntil) {
+    const deadlineStr = deadline || 'TBD';
+    const daysStr = daysUntil !== undefined && daysUntil !== null ? daysUntil : 'N/A';
+    return `${deadlineStr} (${daysStr} days)`;
+}
+
 // Render Launched Opportunities Box
 function renderLaunchedOpps() {
     if (!programsData || !programsData.programs) return;
@@ -1021,8 +1037,12 @@ function renderLaunchedOpps() {
     // Filter for launched opportunities (those with daysUntil < 0 or status indicating launched)
     // For demo purposes, we'll show the most recent/urgent opportunities
     const launchedOpps = uniquePrograms
-        .filter(p => p.urgency === 'urgent' || p.daysUntil <= 30)
-        .sort((a, b) => (a.daysUntil || 999) - (b.daysUntil || 999))
+        .filter(p => p.urgency === 'urgent' || (p.daysUntil !== undefined && p.daysUntil !== null && p.daysUntil <= 30))
+        .sort((a, b) => {
+            const aDays = a.daysUntil ?? 999;
+            const bDays = b.daysUntil ?? 999;
+            return aDays - bDays;
+        })
         .slice(0, 5);
     
     const container = document.getElementById('launched-opps-container');
@@ -1041,9 +1061,9 @@ function renderLaunchedOpps() {
             <h4>${opp.title || 'Untitled'}</h4>
             <p><strong>Agency:</strong> ${opp.agency || 'N/A'}</p>
             <p><strong>Value:</strong> <span class="launched-opp-value">${formatCurrency(opp.valueUSD || 0)}</span></p>
-            <p><strong>Deadline:</strong> ${opp.deadline || 'TBD'} (${opp.daysUntil !== undefined ? opp.daysUntil : 'N/A'} days)</p>
+            <p><strong>Deadline:</strong> ${formatDeadlineDisplay(opp.deadline, opp.daysUntil)}</p>
             ${opp.link && opp.link !== '#' ? `
-            <p><a href="${opp.link}" target="_blank" rel="noopener noreferrer" style="color: var(--nuview-red); font-weight: 600; text-decoration: underline;">View Details →</a></p>
+            <p><a href="${opp.link}" target="_blank" rel="noopener noreferrer" class="launched-opp-link">View Details →</a></p>
             ` : ''}
         `;
         container.appendChild(item);
