@@ -568,7 +568,12 @@ function getUrgencyBadge(urgency) {
     return badges[urgency || 'future'] || badges['future'];
 }
 
-// Render Top 10 Opportunities Matrix
+/**
+ * Render the Top 10 Opportunities Matrix
+ * Shows highest-value opportunities across all categories
+ * Sorted by valueUSD in descending order
+ * Includes proper accessibility attributes (ARIA roles and labels)
+ */
 function renderTopOpportunities() {
     if (!programsData || !programsData.programs) return;
     
@@ -756,7 +761,12 @@ function updateOverview() {
     }
 }
 
-// Global search functionality - FIX: use e.target.value instead of this.value
+/**
+ * Setup global search functionality
+ * Searches across all program cards based on searchable text attributes
+ * Shows/hides cards based on search match
+ * Search is case-insensitive and matches partial strings
+ */
 function setupGlobalSearch() {
     const searchInput = document.getElementById('globalSearch');
     if (!searchInput) return;
@@ -776,7 +786,19 @@ function setupGlobalSearch() {
     });
 }
 
-// Load programs data
+/**
+ * Load programs data from JSON file
+ * Data structure: programs.json contains categorized programs
+ * Categories: funding, lidar, spaceSystems, platform
+ * 
+ * After loading:
+ * - Renders Top 10 opportunities matrix
+ * - Renders all program sections
+ * - Updates overview statistics
+ * - Initializes global search
+ * 
+ * Error handling: Displays error message in containers if data fails to load
+ */
 async function loadPrograms() {
     try {
         const response = await fetch('../data/processed/programs.json');
@@ -812,13 +834,24 @@ async function loadPrograms() {
     }
 }
 
+/**
+ * ============================================
+ * INITIALIZATION
+ * ============================================
+ */
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadPrograms();
     initializePipelineTooltips();
 });
 
-// Pipeline stage tooltips
+/**
+ * Initialize pipeline stage tooltips
+ * Displays detailed descriptions of each pipeline stage on hover
+ * Tooltips include: Data Sources, Processing Engine, Scoring System, Priority Matrix
+ * Positioned dynamically based on mouse position
+ */
 function initializePipelineTooltips() {
     // Tooltip positioning constants
     const TOOLTIP_HORIZONTAL_OFFSET = 140; // Half tooltip width for centering
