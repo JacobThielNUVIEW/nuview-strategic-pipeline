@@ -6,6 +6,7 @@ Handles deduplication, priority scoring, and data quality checks
 """
 
 import json
+import math
 import os
 import sys
 
@@ -30,7 +31,6 @@ def calculate_priority(budget, num_keywords, data_access, confidence):
     # Normalize budget (logarithmic scale)
     budget_score = 0
     if budget > 0:
-        import math
         budget_score = min(50, math.log10(budget) * 5)
 
     # Keyword score (0-30)

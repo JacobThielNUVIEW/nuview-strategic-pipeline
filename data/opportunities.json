@@ -4,34 +4,112 @@
     "market_val": "14.13",
     "scrapers_run": 68,
     "totalCount": 128,
-    "updated": "2025-11-21T18:11:07.396223Z"
+    "updated": "2025-11-21T18:14:05.364097Z"
   },
   "opportunities": [
     {
-      "agency": "FEMA",
-      "agencyLink": "https://www.fema.gov/flood-maps",
-      "amountUSD": 28000000,
+      "agency": "Caltech/JPL",
+      "agencyLink": "https://www.jpl.nasa.gov/",
+      "amountUSD": 18000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 90,
+      "deadline": "2026-02-19",
+      "description": "Next-generation spaceborne LiDAR for planetary surface science",
+      "forecast_value": "$18,000,000",
+      "funding": {
+        "amountUSD": 18000000
+      },
+      "id": "caltech-jpl-993",
+      "link": "https://sam.gov",
+      "next_action": "JPL Collaboration",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T18:14:05.366275Z",
+      "timeline": {
+        "daysUntil": 90,
+        "urgency": "future"
+      },
+      "title": "JPL Earth Surface & Interior Science - LiDAR",
+      "urgency": "future",
+      "valueUSD": 18000000
+    },
+    {
+      "agency": "CNSA",
+      "agencyLink": "http://www.cnsa.gov.cn/english/",
+      "amountUSD": 40000000,
       "budgetSourceLink": "#",
       "category": "DaaS",
-      "daysUntilDeadline": 65,
-      "deadline": "2026-01-25",
-      "description": "LiDAR-derived elevation data for flood risk mapping and modeling",
-      "forecast_value": "$28,000,000",
+      "daysUntilDeadline": 130,
+      "deadline": "2026-03-31",
+      "description": "Large-area spaceborne LiDAR for Belt and Road Initiative countries",
+      "forecast_value": "$40,000,000",
       "funding": {
-        "amountUSD": 28000000
+        "amountUSD": 40000000
       },
-      "id": "fema-423",
+      "id": "cnsa-914",
       "link": "https://sam.gov",
-      "next_action": "Capability Brief",
-      "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.397072Z",
+      "next_action": "International Coordination",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T18:14:05.365759Z",
       "timeline": {
-        "daysUntil": 65,
+        "daysUntil": 130,
+        "urgency": "future"
+      },
+      "title": "CNSA Belt & Road Topographic Mapping",
+      "urgency": "future",
+      "valueUSD": 40000000
+    },
+    {
+      "agency": "MIT",
+      "agencyLink": "https://www.ll.mit.edu/",
+      "amountUSD": 15000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 110,
+      "deadline": "2026-03-11",
+      "description": "Advanced spaceborne LiDAR technology development and validation",
+      "forecast_value": "$15,000,000",
+      "funding": {
+        "amountUSD": 15000000
+      },
+      "id": "mit-122",
+      "link": "https://sam.gov",
+      "next_action": "Research Agreement",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T18:14:05.366257Z",
+      "timeline": {
+        "daysUntil": 110,
+        "urgency": "future"
+      },
+      "title": "MIT Lincoln Lab Space-Based Sensing Partnership",
+      "urgency": "future",
+      "valueUSD": 15000000
+    },
+    {
+      "agency": "USACE",
+      "agencyLink": "https://www.usace.army.mil/",
+      "amountUSD": 32000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 70,
+      "deadline": "2026-01-30",
+      "description": "High-resolution DEM generation for flood mapping and infrastructure planning",
+      "forecast_value": "$32,000,000",
+      "funding": {
+        "amountUSD": 32000000
+      },
+      "id": "usace-583",
+      "link": "https://sam.gov",
+      "next_action": "Past Performance Review",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T18:14:05.364807Z",
+      "timeline": {
+        "daysUntil": 70,
         "urgency": "near"
       },
-      "title": "FEMA Risk MAP Elevation Data Collection",
+      "title": "USACE National DEM Production Contract",
       "urgency": "near",
-      "valueUSD": 28000000
+      "valueUSD": 32000000
     },
     {
       "agency": "NOAA",
@@ -46,11 +124,11 @@
       "funding": {
         "amountUSD": 18000000
       },
-      "id": "noaa-826",
+      "id": "noaa-164",
       "link": "https://sam.gov",
       "next_action": "Technical Demo",
       "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.396821Z",
+      "scrapedAt": "2025-11-21T18:14:05.364624Z",
       "timeline": {
         "daysUntil": 55,
         "urgency": "near"
@@ -72,11 +150,11 @@
       "funding": {
         "amountUSD": 35000000
       },
-      "id": "esa-613",
+      "id": "esa-309",
       "link": "https://sam.gov",
       "next_action": "Consortium Lead",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.397502Z",
+      "scrapedAt": "2025-11-21T18:14:05.365335Z",
       "timeline": {
         "daysUntil": 45,
         "urgency": "near"
@@ -98,11 +176,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "esa-186",
+      "id": "esa-171",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.397520Z",
+      "scrapedAt": "2025-11-21T18:14:05.365350Z",
       "timeline": {
         "daysUntil": 75,
         "urgency": "near"
@@ -124,11 +202,11 @@
       "funding": {
         "amountUSD": 16000000
       },
-      "id": "blm-476",
+      "id": "blm-862",
       "link": "https://sam.gov",
       "next_action": "Site Assessment",
       "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.397327Z",
+      "scrapedAt": "2025-11-21T18:14:05.365089Z",
       "timeline": {
         "daysUntil": 95,
         "urgency": "future"
@@ -136,32 +214,6 @@
       "title": "BLM Public Lands Topographic Mapping",
       "urgency": "future",
       "valueUSD": 16000000
-    },
-    {
-      "agency": "CNSA",
-      "agencyLink": "http://www.cnsa.gov.cn/english/",
-      "amountUSD": 40000000,
-      "budgetSourceLink": "#",
-      "category": "DaaS",
-      "daysUntilDeadline": 130,
-      "deadline": "2026-03-31",
-      "description": "Large-area spaceborne LiDAR for Belt and Road Initiative countries",
-      "forecast_value": "$40,000,000",
-      "funding": {
-        "amountUSD": 40000000
-      },
-      "id": "cnsa-582",
-      "link": "https://sam.gov",
-      "next_action": "International Coordination",
-      "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.398060Z",
-      "timeline": {
-        "daysUntil": 130,
-        "urgency": "future"
-      },
-      "title": "CNSA Belt & Road Topographic Mapping",
-      "urgency": "future",
-      "valueUSD": 40000000
     },
     {
       "agency": "UKSA",
@@ -176,11 +228,11 @@
       "funding": {
         "amountUSD": 20000000
       },
-      "id": "uksa-869",
+      "id": "uksa-777",
       "link": "https://sam.gov",
       "next_action": "UK Partnership Brief",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.397854Z",
+      "scrapedAt": "2025-11-21T18:14:05.365736Z",
       "timeline": {
         "daysUntil": 90,
         "urgency": "future"
@@ -190,30 +242,82 @@
       "valueUSD": 20000000
     },
     {
-      "agency": "MIT",
-      "agencyLink": "https://www.ll.mit.edu/",
-      "amountUSD": 15000000,
+      "agency": "JAXA",
+      "agencyLink": "https://global.jaxa.jp/",
+      "amountUSD": 18000000,
       "budgetSourceLink": "#",
       "category": "R&D",
+      "daysUntilDeadline": 120,
+      "deadline": "2026-03-21",
+      "description": "Spaceborne LiDAR integration for ALOS-4 global topographic mapping",
+      "forecast_value": "$18,000,000",
+      "funding": {
+        "amountUSD": 18000000
+      },
+      "id": "jaxa-246",
+      "link": "https://sam.gov",
+      "next_action": "International Partnership",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T18:14:05.365368Z",
+      "timeline": {
+        "daysUntil": 120,
+        "urgency": "future"
+      },
+      "title": "JAXA ALOS-4 Topographic Mission Support",
+      "urgency": "future",
+      "valueUSD": 18000000
+    },
+    {
+      "agency": "FEMA",
+      "agencyLink": "https://www.fema.gov/flood-maps",
+      "amountUSD": 28000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 65,
+      "deadline": "2026-01-25",
+      "description": "LiDAR-derived elevation data for flood risk mapping and modeling",
+      "forecast_value": "$28,000,000",
+      "funding": {
+        "amountUSD": 28000000
+      },
+      "id": "fema-779",
+      "link": "https://sam.gov",
+      "next_action": "Capability Brief",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T18:14:05.364831Z",
+      "timeline": {
+        "daysUntil": 65,
+        "urgency": "near"
+      },
+      "title": "FEMA Risk MAP Elevation Data Collection",
+      "urgency": "near",
+      "valueUSD": 28000000
+    },
+    {
+      "agency": "ISRO",
+      "agencyLink": "https://www.isro.gov.in/",
+      "amountUSD": 25000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
       "daysUntilDeadline": 110,
       "deadline": "2026-03-11",
-      "description": "Advanced spaceborne LiDAR technology development and validation",
-      "forecast_value": "$15,000,000",
+      "description": "Spaceborne LiDAR for national elevation mapping and disaster management",
+      "forecast_value": "$25,000,000",
       "funding": {
-        "amountUSD": 15000000
+        "amountUSD": 25000000
       },
-      "id": "mit-131",
+      "id": "isro-302",
       "link": "https://sam.gov",
-      "next_action": "Research Agreement",
-      "pillar": "Research",
-      "scrapedAt": "2025-11-21T18:11:07.398506Z",
+      "next_action": "India Partnership",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T18:14:05.365557Z",
       "timeline": {
         "daysUntil": 110,
         "urgency": "future"
       },
-      "title": "MIT Lincoln Lab Space-Based Sensing Partnership",
+      "title": "ISRO National Topographic Mapping - LiDAR Phase",
       "urgency": "future",
-      "valueUSD": 15000000
+      "valueUSD": 25000000
     },
     {
       "agency": "USDA Forest Service",
@@ -228,11 +332,11 @@
       "funding": {
         "amountUSD": 22000000
       },
-      "id": "usda-forest-service-125",
+      "id": "usda-forest-service-202",
       "link": "https://sam.gov",
       "next_action": "Forest Demo",
       "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.397310Z",
+      "scrapedAt": "2025-11-21T18:14:05.365072Z",
       "timeline": {
         "daysUntil": 80,
         "urgency": "near"
@@ -254,11 +358,11 @@
       "funding": {
         "amountUSD": 35000000
       },
-      "id": "eu-commission-440",
+      "id": "eu-commission-113",
       "link": "https://sam.gov",
       "next_action": "Consortium Formation",
       "pillar": "Research",
-      "scrapedAt": "2025-11-21T18:11:07.398333Z",
+      "scrapedAt": "2025-11-21T18:14:05.366220Z",
       "timeline": {
         "daysUntil": 120,
         "urgency": "future"
@@ -266,110 +370,6 @@
       "title": "Horizon Europe Space-Based Earth Monitoring",
       "urgency": "future",
       "valueUSD": 35000000
-    },
-    {
-      "agency": "Microsoft",
-      "agencyLink": "https://planetarycomputer.microsoft.com/",
-      "amountUSD": 22000000,
-      "budgetSourceLink": "#",
-      "category": "Platform",
-      "daysUntilDeadline": 85,
-      "deadline": "2026-02-14",
-      "description": "Spaceborne LiDAR DEM for Planetary Computer sustainability applications",
-      "forecast_value": "$22,000,000",
-      "funding": {
-        "amountUSD": 22000000
-      },
-      "id": "microsoft-579",
-      "link": "https://sam.gov",
-      "next_action": "Azure Integration",
-      "pillar": "Commercial",
-      "scrapedAt": "2025-11-21T18:11:07.398811Z",
-      "timeline": {
-        "daysUntil": 85,
-        "urgency": "near"
-      },
-      "title": "Microsoft Planetary Computer Terrain Services",
-      "urgency": "near",
-      "valueUSD": 22000000
-    },
-    {
-      "agency": "NASA",
-      "agencyLink": "https://science.nasa.gov/earth-science/",
-      "amountUSD": 12000000,
-      "budgetSourceLink": "#",
-      "category": "R&D",
-      "daysUntilDeadline": 45,
-      "deadline": "2026-01-05",
-      "description": "ICESat-2 ATLAS data processing and topographic applications research",
-      "forecast_value": "$12,000,000",
-      "funding": {
-        "amountUSD": 12000000
-      },
-      "id": "nasa-994",
-      "link": "https://sam.gov",
-      "next_action": "Proposal Preparation",
-      "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.396776Z",
-      "timeline": {
-        "daysUntil": 45,
-        "urgency": "near"
-      },
-      "title": "NASA ROSES ICESat-2 Science Team Augmentation",
-      "urgency": "near",
-      "valueUSD": 12000000
-    },
-    {
-      "agency": "NASA",
-      "agencyLink": "https://science.nasa.gov/earth-science/",
-      "amountUSD": 25000000,
-      "budgetSourceLink": "#",
-      "category": "R&D",
-      "daysUntilDeadline": 90,
-      "deadline": "2026-02-19",
-      "description": "Commercial space-based LiDAR for large-area topographic mapping",
-      "forecast_value": "$25,000,000",
-      "funding": {
-        "amountUSD": 25000000
-      },
-      "id": "nasa-106",
-      "link": "https://sam.gov",
-      "next_action": "Partner Coordination",
-      "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.396794Z",
-      "timeline": {
-        "daysUntil": 90,
-        "urgency": "future"
-      },
-      "title": "NASA Commercial Spaceborne LiDAR Partnership",
-      "urgency": "future",
-      "valueUSD": 25000000
-    },
-    {
-      "agency": "ISRO",
-      "agencyLink": "https://www.isro.gov.in/",
-      "amountUSD": 25000000,
-      "budgetSourceLink": "#",
-      "category": "DaaS",
-      "daysUntilDeadline": 110,
-      "deadline": "2026-03-11",
-      "description": "Spaceborne LiDAR for national elevation mapping and disaster management",
-      "forecast_value": "$25,000,000",
-      "funding": {
-        "amountUSD": 25000000
-      },
-      "id": "isro-840",
-      "link": "https://sam.gov",
-      "next_action": "India Partnership",
-      "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.397832Z",
-      "timeline": {
-        "daysUntil": 110,
-        "urgency": "future"
-      },
-      "title": "ISRO National Topographic Mapping - LiDAR Phase",
-      "urgency": "future",
-      "valueUSD": 25000000
     },
     {
       "agency": "USGS",
@@ -384,11 +384,11 @@
       "funding": {
         "amountUSD": 217000000
       },
-      "id": "usgs-425",
+      "id": "usgs-571",
       "link": "https://sam.gov",
       "next_action": "Submit Demo Brief",
       "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.396564Z",
+      "scrapedAt": "2025-11-21T18:14:05.364394Z",
       "timeline": {
         "daysUntil": 28,
         "urgency": "urgent"
@@ -410,11 +410,11 @@
       "funding": {
         "amountUSD": 45000000
       },
-      "id": "usgs-999",
+      "id": "usgs-926",
       "link": "https://sam.gov",
       "next_action": "Capability Statement",
       "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.396594Z",
+      "scrapedAt": "2025-11-21T18:14:05.364415Z",
       "timeline": {
         "daysUntil": 60,
         "urgency": "near"
@@ -422,32 +422,6 @@
       "title": "USGS National Map Topographic Data Services",
       "urgency": "near",
       "valueUSD": 45000000
-    },
-    {
-      "agency": "ESRI",
-      "agencyLink": "https://www.esri.com/",
-      "amountUSD": 20000000,
-      "budgetSourceLink": "#",
-      "category": "Platform",
-      "daysUntilDeadline": 95,
-      "deadline": "2026-02-24",
-      "description": "Commercial space-based topographic data for ArcGIS platform",
-      "forecast_value": "$20,000,000",
-      "funding": {
-        "amountUSD": 20000000
-      },
-      "id": "esri-671",
-      "link": "https://sam.gov",
-      "next_action": "ESRI Partnership Meeting",
-      "pillar": "Commercial",
-      "scrapedAt": "2025-11-21T18:11:07.398795Z",
-      "timeline": {
-        "daysUntil": 95,
-        "urgency": "future"
-      },
-      "title": "ESRI Living Atlas Premium Elevation Layer",
-      "urgency": "future",
-      "valueUSD": 20000000
     },
     {
       "agency": "NIH",
@@ -462,11 +436,11 @@
       "funding": {
         "amountUSD": 6000000
       },
-      "id": "nih-326",
+      "id": "nih-606",
       "link": "https://sam.gov",
       "next_action": "Health Mapping Brief",
       "pillar": "Research",
-      "scrapedAt": "2025-11-21T18:11:07.398317Z",
+      "scrapedAt": "2025-11-21T18:14:05.366051Z",
       "timeline": {
         "daysUntil": 100,
         "urgency": "future"
@@ -476,108 +450,30 @@
       "valueUSD": 6000000
     },
     {
-      "agency": "DLR",
-      "agencyLink": "https://www.dlr.de/",
-      "amountUSD": 30000000,
+      "agency": "ESRI",
+      "agencyLink": "https://www.esri.com/",
+      "amountUSD": 20000000,
       "budgetSourceLink": "#",
-      "category": "R&D",
-      "daysUntilDeadline": 100,
-      "deadline": "2026-03-01",
-      "description": "Next-generation spaceborne LiDAR for high-resolution global DEM",
-      "forecast_value": "$30,000,000",
+      "category": "Platform",
+      "daysUntilDeadline": 95,
+      "deadline": "2026-02-24",
+      "description": "Commercial space-based topographic data for ArcGIS platform",
+      "forecast_value": "$20,000,000",
       "funding": {
-        "amountUSD": 30000000
+        "amountUSD": 20000000
       },
-      "id": "dlr-255",
+      "id": "esri-623",
       "link": "https://sam.gov",
-      "next_action": "Mission Planning",
-      "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.397806Z",
+      "next_action": "ESRI Partnership Meeting",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T18:14:05.366500Z",
       "timeline": {
-        "daysUntil": 100,
+        "daysUntil": 95,
         "urgency": "future"
       },
-      "title": "DLR TanDEM-X Follow-On LiDAR Mission",
+      "title": "ESRI Living Atlas Premium Elevation Layer",
       "urgency": "future",
-      "valueUSD": 30000000
-    },
-    {
-      "agency": "DIU",
-      "agencyLink": "https://www.diu.mil/",
-      "amountUSD": 15000000,
-      "budgetSourceLink": "#",
-      "category": "R&D",
-      "daysUntilDeadline": 15,
-      "deadline": "2025-12-06",
-      "description": "Next-generation space-based LiDAR for rapid large-area mapping",
-      "forecast_value": "$15,000,000",
-      "funding": {
-        "amountUSD": 15000000
-      },
-      "id": "diu-419",
-      "link": "https://sam.gov",
-      "next_action": "Submit Whitepaper",
-      "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.397282Z",
-      "timeline": {
-        "daysUntil": 15,
-        "urgency": "urgent"
-      },
-      "title": "DIU Spaceborne LiDAR BAA",
-      "urgency": "urgent",
-      "valueUSD": 15000000
-    },
-    {
-      "agency": "NGA",
-      "agencyLink": "https://www.nga.mil/",
-      "amountUSD": 45000000,
-      "budgetSourceLink": "#",
-      "category": "DaaS",
-      "daysUntilDeadline": 40,
-      "deadline": "2025-12-31",
-      "description": "Commercial spaceborne LiDAR and 3D topographic intelligence products",
-      "forecast_value": "$45,000,000",
-      "funding": {
-        "amountUSD": 45000000
-      },
-      "id": "nga-831",
-      "link": "https://sam.gov",
-      "next_action": "Security Clearance Prep",
-      "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.397094Z",
-      "timeline": {
-        "daysUntil": 40,
-        "urgency": "near"
-      },
-      "title": "NGA Commercial Space-Based 3D Mapping",
-      "urgency": "near",
-      "valueUSD": 45000000
-    },
-    {
-      "agency": "CSA",
-      "agencyLink": "https://www.asc-csa.gc.ca/",
-      "amountUSD": 22000000,
-      "budgetSourceLink": "#",
-      "category": "DaaS",
-      "daysUntilDeadline": 85,
-      "deadline": "2026-02-14",
-      "description": "Space-based LiDAR for Arctic and sub-Arctic terrain mapping",
-      "forecast_value": "$22,000,000",
-      "funding": {
-        "amountUSD": 22000000
-      },
-      "id": "csa-245",
-      "link": "https://sam.gov",
-      "next_action": "Arctic Capability Demo",
-      "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.397565Z",
-      "timeline": {
-        "daysUntil": 85,
-        "urgency": "near"
-      },
-      "title": "CSA Arctic Topographic Mapping Program",
-      "urgency": "near",
-      "valueUSD": 22000000
+      "valueUSD": 20000000
     },
     {
       "agency": "DOE",
@@ -592,11 +488,11 @@
       "funding": {
         "amountUSD": 10000000
       },
-      "id": "doe-515",
+      "id": "doe-751",
       "link": "https://sam.gov",
       "next_action": "Lab Partnership",
       "pillar": "Research",
-      "scrapedAt": "2025-11-21T18:11:07.398293Z",
+      "scrapedAt": "2025-11-21T18:14:05.366029Z",
       "timeline": {
         "daysUntil": 85,
         "urgency": "near"
@@ -618,11 +514,11 @@
       "funding": {
         "amountUSD": 30000000
       },
-      "id": "google-402",
+      "id": "google-622",
       "link": "https://sam.gov",
       "next_action": "Data Partnership",
       "pillar": "Commercial",
-      "scrapedAt": "2025-11-21T18:11:07.398771Z",
+      "scrapedAt": "2025-11-21T18:14:05.366484Z",
       "timeline": {
         "daysUntil": 80,
         "urgency": "near"
@@ -630,6 +526,162 @@
       "title": "Google Earth Engine Global DEM Initiative",
       "urgency": "near",
       "valueUSD": 30000000
+    },
+    {
+      "agency": "DIU",
+      "agencyLink": "https://www.diu.mil/",
+      "amountUSD": 15000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 15,
+      "deadline": "2025-12-06",
+      "description": "Next-generation space-based LiDAR for rapid large-area mapping",
+      "forecast_value": "$15,000,000",
+      "funding": {
+        "amountUSD": 15000000
+      },
+      "id": "diu-596",
+      "link": "https://sam.gov",
+      "next_action": "Submit Whitepaper",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T18:14:05.365042Z",
+      "timeline": {
+        "daysUntil": 15,
+        "urgency": "urgent"
+      },
+      "title": "DIU Spaceborne LiDAR BAA",
+      "urgency": "urgent",
+      "valueUSD": 15000000
+    },
+    {
+      "agency": "NGA",
+      "agencyLink": "https://www.nga.mil/",
+      "amountUSD": 45000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 40,
+      "deadline": "2025-12-31",
+      "description": "Commercial spaceborne LiDAR and 3D topographic intelligence products",
+      "forecast_value": "$45,000,000",
+      "funding": {
+        "amountUSD": 45000000
+      },
+      "id": "nga-160",
+      "link": "https://sam.gov",
+      "next_action": "Security Clearance Prep",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T18:14:05.364847Z",
+      "timeline": {
+        "daysUntil": 40,
+        "urgency": "near"
+      },
+      "title": "NGA Commercial Space-Based 3D Mapping",
+      "urgency": "near",
+      "valueUSD": 45000000
+    },
+    {
+      "agency": "DLR",
+      "agencyLink": "https://www.dlr.de/",
+      "amountUSD": 30000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 100,
+      "deadline": "2026-03-01",
+      "description": "Next-generation spaceborne LiDAR for high-resolution global DEM",
+      "forecast_value": "$30,000,000",
+      "funding": {
+        "amountUSD": 30000000
+      },
+      "id": "dlr-582",
+      "link": "https://sam.gov",
+      "next_action": "Mission Planning",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T18:14:05.365534Z",
+      "timeline": {
+        "daysUntil": 100,
+        "urgency": "future"
+      },
+      "title": "DLR TanDEM-X Follow-On LiDAR Mission",
+      "urgency": "future",
+      "valueUSD": 30000000
+    },
+    {
+      "agency": "NASA",
+      "agencyLink": "https://science.nasa.gov/earth-science/",
+      "amountUSD": 12000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 45,
+      "deadline": "2026-01-05",
+      "description": "ICESat-2 ATLAS data processing and topographic applications research",
+      "forecast_value": "$12,000,000",
+      "funding": {
+        "amountUSD": 12000000
+      },
+      "id": "nasa-478",
+      "link": "https://sam.gov",
+      "next_action": "Proposal Preparation",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T18:14:05.364586Z",
+      "timeline": {
+        "daysUntil": 45,
+        "urgency": "near"
+      },
+      "title": "NASA ROSES ICESat-2 Science Team Augmentation",
+      "urgency": "near",
+      "valueUSD": 12000000
+    },
+    {
+      "agency": "NASA",
+      "agencyLink": "https://science.nasa.gov/earth-science/",
+      "amountUSD": 25000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 90,
+      "deadline": "2026-02-19",
+      "description": "Commercial space-based LiDAR for large-area topographic mapping",
+      "forecast_value": "$25,000,000",
+      "funding": {
+        "amountUSD": 25000000
+      },
+      "id": "nasa-948",
+      "link": "https://sam.gov",
+      "next_action": "Partner Coordination",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T18:14:05.364600Z",
+      "timeline": {
+        "daysUntil": 90,
+        "urgency": "future"
+      },
+      "title": "NASA Commercial Spaceborne LiDAR Partnership",
+      "urgency": "future",
+      "valueUSD": 25000000
+    },
+    {
+      "agency": "CSA",
+      "agencyLink": "https://www.asc-csa.gc.ca/",
+      "amountUSD": 22000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 85,
+      "deadline": "2026-02-14",
+      "description": "Space-based LiDAR for Arctic and sub-Arctic terrain mapping",
+      "forecast_value": "$22,000,000",
+      "funding": {
+        "amountUSD": 22000000
+      },
+      "id": "csa-505",
+      "link": "https://sam.gov",
+      "next_action": "Arctic Capability Demo",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T18:14:05.365383Z",
+      "timeline": {
+        "daysUntil": 85,
+        "urgency": "near"
+      },
+      "title": "CSA Arctic Topographic Mapping Program",
+      "urgency": "near",
+      "valueUSD": 22000000
     },
     {
       "agency": "NSF",
@@ -644,11 +696,11 @@
       "funding": {
         "amountUSD": 8000000
       },
-      "id": "nsf-434",
+      "id": "nsf-264",
       "link": "https://sam.gov",
       "next_action": "Proposal Development",
       "pillar": "Research",
-      "scrapedAt": "2025-11-21T18:11:07.398102Z",
+      "scrapedAt": "2025-11-21T18:14:05.365963Z",
       "timeline": {
         "daysUntil": 75,
         "urgency": "near"
@@ -670,11 +722,11 @@
       "funding": {
         "amountUSD": 12000000
       },
-      "id": "nsf-654",
+      "id": "nsf-325",
       "link": "https://sam.gov",
       "next_action": "Multi-Institution Proposal",
       "pillar": "Research",
-      "scrapedAt": "2025-11-21T18:11:07.398110Z",
+      "scrapedAt": "2025-11-21T18:14:05.365980Z",
       "timeline": {
         "daysUntil": 95,
         "urgency": "future"
@@ -682,32 +734,6 @@
       "title": "NSF Critical Zone Observatory - Topographic Mapping",
       "urgency": "future",
       "valueUSD": 12000000
-    },
-    {
-      "agency": "Amazon Web Services",
-      "agencyLink": "https://aws.amazon.com/earth/",
-      "amountUSD": 25000000,
-      "budgetSourceLink": "#",
-      "category": "Platform",
-      "daysUntilDeadline": 70,
-      "deadline": "2026-01-30",
-      "description": "Spaceborne LiDAR data integration for AWS geospatial services",
-      "forecast_value": "$25,000,000",
-      "funding": {
-        "amountUSD": 25000000
-      },
-      "id": "amazon-web-services-112",
-      "link": "https://sam.gov",
-      "next_action": "AWS Partnership Brief",
-      "pillar": "Commercial",
-      "scrapedAt": "2025-11-21T18:11:07.398556Z",
-      "timeline": {
-        "daysUntil": 70,
-        "urgency": "near"
-      },
-      "title": "AWS Earth on AWS - Elevation Data Partnership",
-      "urgency": "near",
-      "valueUSD": 25000000
     },
     {
       "agency": "ASI",
@@ -722,11 +748,11 @@
       "funding": {
         "amountUSD": 16000000
       },
-      "id": "asi-555",
+      "id": "asi-502",
       "link": "https://sam.gov",
       "next_action": "Technical Review",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.398085Z",
+      "scrapedAt": "2025-11-21T18:14:05.365773Z",
       "timeline": {
         "daysUntil": 105,
         "urgency": "future"
@@ -736,82 +762,56 @@
       "valueUSD": 16000000
     },
     {
-      "agency": "JAXA",
-      "agencyLink": "https://global.jaxa.jp/",
-      "amountUSD": 18000000,
+      "agency": "Amazon Web Services",
+      "agencyLink": "https://aws.amazon.com/earth/",
+      "amountUSD": 25000000,
       "budgetSourceLink": "#",
-      "category": "R&D",
-      "daysUntilDeadline": 120,
-      "deadline": "2026-03-21",
-      "description": "Spaceborne LiDAR integration for ALOS-4 global topographic mapping",
-      "forecast_value": "$18,000,000",
-      "funding": {
-        "amountUSD": 18000000
-      },
-      "id": "jaxa-920",
-      "link": "https://sam.gov",
-      "next_action": "International Partnership",
-      "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.397545Z",
-      "timeline": {
-        "daysUntil": 120,
-        "urgency": "future"
-      },
-      "title": "JAXA ALOS-4 Topographic Mission Support",
-      "urgency": "future",
-      "valueUSD": 18000000
-    },
-    {
-      "agency": "Caltech/JPL",
-      "agencyLink": "https://www.jpl.nasa.gov/",
-      "amountUSD": 18000000,
-      "budgetSourceLink": "#",
-      "category": "R&D",
-      "daysUntilDeadline": 90,
-      "deadline": "2026-02-19",
-      "description": "Next-generation spaceborne LiDAR for planetary surface science",
-      "forecast_value": "$18,000,000",
-      "funding": {
-        "amountUSD": 18000000
-      },
-      "id": "caltech-jpl-625",
-      "link": "https://sam.gov",
-      "next_action": "JPL Collaboration",
-      "pillar": "Research",
-      "scrapedAt": "2025-11-21T18:11:07.398530Z",
-      "timeline": {
-        "daysUntil": 90,
-        "urgency": "future"
-      },
-      "title": "JPL Earth Surface & Interior Science - LiDAR",
-      "urgency": "future",
-      "valueUSD": 18000000
-    },
-    {
-      "agency": "USACE",
-      "agencyLink": "https://www.usace.army.mil/",
-      "amountUSD": 32000000,
-      "budgetSourceLink": "#",
-      "category": "DaaS",
+      "category": "Platform",
       "daysUntilDeadline": 70,
       "deadline": "2026-01-30",
-      "description": "High-resolution DEM generation for flood mapping and infrastructure planning",
-      "forecast_value": "$32,000,000",
+      "description": "Spaceborne LiDAR data integration for AWS geospatial services",
+      "forecast_value": "$25,000,000",
       "funding": {
-        "amountUSD": 32000000
+        "amountUSD": 25000000
       },
-      "id": "usace-199",
+      "id": "amazon-web-services-276",
       "link": "https://sam.gov",
-      "next_action": "Past Performance Review",
-      "pillar": "Federal",
-      "scrapedAt": "2025-11-21T18:11:07.397040Z",
+      "next_action": "AWS Partnership Brief",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T18:14:05.366458Z",
       "timeline": {
         "daysUntil": 70,
         "urgency": "near"
       },
-      "title": "USACE National DEM Production Contract",
+      "title": "AWS Earth on AWS - Elevation Data Partnership",
       "urgency": "near",
-      "valueUSD": 32000000
+      "valueUSD": 25000000
+    },
+    {
+      "agency": "Microsoft",
+      "agencyLink": "https://planetarycomputer.microsoft.com/",
+      "amountUSD": 22000000,
+      "budgetSourceLink": "#",
+      "category": "Platform",
+      "daysUntilDeadline": 85,
+      "deadline": "2026-02-14",
+      "description": "Spaceborne LiDAR DEM for Planetary Computer sustainability applications",
+      "forecast_value": "$22,000,000",
+      "funding": {
+        "amountUSD": 22000000
+      },
+      "id": "microsoft-703",
+      "link": "https://sam.gov",
+      "next_action": "Azure Integration",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T18:14:05.366882Z",
+      "timeline": {
+        "daysUntil": 85,
+        "urgency": "near"
+      },
+      "title": "Microsoft Planetary Computer Terrain Services",
+      "urgency": "near",
+      "valueUSD": 22000000
     },
     {
       "agency": "Maxar",
@@ -826,11 +826,11 @@
       "funding": {
         "amountUSD": 35000000
       },
-      "id": "maxar-644",
+      "id": "maxar-154",
       "link": "https://sam.gov",
       "next_action": "Commercial Partnership",
       "pillar": "Commercial",
-      "scrapedAt": "2025-11-21T18:11:07.399285Z",
+      "scrapedAt": "2025-11-21T18:14:05.366914Z",
       "timeline": {
         "daysUntil": 60,
         "urgency": "near"
@@ -852,11 +852,11 @@
       "funding": {
         "amountUSD": 45000000
       },
-      "id": "state-of-california-544",
+      "id": "state-of-california-782",
       "link": "https://sam.gov",
       "next_action": "State Contracting",
       "pillar": "State/Local",
-      "scrapedAt": "2025-11-21T18:11:07.399327Z",
+      "scrapedAt": "2025-11-21T18:14:05.366934Z",
       "timeline": {
         "daysUntil": 75,
         "urgency": "near"
@@ -878,11 +878,11 @@
       "funding": {
         "amountUSD": 38000000
       },
-      "id": "state-of-texas-626",
+      "id": "state-of-texas-736",
       "link": "https://sam.gov",
       "next_action": "TNRIS Coordination",
       "pillar": "State/Local",
-      "scrapedAt": "2025-11-21T18:11:07.399350Z",
+      "scrapedAt": "2025-11-21T18:14:05.366951Z",
       "timeline": {
         "daysUntil": 90,
         "urgency": "future"
@@ -904,11 +904,11 @@
       "funding": {
         "amountUSD": 32000000
       },
-      "id": "state-of-florida-853",
+      "id": "state-of-florida-157",
       "link": "https://sam.gov",
       "next_action": "Coastal Demo",
       "pillar": "State/Local",
-      "scrapedAt": "2025-11-21T18:11:07.399368Z",
+      "scrapedAt": "2025-11-21T18:14:05.366966Z",
       "timeline": {
         "daysUntil": 100,
         "urgency": "future"
@@ -930,11 +930,11 @@
       "funding": {
         "amountUSD": 12000000
       },
-      "id": "nyc-planning-758",
+      "id": "nyc-planning-391",
       "link": "https://sam.gov",
       "next_action": "City Proposal",
       "pillar": "State/Local",
-      "scrapedAt": "2025-11-21T18:11:07.399384Z",
+      "scrapedAt": "2025-11-21T18:14:05.366981Z",
       "timeline": {
         "daysUntil": 65,
         "urgency": "near"
@@ -956,11 +956,11 @@
       "funding": {
         "amountUSD": 50000000
       },
-      "id": "world-bank-434",
+      "id": "world-bank-729",
       "link": "https://sam.gov",
       "next_action": "Development Partnership",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399402Z",
+      "scrapedAt": "2025-11-21T18:14:05.367026Z",
       "timeline": {
         "daysUntil": 130,
         "urgency": "future"
@@ -982,11 +982,11 @@
       "funding": {
         "amountUSD": 18000000
       },
-      "id": "planet-labs-251",
+      "id": "planet-labs-418",
       "link": "https://sam.gov",
       "next_action": "Platform Integration",
       "pillar": "Commercial",
-      "scrapedAt": "2025-11-21T18:11:07.399422Z",
+      "scrapedAt": "2025-11-21T18:14:05.367043Z",
       "timeline": {
         "daysUntil": 75,
         "urgency": "near"
@@ -1008,11 +1008,11 @@
       "funding": {
         "amountUSD": 120000000
       },
-      "id": "ibge-879",
+      "id": "ibge-445",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399441Z",
+      "scrapedAt": "2025-11-21T18:14:05.367058Z",
       "timeline": {
         "daysUntil": 95,
         "urgency": "future"
@@ -1034,11 +1034,11 @@
       "funding": {
         "amountUSD": 85000000
       },
-      "id": "ibge-762",
+      "id": "ibge-588",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399450Z",
+      "scrapedAt": "2025-11-21T18:14:05.367066Z",
       "timeline": {
         "daysUntil": 120,
         "urgency": "future"
@@ -1060,11 +1060,11 @@
       "funding": {
         "amountUSD": 72000000
       },
-      "id": "ibge-579",
+      "id": "ibge-769",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399457Z",
+      "scrapedAt": "2025-11-21T18:14:05.367073Z",
       "timeline": {
         "daysUntil": 110,
         "urgency": "future"
@@ -1086,11 +1086,11 @@
       "funding": {
         "amountUSD": 45000000
       },
-      "id": "geoscience-australia-179",
+      "id": "geoscience-australia-695",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399474Z",
+      "scrapedAt": "2025-11-21T18:14:05.367088Z",
       "timeline": {
         "daysUntil": 110,
         "urgency": "future"
@@ -1112,11 +1112,11 @@
       "funding": {
         "amountUSD": 32000000
       },
-      "id": "geoscience-australia-103",
+      "id": "geoscience-australia-180",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399481Z",
+      "scrapedAt": "2025-11-21T18:14:05.367095Z",
       "timeline": {
         "daysUntil": 125,
         "urgency": "future"
@@ -1138,11 +1138,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "linz-248",
+      "id": "linz-549",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399499Z",
+      "scrapedAt": "2025-11-21T18:14:05.367109Z",
       "timeline": {
         "daysUntil": 114,
         "urgency": "future"
@@ -1164,11 +1164,11 @@
       "funding": {
         "amountUSD": 22000000
       },
-      "id": "linz-955",
+      "id": "linz-155",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399507Z",
+      "scrapedAt": "2025-11-21T18:14:05.367117Z",
       "timeline": {
         "daysUntil": 128,
         "urgency": "future"
@@ -1190,11 +1190,11 @@
       "funding": {
         "amountUSD": 32000000
       },
-      "id": "kari-158",
+      "id": "kari-808",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399522Z",
+      "scrapedAt": "2025-11-21T18:14:05.367131Z",
       "timeline": {
         "daysUntil": 114,
         "urgency": "future"
@@ -1216,11 +1216,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "kari-861",
+      "id": "kari-679",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399530Z",
+      "scrapedAt": "2025-11-21T18:14:05.367139Z",
       "timeline": {
         "daysUntil": 117,
         "urgency": "future"
@@ -1242,11 +1242,11 @@
       "funding": {
         "amountUSD": 25000000
       },
-      "id": "kari-554",
+      "id": "kari-293",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399539Z",
+      "scrapedAt": "2025-11-21T18:14:05.367145Z",
       "timeline": {
         "daysUntil": 130,
         "urgency": "future"
@@ -1268,11 +1268,11 @@
       "funding": {
         "amountUSD": 55000000
       },
-      "id": "inegi-195",
+      "id": "inegi-170",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399554Z",
+      "scrapedAt": "2025-11-21T18:14:05.367159Z",
       "timeline": {
         "daysUntil": 116,
         "urgency": "future"
@@ -1294,11 +1294,11 @@
       "funding": {
         "amountUSD": 38000000
       },
-      "id": "inegi-926",
+      "id": "inegi-330",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399561Z",
+      "scrapedAt": "2025-11-21T18:14:05.367166Z",
       "timeline": {
         "daysUntil": 122,
         "urgency": "future"
@@ -1320,11 +1320,11 @@
       "funding": {
         "amountUSD": 42000000
       },
-      "id": "inegi-360",
+      "id": "inegi-538",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399571Z",
+      "scrapedAt": "2025-11-21T18:14:05.367173Z",
       "timeline": {
         "daysUntil": 115,
         "urgency": "future"
@@ -1346,11 +1346,11 @@
       "funding": {
         "amountUSD": 38000000
       },
-      "id": "ign-336",
+      "id": "ign-243",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399587Z",
+      "scrapedAt": "2025-11-21T18:14:05.367187Z",
       "timeline": {
         "daysUntil": 89,
         "urgency": "near"
@@ -1372,11 +1372,11 @@
       "funding": {
         "amountUSD": 29000000
       },
-      "id": "ign-142",
+      "id": "ign-902",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399594Z",
+      "scrapedAt": "2025-11-21T18:14:05.367194Z",
       "timeline": {
         "daysUntil": 126,
         "urgency": "future"
@@ -1398,11 +1398,11 @@
       "funding": {
         "amountUSD": 26000000
       },
-      "id": "ign-941",
+      "id": "ign-793",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399602Z",
+      "scrapedAt": "2025-11-21T18:14:05.367201Z",
       "timeline": {
         "daysUntil": 135,
         "urgency": "future"
@@ -1424,11 +1424,11 @@
       "funding": {
         "amountUSD": 42000000
       },
-      "id": "cnidep-965",
+      "id": "cnidep-580",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399617Z",
+      "scrapedAt": "2025-11-21T18:14:05.367215Z",
       "timeline": {
         "daysUntil": 89,
         "urgency": "near"
@@ -1450,11 +1450,11 @@
       "funding": {
         "amountUSD": 31000000
       },
-      "id": "cnidep-555",
+      "id": "cnidep-314",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399625Z",
+      "scrapedAt": "2025-11-21T18:14:05.367222Z",
       "timeline": {
         "daysUntil": 126,
         "urgency": "future"
@@ -1476,11 +1476,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "cnidep-104",
+      "id": "cnidep-294",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399632Z",
+      "scrapedAt": "2025-11-21T18:14:05.367229Z",
       "timeline": {
         "daysUntil": 145,
         "urgency": "future"
@@ -1502,11 +1502,11 @@
       "funding": {
         "amountUSD": 35000000
       },
-      "id": "sansa-469",
+      "id": "sansa-514",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399651Z",
+      "scrapedAt": "2025-11-21T18:14:05.367243Z",
       "timeline": {
         "daysUntil": 85,
         "urgency": "near"
@@ -1528,11 +1528,11 @@
       "funding": {
         "amountUSD": 27000000
       },
-      "id": "sansa-713",
+      "id": "sansa-217",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399660Z",
+      "scrapedAt": "2025-11-21T18:14:05.367250Z",
       "timeline": {
         "daysUntil": 107,
         "urgency": "future"
@@ -1554,11 +1554,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "sansa-251",
+      "id": "sansa-242",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399668Z",
+      "scrapedAt": "2025-11-21T18:14:05.367257Z",
       "timeline": {
         "daysUntil": 125,
         "urgency": "future"
@@ -1580,11 +1580,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "nasrda-600",
+      "id": "nasrda-984",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399682Z",
+      "scrapedAt": "2025-11-21T18:14:05.367272Z",
       "timeline": {
         "daysUntil": 114,
         "urgency": "future"
@@ -1606,11 +1606,11 @@
       "funding": {
         "amountUSD": 22000000
       },
-      "id": "nasrda-341",
+      "id": "nasrda-814",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399690Z",
+      "scrapedAt": "2025-11-21T18:14:05.367280Z",
       "timeline": {
         "daysUntil": 111,
         "urgency": "future"
@@ -1632,11 +1632,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "narss-960",
+      "id": "narss-535",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399706Z",
+      "scrapedAt": "2025-11-21T18:14:05.367295Z",
       "timeline": {
         "daysUntil": 113,
         "urgency": "future"
@@ -1658,11 +1658,11 @@
       "funding": {
         "amountUSD": 19000000
       },
-      "id": "narss-105",
+      "id": "narss-721",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399714Z",
+      "scrapedAt": "2025-11-21T18:14:05.367302Z",
       "timeline": {
         "daysUntil": 124,
         "urgency": "future"
@@ -1684,11 +1684,11 @@
       "funding": {
         "amountUSD": 17000000
       },
-      "id": "narss-591",
+      "id": "narss-160",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399725Z",
+      "scrapedAt": "2025-11-21T18:14:05.367309Z",
       "timeline": {
         "daysUntil": 130,
         "urgency": "future"
@@ -1710,11 +1710,11 @@
       "funding": {
         "amountUSD": 52000000
       },
-      "id": "eiast-823",
+      "id": "eiast-982",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399740Z",
+      "scrapedAt": "2025-11-21T18:14:05.367323Z",
       "timeline": {
         "daysUntil": 104,
         "urgency": "future"
@@ -1736,11 +1736,11 @@
       "funding": {
         "amountUSD": 38000000
       },
-      "id": "eiast-157",
+      "id": "eiast-386",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399747Z",
+      "scrapedAt": "2025-11-21T18:14:05.367335Z",
       "timeline": {
         "daysUntil": 106,
         "urgency": "future"
@@ -1762,11 +1762,11 @@
       "funding": {
         "amountUSD": 33000000
       },
-      "id": "eiast-462",
+      "id": "eiast-267",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399757Z",
+      "scrapedAt": "2025-11-21T18:14:05.367342Z",
       "timeline": {
         "daysUntil": 110,
         "urgency": "future"
@@ -1788,11 +1788,11 @@
       "funding": {
         "amountUSD": 65000000
       },
-      "id": "kacst-645",
+      "id": "kacst-351",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399771Z",
+      "scrapedAt": "2025-11-21T18:14:05.367356Z",
       "timeline": {
         "daysUntil": 110,
         "urgency": "future"
@@ -1814,11 +1814,11 @@
       "funding": {
         "amountUSD": 45000000
       },
-      "id": "kacst-221",
+      "id": "kacst-939",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399778Z",
+      "scrapedAt": "2025-11-21T18:14:05.367364Z",
       "timeline": {
         "daysUntil": 100,
         "urgency": "future"
@@ -1840,11 +1840,11 @@
       "funding": {
         "amountUSD": 38000000
       },
-      "id": "kacst-962",
+      "id": "kacst-976",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399785Z",
+      "scrapedAt": "2025-11-21T18:14:05.367371Z",
       "timeline": {
         "daysUntil": 140,
         "urgency": "future"
@@ -1866,11 +1866,11 @@
       "funding": {
         "amountUSD": 22000000
       },
-      "id": "isa-844",
+      "id": "isa-989",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399802Z",
+      "scrapedAt": "2025-11-21T18:14:05.367386Z",
       "timeline": {
         "daysUntil": 117,
         "urgency": "future"
@@ -1892,11 +1892,11 @@
       "funding": {
         "amountUSD": 18000000
       },
-      "id": "isa-952",
+      "id": "isa-703",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399809Z",
+      "scrapedAt": "2025-11-21T18:14:05.367394Z",
       "timeline": {
         "daysUntil": 134,
         "urgency": "future"
@@ -1918,11 +1918,11 @@
       "funding": {
         "amountUSD": 16000000
       },
-      "id": "isa-223",
+      "id": "isa-553",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399817Z",
+      "scrapedAt": "2025-11-21T18:14:05.367401Z",
       "timeline": {
         "daysUntil": 125,
         "urgency": "future"
@@ -1944,11 +1944,11 @@
       "funding": {
         "amountUSD": 38000000
       },
-      "id": "tuasa-764",
+      "id": "tuasa-255",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399831Z",
+      "scrapedAt": "2025-11-21T18:14:05.367416Z",
       "timeline": {
         "daysUntil": 87,
         "urgency": "near"
@@ -1970,11 +1970,11 @@
       "funding": {
         "amountUSD": 29000000
       },
-      "id": "tuasa-995",
+      "id": "tuasa-417",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399839Z",
+      "scrapedAt": "2025-11-21T18:14:05.367424Z",
       "timeline": {
         "daysUntil": 111,
         "urgency": "future"
@@ -1996,11 +1996,11 @@
       "funding": {
         "amountUSD": 26000000
       },
-      "id": "tuasa-425",
+      "id": "tuasa-989",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399848Z",
+      "scrapedAt": "2025-11-21T18:14:05.367431Z",
       "timeline": {
         "daysUntil": 135,
         "urgency": "future"
@@ -2022,11 +2022,11 @@
       "funding": {
         "amountUSD": 26000000
       },
-      "id": "cbk-720",
+      "id": "cbk-722",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399864Z",
+      "scrapedAt": "2025-11-21T18:14:05.367445Z",
       "timeline": {
         "daysUntil": 115,
         "urgency": "future"
@@ -2048,11 +2048,11 @@
       "funding": {
         "amountUSD": 21000000
       },
-      "id": "cbk-521",
+      "id": "cbk-961",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399874Z",
+      "scrapedAt": "2025-11-21T18:14:05.367452Z",
       "timeline": {
         "daysUntil": 115,
         "urgency": "future"
@@ -2074,11 +2074,11 @@
       "funding": {
         "amountUSD": 19000000
       },
-      "id": "cbk-961",
+      "id": "cbk-644",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399884Z",
+      "scrapedAt": "2025-11-21T18:14:05.367459Z",
       "timeline": {
         "daysUntil": 120,
         "urgency": "future"
@@ -2100,11 +2100,11 @@
       "funding": {
         "amountUSD": 32000000
       },
-      "id": "snsa-964",
+      "id": "snsa-747",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399900Z",
+      "scrapedAt": "2025-11-21T18:14:05.367472Z",
       "timeline": {
         "daysUntil": 86,
         "urgency": "near"
@@ -2126,11 +2126,11 @@
       "funding": {
         "amountUSD": 26000000
       },
-      "id": "snsa-232",
+      "id": "snsa-811",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399908Z",
+      "scrapedAt": "2025-11-21T18:14:05.367479Z",
       "timeline": {
         "daysUntil": 134,
         "urgency": "future"
@@ -2152,11 +2152,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "snsa-582",
+      "id": "snsa-172",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399916Z",
+      "scrapedAt": "2025-11-21T18:14:05.367486Z",
       "timeline": {
         "daysUntil": 130,
         "urgency": "future"
@@ -2178,11 +2178,11 @@
       "funding": {
         "amountUSD": 29000000
       },
-      "id": "nsc-461",
+      "id": "nsc-659",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399930Z",
+      "scrapedAt": "2025-11-21T18:14:05.367499Z",
       "timeline": {
         "daysUntil": 86,
         "urgency": "near"
@@ -2204,11 +2204,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "nsc-309",
+      "id": "nsc-298",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399938Z",
+      "scrapedAt": "2025-11-21T18:14:05.367507Z",
       "timeline": {
         "daysUntil": 101,
         "urgency": "future"
@@ -2230,11 +2230,11 @@
       "funding": {
         "amountUSD": 22000000
       },
-      "id": "nsc-226",
+      "id": "nsc-839",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399946Z",
+      "scrapedAt": "2025-11-21T18:14:05.367514Z",
       "timeline": {
         "daysUntil": 115,
         "urgency": "future"
@@ -2256,11 +2256,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "fmi-369",
+      "id": "fmi-593",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399965Z",
+      "scrapedAt": "2025-11-21T18:14:05.367527Z",
       "timeline": {
         "daysUntil": 110,
         "urgency": "future"
@@ -2282,11 +2282,11 @@
       "funding": {
         "amountUSD": 20000000
       },
-      "id": "fmi-229",
+      "id": "fmi-306",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.399977Z",
+      "scrapedAt": "2025-11-21T18:14:05.367534Z",
       "timeline": {
         "daysUntil": 139,
         "urgency": "future"
@@ -2308,11 +2308,11 @@
       "funding": {
         "amountUSD": 18000000
       },
-      "id": "fmi-847",
+      "id": "fmi-697",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400003Z",
+      "scrapedAt": "2025-11-21T18:14:05.367541Z",
       "timeline": {
         "daysUntil": 125,
         "urgency": "future"
@@ -2334,11 +2334,11 @@
       "funding": {
         "amountUSD": 36000000
       },
-      "id": "cdti-205",
+      "id": "cdti-362",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400024Z",
+      "scrapedAt": "2025-11-21T18:14:05.367558Z",
       "timeline": {
         "daysUntil": 106,
         "urgency": "future"
@@ -2360,11 +2360,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "cdti-310",
+      "id": "cdti-424",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400032Z",
+      "scrapedAt": "2025-11-21T18:14:05.367566Z",
       "timeline": {
         "daysUntil": 122,
         "urgency": "future"
@@ -2386,11 +2386,11 @@
       "funding": {
         "amountUSD": 25000000
       },
-      "id": "cdti-900",
+      "id": "cdti-912",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400039Z",
+      "scrapedAt": "2025-11-21T18:14:05.367573Z",
       "timeline": {
         "daysUntil": 140,
         "urgency": "future"
@@ -2412,11 +2412,11 @@
       "funding": {
         "amountUSD": 34000000
       },
-      "id": "asi-288",
+      "id": "asi-271",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400057Z",
+      "scrapedAt": "2025-11-21T18:14:05.367587Z",
       "timeline": {
         "daysUntil": 87,
         "urgency": "near"
@@ -2438,11 +2438,11 @@
       "funding": {
         "amountUSD": 26000000
       },
-      "id": "asi-135",
+      "id": "asi-479",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400066Z",
+      "scrapedAt": "2025-11-21T18:14:05.367594Z",
       "timeline": {
         "daysUntil": 121,
         "urgency": "future"
@@ -2464,11 +2464,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "asi-674",
+      "id": "asi-976",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400075Z",
+      "scrapedAt": "2025-11-21T18:14:05.367601Z",
       "timeline": {
         "daysUntil": 130,
         "urgency": "future"
@@ -2490,11 +2490,11 @@
       "funding": {
         "amountUSD": 48000000
       },
-      "id": "cnes-297",
+      "id": "cnes-922",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400093Z",
+      "scrapedAt": "2025-11-21T18:14:05.367615Z",
       "timeline": {
         "daysUntil": 92,
         "urgency": "future"
@@ -2516,11 +2516,11 @@
       "funding": {
         "amountUSD": 36000000
       },
-      "id": "cnes-822",
+      "id": "cnes-669",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400101Z",
+      "scrapedAt": "2025-11-21T18:14:05.367623Z",
       "timeline": {
         "daysUntil": 106,
         "urgency": "future"
@@ -2542,11 +2542,11 @@
       "funding": {
         "amountUSD": 32000000
       },
-      "id": "cnes-127",
+      "id": "cnes-829",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400115Z",
+      "scrapedAt": "2025-11-21T18:14:05.367630Z",
       "timeline": {
         "daysUntil": 135,
         "urgency": "future"
@@ -2568,11 +2568,11 @@
       "funding": {
         "amountUSD": 27000000
       },
-      "id": "nso-611",
+      "id": "nso-933",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400131Z",
+      "scrapedAt": "2025-11-21T18:14:05.367643Z",
       "timeline": {
         "daysUntil": 112,
         "urgency": "future"
@@ -2594,11 +2594,11 @@
       "funding": {
         "amountUSD": 22000000
       },
-      "id": "nso-354",
+      "id": "nso-681",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400138Z",
+      "scrapedAt": "2025-11-21T18:14:05.367651Z",
       "timeline": {
         "daysUntil": 122,
         "urgency": "future"
@@ -2620,11 +2620,11 @@
       "funding": {
         "amountUSD": 21000000
       },
-      "id": "nso-107",
+      "id": "nso-372",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400146Z",
+      "scrapedAt": "2025-11-21T18:14:05.367658Z",
       "timeline": {
         "daysUntil": 120,
         "urgency": "future"
@@ -2646,11 +2646,11 @@
       "funding": {
         "amountUSD": 19000000
       },
-      "id": "belspo-890",
+      "id": "belspo-271",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400160Z",
+      "scrapedAt": "2025-11-21T18:14:05.367672Z",
       "timeline": {
         "daysUntil": 92,
         "urgency": "future"
@@ -2672,11 +2672,11 @@
       "funding": {
         "amountUSD": 16000000
       },
-      "id": "belspo-920",
+      "id": "belspo-993",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400168Z",
+      "scrapedAt": "2025-11-21T18:14:05.367682Z",
       "timeline": {
         "daysUntil": 112,
         "urgency": "future"
@@ -2698,11 +2698,11 @@
       "funding": {
         "amountUSD": 31000000
       },
-      "id": "sso-519",
+      "id": "sso-907",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400186Z",
+      "scrapedAt": "2025-11-21T18:14:05.367696Z",
       "timeline": {
         "daysUntil": 114,
         "urgency": "future"
@@ -2724,11 +2724,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "sso-746",
+      "id": "sso-419",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400193Z",
+      "scrapedAt": "2025-11-21T18:14:05.367703Z",
       "timeline": {
         "daysUntil": 110,
         "urgency": "future"
@@ -2750,11 +2750,11 @@
       "funding": {
         "amountUSD": 23000000
       },
-      "id": "ffg-428",
+      "id": "ffg-589",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400210Z",
+      "scrapedAt": "2025-11-21T18:14:05.367717Z",
       "timeline": {
         "daysUntil": 90,
         "urgency": "future"
@@ -2776,11 +2776,11 @@
       "funding": {
         "amountUSD": 19000000
       },
-      "id": "ffg-796",
+      "id": "ffg-473",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400218Z",
+      "scrapedAt": "2025-11-21T18:14:05.367727Z",
       "timeline": {
         "daysUntil": 103,
         "urgency": "future"
@@ -2802,11 +2802,11 @@
       "funding": {
         "amountUSD": 40000000
       },
-      "id": "gistda-946",
+      "id": "gistda-933",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400235Z",
+      "scrapedAt": "2025-11-21T18:14:05.367741Z",
       "timeline": {
         "daysUntil": 89,
         "urgency": "near"
@@ -2828,11 +2828,11 @@
       "funding": {
         "amountUSD": 32000000
       },
-      "id": "gistda-153",
+      "id": "gistda-804",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400243Z",
+      "scrapedAt": "2025-11-21T18:14:05.367749Z",
       "timeline": {
         "daysUntil": 127,
         "urgency": "future"
@@ -2854,11 +2854,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "gistda-290",
+      "id": "gistda-477",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400250Z",
+      "scrapedAt": "2025-11-21T18:14:05.367756Z",
       "timeline": {
         "daysUntil": 140,
         "urgency": "future"
@@ -2880,11 +2880,11 @@
       "funding": {
         "amountUSD": 55000000
       },
-      "id": "brin-535",
+      "id": "brin-327",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400264Z",
+      "scrapedAt": "2025-11-21T18:14:05.367769Z",
       "timeline": {
         "daysUntil": 102,
         "urgency": "future"
@@ -2906,11 +2906,11 @@
       "funding": {
         "amountUSD": 42000000
       },
-      "id": "brin-969",
+      "id": "brin-345",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400274Z",
+      "scrapedAt": "2025-11-21T18:14:05.367776Z",
       "timeline": {
         "daysUntil": 102,
         "urgency": "future"
@@ -2932,11 +2932,11 @@
       "funding": {
         "amountUSD": 36000000
       },
-      "id": "brin-208",
+      "id": "brin-853",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400281Z",
+      "scrapedAt": "2025-11-21T18:14:05.367783Z",
       "timeline": {
         "daysUntil": 150,
         "urgency": "future"
@@ -2958,11 +2958,11 @@
       "funding": {
         "amountUSD": 33000000
       },
-      "id": "mysa-476",
+      "id": "mysa-981",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400295Z",
+      "scrapedAt": "2025-11-21T18:14:05.367797Z",
       "timeline": {
         "daysUntil": 106,
         "urgency": "future"
@@ -2984,11 +2984,11 @@
       "funding": {
         "amountUSD": 26000000
       },
-      "id": "mysa-997",
+      "id": "mysa-691",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400303Z",
+      "scrapedAt": "2025-11-21T18:14:05.367804Z",
       "timeline": {
         "daysUntil": 122,
         "urgency": "future"
@@ -3010,11 +3010,11 @@
       "funding": {
         "amountUSD": 38000000
       },
-      "id": "philsa-527",
+      "id": "philsa-879",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400317Z",
+      "scrapedAt": "2025-11-21T18:14:05.367822Z",
       "timeline": {
         "daysUntil": 101,
         "urgency": "future"
@@ -3036,11 +3036,11 @@
       "funding": {
         "amountUSD": 29000000
       },
-      "id": "philsa-821",
+      "id": "philsa-882",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400325Z",
+      "scrapedAt": "2025-11-21T18:14:05.367831Z",
       "timeline": {
         "daysUntil": 127,
         "urgency": "future"
@@ -3062,11 +3062,11 @@
       "funding": {
         "amountUSD": 30000000
       },
-      "id": "vnredsat-482",
+      "id": "vnredsat-704",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400342Z",
+      "scrapedAt": "2025-11-21T18:14:05.367845Z",
       "timeline": {
         "daysUntil": 106,
         "urgency": "future"
@@ -3088,11 +3088,11 @@
       "funding": {
         "amountUSD": 24000000
       },
-      "id": "vnredsat-208",
+      "id": "vnredsat-398",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400354Z",
+      "scrapedAt": "2025-11-21T18:14:05.367853Z",
       "timeline": {
         "daysUntil": 123,
         "urgency": "future"
@@ -3114,11 +3114,11 @@
       "funding": {
         "amountUSD": 42000000
       },
-      "id": "igac-395",
+      "id": "igac-409",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400369Z",
+      "scrapedAt": "2025-11-21T18:14:05.367866Z",
       "timeline": {
         "daysUntil": 92,
         "urgency": "future"
@@ -3140,11 +3140,11 @@
       "funding": {
         "amountUSD": 32000000
       },
-      "id": "igac-812",
+      "id": "igac-480",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400377Z",
+      "scrapedAt": "2025-11-21T18:14:05.367874Z",
       "timeline": {
         "daysUntil": 115,
         "urgency": "future"
@@ -3166,11 +3166,11 @@
       "funding": {
         "amountUSD": 29000000
       },
-      "id": "igac-230",
+      "id": "igac-684",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400384Z",
+      "scrapedAt": "2025-11-21T18:14:05.367881Z",
       "timeline": {
         "daysUntil": 140,
         "urgency": "future"
@@ -3192,11 +3192,11 @@
       "funding": {
         "amountUSD": 35000000
       },
-      "id": "ign-peru-723",
+      "id": "ign-peru-736",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400399Z",
+      "scrapedAt": "2025-11-21T18:14:05.367897Z",
       "timeline": {
         "daysUntil": 108,
         "urgency": "future"
@@ -3218,11 +3218,11 @@
       "funding": {
         "amountUSD": 27000000
       },
-      "id": "ign-peru-904",
+      "id": "ign-peru-926",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400407Z",
+      "scrapedAt": "2025-11-21T18:14:05.367905Z",
       "timeline": {
         "daysUntil": 126,
         "urgency": "future"
@@ -3244,11 +3244,11 @@
       "funding": {
         "amountUSD": 28000000
       },
-      "id": "suparco-344",
+      "id": "suparco-481",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400424Z",
+      "scrapedAt": "2025-11-21T18:14:05.367919Z",
       "timeline": {
         "daysUntil": 102,
         "urgency": "future"
@@ -3270,11 +3270,11 @@
       "funding": {
         "amountUSD": 22000000
       },
-      "id": "suparco-661",
+      "id": "suparco-438",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400432Z",
+      "scrapedAt": "2025-11-21T18:14:05.367926Z",
       "timeline": {
         "daysUntil": 138,
         "urgency": "future"
@@ -3296,11 +3296,11 @@
       "funding": {
         "amountUSD": 25000000
       },
-      "id": "sparrso-815",
+      "id": "sparrso-580",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400448Z",
+      "scrapedAt": "2025-11-21T18:14:05.367942Z",
       "timeline": {
         "daysUntil": 102,
         "urgency": "future"
@@ -3322,11 +3322,11 @@
       "funding": {
         "amountUSD": 20000000
       },
-      "id": "sparrso-676",
+      "id": "sparrso-478",
       "link": "https://sam.gov",
       "next_action": "Technical Proposal",
       "pillar": "International",
-      "scrapedAt": "2025-11-21T18:11:07.400457Z",
+      "scrapedAt": "2025-11-21T18:14:05.367949Z",
       "timeline": {
         "daysUntil": 131,
         "urgency": "future"

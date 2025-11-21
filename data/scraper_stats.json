@@ -3,7 +3,25 @@
     {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "FEMA Flood",
+      "scraper": "Caltech JPL",
+      "source_type": "Research"
+    },
+    {
+      "country": "China",
+      "opportunities_found": 1,
+      "scraper": "CNSA Mapping",
+      "source_type": "International"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "MIT Research",
+      "source_type": "Research"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "USACE Mapping",
       "source_type": "Federal"
     },
     {
@@ -25,22 +43,28 @@
       "source_type": "Federal"
     },
     {
-      "country": "China",
-      "opportunities_found": 1,
-      "scraper": "CNSA Mapping",
-      "source_type": "International"
-    },
-    {
       "country": "UK",
       "opportunities_found": 1,
       "scraper": "UKSA EO",
       "source_type": "International"
     },
     {
+      "country": "Japan",
+      "opportunities_found": 1,
+      "scraper": "JAXA Earth",
+      "source_type": "International"
+    },
+    {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "MIT Research",
-      "source_type": "Research"
+      "scraper": "FEMA Flood",
+      "source_type": "Federal"
+    },
+    {
+      "country": "India",
+      "opportunities_found": 1,
+      "scraper": "ISRO Cartography",
+      "source_type": "International"
     },
     {
       "country": "USA",
@@ -56,33 +80,9 @@
     },
     {
       "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "Microsoft Planetary",
-      "source_type": "Commercial"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 2,
-      "scraper": "NASA Space LiDAR",
-      "source_type": "Federal"
-    },
-    {
-      "country": "India",
-      "opportunities_found": 1,
-      "scraper": "ISRO Cartography",
-      "source_type": "International"
-    },
-    {
-      "country": "USA",
       "opportunities_found": 2,
       "scraper": "USGS 3DEP",
       "source_type": "Federal"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "ESRI Platform",
-      "source_type": "Commercial"
     },
     {
       "country": "USA",
@@ -91,28 +91,10 @@
       "source_type": "Research"
     },
     {
-      "country": "Germany",
-      "opportunities_found": 1,
-      "scraper": "DLR Remote Sensing",
-      "source_type": "International"
-    },
-    {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "DIU Innovation",
-      "source_type": "Federal"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "NGA Geoint",
-      "source_type": "Federal"
-    },
-    {
-      "country": "Canada",
-      "opportunities_found": 1,
-      "scraper": "CSA EO",
-      "source_type": "International"
+      "scraper": "ESRI Platform",
+      "source_type": "Commercial"
     },
     {
       "country": "USA",
@@ -128,15 +110,39 @@
     },
     {
       "country": "USA",
-      "opportunities_found": 2,
-      "scraper": "NSF Geosciences",
-      "source_type": "Research"
+      "opportunities_found": 1,
+      "scraper": "DIU Innovation",
+      "source_type": "Federal"
     },
     {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "Amazon AWS Geo",
-      "source_type": "Commercial"
+      "scraper": "NGA Geoint",
+      "source_type": "Federal"
+    },
+    {
+      "country": "Germany",
+      "opportunities_found": 1,
+      "scraper": "DLR Remote Sensing",
+      "source_type": "International"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 2,
+      "scraper": "NASA Space LiDAR",
+      "source_type": "Federal"
+    },
+    {
+      "country": "Canada",
+      "opportunities_found": 1,
+      "scraper": "CSA EO",
+      "source_type": "International"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 2,
+      "scraper": "NSF Geosciences",
+      "source_type": "Research"
     },
     {
       "country": "Italy",
@@ -145,22 +151,16 @@
       "source_type": "International"
     },
     {
-      "country": "Japan",
+      "country": "USA",
       "opportunities_found": 1,
-      "scraper": "JAXA Earth",
-      "source_type": "International"
+      "scraper": "Amazon AWS Geo",
+      "source_type": "Commercial"
     },
     {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "Caltech JPL",
-      "source_type": "Research"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "USACE Mapping",
-      "source_type": "Federal"
+      "scraper": "Microsoft Planetary",
+      "source_type": "Commercial"
     },
     {
       "country": "USA",
@@ -409,7 +409,7 @@
       "source_type": "International"
     }
   ],
-  "timestamp": "2025-11-21T18:11:07.396223Z",
+  "timestamp": "2025-11-21T18:14:05.364097Z",
   "total_opportunities": 128,
   "total_scrapers": 68
 }
