@@ -7,7 +7,7 @@
     <meta name="description" content="NUVIEW Strategic Pipeline - Executive Dashboard for tracking global business development opportunities, funding programs, and strategic initiatives.">
     <meta name="keywords" content="NUVIEW, business development, opportunities, pipeline, funding, LiDAR, space systems">
     <meta name="author" content="NUVIEW Team">
-    <meta name="theme-color" content="#001F3F">
+    <meta name="theme-color" content="#000000">
     
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="website">
@@ -22,35 +22,77 @@
     <link rel="preconnect" href="https://api.github.com">
     
     <title>NUVIEW Branded Global Business Development - Executive Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* ============================================
+           NUVIEW SPACEX-INSPIRED THEME - CSS VARIABLES
+           ============================================
+           
+           PURPOSE:
+           SpaceX-inspired deep space-black theme with minimal accent red.
+           Red is used ONLY for highlights: active nav, badges, underlines, headers.
+           Regular text uses clean off-greys and whites for readability.
+           
+           DESIGN PRINCIPLES:
+           - Deep space-black backgrounds for dramatic effect
+           - Clean, high-contrast text (white/off-grey)
+           - Accent red (#EE3338) sparingly: highlights, active states, badges
+           - Modern card-style tables with soft stripes
+           - Bold headers with subtle drop shadows
+           - Score-badge pills for priority
+           - Mobile-friendly responsive design
+           
+           LAST UPDATED: 2025-11-21
+           ============================================ */
         :root { 
+            /* Primary Brand Colors */
             --nuview-red: #EE3338; 
-            --nuview-navy: #001F3F; 
-            --nuview-blue: #007BFF; 
-            --nuview-gray: #6c757d;
-            --nuview-light-gray: #e9ecef;
-            --nuview-dark-gray: #495057;
-            --dark: #212529;
+            --nuview-red-dim: rgba(238, 51, 56, 0.1);
+            
+            /* Deep Space-Black Palette */
+            --nuview-black: #000000;
+            --nuview-space-dark: #0a0a0a;
+            --nuview-space-medium: #1a1a1a;
+            --nuview-space-light: #2a2a2a;
+            
+            /* Clean Off-Greys and Whites */
+            --nuview-white: #ffffff;
+            --nuview-off-white: #f0f0f0;
+            --nuview-light-grey: #e0e0e0;
+            --nuview-medium-grey: #b0b0b0;
+            --nuview-dark-grey: #666666;
+            
+            /* Semantic Colors */
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #b0b0b0;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --border-primary: #2a2a2a;
+            --border-secondary: #1a1a1a;
+            
+            /* Responsive Spacing */
             --responsive-margin: 20px;
         }
+        
         body { 
             font-family: 'Inter', sans-serif; 
-            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); 
-            color: var(--dark); 
+            background: linear-gradient(180deg, var(--nuview-black) 0%, var(--nuview-space-dark) 50%, var(--nuview-black) 100%); 
+            color: var(--text-primary); 
             margin: 0; 
             padding: 0; 
         }
         .header { 
-            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%); 
-            color: white; 
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-space-dark) 100%); 
+            color: var(--nuview-white); 
             padding: 2.5rem 0; 
             text-align: center; 
-            border-bottom: 5px solid var(--nuview-red); 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+            border-bottom: 3px solid var(--nuview-red); 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6); 
             position: relative;
         }
         .header-logo {
@@ -58,14 +100,14 @@
             font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #ffffff 0%, var(--nuview-red) 100%);
+            background: linear-gradient(90deg, var(--nuview-white) 0%, var(--nuview-red) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .header-subtitle {
             font-size: 1rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
             margin-top: 0.5rem;
         }
         .header-actions {
@@ -81,32 +123,32 @@
             gap: 0.5rem;
             padding: 0.75rem 1.5rem;
             background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
-            color: white;
+            color: var(--nuview-white);
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s ease;
             border: 2px solid transparent;
-            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.3);
+            box-shadow: 0 4px 16px rgba(238, 51, 56, 0.4);
         }
         .header-btn:hover {
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(238, 51, 56, 0.5);
-            border-color: white;
-            color: white;
+            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.6);
+            border-color: var(--nuview-white);
+            color: var(--nuview-white);
         }
         .header-btn:active {
             transform: translateY(-1px);
         }
         .header-btn.secondary {
-            background: linear-gradient(135deg, var(--nuview-blue) 0%, #0056b3 100%);
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            background: linear-gradient(135deg, var(--nuview-space-medium) 0%, var(--nuview-space-light) 100%);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
         }
         .header-btn.secondary:hover {
-            background: linear-gradient(135deg, #0056b3 0%, var(--nuview-blue) 100%);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+            background: linear-gradient(135deg, var(--nuview-space-light) 0%, var(--nuview-space-medium) 100%);
+            box-shadow: 0 6px 24px rgba(255, 255, 255, 0.2);
         }
         .sidebar { 
             position: fixed; 
@@ -114,15 +156,15 @@
             top: 0; 
             height: 100%; 
             width: 260px; 
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
-            box-shadow: 2px 0 12px rgba(0,0,0,0.08); 
+            background: linear-gradient(180deg, var(--nuview-space-dark) 0%, var(--nuview-black) 100%); 
+            box-shadow: 4px 0 24px rgba(0,0,0,0.8); 
             z-index: 100; 
-            border-right: 3px solid var(--nuview-red); 
+            border-right: 2px solid var(--nuview-red); 
             padding-top: 2rem; 
             overflow-y: auto; 
         }
         .sidebar a { 
-            color: var(--nuview-navy); 
+            color: var(--text-secondary); 
             text-decoration: none; 
             display: block; 
             padding: 0.75rem 1.25rem; 
@@ -132,16 +174,16 @@
             font-weight: 500;
         }
         .sidebar a:hover { 
-            background: linear-gradient(90deg, rgba(238, 51, 56, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%); 
-            color: var(--nuview-red); 
-            border-left: 4px solid var(--nuview-red); 
+            background: linear-gradient(90deg, var(--nuview-red-dim) 0%, rgba(255, 255, 255, 0.05) 100%); 
+            color: var(--nuview-white); 
+            border-left: 3px solid var(--nuview-red); 
             padding-left: 1rem;
             transform: translateX(4px);
         }
         .sidebar a.active { 
-            background: linear-gradient(90deg, var(--nuview-red) 0%, var(--nuview-blue) 100%); 
-            color: white; 
-            border-left: 4px solid var(--nuview-navy); 
+            background: linear-gradient(90deg, var(--nuview-red) 0%, rgba(238, 51, 56, 0.2) 100%); 
+            color: var(--nuview-white); 
+            border-left: 3px solid var(--nuview-white); 
             font-weight: 600;
         }
         .main-content { 
@@ -149,6 +191,7 @@
             margin-right: 320px;
             padding: 30px; 
             min-height: 100vh; 
+            background: var(--bg-primary);
         }
         .launched-opps-box {
             position: fixed;
@@ -156,53 +199,53 @@
             top: var(--responsive-margin);
             width: 280px;
             max-height: calc(100vh - 40px);
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            background: linear-gradient(180deg, var(--nuview-space-dark) 0%, var(--nuview-black) 100%);
             border-radius: 16px;
             padding: 1.5rem;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.9);
             border: 2px solid var(--nuview-red);
             z-index: 90;
             overflow-y: auto;
             transition: all 0.3s ease;
         }
         .launched-opps-box:hover {
-            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+            box-shadow: 0 16px 48px rgba(238, 51, 56, 0.3);
             transform: translateY(-2px);
         }
         .launched-opps-box h3 {
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--nuview-red);
+            border-bottom: 2px solid var(--nuview-red);
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         .launched-opp-item {
-            background: white;
+            background: var(--nuview-space-medium);
             border-radius: 8px;
             padding: 1rem;
             margin-bottom: 0.75rem;
-            border-left: 4px solid var(--nuview-blue);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 3px solid var(--nuview-red);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.6);
             transition: all 0.2s ease;
         }
         .launched-opp-item:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.3);
             transform: translateX(-3px);
-            border-left-color: var(--nuview-red);
+            border-left-color: var(--nuview-white);
         }
         .launched-opp-item h4 {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
             margin-bottom: 0.5rem;
         }
         .launched-opp-item p {
             font-size: 0.8rem;
-            color: var(--nuview-gray);
+            color: var(--text-tertiary);
             margin: 0.25rem 0;
         }
         .launched-opp-value {
@@ -212,7 +255,7 @@
         }
         .launched-opps-empty {
             text-align: center;
-            color: var(--nuview-gray);
+            color: var(--text-tertiary);
             font-style: italic;
             padding: 2rem 0;
         }
@@ -222,24 +265,24 @@
             text-decoration: underline;
         }
         .launched-opp-link:hover {
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
         }
         .section { 
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
+            background: linear-gradient(180deg, var(--nuview-space-dark) 0%, var(--nuview-space-medium) 100%); 
             border-radius: 16px; 
             padding: 2rem; 
             margin: 2rem 0; 
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
-            border: 1px solid var(--nuview-light-gray);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.8); 
+            border: 1px solid var(--border-primary);
             transition: all 0.3s ease;
         }
         .section:hover {
-            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.9), 0 0 0 1px var(--nuview-red);
             transform: translateY(-2px);
         }
         .section h2 { 
-            color: var(--nuview-navy); 
-            border-bottom: 4px solid var(--nuview-red); 
+            color: var(--nuview-white); 
+            border-bottom: 3px solid var(--nuview-red); 
             padding-bottom: 0.75rem; 
             margin-bottom: 1.5rem; 
             font-size: 1.75rem; 
@@ -247,14 +290,14 @@
         }
         @supports (background-clip: text) or (-webkit-background-clip: text) {
             .section h2 {
-                background: linear-gradient(90deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%);
+                background: linear-gradient(90deg, var(--nuview-white) 0%, var(--nuview-red) 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
             }
         }
         
-        /* Top 10 Opportunity Matrix Styles */
+        /* Modern Card-Style Tables with Soft Stripes */
         .matrix-table { 
             width: 100%; 
             border-collapse: separate; 
@@ -262,17 +305,18 @@
             margin-top: 1.5rem;
             overflow: hidden;
             border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.8);
         }
         .matrix-table thead th { 
-            background: linear-gradient(135deg, var(--nuview-navy) 0%, var(--nuview-blue) 100%); 
-            color: white; 
-            padding: 1rem; 
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-space-dark) 100%); 
+            color: var(--nuview-white); 
+            padding: 1.2rem 1rem; 
             text-align: left; 
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-weight: 700;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 3px solid var(--nuview-red);
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--nuview-red);
             position: sticky;
             top: 0;
             z-index: 10;
@@ -281,31 +325,33 @@
         .matrix-table thead th:last-child { border-top-right-radius: 12px; }
         .matrix-table tbody tr { 
             transition: all 0.2s ease;
-            background: white;
+            background: var(--nuview-space-dark);
         }
         .matrix-table tbody tr:nth-child(odd) { 
-            background: linear-gradient(90deg, #ffffff 0%, #f8f9fa 100%); 
+            background: linear-gradient(90deg, var(--nuview-space-medium) 0%, var(--nuview-space-dark) 100%); 
         }
         .matrix-table tbody tr:hover { 
-            background: linear-gradient(90deg, rgba(238, 51, 56, 0.08) 0%, rgba(0, 123, 255, 0.08) 100%);
+            background: linear-gradient(90deg, rgba(238, 51, 56, 0.15) 0%, var(--nuview-space-medium) 100%);
             transform: scale(1.01);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 16px rgba(238, 51, 56, 0.3);
             cursor: pointer;
         }
         .matrix-table tbody td { 
             padding: 1rem; 
-            border-bottom: 1px solid var(--nuview-light-gray);
-            color: var(--dark);
+            border-bottom: 1px solid var(--border-secondary);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        .matrix-table tbody td:first-child { font-weight: 600; color: var(--nuview-navy); }
+        .matrix-table tbody td:first-child { font-weight: 600; color: var(--nuview-white); }
+        /* Score Badge Pills - Red accent for priority */
         .matrix-rank { 
             width: 50px; 
             text-align: center; 
             font-weight: 700; 
             font-size: 1.1rem;
             color: var(--nuview-red);
-            background: linear-gradient(135deg, rgba(238, 51, 56, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(238, 51, 56, 0.2) 0%, rgba(238, 51, 56, 0.1) 100%);
+            border-radius: 8px;
         }
         .matrix-value { 
             font-weight: 700; 
@@ -319,91 +365,98 @@
             display: inline-block;
             padding: 0.5rem 1rem; 
             background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
-            color: white; 
+            color: var(--nuview-white); 
             text-decoration: none; 
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.85rem;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            box-shadow: 0 4px 16px rgba(238, 51, 56, 0.4);
         }
         .matrix-link-btn:hover { 
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
-            border-color: var(--nuview-navy);
+            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.6);
+            border-color: var(--nuview-white);
         }
         .matrix-link-btn:focus {
-            outline: 3px solid rgba(0, 123, 255, 0.5);
+            outline: 3px solid rgba(238, 51, 56, 0.5);
             outline-offset: 2px;
         }
         .matrix-source-badge {
             display: inline-block;
             padding: 0.35rem 0.75rem;
-            background: linear-gradient(135deg, var(--nuview-gray) 0%, var(--nuview-dark-gray) 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--nuview-space-light) 0%, var(--nuview-space-medium) 100%);
+            color: var(--text-secondary);
             border-radius: 6px;
             font-size: 0.8rem;
             font-weight: 600;
             margin-left: 0.5rem;
             transition: all 0.2s ease;
+            border: 1px solid var(--border-primary);
         }
         .matrix-source-badge:hover {
-            background: linear-gradient(135deg, var(--nuview-dark-gray) 0%, var(--nuview-gray) 100%);
+            background: linear-gradient(135deg, var(--nuview-space-medium) 0%, var(--nuview-space-light) 100%);
             transform: scale(1.05);
+            border-color: var(--nuview-red);
         }
         
         .search-container { 
             padding: 1.25rem; 
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); 
+            background: linear-gradient(135deg, var(--nuview-space-dark) 0%, var(--nuview-space-medium) 100%); 
             margin: 1.5rem 0; 
             border-radius: 12px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-            border: 1px solid var(--nuview-light-gray);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.8); 
+            border: 1px solid var(--border-primary);
         }
         .search-input { 
             width: 100%; 
             padding: 0.875rem; 
-            border: 2px solid var(--nuview-gray); 
+            border: 2px solid var(--border-primary); 
             border-radius: 10px; 
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: white;
+            background: var(--nuview-black);
+            color: var(--text-primary);
         }
         .search-input:focus {
             outline: none;
             border-color: var(--nuview-red);
-            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.1);
+            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.2);
         }
         .program-card { 
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); 
+            background: linear-gradient(135deg, var(--nuview-space-dark) 0%, var(--nuview-space-medium) 100%); 
             border-radius: 12px; 
             padding: 1.5rem; 
             margin-bottom: 1.25rem; 
-            border-left: 5px solid var(--nuview-red); 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            border-left: 4px solid var(--nuview-red); 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.8); 
             transition: all 0.3s ease;
-            border: 1px solid var(--nuview-light-gray);
+            border: 1px solid var(--border-primary);
         }
         .program-card:hover { 
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+            box-shadow: 0 12px 40px rgba(238, 51, 56, 0.3); 
             transform: translateY(-4px); 
-            border-left-color: var(--nuview-navy);
-            background: linear-gradient(135deg, #ffffff 0%, rgba(0, 123, 255, 0.05) 100%);
+            border-left-color: var(--nuview-white);
+            background: linear-gradient(135deg, var(--nuview-space-medium) 0%, rgba(238, 51, 56, 0.1) 100%);
         }
         .program-card.hidden { display: none; }
-        .urgency-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; }
-        .urgency-urgent { background: var(--nuview-red); color: white; }
-        .urgency-near { background: #ffc107; color: #333; }
-        .urgency-future { background: #28a745; color: white; }
+        .urgency-badge { display: inline-block; padding: 0.3rem 0.85rem; border-radius: 12px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .urgency-urgent { background: var(--nuview-red); color: var(--nuview-white); box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4); }
+        .urgency-near { background: #ff9500; color: var(--nuview-black); }
+        .urgency-future { background: #30d158; color: var(--nuview-black); }
         
         /* Executive Metrics Cards Animation */
         .card {
             transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--nuview-space-dark) 0%, var(--nuview-space-medium) 100%);
+            border: 2px solid var(--border-primary);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.8);
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            box-shadow: 0 16px 48px rgba(238, 51, 56, 0.3);
             border-color: var(--nuview-red) !important;
         }
         .card i {
@@ -418,8 +471,8 @@
         .pipeline-diagram-container { width: 100%; overflow-x: auto; padding: 1rem 0; }
         .pipeline-svg { width: 100%; height: auto; min-width: 800px; }
         .pipeline-stage { cursor: pointer; transition: all 0.3s ease; }
-        .pipeline-stage:hover rect { filter: url(#stageShadow) brightness(1.05); }
-        .pipeline-stage:hover text { fill: var(--nuview-blue); }
+        .pipeline-stage:hover rect { filter: url(#stageShadow) brightness(1.2); }
+        .pipeline-stage:hover text { fill: var(--nuview-red); }
         .pipeline-arrow { animation: flowAnimation 2s ease-in-out infinite; }
         @keyframes flowAnimation {
             0%, 100% { opacity: 0.6; }
@@ -427,7 +480,7 @@
         }
         
         /* Tooltip Styles */
-        .pipeline-tooltip { position: absolute; background: var(--nuview-navy); color: white; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.9rem; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-width: 280px; border: 2px solid var(--nuview-red); }
+        .pipeline-tooltip { position: absolute; background: var(--nuview-space-dark); color: var(--nuview-white); padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.9rem; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; z-index: 1000; box-shadow: 0 8px 32px rgba(0,0,0,0.9); max-width: 280px; border: 2px solid var(--nuview-red); }
         .pipeline-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--nuview-red); }
         .pipeline-tooltip.show { opacity: 1; }
         
@@ -544,8 +597,8 @@
             height: 70px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
-            border: 4px solid var(--nuview-navy);
-            box-shadow: 0 8px 24px rgba(238, 51, 56, 0.4);
+            border: 4px solid var(--nuview-white);
+            box-shadow: 0 12px 40px rgba(238, 51, 56, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -558,7 +611,7 @@
         
         .floating-rocket-btn:hover {
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 12px 32px rgba(238, 51, 56, 0.6);
+            box-shadow: 0 16px 48px rgba(238, 51, 56, 0.8);
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
         }
         
@@ -598,13 +651,13 @@
             position: fixed;
             bottom: 110px;
             right: 30px;
-            background: var(--nuview-navy);
-            color: white;
+            background: var(--nuview-space-dark);
+            color: var(--nuview-white);
             padding: 0.75rem 1rem;
             border-radius: 8px;
             font-size: 0.9rem;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.9);
             z-index: 9998;
             opacity: 0;
             pointer-events: none;
@@ -634,7 +687,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 10000;
             align-items: center;
             justify-content: center;
@@ -645,12 +698,12 @@
         }
         
         .auth-modal-content {
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            background: linear-gradient(180deg, var(--nuview-space-dark) 0%, var(--nuview-space-medium) 100%);
             border-radius: 16px;
             padding: 2.5rem;
             max-width: 450px;
             width: 90%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.9);
             border: 3px solid var(--nuview-red);
             animation: modalSlideIn 0.3s ease-out;
         }
@@ -672,7 +725,7 @@
         }
         
         .auth-modal-header h2 {
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
             margin: 0.5rem 0;
             font-size: 1.75rem;
         }
@@ -686,7 +739,7 @@
         }
         
         .auth-modal-body p {
-            color: var(--nuview-dark-gray);
+            color: var(--text-secondary);
             text-align: center;
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
@@ -698,7 +751,7 @@
         
         .auth-input-group label {
             display: block;
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
             font-weight: 600;
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
@@ -707,17 +760,18 @@
         .auth-input-group input {
             width: 100%;
             padding: 0.875rem;
-            border: 2px solid var(--nuview-gray);
+            border: 2px solid var(--border-primary);
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: white;
+            background: var(--nuview-black);
+            color: var(--text-primary);
         }
         
         .auth-input-group input:focus {
             outline: none;
             border-color: var(--nuview-red);
-            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.1);
+            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.2);
         }
         
         .auth-modal-footer {
@@ -739,13 +793,13 @@
         
         .auth-btn-primary {
             background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
-            color: white;
+            color: var(--nuview-white);
         }
         
         .auth-btn-primary:hover {
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
+            box-shadow: 0 8px 32px rgba(238, 51, 56, 0.6);
         }
         
         .auth-btn-primary:disabled {
@@ -755,17 +809,17 @@
         }
         
         .auth-btn-secondary {
-            background: var(--nuview-gray);
-            color: white;
+            background: var(--nuview-space-light);
+            color: var(--nuview-white);
         }
         
         .auth-btn-secondary:hover {
-            background: var(--nuview-dark-gray);
+            background: var(--nuview-space-medium);
             transform: translateY(-2px);
         }
         
         .auth-error {
-            background: rgba(238, 51, 56, 0.1);
+            background: rgba(238, 51, 56, 0.2);
             border: 2px solid var(--nuview-red);
             color: var(--nuview-red);
             padding: 0.75rem;
@@ -789,9 +843,9 @@
         }
         
         .auth-success {
-            background: rgba(40, 167, 69, 0.1);
-            border: 2px solid #28a745;
-            color: #28a745;
+            background: rgba(48, 209, 88, 0.2);
+            border: 2px solid #30d158;
+            color: #30d158;
             padding: 0.75rem;
             border-radius: 8px;
             margin-bottom: 1rem;
@@ -806,8 +860,8 @@
         }
         
         .trigger-instructions {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 2px solid var(--nuview-blue);
+            background: linear-gradient(135deg, var(--nuview-space-medium) 0%, var(--nuview-space-light) 100%);
+            border: 2px solid var(--border-primary);
             border-radius: 8px;
             padding: 1rem;
             margin-top: 1rem;
@@ -820,7 +874,7 @@
         }
         
         .trigger-instructions h4 {
-            color: var(--nuview-navy);
+            color: var(--nuview-white);
             margin: 0 0 0.75rem 0;
             font-size: 1rem;
         }
@@ -828,7 +882,7 @@
         .trigger-instructions ol {
             margin: 0;
             padding-left: 1.5rem;
-            color: var(--nuview-dark-gray);
+            color: var(--text-secondary);
         }
         
         .trigger-instructions li {
@@ -838,8 +892,8 @@
         }
         
         .trigger-instructions code {
-            background: var(--nuview-navy);
-            color: white;
+            background: var(--nuview-black);
+            color: var(--nuview-white);
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
             font-size: 0.85rem;
