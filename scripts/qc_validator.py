@@ -511,12 +511,12 @@ def main():
     log_info("=" * 60)
     
     if qc_pass:
-        log_success(f"QC STATUS: PASS (100%)")
+        log_success("QC STATUS: PASS (100%)")
         log_success(f"Summary: {report['summary']}")
         log_info("=" * 60)
         return 0
     else:
-        log_error(f"QC STATUS: FAIL (0%)")
+        log_error("QC STATUS: FAIL (0%)")
         log_error(f"Summary: {report['summary']}")
         log_error("Data will NOT be pushed to main branch")
         log_info("=" * 60)

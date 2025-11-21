@@ -1,6 +1,5 @@
 import requests
 import pdfplumber
-from bs4 import BeautifulSoup
 import logging
 import re
 
