@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🔐 Validate Authentication
         id: auth
@@ -62,7 +62,7 @@ jobs:
           echo -e "\033[92m✅ Trigger signal created and pushed\033[0m"
 
       - name: 📢 Create GitHub Issue Notification
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const timestamp = new Date().toISOString();
