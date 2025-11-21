@@ -128,8 +128,12 @@ jobs:
       - name: 🔄 Generate Programs Data
         run: |
           echo -e "\033[94m🔄 Generating programs.json from opportunities.json...\033[0m"
-          python scripts/generate_programs.py
-          echo -e "\033[92m✅ Programs data generated successfully\033[0m"
+          if python scripts/generate_programs.py; then
+            echo -e "\033[92m✅ Programs data generated successfully\033[0m"
+          else
+            echo -e "\033[91m❌ Failed to generate programs.json\033[0m"
+            exit 1
+          fi
 
       - name: 🔀 Prepare Merge
         run: |

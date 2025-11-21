@@ -18,6 +18,7 @@ COLOR_RESET = '\033[0m'
 # Keyword sets for categorization
 SPACE_KEYWORDS = {'space', 'satellite', 'orbital'}
 LIDAR_KEYWORDS = {'lidar'}
+PLATFORM_KEYWORDS = {'platform'}
 
 def log_info(msg):
     print(f"{COLOR_BLUE}ℹ️  {msg}{COLOR_RESET}")
@@ -48,7 +49,7 @@ def categorize_opportunity(opp):
     if category == 'DaaS':
         # Check if it's space-based or platform-related
         if contains_keywords(title, SPACE_KEYWORDS) or contains_keywords(description, SPACE_KEYWORDS) or \
-           'platform' in title.lower() or 'platform' in description.lower():
+           contains_keywords(title, PLATFORM_KEYWORDS) or contains_keywords(description, PLATFORM_KEYWORDS):
             return 'spaceSystems'
         # Check if it's LiDAR-specific
         if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
@@ -70,7 +71,7 @@ def categorize_opportunity(opp):
     if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
         return 'lidar'
     if contains_keywords(title, SPACE_KEYWORDS) or contains_keywords(description, SPACE_KEYWORDS) or \
-       'platform' in title.lower() or 'platform' in description.lower():
+       contains_keywords(title, PLATFORM_KEYWORDS) or contains_keywords(description, PLATFORM_KEYWORDS):
         return 'spaceSystems'
     
     return 'funding'
