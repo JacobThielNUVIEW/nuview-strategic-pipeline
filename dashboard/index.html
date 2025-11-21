@@ -503,16 +503,16 @@
             <h1>NUVIEW Opp Board</h1>
             <p class="header-subtitle">Global Budget & Workflow Data • Strategic Pipeline • Agencies Worldwide</p>
             <div class="header-actions">
-                <a href="#top-opportunities" class="header-btn">
-                    <i class="bi bi-trophy"></i>
+                <a href="#top-opportunities" class="header-btn" aria-label="Navigate to top opportunities section">
+                    <i class="bi bi-trophy" aria-hidden="true"></i>
                     View Top Opportunities
                 </a>
-                <a href="pipeline.html" class="header-btn secondary">
-                    <i class="bi bi-funnel"></i>
+                <a href="pipeline.html" class="header-btn secondary" aria-label="Navigate to pipeline dashboard">
+                    <i class="bi bi-funnel" aria-hidden="true"></i>
                     Pipeline Dashboard
                 </a>
-                <a href="pipeline_matrix.html" class="header-btn secondary">
-                    <i class="bi bi-diagram-3"></i>
+                <a href="pipeline_matrix.html" class="header-btn secondary" aria-label="Navigate to pipeline matrix view">
+                    <i class="bi bi-diagram-3" aria-hidden="true"></i>
                     Pipeline Matrix
                 </a>
             </div>
@@ -1016,9 +1016,14 @@ function setupGlobalSearch() {
 // Format deadline display
 function formatDeadlineDisplay(deadline, daysUntil) {
     const deadlineStr = deadline || 'TBD';
-    const daysStr = daysUntil !== undefined && daysUntil !== null ? daysUntil : 'N/A';
-    return `${deadlineStr} (${daysStr} days)`;
+    if (daysUntil !== undefined && daysUntil !== null) {
+        return `${deadlineStr} (${daysUntil} days)`;
+    }
+    return deadlineStr;
 }
+
+// Constants for opportunity filtering
+const URGENT_DAYS_THRESHOLD = 30;
 
 // Render Launched Opportunities Box
 function renderLaunchedOpps() {
@@ -1037,7 +1042,7 @@ function renderLaunchedOpps() {
     // Filter for launched opportunities (those with daysUntil < 0 or status indicating launched)
     // For demo purposes, we'll show the most recent/urgent opportunities
     const launchedOpps = uniquePrograms
-        .filter(p => p.urgency === 'urgent' || (p.daysUntil !== undefined && p.daysUntil !== null && p.daysUntil <= 30))
+        .filter(p => p.urgency === 'urgent' || (p.daysUntil !== undefined && p.daysUntil !== null && p.daysUntil <= URGENT_DAYS_THRESHOLD))
         .sort((a, b) => {
             const aDays = a.daysUntil ?? 999;
             const bDays = b.daysUntil ?? 999;
