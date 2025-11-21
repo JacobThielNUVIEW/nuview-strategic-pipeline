@@ -114,7 +114,8 @@ def execute_scrape():
     log_info(f"Running: python {scrape_script}")
     stdout, stderr = run_command(f"python3 {scrape_script}")
     
-    if stderr and "error" in stderr.lower():
+    # Check if scrape failed (stderr will be set by CalledProcessError)
+    if stderr is not None:
         log_error(f"Scrape failed: {stderr}")
         return False
     
@@ -153,16 +154,17 @@ def git_commit_and_push(message):
     """Commit and push changes"""
     log_info("Committing and pushing changes...")
     
-    # Configure git if needed
-    run_command('git config user.email "local@nuview.space"')
-    run_command('git config user.name "NUVIEW Local Scraper"')
+    # Configure git locally if not already configured
+    run_command('git config --local user.email "local@nuview.space"')
+    run_command('git config --local user.name "NUVIEW Local Scraper"')
     
     # Add all changes
     stdout, stderr = run_command("git add data/")
     
-    # Check if there are changes to commit
+    # Check if there are changes to commit (diff --quiet returns non-zero if there are changes)
     stdout, stderr = run_command("git diff --staged --quiet")
-    if stdout is not None and not stdout:
+    # If command succeeded (exit code 0), there are no changes
+    if stderr is None:
         log_info("No changes to commit")
         return True
     
@@ -173,9 +175,18 @@ def git_commit_and_push(message):
             log_error(f"Git commit failed: {stderr}")
             return False
     
-    # Push
-    stdout, stderr = run_command("git push origin main")
-    if stderr and "error" in stderr.lower():
+    # Get current branch
+    current_branch, _ = run_command("git rev-parse --abbrev-ref HEAD")
+    if not current_branch:
+        log_error("Could not determine current branch")
+        return False
+    
+    current_branch = current_branch.strip()
+    log_info(f"Pushing to branch: {current_branch}")
+    
+    # Push to current branch (not hardcoded to main)
+    stdout, stderr = run_command(f"git push origin {current_branch}")
+    if stderr is not None:
         log_error(f"Git push failed: {stderr}")
         return False
     

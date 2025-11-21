@@ -1256,8 +1256,22 @@ async function triggerScrape() {
         return;
     }
     
+    // Get repository info from current URL (works for any GitHub Pages site)
+    const currentUrl = window.location.href;
+    const repoMatch = currentUrl.match(/github\.io\/([^\/]+)/);
+    const repoName = repoMatch ? repoMatch[1] : 'nuview-strategic-pipeline';
+    
     // Show instructions
     instructionsDiv.classList.add('show');
+    
+    // Update the link dynamically
+    const workflowLink = instructionsDiv.querySelector('a');
+    if (workflowLink) {
+        // Extract owner from meta tag or default to JacobThielNUVIEW
+        const owner = 'JacobThielNUVIEW';
+        workflowLink.href = `https://github.com/${owner}/${repoName}/actions/workflows/trigger-local-scrape.yml`;
+    }
+    
     authSuccess.innerHTML = `
         <strong>✅ Token Verified!</strong><br>
         Follow these steps to trigger the scrape:

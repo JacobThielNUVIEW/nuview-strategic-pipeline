@@ -25,6 +25,10 @@ jobs:
         run: |
           echo -e "\033[94m🔐 Validating authentication token...\033[0m"
           
+          # Note: Direct string comparison in shell is not timing-attack resistant.
+          # For production use, consider using a more secure comparison method.
+          # However, for this use case with GitHub Secrets, the risk is minimal.
+          
           # Compare provided token with secret
           if [ "${{ github.event.inputs.auth_token }}" != "${{ secrets.NUVIEW_SCRAPE_TOKEN }}" ]; then
             echo -e "\033[91m❌ Authentication failed: Invalid token\033[0m"
