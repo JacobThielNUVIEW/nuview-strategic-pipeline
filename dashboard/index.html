@@ -33,6 +33,62 @@
             text-align: center; 
             border-bottom: 5px solid var(--nuview-red); 
             box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+            position: relative;
+        }
+        .header-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #ffffff 0%, var(--nuview-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        .header-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.3);
+        }
+        .header-btn:hover {
+            background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(238, 51, 56, 0.5);
+            border-color: white;
+            color: white;
+        }
+        .header-btn:active {
+            transform: translateY(-1px);
+        }
+        .header-btn.secondary {
+            background: linear-gradient(135deg, var(--nuview-blue) 0%, #0056b3 100%);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+        .header-btn.secondary:hover {
+            background: linear-gradient(135deg, #0056b3 0%, var(--nuview-blue) 100%);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
         }
         .sidebar { 
             position: fixed; 
@@ -72,8 +128,75 @@
         }
         .main-content { 
             margin-left: 260px; 
+            margin-right: 320px;
             padding: 30px; 
             min-height: 100vh; 
+        }
+        .launched-opps-box {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            width: 280px;
+            max-height: calc(100vh - 40px);
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border: 2px solid var(--nuview-red);
+            z-index: 90;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        .launched-opps-box:hover {
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        .launched-opps-box h3 {
+            color: var(--nuview-navy);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--nuview-red);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .launched-opp-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--nuview-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+        }
+        .launched-opp-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateX(-3px);
+            border-left-color: var(--nuview-red);
+        }
+        .launched-opp-item h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--nuview-navy);
+            margin-bottom: 0.5rem;
+        }
+        .launched-opp-item p {
+            font-size: 0.8rem;
+            color: var(--nuview-gray);
+            margin: 0.25rem 0;
+        }
+        .launched-opp-value {
+            font-weight: 700;
+            color: var(--nuview-red);
+            font-size: 0.95rem;
+        }
+        .launched-opps-empty {
+            text-align: center;
+            color: var(--nuview-gray);
+            font-style: italic;
+            padding: 2rem 0;
         }
         .section { 
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); 
@@ -266,9 +389,87 @@
         .pipeline-tooltip.show { opacity: 1; }
         
         /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .main-content {
+                margin-right: 20px;
+            }
+            .launched-opps-box {
+                width: 260px;
+            }
+        }
+        @media (max-width: 992px) {
+            .main-content {
+                margin-left: 260px;
+                margin-right: 20px;
+            }
+            .launched-opps-box {
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+                max-height: none;
+                margin-bottom: 2rem;
+            }
+            .header-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .header-btn {
+                width: 90%;
+                justify-content: center;
+            }
+        }
         @media (max-width: 768px) {
-            .pipeline-svg { min-width: 600px; }
-            .pipeline-legend { font-size: 0.85rem; }
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                margin-left: 200px;
+            }
+            .pipeline-svg { 
+                min-width: 600px; 
+            }
+            .pipeline-legend { 
+                font-size: 0.85rem; 
+            }
+            .matrix-table {
+                font-size: 0.85rem;
+            }
+            .matrix-table thead th,
+            .matrix-table tbody td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 3px solid var(--nuview-red);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            .header {
+                padding: 1.5rem 1rem;
+            }
+            .header-logo {
+                font-size: 1.8rem;
+            }
+            .section {
+                padding: 1.25rem;
+                margin: 1rem 0;
+            }
+            .section h2 {
+                font-size: 1.4rem;
+            }
+            .header-btn {
+                width: 100%;
+                font-size: 0.9rem;
+                padding: 0.65rem 1.25rem;
+            }
         }
     </style>
 </head>
@@ -292,8 +493,35 @@
             <div class="header-logo" aria-label="NUVIEW logo">NUVIEW</div>
             <h1>NUVIEW Opp Board</h1>
             <p class="header-subtitle">Global Budget & Workflow Data • Strategic Pipeline • Agencies Worldwide</p>
+            <div class="header-actions">
+                <a href="#top-opportunities" class="header-btn">
+                    <i class="bi bi-trophy"></i>
+                    View Top Opportunities
+                </a>
+                <a href="pipeline.html" class="header-btn secondary">
+                    <i class="bi bi-funnel"></i>
+                    Pipeline Dashboard
+                </a>
+                <a href="pipeline_matrix.html" class="header-btn secondary">
+                    <i class="bi bi-diagram-3"></i>
+                    Pipeline Matrix
+                </a>
+            </div>
         </div>
     </header>
+
+    <!-- Launched Opportunities Fixed Box -->
+    <aside class="launched-opps-box" role="complementary" aria-label="Launched Opportunities">
+        <h3>
+            <i class="bi bi-rocket-takeoff-fill"></i>
+            Launched Opps
+        </h3>
+        <div id="launched-opps-container">
+            <div class="launched-opps-empty">
+                Loading launched opportunities...
+            </div>
+        </div>
+    </aside>
 
     <!-- Section 2: How It Works -->
     <!-- 
@@ -776,6 +1004,53 @@ function setupGlobalSearch() {
     });
 }
 
+// Render Launched Opportunities Box
+function renderLaunchedOpps() {
+    if (!programsData || !programsData.programs) return;
+    
+    const allPrograms = [
+        ...(programsData.programs.funding || []),
+        ...(programsData.programs.lidar || []),
+        ...(programsData.programs.spaceSystems || []),
+        ...(programsData.programs.platform || [])
+    ];
+    
+    // Remove duplicates by ID
+    const uniquePrograms = Array.from(new Map(allPrograms.map(p => [p.id, p])).values());
+    
+    // Filter for launched opportunities (those with daysUntil < 0 or status indicating launched)
+    // For demo purposes, we'll show the most recent/urgent opportunities
+    const launchedOpps = uniquePrograms
+        .filter(p => p.urgency === 'urgent' || p.daysUntil <= 30)
+        .sort((a, b) => (a.daysUntil || 999) - (b.daysUntil || 999))
+        .slice(0, 5);
+    
+    const container = document.getElementById('launched-opps-container');
+    if (!container) return;
+    
+    if (launchedOpps.length === 0) {
+        container.innerHTML = '<div class="launched-opps-empty">No recent launches</div>';
+        return;
+    }
+    
+    container.innerHTML = '';
+    launchedOpps.forEach(opp => {
+        const item = document.createElement('div');
+        item.className = 'launched-opp-item';
+        item.innerHTML = `
+            <h4>${opp.title || 'Untitled'}</h4>
+            <p><strong>Agency:</strong> ${opp.agency || 'N/A'}</p>
+            <p><strong>Value:</strong> <span class="launched-opp-value">${formatCurrency(opp.valueUSD || 0)}</span></p>
+            <p><strong>Deadline:</strong> ${opp.deadline || 'TBD'} (${opp.daysUntil !== undefined ? opp.daysUntil : 'N/A'} days)</p>
+            ${opp.link && opp.link !== '#' ? `
+            <p><a href="${opp.link}" target="_blank" rel="noopener noreferrer" style="color: var(--nuview-red); font-weight: 600; text-decoration: underline;">View Details →</a></p>
+            ` : ''}
+        `;
+        container.appendChild(item);
+    });
+}
+
+
 // Load programs data
 async function loadPrograms() {
     try {
@@ -787,6 +1062,9 @@ async function loadPrograms() {
         
         // Render top 10 opportunities matrix
         renderTopOpportunities();
+        
+        // Render launched opportunities box
+        renderLaunchedOpps();
         
         // Render all sections with robust handling for missing data
         renderPrograms(programsData.programs?.funding || [], 'funding-programs');
