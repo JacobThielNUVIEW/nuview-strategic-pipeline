@@ -1,850 +1,999 @@
 {
   "meta": {
-    "market_val": "14.13",
     "cagr": "19.43",
-    "updated": "2025-11-21T03:32:11.673204Z",
-    "totalCount": 30
+    "market_val": "14.13",
+    "scrapers_run": 34,
+    "totalCount": 38,
+    "updated": "2025-11-21T13:08:13.949923Z"
   },
   "opportunities": [
     {
-      "id": "usgs-196",
-      "title": "USGS 3DEP LiDAR Acquisition 2026 - Phase 1",
-      "agency": "USGS",
-      "pillar": "Federal",
-      "category": "DaaS",
-      "description": "Large-area spaceborne LiDAR for National 3D Elevation Program. QL0/QL1 bare-earth DEM generation.",
-      "amountUSD": 217000000,
-      "daysUntilDeadline": 28,
-      "deadline": "2025-12-18",
-      "next_action": "Submit Demo Brief",
-      "scrapedAt": "2025-11-21T00:08:14.331933Z",
-      "forecast_value": "$217,000,000",
-      "link": "https://sam.gov",
+      "agency": "ESRI",
+      "agencyLink": "https://www.esri.com/",
+      "amountUSD": 20000000,
       "budgetSourceLink": "#",
+      "category": "Platform",
+      "daysUntilDeadline": 95,
+      "deadline": "2026-02-24",
+      "description": "Commercial space-based topographic data for ArcGIS platform",
+      "forecast_value": "$20,000,000",
+      "funding": {
+        "amountUSD": 20000000
+      },
+      "id": "esri-211",
+      "link": "https://sam.gov",
+      "next_action": "ESRI Partnership Meeting",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T13:08:13.952764Z",
+      "timeline": {
+        "daysUntil": 95,
+        "urgency": "future"
+      },
+      "title": "ESRI Living Atlas Premium Elevation Layer",
+      "urgency": "future",
+      "valueUSD": 20000000
+    },
+    {
+      "agency": "USGS",
       "agencyLink": "https://www.usgs.gov/3d-elevation-program",
+      "amountUSD": 217000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 28,
+      "deadline": "2025-12-19",
+      "description": "Large-area spaceborne LiDAR for National 3D Elevation Program. QL0/QL1 bare-earth DEM generation.",
+      "forecast_value": "$217,000,000",
+      "funding": {
+        "amountUSD": 217000000
+      },
+      "id": "usgs-923",
+      "link": "https://sam.gov",
+      "next_action": "Submit Demo Brief",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.950406Z",
       "timeline": {
         "daysUntil": 28,
         "urgency": "urgent"
       },
-      "funding": {
-        "amountUSD": 217000000
-      },
-      "valueUSD": 217000000,
+      "title": "USGS 3DEP LiDAR Acquisition 2026 - Phase 1",
       "urgency": "urgent",
-      "priorityScore": 200,
-      "priorityLabel": "top USA: score 200"
+      "valueUSD": 217000000
     },
     {
-      "id": "diu-300",
-      "title": "DIU Spaceborne LiDAR BAA",
-      "agency": "DIU",
-      "pillar": "Federal",
-      "category": "R&D",
-      "description": "Next-generation space-based LiDAR for rapid large-area mapping",
-      "amountUSD": 15000000,
-      "daysUntilDeadline": 15,
-      "deadline": "2025-12-05",
-      "next_action": "Submit Whitepaper",
-      "scrapedAt": "2025-11-20T23:21:39.851594Z",
-      "forecast_value": "$15,000,000",
-      "link": "https://sam.gov",
+      "agency": "USGS",
+      "agencyLink": "https://www.usgs.gov/programs/national-geospatial-program/national-map",
+      "amountUSD": 45000000,
       "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 60,
+      "deadline": "2026-01-20",
+      "description": "Multi-year IDIQ for topographic data collection and processing services",
+      "forecast_value": "$45,000,000",
+      "funding": {
+        "amountUSD": 45000000
+      },
+      "id": "usgs-172",
+      "link": "https://sam.gov",
+      "next_action": "Capability Statement",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.950432Z",
+      "timeline": {
+        "daysUntil": 60,
+        "urgency": "near"
+      },
+      "title": "USGS National Map Topographic Data Services",
+      "urgency": "near",
+      "valueUSD": 45000000
+    },
+    {
+      "agency": "NIH",
+      "agencyLink": "https://www.nih.gov/",
+      "amountUSD": 6000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 100,
+      "deadline": "2026-03-01",
+      "description": "High-resolution DEM for disease vector and environmental health research",
+      "forecast_value": "$6,000,000",
+      "funding": {
+        "amountUSD": 6000000
+      },
+      "id": "nih-354",
+      "link": "https://sam.gov",
+      "next_action": "Health Mapping Brief",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T13:08:13.952334Z",
+      "timeline": {
+        "daysUntil": 100,
+        "urgency": "future"
+      },
+      "title": "NIH Environmental Health Topographic Mapping",
+      "urgency": "future",
+      "valueUSD": 6000000
+    },
+    {
+      "agency": "NASA",
+      "agencyLink": "https://science.nasa.gov/earth-science/",
+      "amountUSD": 12000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 45,
+      "deadline": "2026-01-05",
+      "description": "ICESat-2 ATLAS data processing and topographic applications research",
+      "forecast_value": "$12,000,000",
+      "funding": {
+        "amountUSD": 12000000
+      },
+      "id": "nasa-228",
+      "link": "https://sam.gov",
+      "next_action": "Proposal Preparation",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.950725Z",
+      "timeline": {
+        "daysUntil": 45,
+        "urgency": "near"
+      },
+      "title": "NASA ROSES ICESat-2 Science Team Augmentation",
+      "urgency": "near",
+      "valueUSD": 12000000
+    },
+    {
+      "agency": "NASA",
+      "agencyLink": "https://science.nasa.gov/earth-science/",
+      "amountUSD": 25000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 90,
+      "deadline": "2026-02-19",
+      "description": "Commercial space-based LiDAR for large-area topographic mapping",
+      "forecast_value": "$25,000,000",
+      "funding": {
+        "amountUSD": 25000000
+      },
+      "id": "nasa-127",
+      "link": "https://sam.gov",
+      "next_action": "Partner Coordination",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.950745Z",
+      "timeline": {
+        "daysUntil": 90,
+        "urgency": "future"
+      },
+      "title": "NASA Commercial Spaceborne LiDAR Partnership",
+      "urgency": "future",
+      "valueUSD": 25000000
+    },
+    {
+      "agency": "DIU",
       "agencyLink": "https://www.diu.mil/",
+      "amountUSD": 15000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 15,
+      "deadline": "2025-12-06",
+      "description": "Next-generation space-based LiDAR for rapid large-area mapping",
+      "forecast_value": "$15,000,000",
+      "funding": {
+        "amountUSD": 15000000
+      },
+      "id": "diu-861",
+      "link": "https://sam.gov",
+      "next_action": "Submit Whitepaper",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.951340Z",
       "timeline": {
         "daysUntil": 15,
         "urgency": "urgent"
       },
-      "funding": {
-        "amountUSD": 15000000
-      },
-      "valueUSD": 15000000,
+      "title": "DIU Spaceborne LiDAR BAA",
       "urgency": "urgent",
-      "priorityScore": 180,
-      "priorityLabel": "top USA: score 180"
+      "valueUSD": 15000000
     },
     {
-      "id": "nga-545",
-      "title": "NGA Commercial Space-Based 3D Mapping",
       "agency": "NGA",
-      "pillar": "Federal",
-      "category": "DaaS",
-      "description": "Commercial spaceborne LiDAR and 3D topographic intelligence products",
-      "amountUSD": 45000000,
-      "daysUntilDeadline": 40,
-      "deadline": "2025-12-30",
-      "next_action": "Security Clearance Prep",
-      "scrapedAt": "2025-11-20T23:21:39.851575Z",
-      "forecast_value": "$45,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
       "agencyLink": "https://www.nga.mil/",
+      "amountUSD": 45000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 40,
+      "deadline": "2025-12-31",
+      "description": "Commercial spaceborne LiDAR and 3D topographic intelligence products",
+      "forecast_value": "$45,000,000",
+      "funding": {
+        "amountUSD": 45000000
+      },
+      "id": "nga-655",
+      "link": "https://sam.gov",
+      "next_action": "Security Clearance Prep",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.951157Z",
       "timeline": {
         "daysUntil": 40,
         "urgency": "near"
       },
-      "funding": {
-        "amountUSD": 45000000
-      },
-      "valueUSD": 45000000,
+      "title": "NGA Commercial Space-Based 3D Mapping",
       "urgency": "near",
-      "priorityScore": 170,
-      "priorityLabel": "top USA: score 170"
+      "valueUSD": 45000000
     },
     {
-      "id": "nasa-333",
-      "title": "NASA ROSES ICESat-2 Science Team Augmentation",
-      "agency": "NASA",
-      "pillar": "Federal",
-      "category": "R&D",
-      "deadline": "2026-02-18",
-      "next_action": "Partner Coordination",
-      "scrapedAt": "2025-11-20T23:21:39.851488Z",
-      "description": "Commercial space-based LiDAR for large-area topographic mapping",
-      "amountUSD": 25000000,
-      "daysUntilDeadline": 90,
-      "forecast_value": "$25,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://science.nasa.gov/earth-science/",
-      "timeline": {
-        "daysUntil": 90,
-        "urgency": "future"
-      },
-      "funding": {
-        "amountUSD": 25000000
-      },
-      "valueUSD": 25000000,
-      "urgency": "future",
-      "priorityScore": 160,
-      "priorityLabel": "top USA: score 160"
-    },
-    {
-      "id": "jaxa-188",
-      "title": "JAXA ALOS-4 Topographic Mission Support",
-      "agency": "JAXA",
-      "pillar": "International",
-      "category": "R&D",
-      "description": "Spaceborne LiDAR integration for ALOS-4 global topographic mapping",
-      "amountUSD": 18000000,
-      "daysUntilDeadline": 120,
-      "deadline": "2026-03-20",
-      "next_action": "International Partnership",
-      "scrapedAt": "2025-11-20T23:21:39.851690Z",
-      "forecast_value": "$18,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://global.jaxa.jp/",
-      "timeline": {
-        "daysUntil": 120,
-        "urgency": "future"
-      },
-      "funding": {
-        "amountUSD": 18000000
-      },
-      "valueUSD": 18000000,
-      "urgency": "future",
-      "priorityScore": 160,
-      "priorityLabel": "top Japan: score 160"
-    },
-    {
-      "id": "dlr-410",
-      "title": "DLR TanDEM-X Follow-On LiDAR Mission",
       "agency": "DLR",
-      "pillar": "International",
-      "category": "R&D",
-      "description": "Next-generation spaceborne LiDAR for high-resolution global DEM",
-      "amountUSD": 30000000,
-      "daysUntilDeadline": 100,
-      "deadline": "2026-02-28",
-      "next_action": "Mission Planning",
-      "scrapedAt": "2025-11-20T23:21:39.851726Z",
-      "forecast_value": "$30,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
       "agencyLink": "https://www.dlr.de/",
-      "timeline": {
-        "daysUntil": 100,
-        "urgency": "future"
-      },
+      "amountUSD": 30000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 100,
+      "deadline": "2026-03-01",
+      "description": "Next-generation spaceborne LiDAR for high-resolution global DEM",
+      "forecast_value": "$30,000,000",
       "funding": {
         "amountUSD": 30000000
       },
-      "valueUSD": 30000000,
-      "urgency": "future",
-      "priorityScore": 160,
-      "priorityLabel": "top Global: score 160"
-    },
-    {
-      "id": "isro-678",
-      "title": "ISRO National Topographic Mapping - LiDAR Phase",
-      "agency": "ISRO",
+      "id": "dlr-270",
+      "link": "https://sam.gov",
+      "next_action": "Mission Planning",
       "pillar": "International",
-      "category": "DaaS",
-      "description": "Spaceborne LiDAR for national elevation mapping and disaster management",
-      "amountUSD": 25000000,
-      "daysUntilDeadline": 110,
-      "deadline": "2026-03-10",
-      "next_action": "India Partnership",
-      "scrapedAt": "2025-11-20T23:21:39.851749Z",
-      "forecast_value": "$25,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.isro.gov.in/",
-      "timeline": {
-        "daysUntil": 110,
-        "urgency": "future"
-      },
-      "funding": {
-        "amountUSD": 25000000
-      },
-      "valueUSD": 25000000,
-      "urgency": "future",
-      "priorityScore": 160,
-      "priorityLabel": "top Global: score 160"
-    },
-    {
-      "id": "eu-commission-894",
-      "title": "Horizon Europe Space-Based Earth Monitoring",
-      "agency": "EU Commission",
-      "pillar": "Research",
-      "category": "R&D",
-      "description": "Commercial spaceborne LiDAR for pan-European topographic services",
-      "amountUSD": 35000000,
-      "daysUntilDeadline": 120,
-      "deadline": "2026-03-20",
-      "next_action": "Consortium Formation",
-      "scrapedAt": "2025-11-20T23:21:39.851915Z",
-      "forecast_value": "$35,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en",
-      "timeline": {
-        "daysUntil": 120,
-        "urgency": "future"
-      },
-      "funding": {
-        "amountUSD": 35000000
-      },
-      "valueUSD": 35000000,
-      "urgency": "future",
-      "priorityScore": 160,
-      "priorityLabel": "top Global: score 160"
-    },
-    {
-      "id": "csa-237",
-      "title": "CSA Arctic Topographic Mapping Program",
-      "agency": "CSA",
-      "pillar": "International",
-      "category": "DaaS",
-      "description": "Space-based LiDAR for Arctic and sub-Arctic terrain mapping",
-      "amountUSD": 22000000,
-      "daysUntilDeadline": 85,
-      "deadline": "2026-02-13",
-      "next_action": "Arctic Capability Demo",
-      "scrapedAt": "2025-11-20T23:21:39.851707Z",
-      "forecast_value": "$22,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.asc-csa.gc.ca/",
-      "timeline": {
-        "daysUntil": 85,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 22000000
-      },
-      "valueUSD": 22000000,
-      "urgency": "near",
-      "priorityScore": 154,
-      "priorityLabel": "top Global: score 154"
-    },
-    {
-      "id": "uksa-752",
-      "title": "UKSA Climate & Environment LiDAR Services",
-      "agency": "UKSA",
-      "pillar": "International",
-      "category": "DaaS",
-      "description": "Commercial space-based topographic data for climate monitoring",
-      "amountUSD": 20000000,
-      "daysUntilDeadline": 90,
-      "deadline": "2026-02-18",
-      "next_action": "UK Partnership Brief",
-      "scrapedAt": "2025-11-20T23:21:39.851772Z",
-      "forecast_value": "$20,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.gov.uk/government/organisations/uk-space-agency",
-      "timeline": {
-        "daysUntil": 90,
-        "urgency": "future"
-      },
-      "funding": {
-        "amountUSD": 20000000
-      },
-      "valueUSD": 20000000,
-      "urgency": "future",
-      "priorityScore": 148,
-      "priorityLabel": "top Global: score 148"
-    },
-    {
-      "id": "cnsa-562",
-      "title": "CNSA Belt & Road Topographic Mapping",
-      "agency": "CNSA",
-      "pillar": "International",
-      "category": "DaaS",
-      "description": "Large-area spaceborne LiDAR for Belt and Road Initiative countries",
-      "amountUSD": 40000000,
-      "daysUntilDeadline": 130,
-      "deadline": "2026-03-30",
-      "next_action": "International Coordination",
-      "scrapedAt": "2025-11-20T23:21:39.851798Z",
-      "forecast_value": "$40,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "http://www.cnsa.gov.cn/english/",
-      "timeline": {
-        "daysUntil": 130,
-        "urgency": "future"
-      },
-      "funding": {
-        "amountUSD": 40000000
-      },
-      "valueUSD": 40000000,
-      "urgency": "future",
-      "priorityScore": 148,
-      "priorityLabel": "top Global: score 148"
-    },
-    {
-      "id": "amazon-web-services-461",
-      "title": "AWS Earth on AWS - Elevation Data Partnership",
-      "agency": "Amazon Web Services",
-      "pillar": "Commercial",
-      "category": "Platform",
-      "description": "Spaceborne LiDAR data integration for AWS geospatial services",
-      "amountUSD": 25000000,
-      "daysUntilDeadline": 70,
-      "deadline": "2026-01-29",
-      "next_action": "AWS Partnership Brief",
-      "scrapedAt": "2025-11-20T23:21:39.851974Z",
-      "forecast_value": "$25,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://aws.amazon.com/earth/",
-      "timeline": {
-        "daysUntil": 70,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 25000000
-      },
-      "valueUSD": 25000000,
-      "urgency": "near",
-      "priorityScore": 148,
-      "priorityLabel": "top Global: score 148"
-    },
-    {
-      "id": "microsoft-103",
-      "title": "Microsoft Planetary Computer Terrain Services",
-      "agency": "Microsoft",
-      "pillar": "Commercial",
-      "category": "Platform",
-      "description": "Spaceborne LiDAR DEM for Planetary Computer sustainability applications",
-      "amountUSD": 22000000,
-      "daysUntilDeadline": 85,
-      "deadline": "2026-02-13",
-      "next_action": "Azure Integration",
-      "scrapedAt": "2025-11-20T23:21:39.852030Z",
-      "forecast_value": "$22,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://planetarycomputer.microsoft.com/",
-      "timeline": {
-        "daysUntil": 85,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 22000000
-      },
-      "valueUSD": 22000000,
-      "urgency": "near",
-      "priorityScore": 146,
-      "priorityLabel": "top Global: score 146"
-    },
-    {
-      "id": "mit-533",
-      "title": "MIT Lincoln Lab Space-Based Sensing Partnership",
-      "agency": "MIT",
-      "pillar": "Research",
-      "category": "R&D",
-      "description": "Advanced spaceborne LiDAR technology development and validation",
-      "amountUSD": 15000000,
-      "daysUntilDeadline": 110,
-      "deadline": "2026-03-10",
-      "next_action": "Research Agreement",
-      "scrapedAt": "2025-11-20T23:21:39.851934Z",
-      "forecast_value": "$15,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.ll.mit.edu/",
-      "timeline": {
-        "daysUntil": 110,
-        "urgency": "future"
-      },
-      "funding": {
-        "amountUSD": 15000000
-      },
-      "valueUSD": 15000000,
-      "urgency": "future",
-      "priorityScore": 140,
-      "priorityLabel": "top Global: score 140"
-    },
-    {
-      "id": "esa-211",
-      "title": "ESA Digital Twin Earth LiDAR Platform",
-      "agency": "ESA",
-      "pillar": "Federal",
-      "category": "DaaS",
-      "description": "Multi-year IDIQ for topographic data collection and processing services",
-      "amountUSD": 45000000,
-      "daysUntilDeadline": 60,
-      "deadline": "2026-01-19",
-      "next_action": "Capability Statement",
-      "scrapedAt": "2025-11-20T23:21:39.851436Z",
-      "forecast_value": "$45,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.usgs.gov/programs/national-geospatial-program/national-map",
-      "timeline": {
-        "daysUntil": 60,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 45000000
-      },
-      "valueUSD": 45000000,
-      "urgency": "near",
-      "priorityScore": 130,
-      "priorityLabel": "top USA: score 130"
-    },
-    {
-      "id": "doe-191",
-      "title": "DOE Terrestrial Ecosystem LiDAR Characterization",
-      "agency": "DOE",
-      "pillar": "Research",
-      "category": "R&D",
-      "description": "Spaceborne LiDAR for carbon cycle and ecosystem monitoring",
-      "amountUSD": 10000000,
-      "daysUntilDeadline": 85,
-      "deadline": "2026-02-13",
-      "next_action": "Lab Partnership",
-      "scrapedAt": "2025-11-20T23:21:39.851866Z",
-      "forecast_value": "$10,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.energy.gov/",
-      "timeline": {
-        "daysUntil": 85,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 10000000
-      },
-      "valueUSD": 10000000,
-      "urgency": "near",
-      "priorityScore": 130,
-      "priorityLabel": "top Global: score 130"
-    },
-    {
-      "id": "maxar-976",
-      "title": "Maxar 3D Geospatial Intelligence - LiDAR Integration",
-      "agency": "Maxar",
-      "pillar": "Commercial",
-      "category": "DaaS",
-      "description": "Space-based LiDAR for enhanced 3D intelligence products",
-      "amountUSD": 35000000,
-      "daysUntilDeadline": 60,
-      "deadline": "2026-01-19",
-      "next_action": "Commercial Partnership",
-      "scrapedAt": "2025-11-20T23:21:39.852050Z",
-      "forecast_value": "$35,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.maxar.com/",
-      "timeline": {
-        "daysUntil": 60,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 35000000
-      },
-      "valueUSD": 35000000,
-      "urgency": "near",
-      "priorityScore": 130,
-      "priorityLabel": "top Global: score 130"
-    },
-    {
-      "id": "nsf-758",
-      "title": "NSF EarthCube LiDAR Data Integration",
-      "agency": "NSF",
-      "pillar": "Research",
-      "category": "R&D",
-      "description": "Space-based LiDAR data integration for geoscience research infrastructure",
-      "amountUSD": 8000000,
-      "daysUntilDeadline": 75,
-      "deadline": "2026-02-03",
-      "next_action": "Proposal Development",
-      "scrapedAt": "2025-11-20T23:21:39.851835Z",
-      "forecast_value": "$8,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.nsf.gov/",
-      "timeline": {
-        "daysUntil": 75,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 8000000
-      },
-      "valueUSD": 8000000,
-      "urgency": "near",
-      "priorityScore": 120,
-      "priorityLabel": "top Global: score 120"
-    },
-    {
-      "id": "diu-157",
-      "title": "JPL Earth Surface & Interior Science - LiDAR",
-      "agency": "Caltech/JPL",
-      "pillar": "Federal",
-      "category": "DaaS",
-      "deadline": "2026-01-14",
-      "next_action": "Technical Demo",
-      "scrapedAt": "2025-11-20T23:21:39.851512Z",
-      "description": "Topobathymetric LiDAR for coastal zone mapping and elevation data",
-      "amountUSD": 18000000,
-      "daysUntilDeadline": 55,
-      "forecast_value": "$18,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://coast.noaa.gov/",
-      "timeline": {
-        "daysUntil": 55,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 18000000
-      },
-      "valueUSD": 18000000,
-      "urgency": "near",
-      "priorityScore": 116,
-      "priorityLabel": "top USA: score 116"
-    },
-    {
-      "id": "state-of-florida-696",
-      "title": "Florida Coastal Mapping - Topobathy LiDAR",
-      "agency": "State of Florida",
-      "pillar": "State/Local",
-      "category": "DaaS",
-      "description": "Coastal zone topographic and bathymetric elevation mapping",
-      "amountUSD": 32000000,
-      "daysUntilDeadline": 100,
-      "deadline": "2026-02-28",
-      "next_action": "Coastal Demo",
-      "scrapedAt": "2025-11-20T23:21:39.852108Z",
-      "forecast_value": "$32,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://floridadep.gov/",
+      "scrapedAt": "2025-11-21T13:08:13.951816Z",
       "timeline": {
         "daysUntil": 100,
         "urgency": "future"
       },
-      "funding": {
-        "amountUSD": 32000000
-      },
-      "valueUSD": 32000000,
+      "title": "DLR TanDEM-X Follow-On LiDAR Mission",
       "urgency": "future",
-      "priorityScore": 102,
-      "priorityLabel": "top Global: score 102"
+      "valueUSD": 30000000
     },
     {
-      "id": "usace-992",
-      "title": "USACE National DEM Production Contract",
-      "agency": "USACE",
-      "pillar": "Federal",
-      "category": "DaaS",
-      "description": "High-resolution DEM generation for flood mapping and infrastructure planning",
-      "amountUSD": 32000000,
-      "daysUntilDeadline": 70,
-      "deadline": "2026-01-29",
-      "next_action": "Past Performance Review",
-      "scrapedAt": "2025-11-20T23:21:39.851532Z",
-      "forecast_value": "$32,000,000",
-      "link": "https://sam.gov",
+      "agency": "DOE",
+      "agencyLink": "https://www.energy.gov/",
+      "amountUSD": 10000000,
       "budgetSourceLink": "#",
-      "agencyLink": "https://www.usace.army.mil/",
+      "category": "R&D",
+      "daysUntilDeadline": 85,
+      "deadline": "2026-02-14",
+      "description": "Spaceborne LiDAR for carbon cycle and ecosystem monitoring",
+      "forecast_value": "$10,000,000",
+      "funding": {
+        "amountUSD": 10000000
+      },
+      "id": "doe-427",
+      "link": "https://sam.gov",
+      "next_action": "Lab Partnership",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T13:08:13.952309Z",
       "timeline": {
-        "daysUntil": 70,
+        "daysUntil": 85,
         "urgency": "near"
       },
-      "funding": {
-        "amountUSD": 32000000
-      },
-      "valueUSD": 32000000,
+      "title": "DOE Terrestrial Ecosystem LiDAR Characterization",
       "urgency": "near",
-      "priorityScore": 98,
-      "priorityLabel": "top USA: score 98"
+      "valueUSD": 10000000
     },
     {
-      "id": "fema-481",
-      "title": "FEMA Risk MAP Elevation Data Collection",
-      "agency": "FEMA",
-      "pillar": "Federal",
-      "category": "DaaS",
-      "description": "LiDAR-derived elevation data for flood risk mapping and modeling",
-      "amountUSD": 28000000,
-      "daysUntilDeadline": 65,
-      "deadline": "2026-01-24",
-      "next_action": "Capability Brief",
-      "scrapedAt": "2025-11-20T23:21:39.851556Z",
-      "forecast_value": "$28,000,000",
-      "link": "https://sam.gov",
+      "agency": "CSA",
+      "agencyLink": "https://www.asc-csa.gc.ca/",
+      "amountUSD": 22000000,
       "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 85,
+      "deadline": "2026-02-14",
+      "description": "Space-based LiDAR for Arctic and sub-Arctic terrain mapping",
+      "forecast_value": "$22,000,000",
+      "funding": {
+        "amountUSD": 22000000
+      },
+      "id": "csa-869",
+      "link": "https://sam.gov",
+      "next_action": "Arctic Capability Demo",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.951618Z",
+      "timeline": {
+        "daysUntil": 85,
+        "urgency": "near"
+      },
+      "title": "CSA Arctic Topographic Mapping Program",
+      "urgency": "near",
+      "valueUSD": 22000000
+    },
+    {
+      "agency": "Google",
+      "agencyLink": "https://earthengine.google.com/",
+      "amountUSD": 30000000,
+      "budgetSourceLink": "#",
+      "category": "Platform",
+      "daysUntilDeadline": 80,
+      "deadline": "2026-02-09",
+      "description": "Space-based LiDAR for next-generation global elevation model",
+      "forecast_value": "$30,000,000",
+      "funding": {
+        "amountUSD": 30000000
+      },
+      "id": "google-263",
+      "link": "https://sam.gov",
+      "next_action": "Data Partnership",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T13:08:13.952745Z",
+      "timeline": {
+        "daysUntil": 80,
+        "urgency": "near"
+      },
+      "title": "Google Earth Engine Global DEM Initiative",
+      "urgency": "near",
+      "valueUSD": 30000000
+    },
+    {
+      "agency": "FEMA",
       "agencyLink": "https://www.fema.gov/flood-maps",
+      "amountUSD": 28000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 65,
+      "deadline": "2026-01-25",
+      "description": "LiDAR-derived elevation data for flood risk mapping and modeling",
+      "forecast_value": "$28,000,000",
+      "funding": {
+        "amountUSD": 28000000
+      },
+      "id": "fema-880",
+      "link": "https://sam.gov",
+      "next_action": "Capability Brief",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.951111Z",
       "timeline": {
         "daysUntil": 65,
         "urgency": "near"
       },
-      "funding": {
-        "amountUSD": 28000000
-      },
-      "valueUSD": 28000000,
+      "title": "FEMA Risk MAP Elevation Data Collection",
       "urgency": "near",
-      "priorityScore": 88,
-      "priorityLabel": "top USA: score 88"
+      "valueUSD": 28000000
     },
     {
-      "id": "esa-879",
-      "title": "ESA Copernicus Expansion - Elevation Services",
-      "agency": "ESA",
-      "pillar": "International",
-      "category": "DaaS",
-      "description": "Commercial elevation data services for Copernicus program",
-      "amountUSD": 28000000,
-      "daysUntilDeadline": 75,
-      "deadline": "2026-02-03",
-      "next_action": "Technical Proposal",
-      "scrapedAt": "2025-11-20T23:21:39.851669Z",
-      "forecast_value": "$28,000,000",
-      "link": "https://sam.gov",
+      "agency": "NSF",
+      "agencyLink": "https://www.nsf.gov/",
+      "amountUSD": 8000000,
       "budgetSourceLink": "#",
-      "agencyLink": "https://www.esa.int/Applications/Observing_the_Earth/Copernicus",
-      "timeline": {
-        "daysUntil": 75,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 28000000
-      },
-      "valueUSD": 28000000,
-      "urgency": "near",
-      "priorityScore": 88,
-      "priorityLabel": "top Europe: score 88"
-    },
-    {
-      "id": "state-of-california-869",
-      "title": "California Statewide LiDAR Program - Phase 2",
-      "agency": "State of California",
-      "pillar": "State/Local",
-      "category": "DaaS",
-      "description": "High-resolution elevation data for wildfire, flood, and infrastructure planning",
-      "amountUSD": 45000000,
-      "daysUntilDeadline": 75,
-      "deadline": "2026-02-03",
-      "next_action": "State Contracting",
-      "scrapedAt": "2025-11-20T23:21:39.852068Z",
-      "forecast_value": "$45,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://gis.data.ca.gov/",
-      "timeline": {
-        "daysUntil": 75,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 45000000
-      },
-      "valueUSD": 45000000,
-      "urgency": "near",
-      "priorityScore": 88,
-      "priorityLabel": "top Global: score 88"
-    },
-    {
-      "id": "asi-891",
-      "title": "ASI COSMO-SkyMed Topographic Enhancement",
-      "agency": "ASI",
-      "pillar": "International",
       "category": "R&D",
-      "description": "LiDAR augmentation for COSMO-SkyMed elevation products",
-      "amountUSD": 16000000,
-      "daysUntilDeadline": 105,
-      "deadline": "2026-03-05",
-      "next_action": "Technical Review",
-      "scrapedAt": "2025-11-20T23:21:39.851817Z",
-      "forecast_value": "$16,000,000",
+      "daysUntilDeadline": 75,
+      "deadline": "2026-02-04",
+      "description": "Space-based LiDAR data integration for geoscience research infrastructure",
+      "forecast_value": "$8,000,000",
+      "funding": {
+        "amountUSD": 8000000
+      },
+      "id": "nsf-936",
       "link": "https://sam.gov",
+      "next_action": "Proposal Development",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T13:08:13.952054Z",
+      "timeline": {
+        "daysUntil": 75,
+        "urgency": "near"
+      },
+      "title": "NSF EarthCube LiDAR Data Integration",
+      "urgency": "near",
+      "valueUSD": 8000000
+    },
+    {
+      "agency": "NSF",
+      "agencyLink": "https://www.nsf.gov/geo/",
+      "amountUSD": 12000000,
       "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 95,
+      "deadline": "2026-02-24",
+      "description": "High-resolution elevation data for critical zone science",
+      "forecast_value": "$12,000,000",
+      "funding": {
+        "amountUSD": 12000000
+      },
+      "id": "nsf-691",
+      "link": "https://sam.gov",
+      "next_action": "Multi-Institution Proposal",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T13:08:13.952064Z",
+      "timeline": {
+        "daysUntil": 95,
+        "urgency": "future"
+      },
+      "title": "NSF Critical Zone Observatory - Topographic Mapping",
+      "urgency": "future",
+      "valueUSD": 12000000
+    },
+    {
+      "agency": "Amazon Web Services",
+      "agencyLink": "https://aws.amazon.com/earth/",
+      "amountUSD": 25000000,
+      "budgetSourceLink": "#",
+      "category": "Platform",
+      "daysUntilDeadline": 70,
+      "deadline": "2026-01-30",
+      "description": "Spaceborne LiDAR data integration for AWS geospatial services",
+      "forecast_value": "$25,000,000",
+      "funding": {
+        "amountUSD": 25000000
+      },
+      "id": "amazon-web-services-408",
+      "link": "https://sam.gov",
+      "next_action": "AWS Partnership Brief",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T13:08:13.952576Z",
+      "timeline": {
+        "daysUntil": 70,
+        "urgency": "near"
+      },
+      "title": "AWS Earth on AWS - Elevation Data Partnership",
+      "urgency": "near",
+      "valueUSD": 25000000
+    },
+    {
+      "agency": "ASI",
       "agencyLink": "https://www.asi.it/",
+      "amountUSD": 16000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 105,
+      "deadline": "2026-03-06",
+      "description": "LiDAR augmentation for COSMO-SkyMed elevation products",
+      "forecast_value": "$16,000,000",
+      "funding": {
+        "amountUSD": 16000000
+      },
+      "id": "asi-210",
+      "link": "https://sam.gov",
+      "next_action": "Technical Review",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.952035Z",
       "timeline": {
         "daysUntil": 105,
         "urgency": "future"
       },
-      "funding": {
-        "amountUSD": 16000000
-      },
-      "valueUSD": 16000000,
+      "title": "ASI COSMO-SkyMed Topographic Enhancement",
       "urgency": "future",
-      "priorityScore": 86,
-      "priorityLabel": "top Global: score 86"
+      "valueUSD": 16000000
     },
     {
-      "id": "state-of-texas-330",
-      "title": "Texas Strategic Mapping Program - Statewide DEM",
-      "agency": "State of Texas",
-      "pillar": "State/Local",
-      "category": "DaaS",
-      "description": "Large-area topographic mapping for coastal resilience and flood planning",
-      "amountUSD": 38000000,
-      "daysUntilDeadline": 90,
-      "deadline": "2026-02-18",
-      "next_action": "TNRIS Coordination",
-      "scrapedAt": "2025-11-20T23:21:39.852088Z",
-      "forecast_value": "$38,000,000",
-      "link": "https://sam.gov",
+      "agency": "JAXA",
+      "agencyLink": "https://global.jaxa.jp/",
+      "amountUSD": 18000000,
       "budgetSourceLink": "#",
-      "agencyLink": "https://tnris.org/",
+      "category": "R&D",
+      "daysUntilDeadline": 120,
+      "deadline": "2026-03-21",
+      "description": "Spaceborne LiDAR integration for ALOS-4 global topographic mapping",
+      "forecast_value": "$18,000,000",
+      "funding": {
+        "amountUSD": 18000000
+      },
+      "id": "jaxa-528",
+      "link": "https://sam.gov",
+      "next_action": "International Partnership",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.951600Z",
+      "timeline": {
+        "daysUntil": 120,
+        "urgency": "future"
+      },
+      "title": "JAXA ALOS-4 Topographic Mission Support",
+      "urgency": "future",
+      "valueUSD": 18000000
+    },
+    {
+      "agency": "Caltech/JPL",
+      "agencyLink": "https://www.jpl.nasa.gov/",
+      "amountUSD": 18000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 90,
+      "deadline": "2026-02-19",
+      "description": "Next-generation spaceborne LiDAR for planetary surface science",
+      "forecast_value": "$18,000,000",
+      "funding": {
+        "amountUSD": 18000000
+      },
+      "id": "caltech-jpl-159",
+      "link": "https://sam.gov",
+      "next_action": "JPL Collaboration",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T13:08:13.952556Z",
       "timeline": {
         "daysUntil": 90,
         "urgency": "future"
       },
-      "funding": {
-        "amountUSD": 38000000
-      },
-      "valueUSD": 38000000,
+      "title": "JPL Earth Surface & Interior Science - LiDAR",
       "urgency": "future",
-      "priorityScore": 76,
-      "priorityLabel": "top Global: score 76"
+      "valueUSD": 18000000
     },
     {
-      "id": "blm-478",
-      "title": "BLM Public Lands Topographic Mapping",
-      "agency": "BLM",
-      "pillar": "Federal",
-      "category": "DaaS",
-      "description": "Large-area topographic mapping for public land management and resource planning",
-      "amountUSD": 16000000,
-      "daysUntilDeadline": 95,
-      "deadline": "2026-02-23",
-      "next_action": "Site Assessment",
-      "scrapedAt": "2025-11-20T23:21:39.851638Z",
-      "forecast_value": "$16,000,000",
-      "link": "https://sam.gov",
+      "agency": "USACE",
+      "agencyLink": "https://www.usace.army.mil/",
+      "amountUSD": 32000000,
       "budgetSourceLink": "#",
-      "agencyLink": "https://www.blm.gov/",
+      "category": "DaaS",
+      "daysUntilDeadline": 70,
+      "deadline": "2026-01-30",
+      "description": "High-resolution DEM generation for flood mapping and infrastructure planning",
+      "forecast_value": "$32,000,000",
+      "funding": {
+        "amountUSD": 32000000
+      },
+      "id": "usace-382",
+      "link": "https://sam.gov",
+      "next_action": "Past Performance Review",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.951086Z",
       "timeline": {
-        "daysUntil": 95,
+        "daysUntil": 70,
+        "urgency": "near"
+      },
+      "title": "USACE National DEM Production Contract",
+      "urgency": "near",
+      "valueUSD": 32000000
+    },
+    {
+      "agency": "NOAA",
+      "agencyLink": "https://coast.noaa.gov/",
+      "amountUSD": 18000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 55,
+      "deadline": "2026-01-15",
+      "description": "Topobathymetric LiDAR for coastal zone mapping and elevation data",
+      "forecast_value": "$18,000,000",
+      "funding": {
+        "amountUSD": 18000000
+      },
+      "id": "noaa-776",
+      "link": "https://sam.gov",
+      "next_action": "Technical Demo",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.950787Z",
+      "timeline": {
+        "daysUntil": 55,
+        "urgency": "near"
+      },
+      "title": "NOAA Coastal Topobathy LiDAR Services",
+      "urgency": "near",
+      "valueUSD": 18000000
+    },
+    {
+      "agency": "ESA",
+      "agencyLink": "https://www.esa.int/",
+      "amountUSD": 35000000,
+      "budgetSourceLink": "#",
+      "category": "Platform",
+      "daysUntilDeadline": 45,
+      "deadline": "2026-01-05",
+      "description": "Space-based LiDAR for Digital Twin Earth topographic layer",
+      "forecast_value": "$35,000,000",
+      "funding": {
+        "amountUSD": 35000000
+      },
+      "id": "esa-230",
+      "link": "https://sam.gov",
+      "next_action": "Consortium Lead",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.951567Z",
+      "timeline": {
+        "daysUntil": 45,
+        "urgency": "near"
+      },
+      "title": "ESA Digital Twin Earth LiDAR Platform",
+      "urgency": "near",
+      "valueUSD": 35000000
+    },
+    {
+      "agency": "ESA",
+      "agencyLink": "https://www.esa.int/Applications/Observing_the_Earth/Copernicus",
+      "amountUSD": 28000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 75,
+      "deadline": "2026-02-04",
+      "description": "Commercial elevation data services for Copernicus program",
+      "forecast_value": "$28,000,000",
+      "funding": {
+        "amountUSD": 28000000
+      },
+      "id": "esa-396",
+      "link": "https://sam.gov",
+      "next_action": "Technical Proposal",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.951580Z",
+      "timeline": {
+        "daysUntil": 75,
+        "urgency": "near"
+      },
+      "title": "ESA Copernicus Expansion - Elevation Services",
+      "urgency": "near",
+      "valueUSD": 28000000
+    },
+    {
+      "agency": "CNSA",
+      "agencyLink": "http://www.cnsa.gov.cn/english/",
+      "amountUSD": 40000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 130,
+      "deadline": "2026-03-31",
+      "description": "Large-area spaceborne LiDAR for Belt and Road Initiative countries",
+      "forecast_value": "$40,000,000",
+      "funding": {
+        "amountUSD": 40000000
+      },
+      "id": "cnsa-582",
+      "link": "https://sam.gov",
+      "next_action": "International Coordination",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.952014Z",
+      "timeline": {
+        "daysUntil": 130,
         "urgency": "future"
       },
+      "title": "CNSA Belt & Road Topographic Mapping",
+      "urgency": "future",
+      "valueUSD": 40000000
+    },
+    {
+      "agency": "BLM",
+      "agencyLink": "https://www.blm.gov/",
+      "amountUSD": 16000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 95,
+      "deadline": "2026-02-24",
+      "description": "Large-area topographic mapping for public land management and resource planning",
+      "forecast_value": "$16,000,000",
       "funding": {
         "amountUSD": 16000000
       },
-      "valueUSD": 16000000,
-      "urgency": "future",
-      "priorityScore": 68,
-      "priorityLabel": "top USA: score 68"
-    },
-    {
-      "id": "nyc-planning-693",
-      "title": "NYC 3D Building & Terrain Model Update",
-      "agency": "NYC Planning",
-      "pillar": "State/Local",
-      "category": "DaaS",
-      "description": "High-resolution urban topographic and infrastructure mapping",
-      "amountUSD": 12000000,
-      "daysUntilDeadline": 65,
-      "deadline": "2026-01-24",
-      "next_action": "City Proposal",
-      "scrapedAt": "2025-11-20T23:21:39.852130Z",
-      "forecast_value": "$12,000,000",
+      "id": "blm-324",
       "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www1.nyc.gov/site/planning/",
-      "timeline": {
-        "daysUntil": 65,
-        "urgency": "near"
-      },
-      "funding": {
-        "amountUSD": 12000000
-      },
-      "valueUSD": 12000000,
-      "urgency": "near",
-      "priorityScore": 66,
-      "priorityLabel": "top Global: score 66"
-    },
-    {
-      "id": "nsf-356",
-      "title": "NSF Critical Zone Observatory - Topographic Mapping",
-      "agency": "NSF",
-      "pillar": "Research",
-      "category": "R&D",
-      "description": "High-resolution elevation data for critical zone science",
-      "amountUSD": 12000000,
-      "daysUntilDeadline": 95,
-      "deadline": "2026-02-23",
-      "next_action": "Multi-Institution Proposal",
-      "scrapedAt": "2025-11-20T23:21:39.851848Z",
-      "forecast_value": "$12,000,000",
-      "link": "https://sam.gov",
-      "budgetSourceLink": "#",
-      "agencyLink": "https://www.nsf.gov/geo/",
+      "next_action": "Site Assessment",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.951391Z",
       "timeline": {
         "daysUntil": 95,
         "urgency": "future"
       },
-      "funding": {
-        "amountUSD": 12000000
-      },
-      "valueUSD": 12000000,
+      "title": "BLM Public Lands Topographic Mapping",
       "urgency": "future",
-      "priorityScore": 56,
-      "priorityLabel": "top Global: score 56"
+      "valueUSD": 16000000
     },
     {
-      "id": "nih-431",
-      "title": "NIH Environmental Health Topographic Mapping",
-      "agency": "NIH",
-      "pillar": "Research",
-      "category": "R&D",
-      "description": "High-resolution DEM for disease vector and environmental health research",
-      "amountUSD": 6000000,
-      "daysUntilDeadline": 100,
-      "deadline": "2026-02-28",
-      "next_action": "Health Mapping Brief",
-      "scrapedAt": "2025-11-20T23:21:39.851884Z",
-      "forecast_value": "$6,000,000",
-      "link": "https://sam.gov",
+      "agency": "UKSA",
+      "agencyLink": "https://www.gov.uk/government/organisations/uk-space-agency",
+      "amountUSD": 20000000,
       "budgetSourceLink": "#",
-      "agencyLink": "https://www.nih.gov/",
+      "category": "DaaS",
+      "daysUntilDeadline": 90,
+      "deadline": "2026-02-19",
+      "description": "Commercial space-based topographic data for climate monitoring",
+      "forecast_value": "$20,000,000",
+      "funding": {
+        "amountUSD": 20000000
+      },
+      "id": "uksa-633",
+      "link": "https://sam.gov",
+      "next_action": "UK Partnership Brief",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.951857Z",
+      "timeline": {
+        "daysUntil": 90,
+        "urgency": "future"
+      },
+      "title": "UKSA Climate & Environment LiDAR Services",
+      "urgency": "future",
+      "valueUSD": 20000000
+    },
+    {
+      "agency": "MIT",
+      "agencyLink": "https://www.ll.mit.edu/",
+      "amountUSD": 15000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 110,
+      "deadline": "2026-03-11",
+      "description": "Advanced spaceborne LiDAR technology development and validation",
+      "forecast_value": "$15,000,000",
+      "funding": {
+        "amountUSD": 15000000
+      },
+      "id": "mit-158",
+      "link": "https://sam.gov",
+      "next_action": "Research Agreement",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T13:08:13.952523Z",
+      "timeline": {
+        "daysUntil": 110,
+        "urgency": "future"
+      },
+      "title": "MIT Lincoln Lab Space-Based Sensing Partnership",
+      "urgency": "future",
+      "valueUSD": 15000000
+    },
+    {
+      "agency": "EU Commission",
+      "agencyLink": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en",
+      "amountUSD": 35000000,
+      "budgetSourceLink": "#",
+      "category": "R&D",
+      "daysUntilDeadline": 120,
+      "deadline": "2026-03-21",
+      "description": "Commercial spaceborne LiDAR for pan-European topographic services",
+      "forecast_value": "$35,000,000",
+      "funding": {
+        "amountUSD": 35000000
+      },
+      "id": "eu-commission-683",
+      "link": "https://sam.gov",
+      "next_action": "Consortium Formation",
+      "pillar": "Research",
+      "scrapedAt": "2025-11-21T13:08:13.952352Z",
+      "timeline": {
+        "daysUntil": 120,
+        "urgency": "future"
+      },
+      "title": "Horizon Europe Space-Based Earth Monitoring",
+      "urgency": "future",
+      "valueUSD": 35000000
+    },
+    {
+      "agency": "USDA Forest Service",
+      "agencyLink": "https://www.fs.usda.gov/",
+      "amountUSD": 22000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 80,
+      "deadline": "2026-02-09",
+      "description": "LiDAR for forest inventory, canopy height, and bare-earth terrain mapping",
+      "forecast_value": "$22,000,000",
+      "funding": {
+        "amountUSD": 22000000
+      },
+      "id": "usda-forest-service-765",
+      "link": "https://sam.gov",
+      "next_action": "Forest Demo",
+      "pillar": "Federal",
+      "scrapedAt": "2025-11-21T13:08:13.951373Z",
+      "timeline": {
+        "daysUntil": 80,
+        "urgency": "near"
+      },
+      "title": "USFS National Forest LiDAR Inventory",
+      "urgency": "near",
+      "valueUSD": 22000000
+    },
+    {
+      "agency": "ISRO",
+      "agencyLink": "https://www.isro.gov.in/",
+      "amountUSD": 25000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 110,
+      "deadline": "2026-03-11",
+      "description": "Spaceborne LiDAR for national elevation mapping and disaster management",
+      "forecast_value": "$25,000,000",
+      "funding": {
+        "amountUSD": 25000000
+      },
+      "id": "isro-603",
+      "link": "https://sam.gov",
+      "next_action": "India Partnership",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.951839Z",
+      "timeline": {
+        "daysUntil": 110,
+        "urgency": "future"
+      },
+      "title": "ISRO National Topographic Mapping - LiDAR Phase",
+      "urgency": "future",
+      "valueUSD": 25000000
+    },
+    {
+      "agency": "Microsoft",
+      "agencyLink": "https://planetarycomputer.microsoft.com/",
+      "amountUSD": 22000000,
+      "budgetSourceLink": "#",
+      "category": "Platform",
+      "daysUntilDeadline": 85,
+      "deadline": "2026-02-14",
+      "description": "Spaceborne LiDAR DEM for Planetary Computer sustainability applications",
+      "forecast_value": "$22,000,000",
+      "funding": {
+        "amountUSD": 22000000
+      },
+      "id": "microsoft-138",
+      "link": "https://sam.gov",
+      "next_action": "Azure Integration",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T13:08:13.952777Z",
+      "timeline": {
+        "daysUntil": 85,
+        "urgency": "near"
+      },
+      "title": "Microsoft Planetary Computer Terrain Services",
+      "urgency": "near",
+      "valueUSD": 22000000
+    },
+    {
+      "agency": "Maxar",
+      "agencyLink": "https://www.maxar.com/",
+      "amountUSD": 35000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 60,
+      "deadline": "2026-01-20",
+      "description": "Space-based LiDAR for enhanced 3D intelligence products",
+      "forecast_value": "$35,000,000",
+      "funding": {
+        "amountUSD": 35000000
+      },
+      "id": "maxar-222",
+      "link": "https://sam.gov",
+      "next_action": "Commercial Partnership",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T13:08:13.952992Z",
+      "timeline": {
+        "daysUntil": 60,
+        "urgency": "near"
+      },
+      "title": "Maxar 3D Geospatial Intelligence - LiDAR Integration",
+      "urgency": "near",
+      "valueUSD": 35000000
+    },
+    {
+      "agency": "State of California",
+      "agencyLink": "https://gis.data.ca.gov/",
+      "amountUSD": 45000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 75,
+      "deadline": "2026-02-04",
+      "description": "High-resolution elevation data for wildfire, flood, and infrastructure planning",
+      "forecast_value": "$45,000,000",
+      "funding": {
+        "amountUSD": 45000000
+      },
+      "id": "state-of-california-242",
+      "link": "https://sam.gov",
+      "next_action": "State Contracting",
+      "pillar": "State/Local",
+      "scrapedAt": "2025-11-21T13:08:13.953021Z",
+      "timeline": {
+        "daysUntil": 75,
+        "urgency": "near"
+      },
+      "title": "California Statewide LiDAR Program - Phase 2",
+      "urgency": "near",
+      "valueUSD": 45000000
+    },
+    {
+      "agency": "State of Texas",
+      "agencyLink": "https://tnris.org/",
+      "amountUSD": 38000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 90,
+      "deadline": "2026-02-19",
+      "description": "Large-area topographic mapping for coastal resilience and flood planning",
+      "forecast_value": "$38,000,000",
+      "funding": {
+        "amountUSD": 38000000
+      },
+      "id": "state-of-texas-122",
+      "link": "https://sam.gov",
+      "next_action": "TNRIS Coordination",
+      "pillar": "State/Local",
+      "scrapedAt": "2025-11-21T13:08:13.953039Z",
+      "timeline": {
+        "daysUntil": 90,
+        "urgency": "future"
+      },
+      "title": "Texas Strategic Mapping Program - Statewide DEM",
+      "urgency": "future",
+      "valueUSD": 38000000
+    },
+    {
+      "agency": "State of Florida",
+      "agencyLink": "https://floridadep.gov/",
+      "amountUSD": 32000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 100,
+      "deadline": "2026-03-01",
+      "description": "Coastal zone topographic and bathymetric elevation mapping",
+      "forecast_value": "$32,000,000",
+      "funding": {
+        "amountUSD": 32000000
+      },
+      "id": "state-of-florida-305",
+      "link": "https://sam.gov",
+      "next_action": "Coastal Demo",
+      "pillar": "State/Local",
+      "scrapedAt": "2025-11-21T13:08:13.953056Z",
       "timeline": {
         "daysUntil": 100,
         "urgency": "future"
       },
-      "funding": {
-        "amountUSD": 6000000
-      },
-      "valueUSD": 6000000,
+      "title": "Florida Coastal Mapping - Topobathy LiDAR",
       "urgency": "future",
-      "priorityScore": 46,
-      "priorityLabel": "top Global: score 46"
+      "valueUSD": 32000000
+    },
+    {
+      "agency": "NYC Planning",
+      "agencyLink": "https://www1.nyc.gov/site/planning/",
+      "amountUSD": 12000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 65,
+      "deadline": "2026-01-25",
+      "description": "High-resolution urban topographic and infrastructure mapping",
+      "forecast_value": "$12,000,000",
+      "funding": {
+        "amountUSD": 12000000
+      },
+      "id": "nyc-planning-931",
+      "link": "https://sam.gov",
+      "next_action": "City Proposal",
+      "pillar": "State/Local",
+      "scrapedAt": "2025-11-21T13:08:13.953070Z",
+      "timeline": {
+        "daysUntil": 65,
+        "urgency": "near"
+      },
+      "title": "NYC 3D Building & Terrain Model Update",
+      "urgency": "near",
+      "valueUSD": 12000000
+    },
+    {
+      "agency": "World Bank",
+      "agencyLink": "https://www.worldbank.org/",
+      "amountUSD": 50000000,
+      "budgetSourceLink": "#",
+      "category": "DaaS",
+      "daysUntilDeadline": 130,
+      "deadline": "2026-03-31",
+      "description": "Large-area spaceborne topographic mapping for developing nations",
+      "forecast_value": "$50,000,000",
+      "funding": {
+        "amountUSD": 50000000
+      },
+      "id": "world-bank-244",
+      "link": "https://sam.gov",
+      "next_action": "Development Partnership",
+      "pillar": "International",
+      "scrapedAt": "2025-11-21T13:08:13.953085Z",
+      "timeline": {
+        "daysUntil": 130,
+        "urgency": "future"
+      },
+      "title": "World Bank Climate Resilience Mapping Initiative",
+      "urgency": "future",
+      "valueUSD": 50000000
+    },
+    {
+      "agency": "Planet Labs",
+      "agencyLink": "https://www.planet.com/",
+      "amountUSD": 18000000,
+      "budgetSourceLink": "#",
+      "category": "Platform",
+      "daysUntilDeadline": 75,
+      "deadline": "2026-02-04",
+      "description": "Spaceborne LiDAR integration with Planet Fusion multi-modal analytics",
+      "forecast_value": "$18,000,000",
+      "funding": {
+        "amountUSD": 18000000
+      },
+      "id": "planet-labs-249",
+      "link": "https://sam.gov",
+      "next_action": "Platform Integration",
+      "pillar": "Commercial",
+      "scrapedAt": "2025-11-21T13:08:13.953156Z",
+      "timeline": {
+        "daysUntil": 75,
+        "urgency": "near"
+      },
+      "title": "Planet Fusion Platform - Elevation Layer Integration",
+      "urgency": "near",
+      "valueUSD": 18000000
     }
   ]
 }
