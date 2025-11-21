@@ -188,7 +188,7 @@ jobs:
           script: |
             const timestamp = new Date().toISOString();
             const runUrl = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
-            const dashboardUrl = `https://jacobthielnuview.github.io/nuview-strategic-pipeline/`;
+            const dashboardUrl = `https://salesnuviewspace.netlify.app`;
             
             const body = `## ✅ Daily Global Topographic Sweep - Success
             
@@ -201,7 +201,7 @@ jobs:
             - Data scraped successfully
             - QC validation passed (100%)
             - Changes pushed to main branch
-            - Dashboard will update automatically within 2 minutes
+            - Dashboard updates automatically on Netlify and GitHub Pages
             
             ---
             🤖 Automated notification from Daily Global Topographic Sweep workflow`;
