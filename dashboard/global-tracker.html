@@ -28,7 +28,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="NUVIEW Global Opportunity Tracker - Comprehensive tracking of worldwide business development opportunities, funding programs, and strategic LiDAR initiatives.">
-  <meta name="theme-color" content="#23272A">
+  <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
@@ -37,23 +37,69 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
+    /* ============================================
+       NUVIEW SPACEX-INSPIRED THEME - CSS VARIABLES
+       ============================================
+       
+       PURPOSE:
+       SpaceX-inspired deep space-black theme with minimal accent red.
+       Red is used ONLY for highlights: active states, badges, borders.
+       Regular text uses clean off-greys and whites for readability.
+       
+       DESIGN PRINCIPLES:
+       - Deep space-black backgrounds (#000, #0a0a0a, #1a1a1a)
+       - Clean, high-contrast text (white/off-grey)
+       - Accent red (#EE3338) for highlights only
+       - Modern card-style tables with soft stripes
+       - Bold headers with subtle drop shadows
+       - Mobile-friendly responsive design
+       
+       LAST UPDATED: 2025-11-21
+       ============================================ */
+    
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg,#23272A 0%,#111217 85%,#090a0b 100%);
-      color: #fff;
+      background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+      color: #ffffff;
+      min-height: 100vh;
     }
+    
+    /* Modern Card-Style Containers */
     .card {
-      background: rgba(30, 31, 33, 0.7);
-      border: 1.5px solid #46484b;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border: 2px solid #2a2a2a;
       border-radius: 1.25rem;
-      box-shadow: 0 4px 24px rgba(30, 31, 33, 0.12);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+      transition: all 0.3s ease;
     }
+    
+    .card:hover {
+      box-shadow: 0 16px 48px rgba(238, 51, 56, 0.3);
+      border-color: #EE3338;
+    }
+    
+    /* Accent Red - Use Sparingly */
     .text-nuview-red { color: #EE3338; }
     .border-nuview-red { border-color: #EE3338; }
     .bg-nuview-red { background-color: #EE3338; }
-    .divider { border-color: #46484b; }
-    .highlight-row { background: rgba(238, 51, 56, 0.12); }
-    h1, .dashboard-title { font-weight: 800; color: #fff; letter-spacing:0.02em;}
+    
+    /* Dividers and Borders */
+    .divider { border-color: #2a2a2a; }
+    
+    /* Table Row Highlighting - Minimal Red */
+    .highlight-row { 
+      background: linear-gradient(90deg, rgba(238, 51, 56, 0.15) 0%, #1a1a1a 100%);
+      border-left: 3px solid #EE3338;
+    }
+    
+    /* Typography */
+    h1, .dashboard-title { 
+      font-weight: 800; 
+      color: #ffffff; 
+      letter-spacing: 0.02em;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+    }
+    
     /* Screen reader only content */
     .sr-only {
       position: absolute;
