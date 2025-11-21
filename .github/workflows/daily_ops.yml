@@ -82,7 +82,7 @@ jobs:
 
       - name: 📦 Download Scraped Data
         uses: actions/download-artifact@v4
-        uses: actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427  # v4.1.4
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53  # v6.0.0
         with:
           name: scraped-data
           path: data/
@@ -132,14 +132,14 @@ jobs:
 
       - name: 📦 Download Validated Data
         uses: actions/download-artifact@v4
-        uses: actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427  # v4.1.4
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53  # v6.0.0
         with:
           name: scraped-data
           path: data/
 
       - name: 📦 Download QC Report
         uses: actions/download-artifact@v4
-        uses: actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427  # v4.1.4
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53  # v6.0.0
         with:
           name: qc-report
           path: data/processed/
@@ -189,7 +189,7 @@ jobs:
 
       - name: 📦 Download Merge-Ready Data
         uses: actions/download-artifact@v4
-        uses: actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427  # v4.1.4
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53  # v6.0.0
         with:
           name: merge-ready-data
           path: data/
@@ -302,7 +302,7 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
 
       - name: 📦 Download QC Report
-        uses: actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427  # v4.1.4
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53  # v6.0.0
         with:
           name: qc-report
           path: data/processed/
