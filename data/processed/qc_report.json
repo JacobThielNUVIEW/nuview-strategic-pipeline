@@ -1,20 +1,32 @@
 {
-  "timestamp": "2025-11-20T23:21:39.848461Z",
-  "qc_status": "PASS",
-  "qc_percentage": 100,
-  "total_errors": 0,
+  "timestamp": "2025-11-21T02:40:13.339804Z",
+  "qc_status": "FAIL",
+  "qc_percentage": 0,
+  "total_errors": 1,
   "total_warnings": 3,
   "opportunities_validation": {
-    "errors": [],
+    "errors": [
+      "meta.totalCount (4) doesn't match actual count (30)"
+    ],
     "warnings": [
-      "Opportunity 'NASA ROSES ICESat-2 Science Team Augmentation' (nasa-515): May not be topographic-related (no relevant keywords found)",
-      "Opportunity 'Horizon Europe Space-Based Earth Monitoring' (eu-commission-497): May not be topographic-related (no relevant keywords found)",
-      "Opportunity 'MIT Lincoln Lab Space-Based Sensing Partnership' (mit-444): May not be topographic-related (no relevant keywords found)"
+      "Opportunity 'NASA ROSES ICESat-2 Science Team Augmentation' (nasa-333): May not be topographic-related (no relevant keywords found)",
+      "Opportunity 'Horizon Europe Space-Based Earth Monitoring' (eu-commission-894): May not be topographic-related (no relevant keywords found)",
+      "Opportunity 'MIT Lincoln Lab Space-Based Sensing Partnership' (mit-533): May not be topographic-related (no relevant keywords found)"
     ]
   },
   "forecast_validation": {
     "errors": [],
     "warnings": []
   },
-  "summary": "QC PASSED with 0 errors and 3 warnings"
+  "summary": "QC FAILED with 1 errors and 3 warnings",
+  "source_matrix_export": {
+    "status": "SUCCESS",
+    "output_path": "data/processed/sources_matrix.csv",
+    "statistics": {
+      "total_opportunities": 30,
+      "missing_sources": 0,
+      "bathymetry_flagged": 0,
+      "verified_opportunities": 30
+    }
+  }
 }

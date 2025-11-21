@@ -1,0 +1,31 @@
+textrank,country,agency_name,program_name,budget_amount_usd,nuview_priority_score,data_access,sources,verification
+1,USA,USGS,USGS 3DEP LiDAR Acquisition 2026 - Phase 1,217000000,200,DaaS,https://sam.gov; https://www.usgs.gov/3d-elevation-program,SOURCE_VERIFIED
+2,USA,DIU,DIU Spaceborne LiDAR BAA,15000000,180,R&D,https://sam.gov; https://www.diu.mil/,SOURCE_VERIFIED
+3,USA,NGA,NGA Commercial Space-Based 3D Mapping,45000000,170,DaaS,https://sam.gov; https://www.nga.mil/,SOURCE_VERIFIED
+4,USA,NASA,NASA ROSES ICESat-2 Science Team Augmentation,25000000,160,R&D,https://sam.gov; https://science.nasa.gov/earth-science/,SOURCE_VERIFIED
+5,Japan,JAXA,JAXA ALOS-4 Topographic Mission Support,18000000,160,R&D,https://sam.gov; https://global.jaxa.jp/,SOURCE_VERIFIED
+6,Germany,DLR,DLR TanDEM-X Follow-On LiDAR Mission,30000000,160,R&D,https://sam.gov; https://www.dlr.de/,SOURCE_VERIFIED
+7,India,ISRO,ISRO National Topographic Mapping - LiDAR Phase,25000000,160,DaaS,https://sam.gov; https://www.isro.gov.in/,SOURCE_VERIFIED
+8,Europe,EU Commission,Horizon Europe Space-Based Earth Monitoring,35000000,160,R&D,https://sam.gov; https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en,SOURCE_VERIFIED
+9,Canada,CSA,CSA Arctic Topographic Mapping Program,22000000,154,DaaS,https://sam.gov; https://www.asc-csa.gc.ca/,SOURCE_VERIFIED
+10,UK,UKSA,UKSA Climate & Environment LiDAR Services,20000000,148,DaaS,https://sam.gov; https://www.gov.uk/government/organisations/uk-space-agency,SOURCE_VERIFIED
+11,China,CNSA,CNSA Belt & Road Topographic Mapping,40000000,148,DaaS,https://sam.gov; http://www.cnsa.gov.cn/english/,SOURCE_VERIFIED
+12,USA,Amazon Web Services,AWS Earth on AWS - Elevation Data Partnership,25000000,148,Platform,https://sam.gov; https://aws.amazon.com/earth/,SOURCE_VERIFIED
+13,USA,Microsoft,Microsoft Planetary Computer Terrain Services,22000000,146,Platform,https://sam.gov; https://planetarycomputer.microsoft.com/,SOURCE_VERIFIED
+14,Global,MIT,MIT Lincoln Lab Space-Based Sensing Partnership,15000000,140,R&D,https://sam.gov; https://www.ll.mit.edu/,SOURCE_VERIFIED
+15,Europe,ESA,ESA Digital Twin Earth LiDAR Platform,45000000,130,DaaS,https://sam.gov; https://www.usgs.gov/programs/national-geospatial-program/national-map,SOURCE_VERIFIED
+16,Global,DOE,DOE Terrestrial Ecosystem LiDAR Characterization,10000000,130,R&D,https://sam.gov; https://www.energy.gov/,SOURCE_VERIFIED
+17,USA,Maxar,Maxar 3D Geospatial Intelligence - LiDAR Integration,35000000,130,DaaS,https://sam.gov; https://www.maxar.com/,SOURCE_VERIFIED
+18,Global,NSF,NSF EarthCube LiDAR Data Integration,8000000,120,R&D,https://sam.gov; https://www.nsf.gov/,SOURCE_VERIFIED
+19,USA,Caltech/JPL,JPL Earth Surface & Interior Science - LiDAR,18000000,116,DaaS,https://sam.gov; https://coast.noaa.gov/,SOURCE_VERIFIED
+20,Global,State of Florida,Florida Coastal Mapping - Topobathy LiDAR,32000000,102,DaaS,https://sam.gov; https://floridadep.gov/,SOURCE_VERIFIED
+21,USA,USACE,USACE National DEM Production Contract,32000000,98,DaaS,https://sam.gov; https://www.usace.army.mil/,SOURCE_VERIFIED
+22,USA,FEMA,FEMA Risk MAP Elevation Data Collection,28000000,88,DaaS,https://sam.gov; https://www.fema.gov/flood-maps,SOURCE_VERIFIED
+23,Europe,ESA,ESA Copernicus Expansion - Elevation Services,28000000,88,DaaS,https://sam.gov; https://www.esa.int/Applications/Observing_the_Earth/Copernicus,SOURCE_VERIFIED
+24,Global,State of California,California Statewide LiDAR Program - Phase 2,45000000,88,DaaS,https://sam.gov; https://gis.data.ca.gov/,SOURCE_VERIFIED
+25,Global,ASI,ASI COSMO-SkyMed Topographic Enhancement,16000000,86,R&D,https://sam.gov; https://www.asi.it/,SOURCE_VERIFIED
+26,Global,State of Texas,Texas Strategic Mapping Program - Statewide DEM,38000000,76,DaaS,https://sam.gov; https://tnris.org/,SOURCE_VERIFIED
+27,USA,BLM,BLM Public Lands Topographic Mapping,16000000,68,DaaS,https://sam.gov; https://www.blm.gov/,SOURCE_VERIFIED
+28,Global,NYC Planning,NYC 3D Building & Terrain Model Update,12000000,66,DaaS,https://sam.gov; https://www1.nyc.gov/site/planning/,SOURCE_VERIFIED
+29,Global,NSF,NSF Critical Zone Observatory - Topographic Mapping,12000000,56,R&D,https://sam.gov; https://www.nsf.gov/geo/,SOURCE_VERIFIED
+30,Global,NIH,NIH Environmental Health Topographic Mapping,6000000,46,R&D,https://sam.gov; https://www.nih.gov/,SOURCE_VERIFIED
