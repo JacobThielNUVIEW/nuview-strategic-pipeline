@@ -1,0 +1,26 @@
+[
+  {
+    "id":"usgs-test",
+    "title":"USGS 3DEP LiDAR Acquisition 2026",
+    "agency":"USGS",
+    "pillar":"Federal",
+    "category":"DaaS",
+    "amountUSD":217000000,
+    "daysUntilDeadline":28,
+    "deadline":"2025-12-15",
+    "next_action":"Submit Demo Brief",
+    "scrapedAt":"2025-11-21T13:00:45.234797Z",
+    "forecast_value":"$217,000,000",
+    "link":"https:\/\/sam.gov",
+    "timeline":{
+      "daysUntil":28,
+      "urgency":"urgent"
+    },
+    "funding":{
+      "amountUSD":217000000
+    },
+    "valueUSD":217000000,
+    "urgency":"urgent",
+    "calculatedPriority":67
+  }
+]

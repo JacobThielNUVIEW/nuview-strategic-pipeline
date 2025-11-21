@@ -183,7 +183,7 @@ def check_matrix_integrity():
     
     # Check source verification
     verified_count = len(matrix_df[matrix_df['verification'].str.contains(SOURCE_VERIFIED_STATUS, na=False)])
-    print(f"\nSource verification:")
+    print("\nSource verification:")
     print(f"  Verified opportunities: {verified_count}/{len(matrix_df)}")
     print_check("All sources verified", verified_count == len(matrix_df))
     
