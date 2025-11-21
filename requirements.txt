@@ -1,4 +1,8 @@
 # Dependencies for NUVIEW Strategic Pipeline
+# Python 3.11+ required
+
+# Data processing and CSV export (required for QC source verification matrix)
+pandas>=2.2.0
 # Required for source verification matrix export and data processing
 
 # Data processing
