@@ -1,0 +1,132 @@
+# Netlify Configuration for NUVIEW Strategic Pipeline
+# Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # No build command needed - static site
+  # Publish from root directory (current directory)
+  publish = "."
+  command = ""
+
+  # Build environment
+  [build.environment]
+    NODE_VERSION = "18"
+
+# Production context (main branch)
+[context.production]
+  publish = "."
+
+# Deploy previews for all branches
+[context.deploy-preview]
+  publish = "."
+
+# Branch deploys
+[context.branch-deploy]
+  publish = "."
+
+# Redirect rules
+[[redirects]]
+  from = "/"
+  to = "/dashboard/index.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/index.html"
+  to = "/dashboard/index.html"
+  status = 200
+  force = false
+
+# Ensure clean URLs work
+[[redirects]]
+  from = "/dashboard"
+  to = "/dashboard/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/pipeline"
+  to = "/dashboard/pipeline.html"
+  status = 200
+
+[[redirects]]
+  from = "/matrix"
+  to = "/dashboard/pipeline_matrix.html"
+  status = 200
+
+[[redirects]]
+  from = "/tracker"
+  to = "/dashboard/global-tracker.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # CSP Note: 'unsafe-inline' is required for existing inline styles/scripts in dashboard
+    # Consider moving inline code to external files in future to strengthen CSP
+    Content-Security-Policy = """
+      default-src 'self' https:;
+      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://code.jquery.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdn.datatables.net;
+      font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;
+      img-src 'self' data: https:;
+      connect-src 'self' https://api.github.com;
+    """
+
+# Cache control for static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache control for HTML files (revalidate frequently)
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Cache control for data files (revalidate frequently)
+[[headers]]
+  for = "/data/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+# Cache control for robots.txt
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Enable Brotli compression
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  # JS bundling disabled - scripts loaded from CDN (Bootstrap, Chart.js, jQuery)
+  # All JS is either inline or external CDN resources, no local files to bundle
+  bundle = false
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
