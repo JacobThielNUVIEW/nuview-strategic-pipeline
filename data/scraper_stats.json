@@ -3,8 +3,74 @@
     {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "ESRI Platform",
+      "scraper": "FEMA Flood",
+      "source_type": "Federal"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "NOAA Coastal",
+      "source_type": "Federal"
+    },
+    {
+      "country": "Europe",
+      "opportunities_found": 2,
+      "scraper": "ESA Copernicus",
+      "source_type": "International"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "BLM Mapping",
+      "source_type": "Federal"
+    },
+    {
+      "country": "China",
+      "opportunities_found": 1,
+      "scraper": "CNSA Mapping",
+      "source_type": "International"
+    },
+    {
+      "country": "UK",
+      "opportunities_found": 1,
+      "scraper": "UKSA EO",
+      "source_type": "International"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "MIT Research",
+      "source_type": "Research"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "USDA Forest",
+      "source_type": "Federal"
+    },
+    {
+      "country": "Europe",
+      "opportunities_found": 1,
+      "scraper": "EU Horizon",
+      "source_type": "Research"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "Microsoft Planetary",
       "source_type": "Commercial"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 2,
+      "scraper": "NASA Space LiDAR",
+      "source_type": "Federal"
+    },
+    {
+      "country": "India",
+      "opportunities_found": 1,
+      "scraper": "ISRO Cartography",
+      "source_type": "International"
     },
     {
       "country": "USA",
@@ -15,14 +81,20 @@
     {
       "country": "USA",
       "opportunities_found": 1,
+      "scraper": "ESRI Platform",
+      "source_type": "Commercial"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
       "scraper": "NIH GeoHealth",
       "source_type": "Research"
     },
     {
-      "country": "USA",
-      "opportunities_found": 2,
-      "scraper": "NASA Space LiDAR",
-      "source_type": "Federal"
+      "country": "Germany",
+      "opportunities_found": 1,
+      "scraper": "DLR Remote Sensing",
+      "source_type": "International"
     },
     {
       "country": "USA",
@@ -37,9 +109,9 @@
       "source_type": "Federal"
     },
     {
-      "country": "Germany",
+      "country": "Canada",
       "opportunities_found": 1,
-      "scraper": "DLR Remote Sensing",
+      "scraper": "CSA EO",
       "source_type": "International"
     },
     {
@@ -49,22 +121,10 @@
       "source_type": "Research"
     },
     {
-      "country": "Canada",
-      "opportunities_found": 1,
-      "scraper": "CSA EO",
-      "source_type": "International"
-    },
-    {
       "country": "USA",
       "opportunities_found": 1,
       "scraper": "Google Earth Engine",
       "source_type": "Commercial"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "FEMA Flood",
-      "source_type": "Federal"
     },
     {
       "country": "USA",
@@ -101,66 +161,6 @@
       "opportunities_found": 1,
       "scraper": "USACE Mapping",
       "source_type": "Federal"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "NOAA Coastal",
-      "source_type": "Federal"
-    },
-    {
-      "country": "Europe",
-      "opportunities_found": 2,
-      "scraper": "ESA Copernicus",
-      "source_type": "International"
-    },
-    {
-      "country": "China",
-      "opportunities_found": 1,
-      "scraper": "CNSA Mapping",
-      "source_type": "International"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "BLM Mapping",
-      "source_type": "Federal"
-    },
-    {
-      "country": "UK",
-      "opportunities_found": 1,
-      "scraper": "UKSA EO",
-      "source_type": "International"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "MIT Research",
-      "source_type": "Research"
-    },
-    {
-      "country": "Europe",
-      "opportunities_found": 1,
-      "scraper": "EU Horizon",
-      "source_type": "Research"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "USDA Forest",
-      "source_type": "Federal"
-    },
-    {
-      "country": "India",
-      "opportunities_found": 1,
-      "scraper": "ISRO Cartography",
-      "source_type": "International"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "Microsoft Planetary",
-      "source_type": "Commercial"
     },
     {
       "country": "USA",
@@ -203,9 +203,213 @@
       "opportunities_found": 1,
       "scraper": "Planet Labs",
       "source_type": "Commercial"
+    },
+    {
+      "country": "Brazil",
+      "opportunities_found": 3,
+      "scraper": "Brazil IBGE",
+      "source_type": "International"
+    },
+    {
+      "country": "Australia",
+      "opportunities_found": 2,
+      "scraper": "Geoscience Australia",
+      "source_type": "International"
+    },
+    {
+      "country": "New Zealand",
+      "opportunities_found": 2,
+      "scraper": "LINZ NZ",
+      "source_type": "International"
+    },
+    {
+      "country": "South Korea",
+      "opportunities_found": 3,
+      "scraper": "KARI",
+      "source_type": "International"
+    },
+    {
+      "country": "Mexico",
+      "opportunities_found": 3,
+      "scraper": "INEGI",
+      "source_type": "International"
+    },
+    {
+      "country": "Argentina",
+      "opportunities_found": 3,
+      "scraper": "IGN Argentina",
+      "source_type": "International"
+    },
+    {
+      "country": "Chile",
+      "opportunities_found": 3,
+      "scraper": "CNIDEP",
+      "source_type": "International"
+    },
+    {
+      "country": "South Africa",
+      "opportunities_found": 3,
+      "scraper": "SANSA",
+      "source_type": "International"
+    },
+    {
+      "country": "Nigeria",
+      "opportunities_found": 2,
+      "scraper": "NASRDA",
+      "source_type": "International"
+    },
+    {
+      "country": "Egypt",
+      "opportunities_found": 3,
+      "scraper": "NARSS",
+      "source_type": "International"
+    },
+    {
+      "country": "UAE",
+      "opportunities_found": 3,
+      "scraper": "EIAST",
+      "source_type": "International"
+    },
+    {
+      "country": "Saudi Arabia",
+      "opportunities_found": 3,
+      "scraper": "KACST",
+      "source_type": "International"
+    },
+    {
+      "country": "Israel",
+      "opportunities_found": 3,
+      "scraper": "ISA",
+      "source_type": "International"
+    },
+    {
+      "country": "Turkey",
+      "opportunities_found": 3,
+      "scraper": "TUASA",
+      "source_type": "International"
+    },
+    {
+      "country": "Poland",
+      "opportunities_found": 3,
+      "scraper": "CBK",
+      "source_type": "International"
+    },
+    {
+      "country": "Sweden",
+      "opportunities_found": 3,
+      "scraper": "SNSA",
+      "source_type": "International"
+    },
+    {
+      "country": "Norway",
+      "opportunities_found": 3,
+      "scraper": "NSC",
+      "source_type": "International"
+    },
+    {
+      "country": "Finland",
+      "opportunities_found": 3,
+      "scraper": "FMI",
+      "source_type": "International"
+    },
+    {
+      "country": "Spain",
+      "opportunities_found": 3,
+      "scraper": "CDTI",
+      "source_type": "International"
+    },
+    {
+      "country": "Italy",
+      "opportunities_found": 3,
+      "scraper": "ASI2",
+      "source_type": "International"
+    },
+    {
+      "country": "France",
+      "opportunities_found": 3,
+      "scraper": "CNES",
+      "source_type": "International"
+    },
+    {
+      "country": "Netherlands",
+      "opportunities_found": 3,
+      "scraper": "NSO",
+      "source_type": "International"
+    },
+    {
+      "country": "Belgium",
+      "opportunities_found": 2,
+      "scraper": "BELSPO",
+      "source_type": "International"
+    },
+    {
+      "country": "Switzerland",
+      "opportunities_found": 2,
+      "scraper": "SSO",
+      "source_type": "International"
+    },
+    {
+      "country": "Austria",
+      "opportunities_found": 2,
+      "scraper": "FFG",
+      "source_type": "International"
+    },
+    {
+      "country": "Thailand",
+      "opportunities_found": 3,
+      "scraper": "GISTDA",
+      "source_type": "International"
+    },
+    {
+      "country": "Indonesia",
+      "opportunities_found": 3,
+      "scraper": "BRIN",
+      "source_type": "International"
+    },
+    {
+      "country": "Malaysia",
+      "opportunities_found": 2,
+      "scraper": "MYSA",
+      "source_type": "International"
+    },
+    {
+      "country": "Philippines",
+      "opportunities_found": 2,
+      "scraper": "PhilSA",
+      "source_type": "International"
+    },
+    {
+      "country": "Vietnam",
+      "opportunities_found": 2,
+      "scraper": "VNREDSAT",
+      "source_type": "International"
+    },
+    {
+      "country": "Colombia",
+      "opportunities_found": 3,
+      "scraper": "IGAC",
+      "source_type": "International"
+    },
+    {
+      "country": "Peru",
+      "opportunities_found": 2,
+      "scraper": "IGN_Peru",
+      "source_type": "International"
+    },
+    {
+      "country": "Pakistan",
+      "opportunities_found": 2,
+      "scraper": "SUPARCO",
+      "source_type": "International"
+    },
+    {
+      "country": "Bangladesh",
+      "opportunities_found": 2,
+      "scraper": "SPARRSO",
+      "source_type": "International"
     }
   ],
-  "timestamp": "2025-11-21T13:08:13.949923Z",
-  "total_opportunities": 38,
-  "total_scrapers": 34
+  "timestamp": "2025-11-21T18:11:07.396223Z",
+  "total_opportunities": 128,
+  "total_scrapers": 68
 }

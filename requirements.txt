@@ -3,10 +3,6 @@
 
 # Data processing and CSV export (required for QC source verification matrix)
 pandas>=2.2.0
-# Required for source verification matrix export and data processing
-
-# Data processing
-pandas>=2.0.0
 
 # Web scraping
 requests>=2.31.0
@@ -14,6 +10,9 @@ beautifulsoup4>=4.12.0
 
 # PDF processing
 pdfplumber>=0.10.0
+
+# JSON Schema validation (pinned for Agent 1 core setup)
+jsonschema==4.25.1
 
 # Linting (for development and CI)
 ruff>=0.1.0

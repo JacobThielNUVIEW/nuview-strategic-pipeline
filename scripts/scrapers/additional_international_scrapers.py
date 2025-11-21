@@ -4,14 +4,13 @@ Additional International Scrapers for Topographic/LiDAR Opportunities
 Focus: Space-based LiDAR for large-area topographic collections
 """
 
-import sys
 import os
+import sys
 
 from base_scraper import BaseScraper
 
 # Add scripts directory to path to import global_keywords
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-from global_keywords import calculate_keyword_score, is_topographic_relevant
 
 class BrazilIBGEScraper(BaseScraper):
     """Brazil IBGE"""

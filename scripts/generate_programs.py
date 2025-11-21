@@ -68,7 +68,7 @@ def categorize_opportunity(opp):
     category = opp.get('category', '')
     title = opp.get('title', '')
     description = opp.get('description', '')
-    
+
     # Primary categorization by category field
     if category == 'DaaS':
         # Check if it's space-based or platform-related
@@ -79,7 +79,7 @@ def categorize_opportunity(opp):
         if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
             return 'lidar'
         return 'funding'
-    
+
     elif category == 'R&D':
         # R&D can fall into different buckets
         if contains_keywords(title, SPACE_KEYWORDS) or contains_keywords(description, SPACE_KEYWORDS):
@@ -87,17 +87,17 @@ def categorize_opportunity(opp):
         if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
             return 'lidar'
         return 'funding'
-    
+
     elif category == 'Platform':
         return 'platform'
-    
+
     # Fallback - try to categorize by keywords
     if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
         return 'lidar'
     if contains_keywords(title, SPACE_KEYWORDS) or contains_keywords(description, SPACE_KEYWORDS) or \
        contains_keywords(title, PLATFORM_KEYWORDS) or contains_keywords(description, PLATFORM_KEYWORDS):
         return 'spaceSystems'
-    
+
     return 'funding'
 
 def format_value(amount_usd):
@@ -131,21 +131,21 @@ def is_valid_link(url):
 def calculate_priority_score(opp):
     """
     Calculate priority score for an opportunity based on dashboard rules
-    
+
     Scoring factors:
     - Urgency: urgent (30 pts), near (20 pts), future (10 pts)
     - Value tier: >$100M (30 pts), $10M-$100M (20 pts), <$10M (10 pts)
     - Category: DaaS (15 pts), Platform (10 pts), R&D (5 pts)
     - Source verified: (10 pts)
-    
+
     Total possible: 85 points
     """
     score = 0
-    
+
     # Urgency scoring (30 max)
     urgency = opp.get('timeline', {}).get('urgency', opp.get('urgency', 'future'))
     score += URGENCY_SCORES.get(urgency, 10)  # Default to 'future' if unknown
-    
+
     # Value tier scoring (30 max)
     value_usd = get_value_usd(opp)
     if value_usd >= 100_000_000:
@@ -154,11 +154,11 @@ def calculate_priority_score(opp):
         score += VALUE_TIER_SCORES['medium']
     else:
         score += VALUE_TIER_SCORES['low']
-    
+
     # Category scoring (15 max)
     category = opp.get('category', '')
     score += CATEGORY_SCORES.get(category, 0)
-    
+
     # Source verification scoring (10 max)
     if opp.get('source_verified', False):
         score += SOURCE_VERIFIED_SCORE
@@ -169,14 +169,14 @@ def calculate_priority_score(opp):
         agency_link = opp.get('agencyLink', '')
         if is_valid_link(link) or is_valid_link(budget_link) or is_valid_link(agency_link):
             score += SOURCE_VERIFIED_SCORE
-    
+
     return score
 
 def convert_opportunity_to_program(opp):
     """Convert an opportunity object to a program object for dashboard"""
     value_usd = get_value_usd(opp)
     priority_score = calculate_priority_score(opp)
-    
+
     program = {
         'id': opp.get('id', ''),
         'title': opp.get('title', ''),
@@ -195,7 +195,7 @@ def convert_opportunity_to_program(opp):
         'budgetSourceLink': opp.get('budgetSourceLink', ''),
         'priorityScore': priority_score
     }
-    
+
     return program
 
 def generate_programs_json():
@@ -204,23 +204,23 @@ def generate_programs_json():
     """
     log_info("Starting programs.json generation from opportunities.json")
     log_info("=" * 70)
-    
+
     # Load opportunities.json
     opportunities_file = 'data/opportunities.json'
     if not os.path.exists(opportunities_file):
         log_error(f"Input file not found: {opportunities_file}")
         return False
-    
+
     try:
         with open(opportunities_file, 'r', encoding='utf-8') as f:
             opps_data = json.load(f)
     except json.JSONDecodeError as e:
         log_error(f"Invalid JSON in {opportunities_file}: {e}")
         return False
-    
+
     opportunities = opps_data.get('opportunities', [])
     log_info(f"Loaded {len(opportunities)} opportunities from {opportunities_file}")
-    
+
     # Categorize opportunities into program types
     categorized = {
         'funding': [],
@@ -228,30 +228,30 @@ def generate_programs_json():
         'spaceSystems': [],
         'platform': []
     }
-    
+
     for opp in opportunities:
         bucket = categorize_opportunity(opp)
         program = convert_opportunity_to_program(opp)
         categorized[bucket].append(program)
-    
+
     # Sort each category by value (descending)
     for category in categorized:
         categorized[category].sort(key=lambda x: x['valueUSD'], reverse=True)
-    
+
     # Prepare output directory
     output_dir = 'data/processed'
     os.makedirs(output_dir, exist_ok=True)
-    
+
     # Generate priority matrix CSV
     log_info("")
     log_info("Generating priority matrix...")
     all_programs = []
     for category_programs in categorized.values():
         all_programs.extend(category_programs)
-    
+
     # Sort all programs by priority score (descending)
     all_programs.sort(key=lambda x: x['priorityScore'], reverse=True)
-    
+
     # Create priority matrix DataFrame
     priority_matrix = []
     for rank, program in enumerate(all_programs, 1):
@@ -269,7 +269,7 @@ def generate_programs_json():
             'deadline': program['deadline'],
             'nextAction': program['nextAction']
         })
-    
+
     # Save priority matrix as CSV
     priority_matrix_path = os.path.join(output_dir, 'priority_matrix.csv')
     try:
@@ -278,10 +278,10 @@ def generate_programs_json():
         log_success(f"Successfully generated {priority_matrix_path}")
     except Exception as e:
         log_error(f"Failed to write {priority_matrix_path}: {e}")
-    
+
     # Count programs
     total_programs = sum(len(programs) for programs in categorized.values())
-    
+
     log_info("")
     log_info("Program Distribution:")
     log_info(f"  • Funding Programs: {len(categorized['funding'])}")
@@ -289,7 +289,7 @@ def generate_programs_json():
     log_info(f"  • Space Systems Programs: {len(categorized['spaceSystems'])}")
     log_info(f"  • Platform Programs: {len(categorized['platform'])}")
     log_info(f"  • Total: {total_programs}")
-    
+
     # Create programs.json structure
     programs_data = {
         'meta': {
@@ -301,10 +301,10 @@ def generate_programs_json():
         },
         'programs': categorized
     }
-    
+
     # Save programs.json
     output_file = os.path.join(output_dir, 'programs.json')
-    
+
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(programs_data, f, indent=2, ensure_ascii=False)

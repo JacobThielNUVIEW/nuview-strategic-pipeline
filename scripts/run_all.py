@@ -5,8 +5,8 @@ Convenience script to run all scrapers and display results
 Usage: python scripts/run_all.py
 """
 
-import sys
 import os
+import sys
 
 # Add scripts directory to path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -19,10 +19,10 @@ if __name__ == "__main__":
     print("NUVIEW STRATEGIC PIPELINE - RUN ALL SCRAPERS")
     print("=" * 80)
     print()
-    
+
     # Run the complete pipeline
     run_pipeline()
-    
+
     # Display summary
     print()
     print("=" * 80)
