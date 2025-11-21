@@ -44,3 +44,4 @@ Thumbs.db
 *.log
 *.tmp
 /tmp/
+data/processed/opportunities_validated.json

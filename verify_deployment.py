@@ -7,7 +7,6 @@ Validates that all components are ready for production deployment
 import json
 import os
 import sys
-from pathlib import Path
 
 # ANSI color codes
 GREEN = '\033[92m'
