@@ -1,0 +1,136 @@
+name: Trigger Local Scrape
+
+on:
+  workflow_dispatch:
+    inputs:
+      auth_token:
+        description: 'Authentication token (NUVIEW only)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  validate-and-notify:
+    name: 🔐 Validate & Notify Local Machine
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🔐 Validate Authentication
+        id: auth
+        run: |
+          echo -e "\033[94m🔐 Validating authentication token...\033[0m"
+          
+          # Compare provided token with secret
+          if [ "${{ github.event.inputs.auth_token }}" != "${{ secrets.NUVIEW_SCRAPE_TOKEN }}" ]; then
+            echo -e "\033[91m❌ Authentication failed: Invalid token\033[0m"
+            echo "auth_valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          
+          echo "auth_valid=true" >> $GITHUB_OUTPUT
+          echo -e "\033[92m✅ Authentication successful\033[0m"
+
+      - name: 📝 Create Trigger Signal File
+        run: |
+          echo -e "\033[94m📝 Creating trigger signal...\033[0m"
+          mkdir -p data/signals
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          cat > data/signals/scrape_trigger.json << EOF
+          {
+            "trigger_time": "$TIMESTAMP",
+            "triggered_by": "${{ github.actor }}",
+            "status": "pending",
+            "workflow_run_id": "${{ github.run_id }}"
+          }
+          EOF
+          
+          git config --local user.email "bot@nuview.space"
+          git config --local user.name "NUVIEW Automation Bot"
+          git add data/signals/scrape_trigger.json
+          git commit -m "🚀 Trigger local scrape - Initiated by ${{ github.actor }}"
+          git push
+          
+          echo -e "\033[92m✅ Trigger signal created and pushed\033[0m"
+
+      - name: 📢 Create GitHub Issue Notification
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const timestamp = new Date().toISOString();
+            const runUrl = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            
+            const body = `## 🚀 Local Scrape Triggered
+            
+            **Status:** ⏳ Waiting for local machine to pick up signal
+            **Triggered by:** @${{ github.actor }}
+            **Time:** ${timestamp}
+            **Workflow Run:** [View Run](${runUrl})
+            
+            ### Next Steps
+            Your local machine should detect this trigger signal and begin the scraping process.
+            
+            **Instructions for local machine:**
+            1. Pull the latest changes from the repository
+            2. Check for the signal file at \`data/signals/scrape_trigger.json\`
+            3. Run your local scraping process
+            4. Push results back to the repository
+            5. Update the signal status to "completed"
+            
+            ### Monitoring
+            - Signal file: \`data/signals/scrape_trigger.json\`
+            - Expected completion: Within 30 minutes
+            - If not completed within 1 hour, please check your local machine
+            
+            ---
+            🤖 Automated notification from NUVIEW Pipeline`;
+            
+            // Try to find an existing open issue for scrape triggers
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'scrape-trigger',
+              per_page: 1
+            });
+            
+            if (issues.data.length > 0) {
+              // Comment on existing issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                body: body
+              });
+              console.log(`Comment added to issue #${issues.data[0].number}`);
+            } else {
+              // Create a new issue
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🚀 Local Scrape Trigger - Monitoring',
+                body: body,
+                labels: ['scrape-trigger', 'automated']
+              });
+              console.log('New scrape trigger monitoring issue created');
+            }
+
+      - name: 📊 Summary
+        run: |
+          echo -e "\033[92m"
+          echo "╔════════════════════════════════════════════════════════════╗"
+          echo "║           🚀 LOCAL SCRAPE TRIGGER SUCCESSFUL               ║"
+          echo "╚════════════════════════════════════════════════════════════╝"
+          echo -e "\033[0m"
+          echo ""
+          echo "Next steps for your local machine:"
+          echo "  1. Run: git pull origin main"
+          echo "  2. Check: data/signals/scrape_trigger.json"
+          echo "  3. Execute your scraping process"
+          echo "  4. Push results back to the repository"
+          echo ""
+          echo -e "\033[94mℹ️  Monitor progress in the GitHub Issues tab\033[0m"
