@@ -1,2 +1,39 @@
-id,title,agency,pillar,category,amountUSD,daysUntilDeadline,deadline,next_action,scrapedAt,forecast_value,link,timeline,funding,valueUSD,urgency,calculatedPriority
-usgs-test,USGS 3DEP LiDAR Acquisition 2026,USGS,Federal,DaaS,217000000,28,2025-12-15,Submit Demo Brief,2025-11-21T13:06:40.773978Z,"$217,000,000",https://sam.gov,"{'daysUntil': 28, 'urgency': 'urgent'}",{'amountUSD': 217000000},217000000,urgent,67
+rank,title,agency,pillar,category,value,valueUSD,priorityScore,urgency,daysUntil,deadline,nextAction
+1,USGS 3DEP LiDAR Acquisition 2026 - Phase 1,USGS,Federal,DaaS,$217.0M,217000000,85,urgent,28,2025-12-19,Submit Demo Brief
+2,USGS National Map Topographic Data Services,USGS,Federal,DaaS,$45.0M,45000000,65,near,60,2026-01-20,Capability Statement
+3,USACE National DEM Production Contract,USACE,Federal,DaaS,$32.0M,32000000,65,near,70,2026-01-30,Past Performance Review
+4,ESA Copernicus Expansion - Elevation Services,ESA,International,DaaS,$28.0M,28000000,65,near,75,2026-02-04,Technical Proposal
+5,NYC 3D Building & Terrain Model Update,NYC Planning,State/Local,DaaS,$12.0M,12000000,65,near,65,2026-01-25,City Proposal
+6,California Statewide LiDAR Program - Phase 2,State of California,State/Local,DaaS,$45.0M,45000000,65,near,75,2026-02-04,State Contracting
+7,FEMA Risk MAP Elevation Data Collection,FEMA,Federal,DaaS,$28.0M,28000000,65,near,65,2026-01-25,Capability Brief
+8,USFS National Forest LiDAR Inventory,USDA Forest Service,Federal,DaaS,$22.0M,22000000,65,near,80,2026-02-09,Forest Demo
+9,NOAA Coastal Topobathy LiDAR Services,NOAA,Federal,DaaS,$18.0M,18000000,65,near,55,2026-01-15,Technical Demo
+10,NGA Commercial Space-Based 3D Mapping,NGA,Federal,DaaS,$45.0M,45000000,65,near,40,2025-12-31,Security Clearance Prep
+11,Maxar 3D Geospatial Intelligence - LiDAR Integration,Maxar,Commercial,DaaS,$35.0M,35000000,65,near,60,2026-01-20,Commercial Partnership
+12,CSA Arctic Topographic Mapping Program,CSA,International,DaaS,$22.0M,22000000,65,near,85,2026-02-14,Arctic Capability Demo
+13,DIU Spaceborne LiDAR BAA,DIU,Federal,R&D,$15.0M,15000000,65,urgent,15,2025-12-06,Submit Whitepaper
+14,ESA Digital Twin Earth LiDAR Platform,ESA,International,Platform,$35.0M,35000000,60,near,45,2026-01-05,Consortium Lead
+15,Google Earth Engine Global DEM Initiative,Google,Commercial,Platform,$30.0M,30000000,60,near,80,2026-02-09,Data Partnership
+16,AWS Earth on AWS - Elevation Data Partnership,Amazon Web Services,Commercial,Platform,$25.0M,25000000,60,near,70,2026-01-30,AWS Partnership Brief
+17,Microsoft Planetary Computer Terrain Services,Microsoft,Commercial,Platform,$22.0M,22000000,60,near,85,2026-02-14,Azure Integration
+18,Planet Fusion Platform - Elevation Layer Integration,Planet Labs,Commercial,Platform,$18.0M,18000000,60,near,75,2026-02-04,Platform Integration
+19,Texas Strategic Mapping Program - Statewide DEM,State of Texas,State/Local,DaaS,$38.0M,38000000,55,future,90,2026-02-19,TNRIS Coordination
+20,BLM Public Lands Topographic Mapping,BLM,Federal,DaaS,$16.0M,16000000,55,future,95,2026-02-24,Site Assessment
+21,NASA ROSES ICESat-2 Science Team Augmentation,NASA,Federal,R&D,$12.0M,12000000,55,near,45,2026-01-05,Proposal Preparation
+22,Florida Coastal Mapping - Topobathy LiDAR,State of Florida,State/Local,DaaS,$32.0M,32000000,55,future,100,2026-03-01,Coastal Demo
+23,World Bank Climate Resilience Mapping Initiative,World Bank,International,DaaS,$50.0M,50000000,55,future,130,2026-03-31,Development Partnership
+24,CNSA Belt & Road Topographic Mapping,CNSA,International,DaaS,$40.0M,40000000,55,future,130,2026-03-31,International Coordination
+25,ISRO National Topographic Mapping - LiDAR Phase,ISRO,International,DaaS,$25.0M,25000000,55,future,110,2026-03-11,India Partnership
+26,UKSA Climate & Environment LiDAR Services,UKSA,International,DaaS,$20.0M,20000000,55,future,90,2026-02-19,UK Partnership Brief
+27,DOE Terrestrial Ecosystem LiDAR Characterization,DOE,Research,R&D,$10.0M,10000000,55,near,85,2026-02-14,Lab Partnership
+28,ESRI Living Atlas Premium Elevation Layer,ESRI,Commercial,Platform,$20.0M,20000000,50,future,95,2026-02-24,ESRI Partnership Meeting
+29,NSF Critical Zone Observatory - Topographic Mapping,NSF,Research,R&D,$12.0M,12000000,45,future,95,2026-02-24,Multi-Institution Proposal
+30,ASI COSMO-SkyMed Topographic Enhancement,ASI,International,R&D,$16.0M,16000000,45,future,105,2026-03-06,Technical Review
+31,Horizon Europe Space-Based Earth Monitoring,EU Commission,Research,R&D,$35.0M,35000000,45,future,120,2026-03-21,Consortium Formation
+32,DLR TanDEM-X Follow-On LiDAR Mission,DLR,International,R&D,$30.0M,30000000,45,future,100,2026-03-01,Mission Planning
+33,NASA Commercial Spaceborne LiDAR Partnership,NASA,Federal,R&D,$25.0M,25000000,45,future,90,2026-02-19,Partner Coordination
+34,JAXA ALOS-4 Topographic Mission Support,JAXA,International,R&D,$18.0M,18000000,45,future,120,2026-03-21,International Partnership
+35,JPL Earth Surface & Interior Science - LiDAR,Caltech/JPL,Research,R&D,$18.0M,18000000,45,future,90,2026-02-19,JPL Collaboration
+36,MIT Lincoln Lab Space-Based Sensing Partnership,MIT,Research,R&D,$15.0M,15000000,45,future,110,2026-03-11,Research Agreement
+37,NSF EarthCube LiDAR Data Integration,NSF,Research,R&D,$8.0M,8000000,45,near,75,2026-02-04,Proposal Development
+38,NIH Environmental Health Topographic Mapping,NIH,Research,R&D,$6.0M,6000000,35,future,100,2026-03-01,Health Mapping Brief
