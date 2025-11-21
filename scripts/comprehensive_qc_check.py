@@ -12,6 +12,7 @@ import json
 import sys
 import os
 from datetime import datetime
+import pandas as pd
 
 # Add scripts directory to path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -27,6 +28,9 @@ COLOR_GREEN = '\033[92m'
 COLOR_RED = '\033[91m'
 COLOR_BLUE = '\033[94m'
 COLOR_RESET = '\033[0m'
+
+# Constants
+SOURCE_VERIFIED_STATUS = 'SOURCE_VERIFIED'
 
 def print_header(text):
     print(f"\n{COLOR_BLUE}{'=' * 70}")
@@ -122,7 +126,6 @@ def check_cross_references():
     with open('data/opportunities.json', 'r') as f:
         opps_data = json.load(f)
     
-    import pandas as pd
     matrix_df = pd.read_csv('data/processed/sources_matrix.csv')
     
     # Check counts match
@@ -159,7 +162,6 @@ def check_matrix_integrity():
     """Verify matrix is properly generated and indexed"""
     print_header("MATRIX INTEGRITY CHECK")
     
-    import pandas as pd
     matrix_df = pd.read_csv('data/processed/sources_matrix.csv')
     
     # Check textrank indexing
@@ -180,7 +182,7 @@ def check_matrix_integrity():
     print_check("No null values", null_count == 0)
     
     # Check source verification
-    verified_count = len(matrix_df[matrix_df['verification'].str.contains('SOURCE_VERIFIED', na=False)])
+    verified_count = len(matrix_df[matrix_df['verification'].str.contains(SOURCE_VERIFIED_STATUS, na=False)])
     print(f"\nSource verification:")
     print(f"  Verified opportunities: {verified_count}/{len(matrix_df)}")
     print_check("All sources verified", verified_count == len(matrix_df))
