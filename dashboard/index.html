@@ -46,7 +46,7 @@
            DESIGN PRINCIPLES:
            - Deep space-black backgrounds for dramatic effect
            - Clean, high-contrast text (white/off-grey)
-           - Accent red (#EE3338) sparingly: highlights, active states, badges
+           - Accent red (#E10600) sparingly: highlights, active states, badges
            - Modern card-style tables with soft stripes
            - Bold headers with subtle drop shadows
            - Score-badge pills for priority
@@ -56,8 +56,8 @@
            ============================================ */
         :root { 
             /* Primary Brand Colors */
-            --nuview-red: #EE3338; 
-            --nuview-red-dim: rgba(238, 51, 56, 0.1);
+            --nuview-red: #E10600; 
+            --nuview-red-dim: rgba(225, 6, 0, 0.1);
             
             /* Deep Space-Black Palette */
             --nuview-black: #000000;
@@ -137,12 +137,12 @@
             font-size: 0.95rem;
             transition: all 0.3s ease;
             border: 2px solid transparent;
-            box-shadow: 0 4px 16px rgba(238, 51, 56, 0.4);
+            box-shadow: 0 4px 16px rgba(225, 6, 0, 0.4);
         }
         .header-btn:hover {
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
             transform: translateY(-3px);
-            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.6);
+            box-shadow: 0 6px 24px rgba(225, 6, 0, 0.6);
             border-color: var(--nuview-white);
             color: var(--nuview-white);
         }
@@ -188,7 +188,7 @@
             transform: translateX(4px);
         }
         .sidebar a.active { 
-            background: linear-gradient(90deg, var(--nuview-red) 0%, rgba(238, 51, 56, 0.2) 100%); 
+            background: linear-gradient(90deg, var(--nuview-red) 0%, rgba(225, 6, 0, 0.2) 100%); 
             color: var(--nuview-white); 
             border-left: 3px solid var(--nuview-white); 
             font-weight: 600;
@@ -216,7 +216,7 @@
             transition: all 0.3s ease;
         }
         .launched-opps-box:hover {
-            box-shadow: 0 16px 48px rgba(238, 51, 56, 0.3);
+            box-shadow: 0 16px 48px rgba(225, 6, 0, 0.3);
             transform: translateY(-2px);
         }
         .launched-opps-box h3 {
@@ -240,7 +240,7 @@
             transition: all 0.2s ease;
         }
         .launched-opp-item:hover {
-            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.3);
+            box-shadow: 0 6px 24px rgba(225, 6, 0, 0.3);
             transform: translateX(-3px);
             border-left-color: var(--nuview-white);
         }
@@ -338,9 +338,9 @@
             background: linear-gradient(90deg, var(--nuview-space-medium) 0%, var(--nuview-space-dark) 100%); 
         }
         .matrix-table tbody tr:hover { 
-            background: linear-gradient(90deg, rgba(238, 51, 56, 0.15) 0%, var(--nuview-space-medium) 100%);
+            background: linear-gradient(90deg, rgba(225, 6, 0, 0.15) 0%, var(--nuview-space-medium) 100%);
             transform: scale(1.01);
-            box-shadow: 0 4px 16px rgba(238, 51, 56, 0.3);
+            box-shadow: 0 4px 16px rgba(225, 6, 0, 0.3);
             cursor: pointer;
         }
         .matrix-table tbody td { 
@@ -357,7 +357,7 @@
             font-weight: 700; 
             font-size: 1.1rem;
             color: var(--nuview-red);
-            background: linear-gradient(135deg, rgba(238, 51, 56, 0.2) 0%, rgba(238, 51, 56, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(225, 6, 0, 0.2) 0%, rgba(225, 6, 0, 0.1) 100%);
             border-radius: 8px;
         }
         .matrix-value { 
@@ -379,16 +379,16 @@
             font-size: 0.85rem;
             transition: all 0.3s ease;
             border: 2px solid transparent;
-            box-shadow: 0 4px 16px rgba(238, 51, 56, 0.4);
+            box-shadow: 0 4px 16px rgba(225, 6, 0, 0.4);
         }
         .matrix-link-btn:hover { 
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(238, 51, 56, 0.6);
+            box-shadow: 0 6px 24px rgba(225, 6, 0, 0.6);
             border-color: var(--nuview-white);
         }
         .matrix-link-btn:focus {
-            outline: 3px solid rgba(238, 51, 56, 0.5);
+            outline: 3px solid rgba(225, 6, 0, 0.5);
             outline-offset: 2px;
         }
         .matrix-source-badge {
@@ -430,7 +430,7 @@
         .search-input:focus {
             outline: none;
             border-color: var(--nuview-red);
-            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.2);
+            box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.2);
         }
         .program-card { 
             background: linear-gradient(135deg, var(--nuview-space-dark) 0%, var(--nuview-space-medium) 100%); 
@@ -443,14 +443,14 @@
             border: 1px solid var(--border-primary);
         }
         .program-card:hover { 
-            box-shadow: 0 12px 40px rgba(238, 51, 56, 0.3); 
+            box-shadow: 0 12px 40px rgba(225, 6, 0, 0.3); 
             transform: translateY(-4px); 
             border-left-color: var(--nuview-white);
-            background: linear-gradient(135deg, var(--nuview-space-medium) 0%, rgba(238, 51, 56, 0.1) 100%);
+            background: linear-gradient(135deg, var(--nuview-space-medium) 0%, rgba(225, 6, 0, 0.1) 100%);
         }
         .program-card.hidden { display: none; }
         .urgency-badge { display: inline-block; padding: 0.3rem 0.85rem; border-radius: 12px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .urgency-urgent { background: var(--nuview-red); color: var(--nuview-white); box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4); }
+        .urgency-urgent { background: var(--nuview-red); color: var(--nuview-white); box-shadow: 0 4px 12px rgba(225, 6, 0, 0.4); }
         .urgency-near { background: #ff9500; color: var(--nuview-black); }
         .urgency-future { background: #30d158; color: var(--nuview-black); }
         
@@ -463,7 +463,7 @@
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 16px 48px rgba(238, 51, 56, 0.3);
+            box-shadow: 0 16px 48px rgba(225, 6, 0, 0.3);
             border-color: var(--nuview-red) !important;
         }
         .card i {
@@ -605,7 +605,7 @@
             border-radius: 50%;
             background: linear-gradient(135deg, var(--nuview-red) 0%, #c82630 100%);
             border: 4px solid var(--nuview-white);
-            box-shadow: 0 12px 40px rgba(238, 51, 56, 0.6);
+            box-shadow: 0 12px 40px rgba(225, 6, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -618,7 +618,7 @@
         
         .floating-rocket-btn:hover {
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 16px 48px rgba(238, 51, 56, 0.8);
+            box-shadow: 0 16px 48px rgba(225, 6, 0, 0.8);
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
         }
         
@@ -778,7 +778,7 @@
         .auth-input-group input:focus {
             outline: none;
             border-color: var(--nuview-red);
-            box-shadow: 0 0 0 3px rgba(238, 51, 56, 0.2);
+            box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.2);
         }
         
         .auth-modal-footer {
@@ -806,7 +806,7 @@
         .auth-btn-primary:hover {
             background: linear-gradient(135deg, #c82630 0%, var(--nuview-red) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(238, 51, 56, 0.6);
+            box-shadow: 0 8px 32px rgba(225, 6, 0, 0.6);
         }
         
         .auth-btn-primary:disabled {
@@ -826,7 +826,7 @@
         }
         
         .auth-error {
-            background: rgba(238, 51, 56, 0.2);
+            background: rgba(225, 6, 0, 0.2);
             border: 2px solid var(--nuview-red);
             color: var(--nuview-red);
             padding: 0.75rem;
@@ -996,7 +996,7 @@
                         <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15"/>
                     </filter>
                     <linearGradient id="redAccent" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#EE3338;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#E10600;stop-opacity:1" />
                         <stop offset="100%" style="stop-color:#d62d32;stop-opacity:1" />
                     </linearGradient>
                 </defs>
@@ -1010,8 +1010,8 @@
                     <text x="140" y="165" text-anchor="middle" font-size="12" fill="#495057">Research Programs</text>
                     <text x="140" y="185" text-anchor="middle" font-size="12" fill="#495057">Market Intelligence</text>
                     <text x="140" y="205" text-anchor="middle" font-size="12" fill="#495057">Industry Reports</text>
-                    <circle cx="140" cy="55" r="20" fill="#EE3338" opacity="0.1"/>
-                    <text x="140" y="62" text-anchor="middle" font-size="20" fill="#EE3338">📊</text>
+                    <circle cx="140" cy="55" r="20" fill="#E10600" opacity="0.1"/>
+                    <text x="140" y="62" text-anchor="middle" font-size="20" fill="#E10600">📊</text>
                 </g>
                 
                 <!-- Arrow 1 -->
@@ -1048,8 +1048,8 @@
                     <text x="700" y="165" text-anchor="middle" font-size="12" fill="#495057">Urgency Analysis</text>
                     <text x="700" y="185" text-anchor="middle" font-size="12" fill="#495057">Strategic Fit</text>
                     <text x="700" y="205" text-anchor="middle" font-size="12" fill="#495057">Risk Evaluation</text>
-                    <circle cx="700" cy="55" r="20" fill="#EE3338" opacity="0.1"/>
-                    <text x="700" y="62" text-anchor="middle" font-size="20" fill="#EE3338">🎯</text>
+                    <circle cx="700" cy="55" r="20" fill="#E10600" opacity="0.1"/>
+                    <text x="700" y="62" text-anchor="middle" font-size="20" fill="#E10600">🎯</text>
                 </g>
                 
                 <!-- Arrow 3 -->
@@ -1143,8 +1143,8 @@
             </div>
             <div class="col-md-3">
                 <div class="card text-center" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border: 2px solid var(--nuview-light-gray); transition: all 0.3s ease;">
-                    <i class="bi bi-exclamation-triangle" style="font-size: 2rem; color: #EE3338; margin-bottom: 0.5rem;"></i>
-                    <h3 id="urgent-programs" style="color: #EE3338; font-weight: 700;">0</h3>
+                    <i class="bi bi-exclamation-triangle" style="font-size: 2rem; color: #E10600; margin-bottom: 0.5rem;"></i>
+                    <h3 id="urgent-programs" style="color: #E10600; font-weight: 700;">0</h3>
                     <p class="text-muted" style="font-weight: 600;">Urgent Actions Required</p>
                 </div>
             </div>
@@ -1694,7 +1694,7 @@ function initializeCytoscapeNetwork(opportunities) {
             {
                 selector: 'node[type="agency"]',
                 style: {
-                    'background-color': '#EE3338',
+                    'background-color': '#E10600',
                     'width': 40,
                     'height': 40,
                     'font-size': '12px',

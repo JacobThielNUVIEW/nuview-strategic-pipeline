@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="NUVIEW Interactive Pipeline Matrix - Visual workflow representation with drag-and-drop opportunity management and status tracking.">
-    <meta name="theme-color" content="#EE3338">
+    <meta name="theme-color" content="#E10600">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>NUVIEW Opp Board - Interactive Pipeline Matrix</title>
@@ -25,9 +25,9 @@
             --nuview-bg-gray: #0a0a0a;
             
             /* Status colors using NUVIEW palette */
-            --status-operational: #EE3338;
+            --status-operational: #E10600;
             --status-success: #FFFFFF;
-            --status-warning: #EE3338;
+            --status-warning: #E10600;
             --status-loading: #666666;
             --status-idle: #333333;
         }
@@ -98,7 +98,7 @@
 
         .nav-links a:hover {
             border-color: var(--nuview-red-bright);
-            background: rgba(238, 51, 56, 0.1);
+            background: rgba(225, 6, 0, 0.1);
             transform: translateY(-2px);
         }
 
@@ -216,7 +216,7 @@
 
         .zoom-btn:hover {
             background: linear-gradient(135deg, var(--nuview-red-primary) 0%, var(--nuview-red-bright) 100%);
-            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
+            box-shadow: 0 4px 12px rgba(225, 6, 0, 0.4);
             transform: translateY(-2px);
         }
 
@@ -323,7 +323,7 @@
 
         .pipeline-node:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(238, 51, 56, 0.4);
+            box-shadow: 0 12px 40px rgba(225, 6, 0, 0.4);
         }
 
         /* Node status indicator */
@@ -374,7 +374,7 @@
             font-size: 2rem;
             background: linear-gradient(135deg, var(--nuview-red-primary) 0%, var(--nuview-red-bright) 100%);
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.3);
+            box-shadow: 0 4px 12px rgba(225, 6, 0, 0.3);
         }
 
         /* Node content */
@@ -1542,11 +1542,11 @@
             
             const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
             stop1.setAttribute('offset', '0%');
-            stop1.setAttribute('style', 'stop-color:#EE3338;stop-opacity:1');
+            stop1.setAttribute('style', 'stop-color:#E10600;stop-opacity:1');
             
             const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
             stop2.setAttribute('offset', '100%');
-            stop2.setAttribute('style', 'stop-color:#EE3338;stop-opacity:1');
+            stop2.setAttribute('style', 'stop-color:#E10600;stop-opacity:1');
             
             gradient.appendChild(stop1);
             gradient.appendChild(stop2);
@@ -1562,7 +1562,7 @@
             
             const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
             polygon.setAttribute('points', '0 0, 10 3, 0 6');
-            polygon.setAttribute('fill', '#EE3338');
+            polygon.setAttribute('fill', '#E10600');
             marker.appendChild(polygon);
             
             defs.appendChild(gradient);
