@@ -8,13 +8,16 @@ import json
 import os
 import sys
 from datetime import datetime, timezone
-from collections import defaultdict
 
 # Color codes for console output
 COLOR_GREEN = '\033[92m'
 COLOR_BLUE = '\033[94m'
 COLOR_RED = '\033[91m'
 COLOR_RESET = '\033[0m'
+
+# Keyword sets for categorization
+SPACE_KEYWORDS = {'space', 'satellite', 'orbital'}
+LIDAR_KEYWORDS = {'lidar'}
 
 def log_info(msg):
     print(f"{COLOR_BLUE}ℹ️  {msg}{COLOR_RESET}")
@@ -25,30 +28,38 @@ def log_success(msg):
 def log_error(msg):
     print(f"{COLOR_RED}❌ {msg}{COLOR_RESET}")
 
+def contains_keywords(text, keywords):
+    """Check if text contains any of the specified keywords"""
+    if not text:
+        return False
+    text_lower = text.lower()
+    return any(keyword in text_lower for keyword in keywords)
+
 def categorize_opportunity(opp):
     """
     Categorize opportunity into Funding, LiDAR, Space Systems, or Platform
     Based on category field and keywords in title/description
     """
     category = opp.get('category', '')
-    title = opp.get('title', '').lower()
-    description = opp.get('description', '').lower()
+    title = opp.get('title', '')
+    description = opp.get('description', '')
     
     # Primary categorization by category field
     if category == 'DaaS':
         # Check if it's space-based or platform-related
-        if any(keyword in title or keyword in description for keyword in ['space', 'satellite', 'orbital', 'platform']):
+        if contains_keywords(title, SPACE_KEYWORDS) or contains_keywords(description, SPACE_KEYWORDS) or \
+           'platform' in title.lower() or 'platform' in description.lower():
             return 'spaceSystems'
         # Check if it's LiDAR-specific
-        if 'lidar' in title or 'lidar' in description:
+        if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
             return 'lidar'
         return 'funding'
     
     elif category == 'R&D':
         # R&D can fall into different buckets
-        if any(keyword in title or keyword in description for keyword in ['space', 'satellite', 'orbital']):
+        if contains_keywords(title, SPACE_KEYWORDS) or contains_keywords(description, SPACE_KEYWORDS):
             return 'spaceSystems'
-        if 'lidar' in title or 'lidar' in description:
+        if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
             return 'lidar'
         return 'funding'
     
@@ -56,9 +67,10 @@ def categorize_opportunity(opp):
         return 'platform'
     
     # Fallback - try to categorize by keywords
-    if 'lidar' in title or 'lidar' in description:
+    if contains_keywords(title, LIDAR_KEYWORDS) or contains_keywords(description, LIDAR_KEYWORDS):
         return 'lidar'
-    if any(keyword in title or keyword in description for keyword in ['space', 'satellite', 'orbital', 'platform']):
+    if contains_keywords(title, SPACE_KEYWORDS) or contains_keywords(description, SPACE_KEYWORDS) or \
+       'platform' in title.lower() or 'platform' in description.lower():
         return 'spaceSystems'
     
     return 'funding'
@@ -74,9 +86,20 @@ def format_value(amount_usd):
     else:
         return f"${amount_usd:,.0f}"
 
+def get_value_usd(opp):
+    """Extract USD value from opportunity, checking multiple possible field names"""
+    for field_name in ['amountUSD', 'valueUSD', 'funding.amountUSD']:
+        if field_name == 'funding.amountUSD':
+            funding = opp.get('funding', {})
+            if isinstance(funding, dict) and 'amountUSD' in funding:
+                return funding['amountUSD']
+        elif field_name in opp:
+            return opp[field_name]
+    return 0
+
 def convert_opportunity_to_program(opp):
     """Convert an opportunity object to a program object for dashboard"""
-    value_usd = opp.get('amountUSD', opp.get('valueUSD', 0))
+    value_usd = get_value_usd(opp)
     
     program = {
         'id': opp.get('id', ''),
