@@ -3,38 +3,14 @@
     {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "Caltech JPL",
-      "source_type": "Research"
-    },
-    {
-      "country": "China",
-      "opportunities_found": 1,
-      "scraper": "CNSA Mapping",
-      "source_type": "International"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "MIT Research",
-      "source_type": "Research"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "USACE Mapping",
+      "scraper": "FEMA Flood",
       "source_type": "Federal"
     },
     {
       "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "NOAA Coastal",
-      "source_type": "Federal"
-    },
-    {
-      "country": "Europe",
       "opportunities_found": 2,
-      "scraper": "ESA Copernicus",
-      "source_type": "International"
+      "scraper": "NSF Geosciences",
+      "source_type": "Research"
     },
     {
       "country": "USA",
@@ -49,15 +25,9 @@
       "source_type": "International"
     },
     {
-      "country": "Japan",
-      "opportunities_found": 1,
-      "scraper": "JAXA Earth",
-      "source_type": "International"
-    },
-    {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "FEMA Flood",
+      "scraper": "USDA Forest",
       "source_type": "Federal"
     },
     {
@@ -68,8 +38,8 @@
     },
     {
       "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "USDA Forest",
+      "opportunities_found": 2,
+      "scraper": "USGS 3DEP",
       "source_type": "Federal"
     },
     {
@@ -80,21 +50,9 @@
     },
     {
       "country": "USA",
-      "opportunities_found": 2,
-      "scraper": "USGS 3DEP",
-      "source_type": "Federal"
-    },
-    {
-      "country": "USA",
       "opportunities_found": 1,
       "scraper": "NIH GeoHealth",
       "source_type": "Research"
-    },
-    {
-      "country": "USA",
-      "opportunities_found": 1,
-      "scraper": "ESRI Platform",
-      "source_type": "Commercial"
     },
     {
       "country": "USA",
@@ -103,10 +61,10 @@
       "source_type": "Research"
     },
     {
-      "country": "USA",
+      "country": "Germany",
       "opportunities_found": 1,
-      "scraper": "Google Earth Engine",
-      "source_type": "Commercial"
+      "scraper": "DLR Remote Sensing",
+      "source_type": "International"
     },
     {
       "country": "USA",
@@ -117,14 +75,14 @@
     {
       "country": "USA",
       "opportunities_found": 1,
-      "scraper": "NGA Geoint",
-      "source_type": "Federal"
+      "scraper": "Google Earth Engine",
+      "source_type": "Commercial"
     },
     {
-      "country": "Germany",
+      "country": "USA",
       "opportunities_found": 1,
-      "scraper": "DLR Remote Sensing",
-      "source_type": "International"
+      "scraper": "NGA Geoint",
+      "source_type": "Federal"
     },
     {
       "country": "USA",
@@ -139,10 +97,10 @@
       "source_type": "International"
     },
     {
-      "country": "USA",
-      "opportunities_found": 2,
-      "scraper": "NSF Geosciences",
-      "source_type": "Research"
+      "country": "Japan",
+      "opportunities_found": 1,
+      "scraper": "JAXA Earth",
+      "source_type": "International"
     },
     {
       "country": "Italy",
@@ -154,6 +112,48 @@
       "country": "USA",
       "opportunities_found": 1,
       "scraper": "Amazon AWS Geo",
+      "source_type": "Commercial"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "Caltech JPL",
+      "source_type": "Research"
+    },
+    {
+      "country": "Europe",
+      "opportunities_found": 2,
+      "scraper": "ESA Copernicus",
+      "source_type": "International"
+    },
+    {
+      "country": "China",
+      "opportunities_found": 1,
+      "scraper": "CNSA Mapping",
+      "source_type": "International"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "USACE Mapping",
+      "source_type": "Federal"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "NOAA Coastal",
+      "source_type": "Federal"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "MIT Research",
+      "source_type": "Research"
+    },
+    {
+      "country": "USA",
+      "opportunities_found": 1,
+      "scraper": "ESRI Platform",
       "source_type": "Commercial"
     },
     {
@@ -409,7 +409,7 @@
       "source_type": "International"
     }
   ],
-  "timestamp": "2025-11-21T18:14:05.364097Z",
+  "timestamp": "2025-11-21T18:18:09.409069Z",
   "total_opportunities": 128,
   "total_scrapers": 68
 }
