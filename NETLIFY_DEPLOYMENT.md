@@ -31,18 +31,19 @@ This guide provides complete instructions for deploying the NUVIEW Strategic Pip
    - **Publish directory**: `.` (root directory)
    - Click "Deploy site"
 
-### Step 2: Configure Custom Domain (Optional)
+### Step 2: Domain Configuration
 
-If you want to use `nuview-global.space` on Netlify:
+The site is configured to use the Netlify subdomain:
 
-1. **Go to Site Settings** → **Domain management**
-2. **Add custom domain**: `nuview-global.space`
-3. **Configure DNS**:
-   - Add an A record pointing to Netlify's load balancer
-   - Or add a CNAME record if using a subdomain
-   - Netlify will provide the specific DNS records needed
+**Primary Domain**: `salesnuviewspace.netlify.app`
 
-4. **Enable HTTPS**: Netlify automatically provisions SSL certificates via Let's Encrypt
+This domain:
+- Is automatically provisioned by Netlify
+- Has HTTPS enabled via Netlify's SSL certificate
+- Updates automatically on every push to main branch
+- Requires no additional DNS configuration
+
+**Alternative Access**: The site is also available via GitHub Pages at `jacobthielnuview.github.io/nuview-strategic-pipeline`
 
 ### Step 3: Configure Environment Variables
 

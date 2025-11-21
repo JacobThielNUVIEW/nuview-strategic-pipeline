@@ -58,7 +58,9 @@ The NUVIEW Strategic Pipeline is a fully automated, integrated workflow system t
 
 ### For Dashboard Users
 
-1. **View the Live Dashboard**: [https://jacobthielnuview.github.io/nuview-strategic-pipeline/](https://jacobthielnuview.github.io/nuview-strategic-pipeline/)
+1. **View the Live Dashboard**: 
+   - Primary: [https://salesnuviewspace.netlify.app](https://salesnuviewspace.netlify.app)
+   - Alternative: [https://jacobthielnuview.github.io/nuview-strategic-pipeline/](https://jacobthielnuview.github.io/nuview-strategic-pipeline/)
 
 2. **Trigger a Data Update**:
    - Click the floating 🚀 rocket button (bottom-right)
