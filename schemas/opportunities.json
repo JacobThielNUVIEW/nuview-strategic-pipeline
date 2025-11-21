@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NUVIEW Strategic Pipeline Opportunities Schema",
+  "description": "JSON Schema for validating opportunities.json data structure",
+  "type": "object",
+  "required": ["meta", "opportunities"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Metadata about the opportunities collection",
+      "required": ["market_val", "cagr", "updated", "totalCount", "scrapers_run"],
+      "properties": {
+        "market_val": {
+          "type": "string",
+          "description": "Market value in billions USD",
+          "pattern": "^\\d+(\\.\\d+)?$"
+        },
+        "cagr": {
+          "type": "string",
+          "description": "Compound Annual Growth Rate as percentage",
+          "pattern": "^\\d+(\\.\\d+)?$"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp in ISO 8601 format"
+        },
+        "totalCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of opportunities"
+        },
+        "scrapers_run": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of scrapers that were executed"
+        }
+      }
+    },
+    "opportunities": {
+      "type": "array",
+      "description": "Array of opportunity records",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "agency",
+          "pillar",
+          "category",
+          "forecast_value",
+          "link",
+          "deadline",
+          "next_action",
+          "timeline",
+          "funding"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the opportunity",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Opportunity title"
+          },
+          "agency": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Agency or organization name"
+          },
+          "agencyLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to agency website"
+          },
+          "pillar": {
+            "type": "string",
+            "enum": ["Federal", "International", "Research", "Commercial", "State/Local"],
+            "description": "Business pillar classification"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["DaaS", "R&D", "Platform", "Funding", "LiDAR", "Space Systems"],
+            "description": "Opportunity category"
+          },
+          "forecast_value": {
+            "type": "string",
+            "pattern": "^\\$[0-9,]+$",
+            "description": "Formatted forecast value with $ and commas"
+          },
+          "link": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to opportunity details"
+          },
+          "budgetSourceLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to budget source documentation"
+          },
+          "deadline": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Deadline date in YYYY-MM-DD format"
+          },
+          "next_action": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Next action item"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed opportunity description"
+          },
+          "timeline": {
+            "type": "object",
+            "required": ["daysUntil", "urgency"],
+            "properties": {
+              "daysUntil": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Days until deadline"
+              },
+              "urgency": {
+                "type": "string",
+                "enum": ["urgent", "near", "future"],
+                "description": "Urgency classification based on days until deadline"
+              }
+            }
+          },
+          "funding": {
+            "type": "object",
+            "required": ["amountUSD"],
+            "properties": {
+              "amountUSD": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Funding amount in USD"
+              }
+            }
+          },
+          "amountUSD": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Amount in USD (top-level, for backwards compatibility)"
+          },
+          "valueUSD": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Value in USD"
+          },
+          "daysUntilDeadline": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Days until deadline (top-level, for backwards compatibility)"
+          },
+          "urgency": {
+            "type": "string",
+            "enum": ["urgent", "near", "future"],
+            "description": "Urgency classification (top-level, for backwards compatibility)"
+          },
+          "scrapedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when opportunity was scraped"
+          },
+          "source_verified": {
+            "type": "boolean",
+            "description": "Whether the source has been verified"
+          },
+          "topographic_keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Topographic keywords detected in the opportunity"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language of the source content"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1176,6 +1176,91 @@
         </div>
     </div>
 
+    <!-- Priority Scoring Matrix -->
+    <div id="priority-matrix" class="section">
+        <h2><i class="bi bi-list-ol"></i> Priority Scoring Matrix</h2>
+        <p style="color: var(--nuview-dark-gray); margin-bottom: 1.5rem;">
+            All opportunities ranked by priority score (max 85 points). 
+            Scoring factors: <strong>Urgency (30)</strong>, <strong>Value Tier (30)</strong>, <strong>Category (15)</strong>, <strong>Source Verification (10)</strong>.
+            <button id="toggle-scoring-details" style="background: var(--nuview-red); color: white; border: none; padding: 0.25rem 0.75rem; border-radius: 4px; margin-left: 1rem; cursor: pointer;">
+                Show Scoring Details
+            </button>
+        </p>
+        
+        <!-- Collapsible Scoring Details -->
+        <div id="scoring-details" style="display: none; background: var(--nuview-space-light); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--nuview-red);">
+            <h3 style="color: var(--nuview-red); margin-top: 0;">Priority Scoring Methodology</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div style="background: var(--nuview-space-dark); padding: 1rem; border-radius: 6px;">
+                    <h4 style="color: var(--nuview-red); margin-top: 0;"><i class="bi bi-clock-history"></i> Urgency Score (30 max)</h4>
+                    <ul style="list-style: none; padding-left: 0; color: var(--text-secondary);">
+                        <li>🔴 <strong>Urgent</strong> (&lt;30 days): 30 points</li>
+                        <li>🟡 <strong>Near</strong> (30-89 days): 20 points</li>
+                        <li>🟢 <strong>Future</strong> (90+ days): 10 points</li>
+                    </ul>
+                </div>
+                
+                <div style="background: var(--nuview-space-dark); padding: 1rem; border-radius: 6px;">
+                    <h4 style="color: var(--nuview-red); margin-top: 0;"><i class="bi bi-cash-stack"></i> Value Tier Score (30 max)</h4>
+                    <ul style="list-style: none; padding-left: 0; color: var(--text-secondary);">
+                        <li>💰 <strong>&gt;$100M</strong>: 30 points</li>
+                        <li>💵 <strong>$10M-$100M</strong>: 20 points</li>
+                        <li>💴 <strong>&lt;$10M</strong>: 10 points</li>
+                    </ul>
+                </div>
+                
+                <div style="background: var(--nuview-space-dark); padding: 1rem; border-radius: 6px;">
+                    <h4 style="color: var(--nuview-red); margin-top: 0;"><i class="bi bi-tag"></i> Category Score (15 max)</h4>
+                    <ul style="list-style: none; padding-left: 0; color: var(--text-secondary);">
+                        <li>📊 <strong>DaaS</strong>: 15 points</li>
+                        <li>🖥️ <strong>Platform</strong>: 10 points</li>
+                        <li>🔬 <strong>R&D</strong>: 5 points</li>
+                    </ul>
+                </div>
+                
+                <div style="background: var(--nuview-space-dark); padding: 1rem; border-radius: 6px;">
+                    <h4 style="color: var(--nuview-red); margin-top: 0;"><i class="bi bi-check-circle"></i> Source Verification (10 max)</h4>
+                    <ul style="list-style: none; padding-left: 0; color: var(--text-secondary);">
+                        <li>✅ <strong>Verified sources</strong>: 10 points</li>
+                        <li>❌ <strong>Missing sources</strong>: 0 points</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p style="margin-top: 1rem; padding: 1rem; background: rgba(225, 6, 0, 0.1); border-radius: 6px; color: var(--text-secondary);">
+                <i class="bi bi-info-circle"></i> <strong>Total Possible Score:</strong> 85 points. 
+                Higher scores indicate opportunities that are urgent, high-value, strategically aligned, and properly sourced.
+            </p>
+        </div>
+        
+        <div style="overflow-x: auto;">
+            <table class="matrix-table" role="table" aria-label="Priority scoring matrix">
+                <thead>
+                    <tr>
+                        <th class="matrix-rank" scope="col">Rank</th>
+                        <th scope="col">Opportunity</th>
+                        <th scope="col">Agency</th>
+                        <th scope="col">Pillar</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Priority Score</th>
+                        <th scope="col">Urgency</th>
+                        <th scope="col">Days Until</th>
+                        <th scope="col">Deadline</th>
+                    </tr>
+                </thead>
+                <tbody id="priority-matrix-body">
+                    <tr>
+                        <td colspan="10" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">
+                            Loading priority matrix...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- Top 10 Opportunity Matrix -->
     <div id="top-opportunities" class="section">
         <h2><i class="bi bi-trophy"></i> Strategic Priority Opportunities</h2>
@@ -1366,6 +1451,68 @@ function renderTopOpportunities() {
                 </span>
                 `}
             </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Render Priority Scoring Matrix
+function renderPriorityMatrix() {
+    if (!programsData || !programsData.programs) return;
+    
+    const allPrograms = [
+        ...(programsData.programs.funding || []),
+        ...(programsData.programs.lidar || []),
+        ...(programsData.programs.spaceSystems || []),
+        ...(programsData.programs.platform || [])
+    ];
+    
+    // Remove duplicates by ID
+    const uniquePrograms = Array.from(new Map(allPrograms.map(p => [p.id, p])).values());
+    
+    // Sort by priority score (descending)
+    const sortedPrograms = uniquePrograms.sort((a, b) => {
+        const scoreA = a.priorityScore || 0;
+        const scoreB = b.priorityScore || 0;
+        return scoreB - scoreA;
+    });
+    
+    const tbody = document.getElementById('priority-matrix-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    if (sortedPrograms.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 2rem; color: var(--nuview-gray);">No opportunities available.</td></tr>';
+        return;
+    }
+    
+    sortedPrograms.forEach((program, index) => {
+        const row = document.createElement('tr');
+        row.setAttribute('role', 'row');
+        
+        // Calculate score badge color based on score
+        const score = program.priorityScore || 0;
+        let scoreColor = 'var(--nuview-gray)'; // default gray
+        if (score >= 70) scoreColor = 'var(--nuview-red)'; // high priority
+        else if (score >= 50) scoreColor = '#ff9800'; // medium priority
+        else if (score >= 30) scoreColor = '#2196F3'; // low priority
+        
+        row.innerHTML = `
+            <td class="matrix-rank" role="cell">${index + 1}</td>
+            <td role="cell"><strong>${program.title || 'Untitled Program'}</strong></td>
+            <td role="cell">${program.agency || 'N/A'}</td>
+            <td role="cell"><span class="matrix-source-badge">${program.pillar || 'N/A'}</span></td>
+            <td role="cell">${program.category || 'N/A'}</td>
+            <td class="matrix-value" role="cell">${formatCurrency(program.valueUSD || 0)}</td>
+            <td role="cell">
+                <span style="display: inline-block; background: ${scoreColor}; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-weight: bold; min-width: 45px; text-align: center;">
+                    ${score}
+                </span>
+            </td>
+            <td role="cell">${getUrgencyBadge(program.urgency)}</td>
+            <td role="cell">${program.daysUntil !== undefined ? program.daysUntil : 'N/A'}</td>
+            <td role="cell">${program.deadline || 'TBD'}</td>
         `;
         tbody.appendChild(row);
     });
@@ -1564,6 +1711,9 @@ async function loadPrograms() {
         // Render top 10 opportunities matrix
         renderTopOpportunities();
         
+        // Render priority scoring matrix
+        renderPriorityMatrix();
+        
         // Render launched opportunities box
         renderLaunchedOpps();
         
@@ -1747,20 +1897,45 @@ function initializeCytoscapeNetwork(opportunities) {
         }
     });
     
-    // Add click event
+    // Add interactive tooltips and click events
     cy.on('tap', 'node', function(evt) {
         const node = evt.target;
         const data = node.data();
         if (data.type === 'opportunity') {
-            alert(`Opportunity: ${data.fullTitle}\nValue: $${(data.value || 0).toLocaleString()}`);
-        } else {
-            alert(`${data.type}: ${data.label}`);
+            // Create a more detailed popup
+            const details = `
+Opportunity: ${data.fullTitle}
+Value: $${(data.value || 0).toLocaleString()}
+Type: ${data.type}
+
+Click outside to close`;
+            alert(details);
+        } else if (data.type === 'agency') {
+            alert(`Agency: ${data.label}\n\nRepresents opportunities from this agency.\nClick outside to close.`);
+        } else if (data.type === 'category') {
+            alert(`Category: ${data.label}\n\nRepresents opportunities in this category.\nClick outside to close.`);
         }
+    });
+    
+    // Add hover effects
+    cy.on('mouseover', 'node', function(evt) {
+        const node = evt.target;
+        node.style('border-width', '3px');
+        node.style('border-color', '#E10600');
+    });
+    
+    cy.on('mouseout', 'node', function(evt) {
+        const node = evt.target;
+        node.style('border-width', '0px');
     });
     
     // Enable zoom and pan
     cy.userZoomingEnabled(true);
     cy.userPanningEnabled(true);
+    cy.boxSelectionEnabled(false);
+    
+    // Add zoom controls info
+    console.log('Cytoscape controls: Mouse wheel to zoom, drag to pan, click nodes for details');
     
     console.log('Cytoscape network initialized with', elements.length, 'elements');
 }
@@ -1775,6 +1950,22 @@ function initializeCytoscapeNetwork(opportunities) {
 document.addEventListener('DOMContentLoaded', function() {
     loadPrograms();
     initializePipelineTooltips();
+    
+    // Initialize scoring details toggle
+    const toggleBtn = document.getElementById('toggle-scoring-details');
+    const scoringDetails = document.getElementById('scoring-details');
+    
+    if (toggleBtn && scoringDetails) {
+        toggleBtn.addEventListener('click', function() {
+            if (scoringDetails.style.display === 'none') {
+                scoringDetails.style.display = 'block';
+                toggleBtn.textContent = 'Hide Scoring Details';
+            } else {
+                scoringDetails.style.display = 'none';
+                toggleBtn.textContent = 'Show Scoring Details';
+            }
+        });
+    }
 });
 
 /**

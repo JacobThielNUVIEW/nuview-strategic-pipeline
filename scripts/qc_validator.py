@@ -3,6 +3,7 @@ QC Validator for NUVIEW Topographic Pipeline Data
 Validates opportunities.json and forecast.json for quality and completeness
 Outputs qc_report.json with detailed validation results
 Generates source verification matrix (sources_matrix.csv)
+Uses JSON Schema for schema validation
 """
 
 import json
@@ -11,6 +12,7 @@ import sys
 from datetime import datetime, timezone
 
 import pandas as pd
+from jsonschema import Draft7Validator, validate
 
 # Required fields for opportunities
 REQUIRED_OPP_FIELDS = ['id', 'title', 'agency', 'pillar', 'category', 'forecast_value',
@@ -43,8 +45,41 @@ def log_error(msg):
     """Log error message in NUVIEW red"""
     print(f"{COLOR_RED}❌ {msg}{COLOR_RESET}")
 
+def load_schema(schema_path='schemas/opportunities.json'):
+    """Load and return the JSON schema"""
+    try:
+        with open(schema_path, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        log_error(f"Schema file not found: {schema_path}")
+        return None
+    except json.JSONDecodeError as e:
+        log_error(f"Invalid JSON in schema file: {str(e)}")
+        return None
+
+def validate_with_schema(data, schema):
+    """Validate data against JSON schema and return errors"""
+    errors = []
+    
+    if not schema:
+        errors.append("Schema not loaded, skipping schema validation")
+        return errors
+    
+    try:
+        # Use Draft7Validator for better error messages
+        validator = Draft7Validator(schema)
+        schema_errors = sorted(validator.iter_errors(data), key=lambda e: e.path)
+        
+        for error in schema_errors:
+            path = '.'.join(str(p) for p in error.path) if error.path else 'root'
+            errors.append(f"Schema validation error at '{path}': {error.message}")
+    except Exception as e:
+        errors.append(f"Schema validation exception: {str(e)}")
+    
+    return errors
+
 def validate_opportunities_file(filepath):
-    """Validate opportunities.json structure and content"""
+    """Validate opportunities.json structure and content using JSON Schema"""
     errors = []
     warnings = []
 
@@ -60,6 +95,17 @@ def validate_opportunities_file(filepath):
     except json.JSONDecodeError as e:
         errors.append(f"Invalid JSON in {filepath}: {str(e)}")
         return errors, warnings, None
+    
+    # Load and validate against JSON Schema
+    log_info("Validating against JSON Schema...")
+    schema = load_schema()
+    if schema:
+        schema_errors = validate_with_schema(data, schema)
+        errors.extend(schema_errors)
+        if schema_errors:
+            log_warning(f"JSON Schema validation found {len(schema_errors)} error(s)")
+        else:
+            log_success("JSON Schema validation passed")
 
     # Check meta section
     if 'meta' not in data:
