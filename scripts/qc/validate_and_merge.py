@@ -1,6 +1,5 @@
 # validate_and_merge.py
 
-import pandas as pd
 
 # Function to source data for priority matrix
 
