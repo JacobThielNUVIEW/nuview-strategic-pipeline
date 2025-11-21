@@ -4,12 +4,13 @@ Commercial and State/Local Government Scrapers for Topographic Opportunities
 
 from base_scraper import BaseScraper
 
+
 class AmazonAWSScraper(BaseScraper):
     """Amazon AWS geospatial services"""
-    
+
     def __init__(self):
         super().__init__("Amazon AWS Geo", "Commercial", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -24,16 +25,16 @@ class AmazonAWSScraper(BaseScraper):
                 agency_link="https://aws.amazon.com/earth/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class GoogleEarthEngineScraper(BaseScraper):
     """Google Earth Engine partnerships"""
-    
+
     def __init__(self):
         super().__init__("Google Earth Engine", "Commercial", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -48,16 +49,16 @@ class GoogleEarthEngineScraper(BaseScraper):
                 agency_link="https://earthengine.google.com/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class ESRIScraper(BaseScraper):
     """ESRI Living Atlas and ArcGIS"""
-    
+
     def __init__(self):
         super().__init__("ESRI Platform", "Commercial", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -72,16 +73,16 @@ class ESRIScraper(BaseScraper):
                 agency_link="https://www.esri.com/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class MicrosoftPlanetaryScraper(BaseScraper):
     """Microsoft Planetary Computer"""
-    
+
     def __init__(self):
         super().__init__("Microsoft Planetary", "Commercial", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -96,16 +97,16 @@ class MicrosoftPlanetaryScraper(BaseScraper):
                 agency_link="https://planetarycomputer.microsoft.com/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class MaxarScraper(BaseScraper):
     """Maxar Technologies geospatial intelligence"""
-    
+
     def __init__(self):
         super().__init__("Maxar Geo", "Commercial", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -120,16 +121,16 @@ class MaxarScraper(BaseScraper):
                 agency_link="https://www.maxar.com/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class CaliforniaScraper(BaseScraper):
     """State of California mapping programs"""
-    
+
     def __init__(self):
         super().__init__("California State", "State/Local", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -144,16 +145,16 @@ class CaliforniaScraper(BaseScraper):
                 agency_link="https://gis.data.ca.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class TexasScraper(BaseScraper):
     """State of Texas mapping programs"""
-    
+
     def __init__(self):
         super().__init__("Texas State", "State/Local", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -168,16 +169,16 @@ class TexasScraper(BaseScraper):
                 agency_link="https://tnris.org/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class FloridaScraper(BaseScraper):
     """State of Florida coastal mapping"""
-    
+
     def __init__(self):
         super().__init__("Florida State", "State/Local", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -192,16 +193,16 @@ class FloridaScraper(BaseScraper):
                 agency_link="https://floridadep.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class NYCScraper(BaseScraper):
     """New York City urban mapping"""
-    
+
     def __init__(self):
         super().__init__("NYC Urban", "State/Local", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -216,16 +217,16 @@ class NYCScraper(BaseScraper):
                 agency_link="https://www1.nyc.gov/site/planning/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class WorldBankScraper(BaseScraper):
     """World Bank development projects"""
-    
+
     def __init__(self):
         super().__init__("World Bank", "International", "Global")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -240,16 +241,16 @@ class WorldBankScraper(BaseScraper):
                 agency_link="https://www.worldbank.org/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class PlanetLabsScraper(BaseScraper):
     """Planet Labs geospatial analytics platform"""
-    
+
     def __init__(self):
         super().__init__("Planet Labs", "Commercial", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -264,6 +265,6 @@ class PlanetLabsScraper(BaseScraper):
                 agency_link="https://www.planet.com/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities

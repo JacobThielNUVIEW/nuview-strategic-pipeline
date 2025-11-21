@@ -4,12 +4,13 @@ International Space Agency Scrapers for Topographic/LiDAR Opportunities
 
 from base_scraper import BaseScraper
 
+
 class ESAScraper(BaseScraper):
     """European Space Agency - Earth observation and LiDAR"""
-    
+
     def __init__(self):
         super().__init__("ESA Copernicus", "International", "Europe")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -35,16 +36,16 @@ class ESAScraper(BaseScraper):
                 agency_link="https://www.esa.int/Applications/Observing_the_Earth/Copernicus"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class JAXAScraper(BaseScraper):
     """Japan Aerospace Exploration Agency"""
-    
+
     def __init__(self):
         super().__init__("JAXA Earth", "International", "Japan")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -59,16 +60,16 @@ class JAXAScraper(BaseScraper):
                 agency_link="https://global.jaxa.jp/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class CSAScraper(BaseScraper):
     """Canadian Space Agency"""
-    
+
     def __init__(self):
         super().__init__("CSA EO", "International", "Canada")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -83,16 +84,16 @@ class CSAScraper(BaseScraper):
                 agency_link="https://www.asc-csa.gc.ca/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class DLRScraper(BaseScraper):
     """German Aerospace Center"""
-    
+
     def __init__(self):
         super().__init__("DLR Remote Sensing", "International", "Germany")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -107,16 +108,16 @@ class DLRScraper(BaseScraper):
                 agency_link="https://www.dlr.de/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class ISROScraper(BaseScraper):
     """Indian Space Research Organisation"""
-    
+
     def __init__(self):
         super().__init__("ISRO Cartography", "International", "India")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -131,16 +132,16 @@ class ISROScraper(BaseScraper):
                 agency_link="https://www.isro.gov.in/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class UKSAScraper(BaseScraper):
     """UK Space Agency"""
-    
+
     def __init__(self):
         super().__init__("UKSA EO", "International", "UK")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -155,16 +156,16 @@ class UKSAScraper(BaseScraper):
                 agency_link="https://www.gov.uk/government/organisations/uk-space-agency"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class CNSAScraper(BaseScraper):
     """China National Space Administration"""
-    
+
     def __init__(self):
         super().__init__("CNSA Mapping", "International", "China")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -179,16 +180,16 @@ class CNSAScraper(BaseScraper):
                 agency_link="http://www.cnsa.gov.cn/english/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class ASIScraper(BaseScraper):
     """Italian Space Agency"""
-    
+
     def __init__(self):
         super().__init__("ASI Earth Obs", "International", "Italy")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -203,6 +204,6 @@ class ASIScraper(BaseScraper):
                 agency_link="https://www.asi.it/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities

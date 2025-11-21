@@ -4,12 +4,13 @@ Research Institution and University Scrapers for Topographic/LiDAR Research
 
 from base_scraper import BaseScraper
 
+
 class NSFScraper(BaseScraper):
     """National Science Foundation research grants"""
-    
+
     def __init__(self):
         super().__init__("NSF Geosciences", "Research", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -35,16 +36,16 @@ class NSFScraper(BaseScraper):
                 agency_link="https://www.nsf.gov/geo/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class DOEScraper(BaseScraper):
     """Department of Energy environmental research"""
-    
+
     def __init__(self):
         super().__init__("DOE Environmental", "Research", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -59,16 +60,16 @@ class DOEScraper(BaseScraper):
                 agency_link="https://www.energy.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class NIHGeospatialScraper(BaseScraper):
     """NIH geospatial health applications"""
-    
+
     def __init__(self):
         super().__init__("NIH GeoHealth", "Research", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -83,16 +84,16 @@ class NIHGeospatialScraper(BaseScraper):
                 agency_link="https://www.nih.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class EUHorizonScraper(BaseScraper):
     """EU Horizon Europe research program"""
-    
+
     def __init__(self):
         super().__init__("EU Horizon", "Research", "Europe")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -107,16 +108,16 @@ class EUHorizonScraper(BaseScraper):
                 agency_link="https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class MITScraper(BaseScraper):
     """MIT research partnerships"""
-    
+
     def __init__(self):
         super().__init__("MIT Research", "Research", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -131,16 +132,16 @@ class MITScraper(BaseScraper):
                 agency_link="https://www.ll.mit.edu/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities
 
 class CaltechJPLScraper(BaseScraper):
     """Caltech JPL research opportunities"""
-    
+
     def __init__(self):
         super().__init__("Caltech JPL", "Research", "USA")
-    
+
     def scrape(self):
         opportunities = [
             self.generate_opportunity(
@@ -155,6 +156,6 @@ class CaltechJPLScraper(BaseScraper):
                 agency_link="https://www.jpl.nasa.gov/"
             ),
         ]
-        
+
         self.opportunities.extend(opportunities)
         return opportunities

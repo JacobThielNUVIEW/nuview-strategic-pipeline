@@ -1,5 +1,6 @@
 {
   "timestamp": "2025-11-21T12:50:37.558337Z",
+  "timestamp": "2025-11-21T13:09:45.772722Z",
   "qc_status": "PASS",
   "qc_percentage": 100,
   "total_errors": 0,
@@ -17,10 +18,10 @@
     "status": "SUCCESS",
     "output_path": "data/processed/sources_matrix.csv",
     "statistics": {
-      "total_opportunities": 30,
+      "total_opportunities": 38,
       "missing_sources": 0,
       "bathymetry_flagged": 0,
-      "verified_opportunities": 30
+      "verified_opportunities": 38
     }
   }
 }
