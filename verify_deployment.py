@@ -137,8 +137,10 @@ def check_data_files():
         if os.path.exists(df):
             results.append(validate_json_file(df))
         else:
+            # Don't fail on missing data files - they may be generated dynamically 
+            # by scraping workflows or may not exist yet in a fresh clone
             log_warning(f"Data file not found (may be generated): {df}")
-            results.append(True)  # Don't fail on missing data files
+            results.append(True)
     
     return all(results)
 
