@@ -5,21 +5,59 @@ Validates scraped data and merges it with existing opportunities
 Handles deduplication, priority scoring, and data quality checks
 """
 
+import json
+import math
+import os
+import sys
+
+import pandas as pd
+
+# Add parent directory to path to import from scripts/
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+def calculate_priority(budget, num_keywords, data_access, confidence):
+    """
+    Calculate priority score based on budget, keywords, data access, and confidence.
+
+    Args:
+        budget (float): Budget in USD
+        num_keywords (int): Number of matching keywords
+        data_access (int): Data access score (0-10)
+        confidence (float): Confidence score (0-1)
+
+    Returns:
+        float: Priority score
+    """
+    # Normalize budget (logarithmic scale)
+    budget_score = 0
+    if budget > 0:
+        budget_score = min(50, math.log10(budget) * 5)
+
+    # Keyword score (0-30)
+    keyword_score = min(30, num_keywords * 5)
+
+    # Data access score (0-10)
+    access_score = data_access
+
+    # Total score weighted by confidence
+    total_score = (budget_score + keyword_score + access_score) * confidence
+
+    return round(total_score, 2)
 
 # Function to source data for priority matrix
 
 def source_data():
     """Load opportunities data from JSON file"""
     opportunities_file = 'data/opportunities.json'
-    
+
     if not os.path.exists(opportunities_file):
         print(f"⚠️  Warning: {opportunities_file} not found")
         return pd.DataFrame()
-    
+
     try:
         with open(opportunities_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        
+
         opportunities = data.get('opportunities', [])
         df = pd.DataFrame(opportunities)
         print(f"✅ Loaded {len(df)} opportunities from {opportunities_file}")
@@ -35,39 +73,39 @@ def verify_dataframe(df):
     if df.empty:
         print("⚠️  DataFrame is empty, skipping verification")
         return df
-    
+
     verified_df = df.copy()
-    
+
     # Add priority calculation if not present
     if 'calculatedPriority' not in verified_df.columns:
         print("📊 Calculating priorities...")
-        
+
         def calc_row_priority(row):
             budget = row.get('amountUSD', 0)
             if budget == 0 and 'funding' in row:
                 budget = row.get('funding', {}).get('amountUSD', 0) if isinstance(row.get('funding'), dict) else 0
-            
+
             # Count keywords from title and description
             title = str(row.get('title', '')).lower()
             desc = str(row.get('description', '')).lower()
             combined = f"{title} {desc}"
-            
+
             # Simple keyword counting
             keywords = ['lidar', 'topographic', 'elevation', 'dem', 'dsm', 'satellite', 'space-based']
             num_keywords = sum(1 for kw in keywords if kw in combined)
-            
+
             # Data access score (0-10) - based on urgency
             urgency = row.get('urgency', 'future')
             data_access = 8 if urgency == 'urgent' else 5 if urgency == 'near' else 3
-            
+
             # Confidence based on data completeness
             confidence = 0.9 if budget > 0 else 0.7
-            
+
             return calculate_priority(budget, num_keywords, data_access, confidence)
-        
+
         verified_df['calculatedPriority'] = verified_df.apply(calc_row_priority, axis=1)
         print(f"✅ Calculated priorities for {len(verified_df)} opportunities")
-    
+
     return verified_df
 
 # Function to handle fallback/source
@@ -86,20 +124,20 @@ def validate_and_merge():
     print("NUVIEW TOPOGRAPHIC PIPELINE - QC VALIDATE AND MERGE")
     print("=" * 80)
     print()
-    
+
     # Source the data
     data = source_data()
-    
+
     if data.empty:
         print("⚠️  No data to process")
         return
-    
+
     # Verify data in DataFrame
     verified_data = verify_dataframe(data)
-    
+
     # Handle fallback/source logic
     handle_sources()
-    
+
     # Sort by priority (descending - highest priority first)
     if 'calculatedPriority' in verified_data.columns:
         output = verified_data.sort_values(by='calculatedPriority', ascending=False)
@@ -107,20 +145,20 @@ def validate_and_merge():
         output = verified_data.sort_values(by='priorityScore', ascending=False)
     else:
         output = verified_data
-    
+
     # Ensure output directory exists
     os.makedirs('data/processed', exist_ok=True)
-    
+
     # Save to CSV
     output_csv = 'data/processed/priority_matrix.csv'
     output.to_csv(output_csv, index=False)
     print(f"✅ Saved priority matrix to {output_csv}")
-    
+
     # Also save as JSON
     output_json = 'data/processed/opportunities_validated.json'
     output.to_json(output_json, orient='records', indent=2)
     print(f"✅ Saved validated opportunities to {output_json}")
-    
+
     print()
     print("=" * 80)
     print("✅ Validation and merge completed successfully")

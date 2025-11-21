@@ -10,11 +10,48 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 
-# Add scripts directory to path
+# Add scripts and scrapers directories to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.dirname(__file__))
 
 # Import all scraper modules
 try:
+    from scrapers.additional_international_scrapers import (
+        ArgentinaScraper,
+        AustraliaGAScraper,
+        AustriaScraper,
+        BangladeshScraper,
+        BelgiumScraper,
+        BrazilIBGEScraper,
+        ChileScraper,
+        ColombiaScraper,
+        EgyptScraper,
+        FinlandScraper,
+        FranceScraper,
+        IndonesiaScraper,
+        IsraelScraper,
+        ItalyScraper,
+        MalaysiaScraper,
+        MexicoScraper,
+        NetherlandsScraper,
+        NewZealandScraper,
+        NigeriaScraper,
+        NorwayScraper,
+        PakistanScraper,
+        PeruScraper,
+        PhilippinesScraper,
+        PolandScraper,
+        SaudiArabiaScraper,
+        SouthAfricaScraper,
+        SouthKoreaScraper,
+        SpainScraper,
+        SwedenScraper,
+        SwitzerlandScraper,
+        ThailandScraper,
+        TurkeyScraper,
+        UAEScraper,
+        VietnamScraper,
+    )
     from scrapers.commercial_state_scrapers import (
         AmazonAWSScraper,
         CaliforniaScraper,
@@ -56,17 +93,6 @@ try:
         MITScraper,
         NIHGeospatialScraper,
         NSFScraper,
-    )
-    from scrapers.additional_international_scrapers import (
-        BrazilIBGEScraper, AustraliaGAScraper, NewZealandScraper, SouthKoreaScraper,
-        MexicoScraper, ArgentinaScraper, ChileScraper, SouthAfricaScraper,
-        NigeriaScraper, EgyptScraper, UAEScraper, SaudiArabiaScraper,
-        IsraelScraper, TurkeyScraper, PolandScraper, SwedenScraper,
-        NorwayScraper, FinlandScraper, SpainScraper, ItalyScraper,
-        FranceScraper, NetherlandsScraper, BelgiumScraper, SwitzerlandScraper,
-        AustriaScraper, ThailandScraper, IndonesiaScraper, MalaysiaScraper,
-        PhilippinesScraper, VietnamScraper, ColombiaScraper, PeruScraper,
-        PakistanScraper, BangladeshScraper
     )
     SCRAPERS_AVAILABLE = True
 except ImportError as e:
@@ -189,7 +215,7 @@ def run_all_scrapers():
         NYCScraper(),
         WorldBankScraper(),
         PlanetLabsScraper(),
-        
+
         # Additional International Scrapers (34 scrapers)
         BrazilIBGEScraper(),
         AustraliaGAScraper(),

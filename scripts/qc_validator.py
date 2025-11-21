@@ -12,7 +12,7 @@ import sys
 from datetime import datetime, timezone
 
 import pandas as pd
-from jsonschema import Draft7Validator, validate
+from jsonschema import Draft7Validator
 
 # Required fields for opportunities
 REQUIRED_OPP_FIELDS = ['id', 'title', 'agency', 'pillar', 'category', 'forecast_value',
@@ -60,22 +60,22 @@ def load_schema(schema_path='schemas/opportunities.json'):
 def validate_with_schema(data, schema):
     """Validate data against JSON schema and return errors"""
     errors = []
-    
+
     if not schema:
         errors.append("Schema not loaded, skipping schema validation")
         return errors
-    
+
     try:
         # Use Draft7Validator for better error messages
         validator = Draft7Validator(schema)
         schema_errors = sorted(validator.iter_errors(data), key=lambda e: e.path)
-        
+
         for error in schema_errors:
             path = '.'.join(str(p) for p in error.path) if error.path else 'root'
             errors.append(f"Schema validation error at '{path}': {error.message}")
     except Exception as e:
         errors.append(f"Schema validation exception: {str(e)}")
-    
+
     return errors
 
 def validate_opportunities_file(filepath):
@@ -95,7 +95,7 @@ def validate_opportunities_file(filepath):
     except json.JSONDecodeError as e:
         errors.append(f"Invalid JSON in {filepath}: {str(e)}")
         return errors, warnings, None
-    
+
     # Load and validate against JSON Schema
     log_info("Validating against JSON Schema...")
     schema = load_schema()
