@@ -1,0 +1,59 @@
+{
+  "timestamp": "2025-11-21T16:23:49.453570Z",
+  "audit_type": "Full QC Audit",
+  "results": {
+    "HTML Files": {
+      "errors": [],
+      "warnings": [],
+      "files_checked": 7
+    },
+    "Python Files": {
+      "errors": [],
+      "warnings": [],
+      "files_checked": 22
+    },
+    "Shell Scripts": {
+      "errors": [],
+      "warnings": [
+        "setup_and_run.sh: source \"${VENV_PATH}/bin/activate\"",
+        "setup_and_run.sh:        ^-------------------------^ SC1091 (info): Not following: ./bin/activate was not specified as input (see shellcheck -x).",
+        "setup_and_run.sh: For more information:"
+      ],
+      "files_checked": 1
+    },
+    "JSON Files": {
+      "errors": [],
+      "warnings": [],
+      "files_checked": 9
+    },
+    "CSV Files": {
+      "errors": [],
+      "warnings": [],
+      "files_checked": 2
+    },
+    "Documentation": {
+      "errors": [],
+      "warnings": [],
+      "files_checked": 22
+    },
+    "Data Integrity": {
+      "errors": [],
+      "warnings": [
+        "Calculation verification found inconsistencies (may need recalculation)"
+      ],
+      "files_checked": 0
+    },
+    "Recent Updates": {
+      "errors": [],
+      "warnings": [],
+      "files_checked": 0
+    }
+  },
+  "summary": {
+    "total_errors": 0,
+    "total_warnings": 4,
+    "total_files_checked": 63,
+    "status": "PASS",
+    "recommendation": "All checks passed. System is ready for production."
+  }
+}

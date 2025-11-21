@@ -44,6 +44,18 @@ scripts/
   - Outputs: `data/processed/qc_report.json`, `data/processed/sources_matrix.csv`
 
 - **`comprehensive_qc_check.py`** - Additional comprehensive QC checks
+  - Index integrity validation
+  - Calculation verification
+  - Cross-reference validation
+  - Matrix integrity checks
+
+- **`full_qc_audit.py`** - Complete repository quality control audit
+  - HTML, Python, Shell, JSON, CSV validation
+  - Documentation quality checks
+  - Data integrity verification
+  - Recent updates and regression detection
+  - Outputs: `data/processed/full_qc_audit_report.json`
+  - See: [docs/FULL_QC_AUDIT.md](../docs/FULL_QC_AUDIT.md)
 
 ### Monitoring
 - **`local_monitor.py`** - Monitors for remote scrape trigger signals
@@ -64,7 +76,14 @@ python scripts/generate_programs.py
 
 ### Validate Data Quality
 ```bash
+# Standard QC validation
 python scripts/qc_validator.py
+
+# Comprehensive data checks
+python scripts/comprehensive_qc_check.py
+
+# Full repository audit
+python scripts/full_qc_audit.py
 ```
 
 ### Monitor for Remote Triggers
