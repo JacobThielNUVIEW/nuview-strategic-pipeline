@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="robots" content="noindex, nofollow">
-    <title>NUVIEW Opp Board - Pipeline Matrix</title>
+    <title>NUVIEW Opp Board - Interactive Pipeline Matrix</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* ============================================
@@ -151,6 +151,121 @@
             min-height: 600px;
         }
 
+        /* Zoom and Pan Container */
+        .workflow-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-dark-gray) 100%);
+            border: 2px solid var(--nuview-medium-gray);
+            border-radius: 16px;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .workflow-container:active {
+            cursor: grabbing;
+        }
+
+        .workflow-canvas {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-origin: 0 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        /* Zoom Controls */
+        .zoom-controls {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 10;
+            background: var(--nuview-dark-gray);
+            border: 2px solid var(--nuview-medium-gray);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: linear-gradient(135deg, var(--nuview-medium-gray) 0%, var(--nuview-dark-gray) 100%);
+            color: var(--nuview-white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-btn:hover {
+            background: linear-gradient(135deg, var(--nuview-red-primary) 0%, var(--nuview-red-bright) 100%);
+            box-shadow: 0 4px 12px rgba(238, 51, 56, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .zoom-btn:active {
+            transform: translateY(0);
+        }
+
+        .zoom-level {
+            font-size: 0.75rem;
+            color: var(--nuview-light-gray);
+            text-align: center;
+            padding: 0.25rem;
+            font-weight: 600;
+        }
+
+        /* Instructions Overlay */
+        .instructions-overlay {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid var(--nuview-red-bright);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeInOut 8s ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            10%, 70% { opacity: 1; }
+        }
+
+        .instructions-overlay .icon {
+            font-size: 1.5rem;
+        }
+
+        .instructions-text {
+            font-size: 0.9rem;
+            color: var(--nuview-white);
+            line-height: 1.4;
+        }
+
+        .instructions-text strong {
+            color: var(--nuview-red-bright);
+        }
+
         /* SVG Canvas for connections */
         .pipeline-svg {
             position: absolute;
@@ -223,6 +338,11 @@
             box-shadow: 0 0 20px var(--nuview-red-bright);
         }
 
+        .node-status.success {
+            background: radial-gradient(circle, #22c55e 0%, #16a34a 100%);
+            box-shadow: 0 0 20px #22c55e;
+        }
+
         .node-status.idle {
             background: var(--nuview-light-gray);
             animation: none;
@@ -234,7 +354,8 @@
         }
 
         .node-status.fail {
-            background: var(--nuview-red-primary);
+            background: radial-gradient(circle, #ef4444 0%, #dc2626 100%);
+            box-shadow: 0 0 20px #ef4444;
             animation: blink 1s ease-in-out infinite;
         }
 
@@ -368,6 +489,62 @@
             line-height: 1.6;
         }
 
+        .tooltip-section {
+            margin-bottom: 0.75rem;
+        }
+
+        .tooltip-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .tooltip-section-title {
+            font-weight: 600;
+            color: var(--nuview-red-bright);
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tooltip-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0.25rem 0;
+        }
+
+        .tooltip-list li {
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+        }
+
+        .tooltip-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--nuview-red-bright);
+        }
+
+        /* Edge/Connection Tooltips */
+        .edge-tooltip {
+            position: absolute;
+            background: linear-gradient(135deg, var(--nuview-black) 0%, var(--nuview-dark-gray) 100%);
+            border: 2px solid var(--nuview-red-bright);
+            border-radius: 8px;
+            padding: 0.75rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 250px;
+            font-size: 0.8rem;
+        }
+
+        .edge-tooltip.visible {
+            opacity: 1;
+        }
+
         /* ============================================
            LEGEND
            ============================================ */
@@ -402,6 +579,11 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
+        }
+
+        .legend-indicator.success {
+            background: radial-gradient(circle, #22c55e 0%, #16a34a 100%);
+            box-shadow: 0 0 10px #22c55e;
         }
 
         .legend-label {
@@ -509,119 +691,141 @@
 
         <!-- Pipeline Matrix -->
         <div class="pipeline-matrix">
-            <!-- SVG for flow arrows -->
-            <svg class="pipeline-svg" id="flow-svg">
-                <!-- Arrows will be dynamically generated -->
-            </svg>
-
-            <!-- Pipeline Nodes -->
-            <div class="pipeline-nodes">
-                <!-- Node 1: Scrape -->
-                <div class="pipeline-node" data-node="scrape">
-                    <div class="node-status operational"></div>
-                    <div class="node-icon">🕷️</div>
-                    <div class="node-title">SCRAPE</div>
-                    <div class="node-script">scrape_all.py</div>
-                    <div class="node-info">
-                        <div class="node-info-item">
-                            <span class="node-info-label">Status:</span>
-                            <span class="node-info-value" id="scrape-status">Operational</span>
-                        </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Last Run:</span>
-                            <span class="node-info-value" id="scrape-lastrun">--</span>
-                        </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Records:</span>
-                            <span class="node-info-value" id="scrape-records">0</span>
-                        </div>
+            <!-- Workflow Container with Pan/Zoom -->
+            <div class="workflow-container" id="workflow-container" role="application" aria-label="Interactive Pipeline Workflow" tabindex="0">
+                <!-- Instructions Overlay -->
+                <div class="instructions-overlay" id="instructions-overlay" role="status" aria-live="polite">
+                    <span class="icon">ℹ️</span>
+                    <div class="instructions-text">
+                        <strong>Drag</strong> to pan • <strong>Scroll</strong> to zoom • <strong>Hover</strong> nodes for details
                     </div>
                 </div>
 
-                <!-- Node 2: QC -->
-                <div class="pipeline-node" data-node="qc">
-                    <div class="node-status operational"></div>
-                    <div class="node-icon">✅</div>
-                    <div class="node-title">QC</div>
-                    <div class="node-script">qc_validator.py</div>
-                    <div class="node-info">
-                        <div class="node-info-item">
-                            <span class="node-info-label">Status:</span>
-                            <span class="node-info-value" id="qc-status">Operational</span>
-                        </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Last Run:</span>
-                            <span class="node-info-value" id="qc-lastrun">--</span>
-                        </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Errors:</span>
-                            <span class="node-info-value" id="qc-errors">0</span>
-                        </div>
-                    </div>
+                <!-- Zoom Controls -->
+                <div class="zoom-controls" role="group" aria-label="Zoom controls">
+                    <button class="zoom-btn" id="zoom-in" aria-label="Zoom in" title="Zoom in (+ key)">+</button>
+                    <div class="zoom-level" id="zoom-level" aria-live="polite">100%</div>
+                    <button class="zoom-btn" id="zoom-out" aria-label="Zoom out" title="Zoom out (- key)">−</button>
+                    <button class="zoom-btn" id="zoom-reset" aria-label="Reset zoom" title="Reset view (0 key)">⊙</button>
                 </div>
 
-                <!-- Node 3: Matrix -->
-                <div class="pipeline-node" data-node="matrix">
-                    <div class="node-status operational"></div>
-                    <div class="node-icon">📊</div>
-                    <div class="node-title">MATRIX</div>
-                    <div class="node-script">priority_matrix.csv</div>
-                    <div class="node-info">
-                        <div class="node-info-item">
-                            <span class="node-info-label">Status:</span>
-                            <span class="node-info-value" id="matrix-status">Operational</span>
-                        </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Programs:</span>
-                            <span class="node-info-value" id="matrix-programs">0</span>
-                        </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">High Priority:</span>
-                            <span class="node-info-value" id="matrix-priority">0</span>
-                        </div>
-                    </div>
-                </div>
+                <!-- Workflow Canvas -->
+                <div class="workflow-canvas" id="workflow-canvas">
+                    <!-- SVG for flow arrows -->
+                    <svg class="pipeline-svg" id="flow-svg" aria-hidden="true">
+                        <!-- Arrows will be dynamically generated -->
+                    </svg>
 
-                <!-- Node 4: Merge -->
-                <div class="pipeline-node" data-node="merge">
-                    <div class="node-status operational"></div>
-                    <div class="node-icon">🔗</div>
-                    <div class="node-title">MERGE</div>
-                    <div class="node-script">data_integration</div>
-                    <div class="node-info">
-                        <div class="node-info-item">
-                            <span class="node-info-label">Status:</span>
-                            <span class="node-info-value" id="merge-status">Operational</span>
+                    <!-- Pipeline Nodes -->
+                    <div class="pipeline-nodes" role="list" aria-label="Pipeline stages">
+                        <!-- Node 1: Scrape -->
+                        <div class="pipeline-node" data-node="scrape" role="listitem" tabindex="0" aria-label="SCRAPE stage">
+                            <div class="node-status operational" role="status" aria-label="Status: Operational"></div>
+                            <div class="node-icon" aria-hidden="true">🕷️</div>
+                            <div class="node-title">SCRAPE</div>
+                            <div class="node-script">scrape_all.py</div>
+                            <div class="node-info">
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Status:</span>
+                                    <span class="node-info-value" id="scrape-status">Operational</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Last Run:</span>
+                                    <span class="node-info-value" id="scrape-lastrun">--</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Records:</span>
+                                    <span class="node-info-value" id="scrape-records">0</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Sources:</span>
-                            <span class="node-info-value" id="merge-sources">3</span>
-                        </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Unified:</span>
-                            <span class="node-info-value" id="merge-unified">Yes</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Node 5: Dashboard -->
-                <div class="pipeline-node" data-node="dashboard">
-                    <div class="node-status operational"></div>
-                    <div class="node-icon">📈</div>
-                    <div class="node-title">DASHBOARD</div>
-                    <div class="node-script">index.html</div>
-                    <div class="node-info">
-                        <div class="node-info-item">
-                            <span class="node-info-label">Status:</span>
-                            <span class="node-info-value" id="dashboard-status">Online</span>
+                        <!-- Node 2: QC -->
+                        <div class="pipeline-node" data-node="qc" role="listitem" tabindex="0" aria-label="QC stage">
+                            <div class="node-status operational" role="status" aria-label="Status: Operational"></div>
+                            <div class="node-icon" aria-hidden="true">✅</div>
+                            <div class="node-title">QC</div>
+                            <div class="node-script">qc_validator.py</div>
+                            <div class="node-info">
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Status:</span>
+                                    <span class="node-info-value" id="qc-status">Operational</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Last Run:</span>
+                                    <span class="node-info-value" id="qc-lastrun">--</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Errors:</span>
+                                    <span class="node-info-value" id="qc-errors">0</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Live Data:</span>
-                            <span class="node-info-value" id="dashboard-live">Yes</span>
+
+                        <!-- Node 3: Matrix -->
+                        <div class="pipeline-node" data-node="matrix" role="listitem" tabindex="0" aria-label="MATRIX stage">
+                            <div class="node-status operational" role="status" aria-label="Status: Operational"></div>
+                            <div class="node-icon" aria-hidden="true">📊</div>
+                            <div class="node-title">MATRIX</div>
+                            <div class="node-script">priority_matrix.csv</div>
+                            <div class="node-info">
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Status:</span>
+                                    <span class="node-info-value" id="matrix-status">Operational</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Programs:</span>
+                                    <span class="node-info-value" id="matrix-programs">0</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">High Priority:</span>
+                                    <span class="node-info-value" id="matrix-priority">0</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="node-info-item">
-                            <span class="node-info-label">Views:</span>
-                            <span class="node-info-value" id="dashboard-views">3</span>
+
+                        <!-- Node 4: Merge -->
+                        <div class="pipeline-node" data-node="merge" role="listitem" tabindex="0" aria-label="MERGE stage">
+                            <div class="node-status operational" role="status" aria-label="Status: Operational"></div>
+                            <div class="node-icon" aria-hidden="true">🔗</div>
+                            <div class="node-title">MERGE</div>
+                            <div class="node-script">data_integration</div>
+                            <div class="node-info">
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Status:</span>
+                                    <span class="node-info-value" id="merge-status">Operational</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Sources:</span>
+                                    <span class="node-info-value" id="merge-sources">3</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Unified:</span>
+                                    <span class="node-info-value" id="merge-unified">Yes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Node 5: Dashboard -->
+                        <div class="pipeline-node" data-node="dashboard" role="listitem" tabindex="0" aria-label="DASHBOARD stage">
+                            <div class="node-status operational" role="status" aria-label="Status: Online"></div>
+                            <div class="node-icon" aria-hidden="true">📈</div>
+                            <div class="node-title">DASHBOARD</div>
+                            <div class="node-script">index.html</div>
+                            <div class="node-info">
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Status:</span>
+                                    <span class="node-info-value" id="dashboard-status">Online</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Live Data:</span>
+                                    <span class="node-info-value" id="dashboard-live">Yes</span>
+                                </div>
+                                <div class="node-info-item">
+                                    <span class="node-info-label">Views:</span>
+                                    <span class="node-info-value" id="dashboard-views">3</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -635,6 +839,10 @@
                 <div class="legend-item">
                     <div class="legend-indicator operational"></div>
                     <span class="legend-label">Operational</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-indicator success"></div>
+                    <span class="legend-label">Success</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-indicator idle"></div>
@@ -674,24 +882,81 @@
     </div>
 
     <!-- Tooltip -->
-    <div class="tooltip" id="tooltip">
+    <div class="tooltip" id="tooltip" role="tooltip">
         <div class="tooltip-title" id="tooltip-title"></div>
         <div class="tooltip-content" id="tooltip-content"></div>
     </div>
 
+    <!-- Edge Tooltip -->
+    <div class="edge-tooltip" id="edge-tooltip" role="tooltip">
+        <div id="edge-tooltip-content"></div>
+    </div>
+
     <!-- JavaScript -->
     <script>
+        /**
+         * ============================================
+         * NUVIEW INTERACTIVE PIPELINE MATRIX
+         * ============================================
+         * Enhanced n8n-inspired workflow board with:
+         * - Pan and zoom functionality
+         * - Comprehensive tooltips
+         * - Animated transitions
+         * - Keyboard navigation
+         * - Accessibility support
+         * - Mobile responsiveness
+         * ============================================
+         */
+
+        'use strict';
+
         // ============================================
-        // DATA LOADING AND INITIALIZATION
+        // CONFIGURATION
         // ============================================
-        
-        let pipelineData = {
-            opportunities: null,
-            qcReport: null,
-            forecast: null
+        const CONFIG = {
+            zoom: {
+                min: 0.5,
+                max: 2.0,
+                step: 0.1,
+                default: 1.0
+            },
+            pan: {
+                friction: 0.95,
+                minVelocity: 0.1
+            },
+            animation: {
+                duration: 300,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+            },
+            data: {
+                refreshInterval: 30000 // 30 seconds
+            }
         };
 
-        // Demo/fallback data
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        const state = {
+            zoom: CONFIG.zoom.default,
+            pan: { x: 0, y: 0 },
+            isDragging: false,
+            dragStart: { x: 0, y: 0 },
+            velocity: { x: 0, y: 0 },
+            lastPan: { x: 0, y: 0 },
+            animationFrame: null,
+            pipelineData: {
+                opportunities: null,
+                qcReport: null
+            }
+        };
+
+        // ============================================
+        // DATA STRUCTURES
+        // ============================================
+        
+        /**
+         * Demo/fallback data for when live data is unavailable
+         */
         const demoData = {
             opportunities: {
                 meta: {
@@ -701,10 +966,10 @@
                     totalCount: 4
                 },
                 opportunities: [
-                    {id: "demo-1", title: "Demo Opportunity 1", agency: "DEMO", amountUSD: 1000000},
-                    {id: "demo-2", title: "Demo Opportunity 2", agency: "DEMO", amountUSD: 2000000},
-                    {id: "demo-3", title: "Demo Opportunity 3", agency: "DEMO", amountUSD: 3000000},
-                    {id: "demo-4", title: "Demo Opportunity 4", agency: "DEMO", amountUSD: 4000000}
+                    {id: "demo-1", title: "Demo Opportunity 1", agency: "DEMO", amountUSD: 1000000, category: "DaaS"},
+                    {id: "demo-2", title: "Demo Opportunity 2", agency: "DEMO", amountUSD: 2000000, category: "R&D"},
+                    {id: "demo-3", title: "Demo Opportunity 3", agency: "DEMO", amountUSD: 3000000, category: "DaaS"},
+                    {id: "demo-4", title: "Demo Opportunity 4", agency: "DEMO", amountUSD: 4000000, category: "Platform"}
                 ]
             },
             qcReport: {
@@ -717,111 +982,192 @@
             }
         };
 
-        // ============================================
-        // LOAD DATA FROM JSON FILES
-        // ============================================
-        async function loadPipelineData() {
-            try {
-                // Try to load opportunities.json
-                try {
-                    const oppResponse = await fetch('../data/opportunities.json');
-                    if (oppResponse.ok) {
-                        pipelineData.opportunities = await oppResponse.json();
-                    } else {
-                        console.warn('Using demo opportunities data');
-                        pipelineData.opportunities = demoData.opportunities;
-                    }
-                } catch (e) {
-                    console.warn('Using demo opportunities data:', e);
-                    pipelineData.opportunities = demoData.opportunities;
-                }
-
-                // Try to load qc_report.json
-                try {
-                    const qcResponse = await fetch('../data/processed/qc_report.json');
-                    if (qcResponse.ok) {
-                        pipelineData.qcReport = await qcResponse.json();
-                    } else {
-                        console.warn('Using demo QC data');
-                        pipelineData.qcReport = demoData.qcReport;
-                    }
-                } catch (e) {
-                    console.warn('Using demo QC data:', e);
-                    pipelineData.qcReport = demoData.qcReport;
-                }
-
-                // Update UI with loaded data
-                updatePipelineUI();
-            } catch (error) {
-                console.error('Error loading pipeline data:', error);
-                // Use demo data as fallback
-                pipelineData.opportunities = demoData.opportunities;
-                pipelineData.qcReport = demoData.qcReport;
-                updatePipelineUI();
+        /**
+         * Comprehensive descriptions for each pipeline node
+         */
+        const nodeDescriptions = {
+            scrape: {
+                title: 'Data Scraping Stage',
+                content: `
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Purpose</div>
+                        Automated daily collection of federal and commercial LiDAR opportunities from multiple sources.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Data Sources</div>
+                        <ul class="tooltip-list">
+                            <li>SAM.gov (System for Award Management)</li>
+                            <li>NASA contracts and opportunities</li>
+                            <li>ESA (European Space Agency)</li>
+                            <li>Other federal and commercial agencies</li>
+                        </ul>
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Execution</div>
+                        Runs via GitHub Actions at 3:00 AM UTC daily. Script: scrape_all.py
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Output</div>
+                        Raw opportunity data stored in JSON format for downstream processing.
+                    </div>
+                `
+            },
+            qc: {
+                title: 'Quality Control Stage',
+                content: `
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Purpose</div>
+                        Validates data integrity and ensures quality standards are met across all scraped opportunities.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Validation Checks</div>
+                        <ul class="tooltip-list">
+                            <li>Required field completeness</li>
+                            <li>Data format correctness</li>
+                            <li>Value range validation</li>
+                            <li>Duplicate detection</li>
+                            <li>Cross-reference consistency</li>
+                        </ul>
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Execution</div>
+                        Script: qc_validator.py. Generates detailed reports with error and warning counts.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Output</div>
+                        QC reports (qc_report.json) with status, error counts, and validation summaries.
+                    </div>
+                `
+            },
+            matrix: {
+                title: 'Priority Matrix Stage',
+                content: `
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Purpose</div>
+                        Processes and prioritizes opportunities based on NUVIEW strategic criteria and business objectives.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Categorization</div>
+                        <ul class="tooltip-list">
+                            <li>DaaS (Data as a Service) opportunities</li>
+                            <li>R&D (Research & Development) projects</li>
+                            <li>Platform development initiatives</li>
+                        </ul>
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Scoring Algorithm</div>
+                        Calculates urgency and priority scores based on deadline proximity, contract value, strategic fit, and market opportunity.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Output</div>
+                        Prioritized opportunity matrix (priority_matrix.csv) for decision-making and resource allocation.
+                    </div>
+                `
+            },
+            merge: {
+                title: 'Data Integration Stage',
+                content: `
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Purpose</div>
+                        Consolidates data from multiple pipeline sources into unified, consistent datasets.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Integration Sources</div>
+                        <ul class="tooltip-list">
+                            <li>Opportunity pipeline data</li>
+                            <li>Market forecast data</li>
+                            <li>Global tracker information</li>
+                            <li>Historical performance metrics</li>
+                        </ul>
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Processing</div>
+                        Resolves conflicts, normalizes formats, deduplicates entries, and maintains referential integrity.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Output</div>
+                        Unified JSON datasets ready for dashboard visualization and analysis.
+                    </div>
+                `
+            },
+            dashboard: {
+                title: 'Dashboard Visualization Stage',
+                content: `
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Purpose</div>
+                        Presents processed data through interactive, real-time dashboards for executive decision-making.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Dashboard Views</div>
+                        <ul class="tooltip-list">
+                            <li>Main dashboard with key metrics</li>
+                            <li>Pipeline workflow visualization</li>
+                            <li>Global opportunity tracker</li>
+                            <li>Priority matrix view</li>
+                        </ul>
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Features</div>
+                        Real-time updates, interactive charts, filterable tables, and export capabilities.
+                    </div>
+                    <div class="tooltip-section">
+                        <div class="tooltip-section-title">Technology</div>
+                        Built with HTML5, CSS3, and vanilla JavaScript for maximum compatibility and performance.
+                    </div>
+                `
             }
+        };
+
+        /**
+         * Edge/connection descriptions for data flow
+         */
+        const edgeDescriptions = {
+            'scrape-qc': 'Raw opportunity data flows from SCRAPE to QC for validation. Includes metadata, contract details, and source information.',
+            'qc-matrix': 'Validated, clean data passes to MATRIX for prioritization. Only records passing QC checks proceed to this stage.',
+            'matrix-merge': 'Prioritized opportunities merge with forecast and tracker data. Scoring and categorization complete.',
+            'merge-dashboard': 'Unified, processed data streams to DASHBOARD for real-time visualization and stakeholder access.'
+        };
+
+        // ============================================
+        // DOM REFERENCES
+        // ============================================
+        const elements = {
+            container: null,
+            canvas: null,
+            svg: null,
+            nodes: null,
+            zoomInBtn: null,
+            zoomOutBtn: null,
+            zoomResetBtn: null,
+            zoomLevel: null,
+            tooltip: null,
+            tooltipTitle: null,
+            tooltipContent: null,
+            edgeTooltip: null,
+            edgeTooltipContent: null,
+            instructionsOverlay: null
+        };
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        /**
+         * Clamps a value between min and max
+         * @param {number} value - Value to clamp
+         * @param {number} min - Minimum value
+         * @param {number} max - Maximum value
+         * @returns {number} Clamped value
+         */
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
         }
 
-        // ============================================
-        // UPDATE UI WITH DATA
-        // ============================================
-        function updatePipelineUI() {
-            const opp = pipelineData.opportunities;
-            const qc = pipelineData.qcReport;
-
-            // Update status bar
-            if (qc) {
-                document.getElementById('pipeline-status').textContent = qc.qc_status || 'OPERATIONAL';
-                document.getElementById('qc-score').textContent = (qc.qc_percentage || 100) + '%';
-                
-                const timestamp = qc.timestamp || new Date().toISOString();
-                const lastRunDate = new Date(timestamp);
-                document.getElementById('last-run').textContent = formatTimeAgo(lastRunDate);
-            }
-
-            if (opp && opp.meta) {
-                document.getElementById('total-records').textContent = opp.meta.totalCount || 0;
-            }
-
-            // Update individual nodes
-            updateNodeData('scrape', opp);
-            updateNodeData('qc', qc);
-            updateNodeData('matrix', opp);
-            updateNodeData('merge', opp);
-            updateNodeData('dashboard', opp);
-        }
-
-        function updateNodeData(nodeName, data) {
-            if (nodeName === 'scrape' && data) {
-                const meta = data.meta || {};
-                document.getElementById('scrape-lastrun').textContent = 
-                    meta.updated ? formatTimeAgo(new Date(meta.updated)) : '--';
-                document.getElementById('scrape-records').textContent = meta.totalCount || 0;
-            }
-
-            if (nodeName === 'qc' && data) {
-                const timestamp = data.timestamp || new Date().toISOString();
-                document.getElementById('qc-lastrun').textContent = formatTimeAgo(new Date(timestamp));
-                document.getElementById('qc-errors').textContent = data.total_errors || 0;
-                
-                // Update status indicator
-                const qcNode = document.querySelector('[data-node="qc"] .node-status');
-                if (data.total_errors > 0) {
-                    qcNode.className = 'node-status fail';
-                } else if (data.total_warnings > 0) {
-                    qcNode.className = 'node-status operational';
-                } else {
-                    qcNode.className = 'node-status operational';
-                }
-            }
-
-            if (nodeName === 'matrix' && data) {
-                const opportunities = data.opportunities || [];
-                document.getElementById('matrix-programs').textContent = opportunities.length;
-                const highPriority = opportunities.filter(o => o.category === 'DaaS').length;
-                document.getElementById('matrix-priority').textContent = highPriority;
-            }
-        }
-
+        /**
+         * Formats a date as "X time ago"
+         * @param {Date} date - Date to format
+         * @returns {string} Formatted time string
+         */
         function formatTimeAgo(date) {
             const seconds = Math.floor((new Date() - date) / 1000);
             
@@ -831,17 +1177,288 @@
             return Math.floor(seconds / 86400) + 'd ago';
         }
 
+        /**
+         * Debounces a function call
+         * @param {Function} func - Function to debounce
+         * @param {number} wait - Wait time in milliseconds
+         * @returns {Function} Debounced function
+         */
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
         // ============================================
-        // DRAW FLOW ARROWS
+        // ZOOM FUNCTIONALITY
         // ============================================
+
+        /**
+         * Updates the zoom level and applies transform
+         * @param {number} newZoom - New zoom level
+         * @param {Object} origin - Origin point {x, y} for zoom
+         */
+        function setZoom(newZoom, origin = null) {
+            const oldZoom = state.zoom;
+            state.zoom = clamp(newZoom, CONFIG.zoom.min, CONFIG.zoom.max);
+            
+            // Adjust pan to zoom towards a specific point
+            if (origin) {
+                const zoomRatio = state.zoom / oldZoom;
+                state.pan.x = origin.x - (origin.x - state.pan.x) * zoomRatio;
+                state.pan.y = origin.y - (origin.y - state.pan.y) * zoomRatio;
+            }
+            
+            updateTransform();
+            updateZoomDisplay();
+        }
+
+        /**
+         * Zooms in by one step
+         */
+        function zoomIn() {
+            const containerRect = elements.container.getBoundingClientRect();
+            const origin = {
+                x: containerRect.width / 2,
+                y: containerRect.height / 2
+            };
+            setZoom(state.zoom + CONFIG.zoom.step, origin);
+        }
+
+        /**
+         * Zooms out by one step
+         */
+        function zoomOut() {
+            const containerRect = elements.container.getBoundingClientRect();
+            const origin = {
+                x: containerRect.width / 2,
+                y: containerRect.height / 2
+            };
+            setZoom(state.zoom - CONFIG.zoom.step, origin);
+        }
+
+        /**
+         * Resets zoom and pan to default values
+         */
+        function resetZoom() {
+            state.zoom = CONFIG.zoom.default;
+            state.pan = { x: 0, y: 0 };
+            updateTransform(true);
+            updateZoomDisplay();
+        }
+
+        /**
+         * Updates the zoom level display
+         */
+        function updateZoomDisplay() {
+            const percentage = Math.round(state.zoom * 100);
+            elements.zoomLevel.textContent = `${percentage}%`;
+            elements.zoomLevel.setAttribute('aria-label', `Current zoom level: ${percentage} percent`);
+        }
+
+        /**
+         * Handles mouse wheel zoom
+         * @param {WheelEvent} event - Mouse wheel event
+         */
+        function handleWheel(event) {
+            event.preventDefault();
+            
+            const delta = -Math.sign(event.deltaY) * CONFIG.zoom.step;
+            const rect = elements.container.getBoundingClientRect();
+            const origin = {
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
+            };
+            
+            setZoom(state.zoom + delta, origin);
+        }
+
+        // ============================================
+        // PAN FUNCTIONALITY
+        // ============================================
+
+        /**
+         * Starts panning operation
+         * @param {MouseEvent|TouchEvent} event - Pointer event
+         */
+        function startPan(event) {
+            state.isDragging = true;
+            elements.container.style.cursor = 'grabbing';
+            
+            const point = getPointerPosition(event);
+            state.dragStart = { x: point.x - state.pan.x, y: point.y - state.pan.y };
+            state.lastPan = { ...state.pan };
+            state.velocity = { x: 0, y: 0 };
+            
+            // Cancel any ongoing animations
+            if (state.animationFrame) {
+                cancelAnimationFrame(state.animationFrame);
+                state.animationFrame = null;
+            }
+        }
+
+        /**
+         * Updates pan position during drag
+         * @param {MouseEvent|TouchEvent} event - Pointer event
+         */
+        function updatePan(event) {
+            if (!state.isDragging) return;
+            
+            event.preventDefault();
+            const point = getPointerPosition(event);
+            
+            const newPan = {
+                x: point.x - state.dragStart.x,
+                y: point.y - state.dragStart.y
+            };
+            
+            // Calculate velocity for momentum
+            state.velocity = {
+                x: newPan.x - state.pan.x,
+                y: newPan.y - state.pan.y
+            };
+            
+            state.pan = newPan;
+            updateTransform();
+        }
+
+        /**
+         * Ends panning operation with momentum
+         */
+        function endPan() {
+            if (!state.isDragging) return;
+            
+            state.isDragging = false;
+            elements.container.style.cursor = 'grab';
+            
+            // Apply momentum
+            applyMomentum();
+        }
+
+        /**
+         * Applies momentum effect after pan ends
+         */
+        function applyMomentum() {
+            if (Math.abs(state.velocity.x) < CONFIG.pan.minVelocity && 
+                Math.abs(state.velocity.y) < CONFIG.pan.minVelocity) {
+                return;
+            }
+            
+            state.pan.x += state.velocity.x;
+            state.pan.y += state.velocity.y;
+            
+            state.velocity.x *= CONFIG.pan.friction;
+            state.velocity.y *= CONFIG.pan.friction;
+            
+            updateTransform();
+            
+            state.animationFrame = requestAnimationFrame(applyMomentum);
+        }
+
+        /**
+         * Gets pointer position from mouse or touch event
+         * @param {MouseEvent|TouchEvent} event - Pointer event
+         * @returns {Object} Position {x, y}
+         */
+        function getPointerPosition(event) {
+            const rect = elements.container.getBoundingClientRect();
+            if (event.touches && event.touches.length > 0) {
+                return {
+                    x: event.touches[0].clientX - rect.left,
+                    y: event.touches[0].clientY - rect.top
+                };
+            }
+            return {
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
+            };
+        }
+
+        /**
+         * Handles pinch-to-zoom on touch devices
+         * @param {TouchEvent} event - Touch event
+         */
+        function handlePinch(event) {
+            if (event.touches.length !== 2) return;
+            
+            event.preventDefault();
+            
+            const touch1 = event.touches[0];
+            const touch2 = event.touches[1];
+            
+            const distance = Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+            );
+            
+            if (!state.lastPinchDistance) {
+                state.lastPinchDistance = distance;
+                return;
+            }
+            
+            const delta = distance - state.lastPinchDistance;
+            const rect = elements.container.getBoundingClientRect();
+            const centerX = (touch1.clientX + touch2.clientX) / 2 - rect.left;
+            const centerY = (touch1.clientY + touch2.clientY) / 2 - rect.top;
+            
+            setZoom(state.zoom + delta * 0.01, { x: centerX, y: centerY });
+            
+            state.lastPinchDistance = distance;
+        }
+
+        /**
+         * Resets pinch state
+         */
+        function endPinch() {
+            state.lastPinchDistance = null;
+        }
+
+        // ============================================
+        // TRANSFORM MANAGEMENT
+        // ============================================
+
+        /**
+         * Updates the canvas transform
+         * @param {boolean} animate - Whether to animate the transform
+         */
+        function updateTransform(animate = false) {
+            const transform = `translate(${state.pan.x}px, ${state.pan.y}px) scale(${state.zoom})`;
+            
+            if (animate) {
+                elements.canvas.style.transition = `transform ${CONFIG.animation.duration}ms ${CONFIG.animation.easing}`;
+                elements.canvas.style.transform = transform;
+                setTimeout(() => {
+                    elements.canvas.style.transition = '';
+                }, CONFIG.animation.duration);
+            } else {
+                elements.canvas.style.transform = transform;
+            }
+            
+            // Redraw arrows after transform
+            debounceDrawArrows();
+        }
+
+        // ============================================
+        // SVG ARROW DRAWING
+        // ============================================
+
+        /**
+         * Draws flow arrows between pipeline nodes
+         */
         function drawFlowArrows() {
-            const svg = document.getElementById('flow-svg');
-            const nodes = document.querySelectorAll('.pipeline-node');
+            const svg = elements.svg;
+            const nodes = Array.from(elements.nodes.querySelectorAll('.pipeline-node'));
             
             // Clear existing arrows
             svg.innerHTML = '';
 
-            // Create defs for gradient and arrow marker
+            // Create defs for gradients and markers
             const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
             
             // Gradient definition
@@ -903,86 +1520,420 @@
                 path.setAttribute('fill', 'none');
                 path.setAttribute('marker-end', 'url(#arrowhead)');
                 path.setAttribute('class', 'flow-arrow');
+                path.setAttribute('data-edge', `${fromNode.dataset.node}-${toNode.dataset.node}`);
+                path.style.pointerEvents = 'stroke';
+                path.style.cursor = 'help';
+                
+                // Add edge tooltip handlers
+                path.addEventListener('mouseenter', (e) => handleEdgeHover(e, fromNode.dataset.node, toNode.dataset.node));
+                path.addEventListener('mousemove', handleEdgeMove);
+                path.addEventListener('mouseleave', hideEdgeTooltip);
                 
                 svg.appendChild(path);
             }
         }
 
+        const debounceDrawArrows = debounce(drawFlowArrows, 100);
+
         // ============================================
         // TOOLTIP FUNCTIONALITY
         // ============================================
-        const tooltip = document.getElementById('tooltip');
-        const tooltipTitle = document.getElementById('tooltip-title');
-        const tooltipContent = document.getElementById('tooltip-content');
 
-        const nodeDescriptions = {
-            scrape: {
-                title: 'Data Scraping Stage',
-                content: 'Automated daily collection of federal and commercial LiDAR opportunities from SAM.gov, NASA, ESA, and other sources. Runs via GitHub Actions at 3:00 AM UTC.'
-            },
-            qc: {
-                title: 'Quality Control Stage',
-                content: 'Validates data integrity, checks required fields, ensures proper formatting, and generates quality reports. Identifies errors and warnings for data accuracy.'
-            },
-            matrix: {
-                title: 'Priority Matrix Stage',
-                content: 'Processes and prioritizes opportunities based on NUVIEW criteria. Categorizes by DaaS, R&D, and Platform opportunities. Calculates urgency and priority scores.'
-            },
-            merge: {
-                title: 'Data Integration Stage',
-                content: 'Merges data from multiple sources (opportunities, forecast, global tracker) into unified datasets. Ensures consistency and resolves conflicts.'
-            },
-            dashboard: {
-                title: 'Dashboard Visualization Stage',
-                content: 'Presents data through interactive dashboards including main dashboard, pipeline view, and global tracker. Updates in real-time with latest data.'
+        /**
+         * Shows tooltip for a node
+         * @param {HTMLElement} node - Node element
+         */
+        function showNodeTooltip(node) {
+            const nodeName = node.dataset.node;
+            const desc = nodeDescriptions[nodeName];
+            
+            if (desc) {
+                elements.tooltipTitle.textContent = desc.title;
+                elements.tooltipContent.innerHTML = desc.content;
+                elements.tooltip.classList.add('visible');
             }
-        };
+        }
 
-        document.querySelectorAll('.pipeline-node').forEach(node => {
-            node.addEventListener('mouseenter', (e) => {
-                const nodeName = e.currentTarget.dataset.node;
-                const desc = nodeDescriptions[nodeName];
-                
-                if (desc) {
-                    tooltipTitle.textContent = desc.title;
-                    tooltipContent.textContent = desc.content;
-                    tooltip.classList.add('visible');
+        /**
+         * Updates tooltip position
+         * @param {MouseEvent} event - Mouse event
+         */
+        function updateTooltipPosition(event) {
+            const tooltip = elements.tooltip;
+            const offset = 20;
+            const tooltipRect = tooltip.getBoundingClientRect();
+            
+            let x = event.pageX + offset;
+            let y = event.pageY + offset;
+            
+            // Keep tooltip within viewport
+            if (x + tooltipRect.width > window.innerWidth) {
+                x = event.pageX - tooltipRect.width - offset;
+            }
+            if (y + tooltipRect.height > window.innerHeight) {
+                y = event.pageY - tooltipRect.height - offset;
+            }
+            
+            tooltip.style.left = `${x}px`;
+            tooltip.style.top = `${y}px`;
+        }
+
+        /**
+         * Hides node tooltip
+         */
+        function hideNodeTooltip() {
+            elements.tooltip.classList.remove('visible');
+        }
+
+        /**
+         * Handles edge hover to show connection info
+         * @param {MouseEvent} event - Mouse event
+         * @param {string} fromNode - Source node name
+         * @param {string} toNode - Target node name
+         */
+        function handleEdgeHover(event, fromNode, toNode) {
+            const edgeKey = `${fromNode}-${toNode}`;
+            const description = edgeDescriptions[edgeKey];
+            
+            if (description) {
+                elements.edgeTooltipContent.innerHTML = `
+                    <strong>${fromNode.toUpperCase()} → ${toNode.toUpperCase()}</strong><br/>
+                    ${description}
+                `;
+                elements.edgeTooltip.classList.add('visible');
+                handleEdgeMove(event);
+            }
+        }
+
+        /**
+         * Updates edge tooltip position
+         * @param {MouseEvent} event - Mouse event
+         */
+        function handleEdgeMove(event) {
+            const tooltip = elements.edgeTooltip;
+            const offset = 15;
+            
+            tooltip.style.left = `${event.pageX + offset}px`;
+            tooltip.style.top = `${event.pageY + offset}px`;
+        }
+
+        /**
+         * Hides edge tooltip
+         */
+        function hideEdgeTooltip() {
+            elements.edgeTooltip.classList.remove('visible');
+        }
+
+        // ============================================
+        // DATA LOADING
+        // ============================================
+
+        /**
+         * Loads pipeline data from JSON files
+         */
+        async function loadPipelineData() {
+            try {
+                // Try to load opportunities.json
+                try {
+                    const oppResponse = await fetch('../data/opportunities.json');
+                    if (oppResponse.ok) {
+                        state.pipelineData.opportunities = await oppResponse.json();
+                    } else {
+                        console.warn('Using demo opportunities data');
+                        state.pipelineData.opportunities = demoData.opportunities;
+                    }
+                } catch (e) {
+                    console.warn('Using demo opportunities data:', e);
+                    state.pipelineData.opportunities = demoData.opportunities;
                 }
-            });
 
-            node.addEventListener('mousemove', (e) => {
-                tooltip.style.left = (e.pageX + 20) + 'px';
-                tooltip.style.top = (e.pageY + 20) + 'px';
-            });
+                // Try to load qc_report.json
+                try {
+                    const qcResponse = await fetch('../data/processed/qc_report.json');
+                    if (qcResponse.ok) {
+                        state.pipelineData.qcReport = await qcResponse.json();
+                    } else {
+                        console.warn('Using demo QC data');
+                        state.pipelineData.qcReport = demoData.qcReport;
+                    }
+                } catch (e) {
+                    console.warn('Using demo QC data:', e);
+                    state.pipelineData.qcReport = demoData.qcReport;
+                }
 
-            node.addEventListener('mouseleave', () => {
-                tooltip.classList.remove('visible');
-            });
-        });
+                // Update UI with loaded data
+                updatePipelineUI();
+            } catch (error) {
+                console.error('Error loading pipeline data:', error);
+                // Use demo data as fallback
+                state.pipelineData.opportunities = demoData.opportunities;
+                state.pipelineData.qcReport = demoData.qcReport;
+                updatePipelineUI();
+            }
+        }
+
+        /**
+         * Updates UI elements with pipeline data
+         */
+        function updatePipelineUI() {
+            const opp = state.pipelineData.opportunities;
+            const qc = state.pipelineData.qcReport;
+
+            // Update status bar
+            if (qc) {
+                const statusEl = document.getElementById('pipeline-status');
+                if (statusEl) {
+                    statusEl.textContent = qc.qc_status || 'OPERATIONAL';
+                }
+                
+                const qcScoreEl = document.getElementById('qc-score');
+                if (qcScoreEl) {
+                    qcScoreEl.textContent = (qc.qc_percentage || 100) + '%';
+                }
+                
+                const lastRunEl = document.getElementById('last-run');
+                if (lastRunEl && qc.timestamp) {
+                    const lastRunDate = new Date(qc.timestamp);
+                    lastRunEl.textContent = formatTimeAgo(lastRunDate);
+                }
+            }
+
+            if (opp && opp.meta) {
+                const recordsEl = document.getElementById('total-records');
+                if (recordsEl) {
+                    recordsEl.textContent = opp.meta.totalCount || 0;
+                }
+            }
+
+            // Update individual nodes
+            updateNodeData('scrape', opp);
+            updateNodeData('qc', qc);
+            updateNodeData('matrix', opp);
+            updateNodeData('merge', opp);
+            updateNodeData('dashboard', opp);
+        }
+
+        /**
+         * Updates data for a specific node
+         * @param {string} nodeName - Name of the node
+         * @param {Object} data - Data for the node
+         */
+        function updateNodeData(nodeName, data) {
+            if (nodeName === 'scrape' && data) {
+                const meta = data.meta || {};
+                const lastRunEl = document.getElementById('scrape-lastrun');
+                if (lastRunEl) {
+                    lastRunEl.textContent = meta.updated ? formatTimeAgo(new Date(meta.updated)) : '--';
+                }
+                const recordsEl = document.getElementById('scrape-records');
+                if (recordsEl) {
+                    recordsEl.textContent = meta.totalCount || 0;
+                }
+            }
+
+            if (nodeName === 'qc' && data) {
+                const lastRunEl = document.getElementById('qc-lastrun');
+                if (lastRunEl && data.timestamp) {
+                    lastRunEl.textContent = formatTimeAgo(new Date(data.timestamp));
+                }
+                const errorsEl = document.getElementById('qc-errors');
+                if (errorsEl) {
+                    errorsEl.textContent = data.total_errors || 0;
+                }
+                
+                // Update status indicator based on errors
+                const qcNode = document.querySelector('[data-node="qc"]');
+                if (qcNode) {
+                    const statusIndicator = qcNode.querySelector('.node-status');
+                    if (statusIndicator) {
+                        if (data.total_errors > 0) {
+                            statusIndicator.className = 'node-status fail';
+                            statusIndicator.setAttribute('aria-label', 'Status: Failed');
+                        } else if (data.total_warnings > 0) {
+                            statusIndicator.className = 'node-status operational';
+                            statusIndicator.setAttribute('aria-label', 'Status: Operational with warnings');
+                        } else {
+                            statusIndicator.className = 'node-status success';
+                            statusIndicator.setAttribute('aria-label', 'Status: Success');
+                        }
+                    }
+                }
+            }
+
+            if (nodeName === 'matrix' && data) {
+                const opportunities = data.opportunities || [];
+                const programsEl = document.getElementById('matrix-programs');
+                if (programsEl) {
+                    programsEl.textContent = opportunities.length;
+                }
+                const priorityEl = document.getElementById('matrix-priority');
+                if (priorityEl) {
+                    const highPriority = opportunities.filter(o => o.category === 'DaaS').length;
+                    priorityEl.textContent = highPriority;
+                }
+            }
+        }
+
+        // ============================================
+        // KEYBOARD NAVIGATION
+        // ============================================
+
+        /**
+         * Handles keyboard shortcuts
+         * @param {KeyboardEvent} event - Keyboard event
+         */
+        function handleKeyboard(event) {
+            // Ignore if user is typing in an input
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                return;
+            }
+            
+            switch(event.key) {
+                case '+':
+                case '=':
+                    event.preventDefault();
+                    zoomIn();
+                    break;
+                case '-':
+                case '_':
+                    event.preventDefault();
+                    zoomOut();
+                    break;
+                case '0':
+                    event.preventDefault();
+                    resetZoom();
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    state.pan.y += 50;
+                    updateTransform();
+                    break;
+                case 'ArrowDown':
+                    event.preventDefault();
+                    state.pan.y -= 50;
+                    updateTransform();
+                    break;
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    state.pan.x += 50;
+                    updateTransform();
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    state.pan.x -= 50;
+                    updateTransform();
+                    break;
+            }
+        }
 
         // ============================================
         // INITIALIZATION
         // ============================================
-        let refreshInterval = null;
 
-        window.addEventListener('load', () => {
+        /**
+         * Initializes all DOM references
+         */
+        function initializeElements() {
+            elements.container = document.getElementById('workflow-container');
+            elements.canvas = document.getElementById('workflow-canvas');
+            elements.svg = document.getElementById('flow-svg');
+            elements.nodes = document.querySelector('.pipeline-nodes');
+            elements.zoomInBtn = document.getElementById('zoom-in');
+            elements.zoomOutBtn = document.getElementById('zoom-out');
+            elements.zoomResetBtn = document.getElementById('zoom-reset');
+            elements.zoomLevel = document.getElementById('zoom-level');
+            elements.tooltip = document.getElementById('tooltip');
+            elements.tooltipTitle = document.getElementById('tooltip-title');
+            elements.tooltipContent = document.getElementById('tooltip-content');
+            elements.edgeTooltip = document.getElementById('edge-tooltip');
+            elements.edgeTooltipContent = document.getElementById('edge-tooltip-content');
+            elements.instructionsOverlay = document.getElementById('instructions-overlay');
+        }
+
+        /**
+         * Sets up all event listeners
+         */
+        function setupEventListeners() {
+            // Zoom controls
+            elements.zoomInBtn.addEventListener('click', zoomIn);
+            elements.zoomOutBtn.addEventListener('click', zoomOut);
+            elements.zoomResetBtn.addEventListener('click', resetZoom);
+            
+            // Mouse pan
+            elements.container.addEventListener('mousedown', startPan);
+            elements.container.addEventListener('mousemove', updatePan);
+            elements.container.addEventListener('mouseup', endPan);
+            elements.container.addEventListener('mouseleave', endPan);
+            
+            // Mouse wheel zoom
+            elements.container.addEventListener('wheel', handleWheel, { passive: false });
+            
+            // Touch pan and pinch
+            elements.container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    startPan(e);
+                } else if (e.touches.length === 2) {
+                    endPan();
+                }
+            });
+            elements.container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    updatePan(e);
+                } else if (e.touches.length === 2) {
+                    handlePinch(e);
+                }
+            });
+            elements.container.addEventListener('touchend', (e) => {
+                if (e.touches.length === 0) {
+                    endPan();
+                    endPinch();
+                }
+            });
+            
+            // Node tooltips
+            const nodeElements = document.querySelectorAll('.pipeline-node');
+            nodeElements.forEach(node => {
+                node.addEventListener('mouseenter', () => showNodeTooltip(node));
+                node.addEventListener('mousemove', updateTooltipPosition);
+                node.addEventListener('mouseleave', hideNodeTooltip);
+                
+                // Keyboard focus
+                node.addEventListener('focus', () => showNodeTooltip(node));
+                node.addEventListener('blur', hideNodeTooltip);
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', handleKeyboard);
+            
+            // Window resize
+            window.addEventListener('resize', debounceDrawArrows);
+        }
+
+        /**
+         * Main initialization function
+         */
+        function initialize() {
+            initializeElements();
+            setupEventListeners();
             loadPipelineData();
             drawFlowArrows();
+            updateZoomDisplay();
             
-            // Auto-refresh data every 30 seconds
-            refreshInterval = setInterval(() => {
-                loadPipelineData();
-            }, 30000);
-        });
+            // Auto-refresh data
+            setInterval(loadPipelineData, CONFIG.data.refreshInterval);
+        }
 
-        window.addEventListener('resize', () => {
-            drawFlowArrows();
-        });
+        // Start when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
 
-        // Clean up interval on page unload to prevent memory leaks
+        // Cleanup on page unload
         window.addEventListener('beforeunload', () => {
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
+            if (state.animationFrame) {
+                cancelAnimationFrame(state.animationFrame);
             }
         });
     </script>

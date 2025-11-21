@@ -397,6 +397,26 @@
         .pipeline-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--nuview-red); }
         .pipeline-tooltip.show { opacity: 1; }
         
+        /* Table wrapper for horizontal scroll on mobile */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+        }
+        
+        /* Respect user motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .sidebar,
+            .program-card,
+            .matrix-table tbody tr,
+            .section,
+            .pipeline-stage,
+            .matrix-link-btn {
+                animation: none;
+                transition: none;
+            }
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 1200px) {
             .main-content {
@@ -484,7 +504,12 @@
 </head>
 <body>
 
-<nav class="sidebar">
+<!-- Mobile Menu Toggle -->
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+    <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+</button>
+
+<nav class="sidebar" id="sidebar">
     <h3 style="padding-left:1rem; color:var(--nuview-navy); font-weight:800;">NUVIEW INTEL</h3>
     <a href="#overview" class="active"><i class="bi bi-house-door"></i> Overview</a>
     <a href="#top-opportunities"><i class="bi bi-trophy"></i> Top 10 Matrix</a>
@@ -805,7 +830,12 @@ function getUrgencyBadge(urgency) {
     return badges[urgency || 'future'] || badges['future'];
 }
 
-// Render Top 10 Opportunities Matrix
+/**
+ * Render the Top 10 Opportunities Matrix
+ * Shows highest-value opportunities across all categories
+ * Sorted by valueUSD in descending order
+ * Includes proper accessibility attributes (ARIA roles and labels)
+ */
 function renderTopOpportunities() {
     if (!programsData || !programsData.programs) return;
     
@@ -993,7 +1023,12 @@ function updateOverview() {
     }
 }
 
-// Global search functionality - FIX: use e.target.value instead of this.value
+/**
+ * Setup global search functionality
+ * Searches across all program cards based on searchable text attributes
+ * Shows/hides cards based on search match
+ * Search is case-insensitive and matches partial strings
+ */
 function setupGlobalSearch() {
     const searchInput = document.getElementById('globalSearch');
     if (!searchInput) return;
@@ -1115,13 +1150,24 @@ async function loadPrograms() {
     }
 }
 
+/**
+ * ============================================
+ * INITIALIZATION
+ * ============================================
+ */
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadPrograms();
     initializePipelineTooltips();
 });
 
-// Pipeline stage tooltips
+/**
+ * Initialize pipeline stage tooltips
+ * Displays detailed descriptions of each pipeline stage on hover
+ * Tooltips include: Data Sources, Processing Engine, Scoring System, Priority Matrix
+ * Positioned dynamically based on mouse position
+ */
 function initializePipelineTooltips() {
     // Tooltip positioning constants
     const TOOLTIP_HORIZONTAL_OFFSET = 140; // Half tooltip width for centering
@@ -1175,6 +1221,66 @@ function initializePipelineTooltips() {
         });
     });
 }
+
+// Mobile menu toggle with keyboard support and focus management
+function toggleMobileMenu() {
+    const sidebar = document.getElementById('sidebar');
+    const isOpening = !sidebar.classList.contains('mobile-active');
+    
+    sidebar.classList.toggle('mobile-active');
+    
+    // Focus management for accessibility
+    if (isOpening) {
+        const firstLink = sidebar.querySelector('a');
+        if (firstLink) {
+            firstLink.focus();
+        }
+    } else {
+        // When closing, return focus to toggle button
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        if (toggle) {
+            toggle.focus();
+        }
+    }
+}
+
+// Create media query once for efficiency and listen for changes
+const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    if (!mobileMediaQuery.matches) return; // Only apply on mobile
+    
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+        if (sidebar.classList.contains('mobile-active')) {
+            sidebar.classList.remove('mobile-active');
+            if (toggle) {
+                toggle.focus();
+            }
+        }
+    }
+});
+
+// Keyboard support for mobile menu
+document.addEventListener('keydown', function(event) {
+    if (!mobileMediaQuery.matches) return; // Only apply on mobile
+    
+    const sidebar = document.getElementById('sidebar');
+    
+    // Close menu on Escape key
+    if (event.key === 'Escape' && sidebar.classList.contains('mobile-active')) {
+        sidebar.classList.remove('mobile-active');
+        
+        // Return focus to toggle button
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        if (toggle) {
+            toggle.focus();
+        }
+    }
+});
 </script>
 </body>
 </html>
