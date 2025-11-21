@@ -180,6 +180,50 @@ jobs:
           git push origin main
           
           echo -e "\033[92m✅ Successfully pushed to main branch\033[0m"
+          echo -e "\033[94mℹ️  Dashboard will auto-update via deploy-pages workflow\033[0m"
+      
+      - name: 📊 Create Success Notification
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const timestamp = new Date().toISOString();
+            const runUrl = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            const dashboardUrl = `https://jacobthielnuview.github.io/nuview-strategic-pipeline/`;
+            
+            const body = `## ✅ Daily Global Topographic Sweep - Success
+            
+            **Status:** ✅ COMPLETED
+            **Time:** ${timestamp}
+            **Workflow Run:** [View Run](${runUrl})
+            **Dashboard:** [View Dashboard](${dashboardUrl})
+            
+            ### Summary
+            - Data scraped successfully
+            - QC validation passed (100%)
+            - Changes pushed to main branch
+            - Dashboard will update automatically within 2 minutes
+            
+            ---
+            🤖 Automated notification from Daily Global Topographic Sweep workflow`;
+            
+            // Try to find an existing success notification issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'daily-update',
+              per_page: 1
+            });
+            
+            if (issues.data.length > 0) {
+              // Comment on existing issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                body: body
+              });
+            }
 
   notify:
     name: 📢 Send Notifications
