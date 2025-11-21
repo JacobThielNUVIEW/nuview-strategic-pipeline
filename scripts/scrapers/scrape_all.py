@@ -1,41 +1,199 @@
+"""
+NUVIEW Strategic Pipeline - Master Scraper
+Orchestrates all 34 specialized scrapers for topographic/LiDAR opportunities
+Focus: Space-based LiDAR for large-area topographic collections (bare-earth/DEM/DSM)
+"""
+
 import json
-import random
-from datetime import datetime, timezone
+import sys
 import os
+from datetime import datetime, timezone
+
+# Add scripts directory to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+# Import all scraper modules
+try:
+    from scrapers.federal_scrapers import (
+        USGSScraper, NASAScraper, NOAAScraper, USACEScraper, FEMAScraper,
+        NGAScraper, DIUScraper, USDAForestScraper, BLMScraper
+    )
+    from scrapers.international_scrapers import (
+        ESAScraper, JAXAScraper, CSAScraper, DLRScraper, ISROScraper,
+        UKSAScraper, CNSAScraper, ASIScraper
+    )
+    from scrapers.research_scrapers import (
+        NSFScraper, DOEScraper, NIHGeospatialScraper, EUHorizonScraper,
+        MITScraper, CaltechJPLScraper
+    )
+    from scrapers.commercial_state_scrapers import (
+        AmazonAWSScraper, GoogleEarthEngineScraper, ESRIScraper, MicrosoftPlanetaryScraper,
+        MaxarScraper, CaliforniaScraper, TexasScraper, FloridaScraper,
+        NYCScraper, WorldBankScraper, PlanetLabsScraper
+    )
+    SCRAPERS_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️  Warning: Could not import scrapers: {e}")
+    print("⚠️  Falling back to basic mode")
+    SCRAPERS_AVAILABLE = False
 
 OUTPUT_FILE = "data/opportunities.json"
 FORECAST_FILE = "data/forecast.json"
 
-OPPORTUNITIES = [
-    {"title":"USGS 3DEP LiDAR Acquisition 2026","agency":"USGS","amountUSD":217000000,"daysUntilDeadline":28,"category":"DaaS","deadline":"2025-12-15","next_action":"Submit Demo Brief"},
-    {"title":"NASA ROSES Omnibus Earth Observation","agency":"NASA","amountUSD":50000000,"daysUntilDeadline":120,"category":"R&D","deadline":"2026-03-01","next_action":"Proposal Dev"},
-    {"title":"ESA Digital Twin Earth Platform","agency":"ESA","amountUSD":8000000,"daysUntilDeadline":45,"category":"Platform","deadline":"2026-01-20","next_action":"Consortium Lead"},
-    {"title":"DIU Spaceborne LiDAR BAA","agency":"DIU","amountUSD":10000000,"daysUntilDeadline":15,"category":"R&D","deadline":"2025-12-01","next_action":"Submit Whitepaper"}
-]
+# Color codes for console output
+COLOR_GREEN = '\033[92m'
+COLOR_BLUE = '\033[94m'
+COLOR_RESET = '\033[0m'
 
-def get_urgency(days):
-    if days < 30: return "urgent"
-    if days < 90: return "near"
-    return "future"
+def log_info(msg):
+    print(f"{COLOR_BLUE}ℹ️  {msg}{COLOR_RESET}")
+
+def log_success(msg):
+    print(f"{COLOR_GREEN}✅ {msg}{COLOR_RESET}")
+
+def run_all_scrapers():
+    """
+    Run all 34 specialized scrapers and collect opportunities.
+    
+    Returns:
+        list: Combined list of all opportunities from all scrapers
+    """
+    log_info("Starting comprehensive topographic opportunity scan...")
+    log_info("Focus: Space-based LiDAR for large-area topographic collections")
+    log_info("")
+    
+    all_opportunities = []
+    scraper_stats = []
+    
+    if not SCRAPERS_AVAILABLE:
+        log_info("Running in basic mode with limited scrapers")
+        return []
+    
+    # Initialize all 34 scrapers
+    scrapers = [
+        # US Federal Agencies (9 scrapers)
+        USGSScraper(),
+        NASAScraper(),
+        NOAAScraper(),
+        USACEScraper(),
+        FEMAScraper(),
+        NGAScraper(),
+        DIUScraper(),
+        USDAForestScraper(),
+        BLMScraper(),
+        
+        # International Space Agencies (8 scrapers)
+        ESAScraper(),
+        JAXAScraper(),
+        CSAScraper(),
+        DLRScraper(),
+        ISROScraper(),
+        UKSAScraper(),
+        CNSAScraper(),
+        ASIScraper(),
+        
+        # Research Institutions (6 scrapers)
+        NSFScraper(),
+        DOEScraper(),
+        NIHGeospatialScraper(),
+        EUHorizonScraper(),
+        MITScraper(),
+        CaltechJPLScraper(),
+        
+        # Commercial & State/Local (12 scrapers)
+        AmazonAWSScraper(),
+        GoogleEarthEngineScraper(),
+        ESRIScraper(),
+        MicrosoftPlanetaryScraper(),
+        MaxarScraper(),
+        CaliforniaScraper(),
+        TexasScraper(),
+        FloridaScraper(),
+        NYCScraper(),
+        WorldBankScraper(),
+        PlanetLabsScraper(),
+    ]
+    
+    # Run each scraper
+    total_scrapers = len(scrapers)
+    log_info(f"Running {total_scrapers} specialized scrapers...")
+    log_info("")
+    
+    for i, scraper in enumerate(scrapers, 1):
+        try:
+            log_info(f"[{i}/{total_scrapers}] Running {scraper.name}...")
+            opportunities = scraper.scrape()
+            count = len(opportunities)
+            all_opportunities.extend(opportunities)
+            
+            scraper_stats.append({
+                "scraper": scraper.name,
+                "source_type": scraper.source_type,
+                "country": scraper.country,
+                "opportunities_found": count
+            })
+            
+            log_success(f"  {scraper.name}: {count} opportunities collected")
+            
+        except Exception as e:
+            log_info(f"  ⚠️  {scraper.name}: Error - {str(e)}")
+            scraper_stats.append({
+                "scraper": scraper.name,
+                "source_type": scraper.source_type,
+                "country": scraper.country,
+                "opportunities_found": 0,
+                "error": str(e)
+            })
+    
+    log_info("")
+    log_success(f"Scraping complete: {len(all_opportunities)} total opportunities from {total_scrapers} sources")
+    
+    return all_opportunities, scraper_stats
 
 def run_pipeline():
-    print("🕷️  RUNNING DAILY INTEL UPDATE...")
+    """Main pipeline execution"""
+    print("=" * 80)
+    log_info("🕷️  NUVIEW STRATEGIC PIPELINE - DAILY GLOBAL TOPOGRAPHIC SWEEP")
+    print("=" * 80)
+    log_info("")
+    
     current_time = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
     
-    processed = []
-    for opp in OPPORTUNITIES:
-        clean = opp['agency'].lower().replace(' ', '-').replace('/', '-')
-        opp["id"] = f"{clean}-{random.randint(100,999)}"
-        opp["scrapedAt"] = current_time
-        opp["pillar"] = "Federal"
-        opp["forecast_value"] = f"${opp['amountUSD']:,}"
-        opp["link"] = "https://sam.gov"
-        opp["timeline"] = {
-            "daysUntil": opp["daysUntilDeadline"],
-            "urgency": get_urgency(opp["daysUntilDeadline"])
-        }
-        opp["funding"] = {"amountUSD": opp["amountUSD"]}
-        processed.append(opp)
+    # Ensure data directory exists
+    os.makedirs('data', exist_ok=True)
+    
+    # Run all scrapers
+    if SCRAPERS_AVAILABLE:
+        opportunities, scraper_stats = run_all_scrapers()
+    else:
+        # Fallback: Basic opportunities for testing
+        log_info("Using basic test data...")
+        opportunities = []
+        scraper_stats = []
+    
+    # If no opportunities from scrapers, use minimal test data
+    if len(opportunities) == 0:
+        log_info("No opportunities collected, using test data")
+        opportunities = [
+            {
+                "id": "usgs-test",
+                "title": "USGS 3DEP LiDAR Acquisition 2026",
+                "agency": "USGS",
+                "pillar": "Federal",
+                "category": "DaaS",
+                "amountUSD": 217000000,
+                "daysUntilDeadline": 28,
+                "deadline": "2025-12-15",
+                "next_action": "Submit Demo Brief",
+                "scrapedAt": current_time,
+                "forecast_value": "$217,000,000",
+                "link": "https://sam.gov",
+                "timeline": {"daysUntil": 28, "urgency": "urgent"},
+                "funding": {"amountUSD": 217000000},
+                "valueUSD": 217000000,
+                "urgency": "urgent"
+            }
+        ]
     
     # Save opportunities.json
     final_opps_json = {
@@ -43,33 +201,50 @@ def run_pipeline():
             "market_val": "14.13",
             "cagr": "19.43",
             "updated": current_time,
-            "totalCount": len(processed)
+            "totalCount": len(opportunities),
+            "scrapers_run": len(scraper_stats) if scraper_stats else 1
         },
-        "opportunities": processed
+        "opportunities": opportunities
     }
     
-    with open(OUTPUT_FILE, 'w') as f:
-        json.dump(final_opps_json, f, indent=2)
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+        json.dump(final_opps_json, f, indent=2, ensure_ascii=False)
     
-    # --- 2. GENERATE MARKET FORECAST (forecast.json) ---
-    # Using pre-calculated values for consistency and simplicity.
+    log_success(f"Saved {len(opportunities)} opportunities to {OUTPUT_FILE}")
+    
+    # Save scraper statistics if available
+    if scraper_stats:
+        stats_file = "data/scraper_stats.json"
+        with open(stats_file, 'w', encoding='utf-8') as f:
+            json.dump({
+                "timestamp": current_time,
+                "total_scrapers": len(scraper_stats),
+                "total_opportunities": len(opportunities),
+                "scrapers": scraper_stats
+            }, f, indent=2, ensure_ascii=False)
+        log_success(f"Saved scraper statistics to {stats_file}")
+    
+    # Generate market forecast (forecast.json)
     forecast_data = {
         "current_year": 2025,
         "current_value": 3.27,
         "forecast_2030": 403.0,
         "cagr_pct": 4.3,
         "legislative_targets": [
-             {"bill": "H.R. 187 (MAPWaters)", "impact": "Water data mandate"}
+            {"bill": "H.R. 187 (MAPWaters)", "impact": "Water data mandate"},
+            {"bill": "Infrastructure Investment and Jobs Act", "impact": "3DEP expansion funding"}
         ]
     }
     
-    # Save forecast.json
-    with open(FORECAST_FILE, 'w') as f:
+    with open(FORECAST_FILE, 'w', encoding='utf-8') as f:
         json.dump(forecast_data, f, indent=2)
-        
-    print(f"✅ DATA SYNCED: {len(processed)} opportunities and FORECAST data saved.")
+    
+    log_success(f"Saved market forecast to {FORECAST_FILE}")
+    
+    log_info("")
+    print("=" * 80)
+    log_success("🎯 DAILY GLOBAL TOPOGRAPHIC SWEEP COMPLETE")
+    print("=" * 80)
 
 if __name__ == "__main__":
-    # Ensure data directory exists before trying to save files
-    os.makedirs('data', exist_ok=True)
     run_pipeline()
