@@ -23,6 +23,27 @@ SPACE_KEYWORDS = {'space', 'satellite', 'orbital'}
 LIDAR_KEYWORDS = {'lidar'}
 PLATFORM_KEYWORDS = {'platform'}
 
+# Priority scoring constants
+URGENCY_SCORES = {
+    'urgent': 30,
+    'near': 20,
+    'future': 10
+}
+
+VALUE_TIER_SCORES = {
+    'high': 30,      # >= $100M
+    'medium': 20,    # $10M - $100M
+    'low': 10        # < $10M
+}
+
+CATEGORY_SCORES = {
+    'DaaS': 15,
+    'Platform': 10,
+    'R&D': 5
+}
+
+SOURCE_VERIFIED_SCORE = 10
+
 def log_info(msg):
     print(f"{COLOR_BLUE}ℹ️  {msg}{COLOR_RESET}")
 
@@ -101,6 +122,12 @@ def get_value_usd(opp):
             return opp[field_name]
     return 0
 
+def is_valid_link(url):
+    """Check if a URL is valid and not a placeholder"""
+    if not url:
+        return False
+    return url not in ['#', '', 'none', 'None']
+
 def calculate_priority_score(opp):
     """
     Calculate priority score for an opportunity based on dashboard rules
@@ -117,43 +144,31 @@ def calculate_priority_score(opp):
     
     # Urgency scoring (30 max)
     urgency = opp.get('timeline', {}).get('urgency', opp.get('urgency', 'future'))
-    if urgency == 'urgent':
-        score += 30
-    elif urgency == 'near':
-        score += 20
-    elif urgency == 'future':
-        score += 10
+    score += URGENCY_SCORES.get(urgency, 10)  # Default to 'future' if unknown
     
     # Value tier scoring (30 max)
     value_usd = get_value_usd(opp)
     if value_usd >= 100_000_000:
-        score += 30
+        score += VALUE_TIER_SCORES['high']
     elif value_usd >= 10_000_000:
-        score += 20
+        score += VALUE_TIER_SCORES['medium']
     else:
-        score += 10
+        score += VALUE_TIER_SCORES['low']
     
     # Category scoring (15 max)
     category = opp.get('category', '')
-    if category == 'DaaS':
-        score += 15
-    elif category == 'Platform':
-        score += 10
-    elif category == 'R&D':
-        score += 5
+    score += CATEGORY_SCORES.get(category, 0)
     
     # Source verification scoring (10 max)
     if opp.get('source_verified', False):
-        score += 10
+        score += SOURCE_VERIFIED_SCORE
     else:
         # Check if has valid sources
         link = opp.get('link', '')
         budget_link = opp.get('budgetSourceLink', '')
         agency_link = opp.get('agencyLink', '')
-        if (link and link not in ['#', '']) or \
-           (budget_link and budget_link not in ['#', '']) or \
-           (agency_link and agency_link not in ['#', '']):
-            score += 10
+        if is_valid_link(link) or is_valid_link(budget_link) or is_valid_link(agency_link):
+            score += SOURCE_VERIFIED_SCORE
     
     return score
 

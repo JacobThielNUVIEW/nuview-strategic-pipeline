@@ -12,7 +12,7 @@ import sys
 from datetime import datetime, timezone
 
 import pandas as pd
-from jsonschema import Draft7Validator, ValidationError, validate
+from jsonschema import Draft7Validator, validate
 
 # Required fields for opportunities
 REQUIRED_OPP_FIELDS = ['id', 'title', 'agency', 'pillar', 'category', 'forecast_value',
