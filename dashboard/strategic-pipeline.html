@@ -155,7 +155,7 @@
         responsiveLayout: "collapse",
         columns: [
           {title:"ID", field:"id", width:80},
-          {title:"Title", field:"title", formatter:"link", formatterParams:{urlField:"link", target:"_blank"}},
+          {title:"Title", field:"title", formatter:"link", formatterParams:{urlField:"link", target:"_blank", rel:"noopener noreferrer"}},
           {title:"Agency", field:"agency"},
           {title:"Value", field:"valueUSD", formatter: cell => {
             const val = cell.getValue() || cell.getRow().getData().amountUSD;
@@ -190,25 +190,52 @@
       document.getElementById('opportunities-table').innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
     });
 
+  function escapeHtml(text) {
+    if (!text) return '';
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.toString().replace(/[&<>"']/g, m => map[m]);
+  }
+
   function showDetail(row) {
     const d = document.getElementById('detail-content');
     const value = row.valueUSD || row.amountUSD || 0;
     const numValue = parseFloat(value);
     const formattedValue = !isNaN(numValue) && numValue > 0 ? '$' + numValue.toLocaleString() : 'Undisclosed';
     
+    // Escape all user-provided content to prevent XSS
+    const title = escapeHtml(row.title);
+    const agency = escapeHtml(row.agency);
+    const category = escapeHtml(row.category);
+    const pillar = escapeHtml(row.pillar);
+    const deadline = row.deadline ? escapeHtml(new Date(row.deadline).toLocaleDateString()) : 'Open';
+    const daysUntil = row.daysUntilDeadline !== undefined ? escapeHtml(row.daysUntilDeadline) : 'N/A';
+    const urgency = escapeHtml(row.urgency);
+    const description = escapeHtml(row.description);
+    const nextAction = escapeHtml(row.next_action);
+    
+    // Validate URLs before using them
+    const link = row.link && row.link !== '#' ? escapeHtml(row.link) : null;
+    const agencyLink = row.agencyLink && row.agencyLink !== '#' ? escapeHtml(row.agencyLink) : null;
+    
     d.innerHTML = `
-      <h3>${row.title}</h3>
-      <p><strong>Agency:</strong> ${row.agency}</p>
-      <p><strong>Category:</strong> ${row.category || 'N/A'}</p>
-      <p><strong>Pillar:</strong> ${row.pillar || 'N/A'}</p>
+      <h3>${title}</h3>
+      <p><strong>Agency:</strong> ${agency}</p>
+      <p><strong>Category:</strong> ${category || 'N/A'}</p>
+      <p><strong>Pillar:</strong> ${pillar || 'N/A'}</p>
       <p><strong>Value:</strong> ${formattedValue}</p>
-      <p><strong>Deadline:</strong> ${row.deadline ? new Date(row.deadline).toLocaleDateString() : 'Open'}</p>
-      <p><strong>Days Until:</strong> ${row.daysUntilDeadline !== undefined ? row.daysUntilDeadline : 'N/A'}</p>
-      <p><strong>Urgency:</strong> ${row.urgency || 'N/A'}</p>
-      <p><strong>Description:</strong><br>${row.description || 'No description available'}</p>
-      <p><strong>Next Action:</strong><br>${row.next_action || 'No action specified'}</p>
-      ${row.link && row.link !== '#' ? `<a href="${row.link}" target="_blank" class="btn btn-outline-light mt-3">View Source <i class="bi bi-box-arrow-up-right"></i></a>` : ''}
-      ${row.agencyLink && row.agencyLink !== '#' ? `<a href="${row.agencyLink}" target="_blank" class="btn btn-outline-light mt-3 ms-2">Agency Site <i class="bi bi-box-arrow-up-right"></i></a>` : ''}
+      <p><strong>Deadline:</strong> ${deadline}</p>
+      <p><strong>Days Until:</strong> ${daysUntil}</p>
+      <p><strong>Urgency:</strong> ${urgency || 'N/A'}</p>
+      <p><strong>Description:</strong><br>${description || 'No description available'}</p>
+      <p><strong>Next Action:</strong><br>${nextAction || 'No action specified'}</p>
+      ${link ? `<a href="${link}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light mt-3">View Source <i class="bi bi-box-arrow-up-right"></i></a>` : ''}
+      ${agencyLink ? `<a href="${agencyLink}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light mt-3 ms-2">Agency Site <i class="bi bi-box-arrow-up-right"></i></a>` : ''}
     `;
     document.getElementById('detail-panel').style.transform = 'translateX(0)';
   }

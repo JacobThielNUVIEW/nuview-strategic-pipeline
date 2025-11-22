@@ -130,10 +130,21 @@ The dashboard loads external libraries from CDN providers. For production deploy
    ```
 3. Generate hashes using: `openssl dgst -sha384 -binary <file> | openssl base64 -A`
 
+### XSS Protection
+- All user-provided data is HTML-escaped before rendering
+- Uses dedicated `escapeHtml()` function to sanitize strings
+- Prevents script injection through opportunity titles, descriptions, etc.
+
+### External Links
+- All external links include `rel="noopener noreferrer"` attributes
+- Prevents opened pages from accessing window.opener
+- Protects against tabnabbing attacks
+
 ### Data Validation
 - All numeric values are validated before display
 - Date parsing includes validation checks
 - Error messages are specific to the failure type
+- URL validation before rendering links
 
 ## Support
 
