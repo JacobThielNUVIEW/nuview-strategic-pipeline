@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NUVIEW Strategic Pipeline</title>
+  
+  <!-- Bootstrap 5 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  
+  <!-- Tabulator -->
+  <link href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator_bootstrap5.min.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js"></script>
+  
+  <!-- Drawflow (n8n style) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/drawflow@0.2.1/dist/drawflow.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/drawflow@0.2.1/dist/drawflow.min.js"></script>
+  
+  <style>
+    body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; font-family: 'Segoe UI', sans-serif; }
+    .sidebar { background: rgba(15,23,42,0.95); backdrop-filter: blur(10px); border-right: 1px solid #334155; transition: all 0.3s; }
+    .sidebar.collapsed { width: 60px; }
+    .sidebar.collapsed .nav-text { display: none; }
+    .sidebar.collapsed .logo-text { display: none; }
+    .nav-link { color: #94a3b8; border-left: 3px solid transparent; }
+    .nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.05); border-left-color: #ef4444; }
+    .badge-red { background: #ef4444; }
+    .table-dark { --bs-table-bg: #1e293b; --bs-table-hover-bg: #334155; }
+    #detail-panel { background: #1e293b; border-left: 1px solid #334155; }
+    .red-accent { color: #ef4444; }
+    #flow-container { height: 600px; border: 1px solid #334155; border-radius: 12px; overflow: hidden; }
+  </style>
+</head>
+<body class="h-full">
+
+<div class="d-flex h-full">
+  <!-- Left Sidebar -->
+  <div id="sidebar" class="sidebar position-fixed start-0 top-0 h-100 d-flex flex-column p-3" style="width: 280px; z-index: 1000;">
+    <div class="d-flex align-items-center mb-4">
+      <h4 class="text-white mb-0 logo-text">NUVIEW</h4>
+      <button id="toggle-sidebar" class="btn btn-link text-white ms-auto"><i class="bi bi-list"></i></button>
+    </div>
+    <nav class="nav flex-column flex-grow-1">
+      <a class="nav-link active" href="#summary"><i class="bi bi-speedometer2 me-2"></i><span class="nav-text">Executive Summary</span></a>
+      <a class="nav-link" href="#all"><i class="bi bi-table me-2"></i><span class="nav-text">All Opportunities</span></a>
+      <a class="nav-link" href="#space"><i class="bi bi-rocket me-2"></i><span class="nav-text">Space Systems</span></a>
+      <a class="nav-link" href="#daas"><i class="bi bi-cloud me-2"></i><span class="nav-text">DaaS / Geoint</span></a>
+      <a class="nav-link" href="#funding"><i class="bi bi-currency-dollar me-2"></i><span class="nav-text">Funding & Grants</span></a>
+      <a class="nav-link" href="#forecast"><i class="bi bi-calendar3 me-2"></i><span class="nav-text">Forecast Calendar</span></a>
+      <a class="nav-link" href="#matrix"><i class="bi bi-grid-3x3-gap me-2"></i><span class="nav-text">Pipeline Matrix</span></a>
+      <a class="nav-link" href="#how"><i class="bi bi-diagram-3 me-2"></i><span class="nav-text">How It Works</span></a>
+    </nav>
+    <div class="text-center text-muted small">Last refresh: <span id="last-update">-</span></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-grow-1" style="margin-left: 280px; transition: all 0.3s;">
+    <div class="container-fluid py-4 px-5">
+
+      <!-- Executive Summary -->
+      <div id="summary" class="section">
+        <h1 class="display-5 fw-bold text-white mb-4">Executive Summary</h1>
+        <div class="row g-4">
+          <div class="col-md-3"><div class="p-4 bg-gradient text-white rounded shadow" style="background: linear-gradient(135deg,#ef4444,#991b1b);"><h3 id="total-opps">0</h3><small>Total Opportunities</small></div></div>
+          <div class="col-md-3"><div class="p-4 bg-dark rounded shadow"><h3 id="today-new">0</h3><small>New Today</small></div></div>
+          <div class="col-md-3"><div class="p-4 bg-dark rounded shadow"><h3 id="high-value">0</h3><small>> $10M</small></div></div>
+          <div class="col-md-3"><div class="p-4 bg-dark rounded shadow"><h3 id="closing-soon">0</h3><small>Due < 90 days</small></div></div>
+        </div>
+      </div>
+
+      <!-- Main Table View -->
+      <div id="all" class="section mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="text-white">All Opportunities</h2>
+          <button class="btn btn-outline-light" onclick="exportToCSV()"><i class="bi bi-download"></i> Export CSV</button>
+        </div>
+        <div id="opportunities-table"></div>
+      </div>
+
+      <!-- How It Works – Drawflow -->
+      <div id="how" class="section mt-5">
+        <h2 class="text-white mb-4">How It Works – Fully Automated Pipeline</h2>
+        <div id="drawflow" class="position-relative" style="height: 660px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Right Slide-over Detail Panel -->
+  <div id="detail-panel" class="position-fixed top-0 end-0 h-100 bg-dark text-white p-4 overflow-auto" style="width: 420px; transform: translateX(100%); transition: 0.4s; z-index: 2000;">
+    <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3" onclick="closeDetail()"></button>
+    <div id="detail-content"><div class="text-center mt-5 text-muted">Click a row to view details</div></div>
+  </div>
+</div>
+
+<script>
+  // Toggle sidebar
+  document.getElementById('toggle-sidebar').onclick = () => {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+    document.querySelector('.flex-grow-1').style.marginLeft = 
+      document.getElementById('sidebar').classList.contains('collapsed') ? '60px' : '280px';
+  };
+
+  // Load data
+  let opportunities = [];
+  let tableInstance = null;
+
+  fetch('../data/opportunities.json')
+    .then(r => r.json())
+    .then(data => {
+      opportunities = data.opportunities || [];
+      const meta = data.meta || {};
+      
+      // Update metadata
+      document.getElementById('last-update').textContent = meta.updated ? new Date(meta.updated).toLocaleString() : new Date().toLocaleString();
+      document.getElementById('total-opps').textContent = opportunities.length;
+      
+      // Calculate metrics
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const newToday = opportunities.filter(o => {
+        const scrapedDate = new Date(o.scrapedAt);
+        scrapedDate.setHours(0, 0, 0, 0);
+        return scrapedDate.getTime() === today.getTime();
+      }).length;
+      document.getElementById('today-new').textContent = newToday;
+      
+      const highValue = opportunities.filter(o => (o.valueUSD || o.amountUSD || 0) > 10000000).length;
+      document.getElementById('high-value').textContent = highValue;
+      
+      const closingSoon = opportunities.filter(o => {
+        const days = o.daysUntilDeadline;
+        return days !== undefined && days >= 0 && days < 90;
+      }).length;
+      document.getElementById('closing-soon').textContent = closingSoon;
+
+      // Initialize Tabulator
+      tableInstance = new Tabulator("#opportunities-table", {
+        data: opportunities,
+        layout: "fitColumns",
+        pagination: "local",
+        paginationSize: 25,
+        paginationSizeSelector: [25, 50, 100, "All"],
+        responsiveLayout: "collapse",
+        columns: [
+          {title:"ID", field:"id", width:80},
+          {title:"Title", field:"title", formatter:"link", formatterParams:{urlField:"link", target:"_blank"}},
+          {title:"Agency", field:"agency"},
+          {title:"Value", field:"valueUSD", formatter: cell => {
+            const val = cell.getValue() || cell.getRow().getData().amountUSD;
+            return val ? `$${Number(val).toLocaleString()}` : "N/A";
+          }},
+          {title:"Category", field:"category"},
+          {title:"Due", field:"deadline", sorter:"date", formatter: cell => cell.getValue() ? new Date(cell.getValue()).toLocaleDateString() : "Open"},
+          {title:"Days Until", field:"daysUntilDeadline", formatter: cell => {
+            const days = cell.getValue();
+            if (days === undefined || days === null) return "N/A";
+            return days;
+          }},
+          {title:"Urgency", field:"urgency", formatter: cell => {
+            const urgency = cell.getValue() || 'future';
+            const colors = {urgent: '#ef4444', near: '#f59e0b', future: '#10b981'};
+            return `<span style="color: ${colors[urgency] || colors.future}; font-weight: bold;">${urgency.toUpperCase()}</span>`;
+          }}
+        ],
+        rowClick: (e, row) => showDetail(row.getData())
+      });
+    })
+    .catch(err => {
+      console.error('Error loading data:', err);
+      document.getElementById('opportunities-table').innerHTML = '<div class="alert alert-danger">Error loading opportunities data</div>';
+    });
+
+  function showDetail(row) {
+    const d = document.getElementById('detail-content');
+    const value = row.valueUSD || row.amountUSD || 0;
+    d.innerHTML = `
+      <h3>${row.title}</h3>
+      <p><strong>Agency:</strong> ${row.agency}</p>
+      <p><strong>Category:</strong> ${row.category || 'N/A'}</p>
+      <p><strong>Pillar:</strong> ${row.pillar || 'N/A'}</p>
+      <p><strong>Value:</strong> ${value ? '$'+Number(value).toLocaleString() : 'Undisclosed'}</p>
+      <p><strong>Deadline:</strong> ${row.deadline ? new Date(row.deadline).toLocaleDateString() : 'Open'}</p>
+      <p><strong>Days Until:</strong> ${row.daysUntilDeadline !== undefined ? row.daysUntilDeadline : 'N/A'}</p>
+      <p><strong>Urgency:</strong> ${row.urgency || 'N/A'}</p>
+      <p><strong>Description:</strong><br>${row.description || 'No description available'}</p>
+      <p><strong>Next Action:</strong><br>${row.next_action || 'No action specified'}</p>
+      ${row.link && row.link !== '#' ? `<a href="${row.link}" target="_blank" class="btn btn-outline-light mt-3">View Source <i class="bi bi-box-arrow-up-right"></i></a>` : ''}
+      ${row.agencyLink && row.agencyLink !== '#' ? `<a href="${row.agencyLink}" target="_blank" class="btn btn-outline-light mt-3 ms-2">Agency Site <i class="bi bi-box-arrow-up-right"></i></a>` : ''}
+    `;
+    document.getElementById('detail-panel').style.transform = 'translateX(0)';
+  }
+
+  function closeDetail() {
+    document.getElementById('detail-panel').style.transform = 'translateX(100%)';
+  }
+
+  function exportToCSV() {
+    if (tableInstance) {
+      tableInstance.download("csv", "nuview-opportunities.csv");
+    }
+  }
+
+  // Drawflow – n8n style pipeline
+  var id = document.getElementById("drawflow");
+  const editor = new Drawflow(id);
+  editor.reroute = true;
+  editor.start();
+
+  editor.addNode("Trigger", 0, 1, 150, 100, "node", {}, "Daily 3 AM UTC<br>GitHub Actions", "node trigger");
+  editor.addNode("Scrape", 1, 1, 450, 100, "node", {}, "34 Global Sources<br>All scrapers run", "node");
+  editor.addNode("Raw", 1, 1, 750, 100, "node", {}, "Raw Data Bucket<br>data/raw/", "node");
+  editor.addNode("QC", 1, 1, 1050, 100, "node", {}, "QC Validator<br>100% pass required", "node success");
+  editor.addNode("Generate", 1, 1, 1350, 200, "node", {}, "Generate Programs<br>opportunities.json", "node");
+  editor.addNode("Deploy", 1, 1, 1650, 200, "node", {}, "Deploy Dashboard<br>GitHub Pages", "node success");
+  editor.addNode("Backup", 1, 0, 1650, 350, "node", {}, "Daily Backup<br>4 AM UTC", "node");
+
+  editor.addConnection(1,2,2,1);
+  editor.addConnection(2,3,3,1);
+  editor.addConnection(3,4,4,1);
+  editor.addConnection(4,5,5,1);
+  editor.addConnection(5,6,6,1);
+  editor.addConnection(5,7,7,1);
+
+  // Styling
+  document.head.insertAdjacentHTML("beforeend", `
+    <style>
+      .drawflow .drawflow-node { background: #1e293b; border: 2px solid #475569; color: white; }
+      .drawflow .drawflow-node.success { border-color: #10b981; }
+      .drawflow .drawflow-node.trigger { border-color: #ef4444; }
+      .drawflow-delete { display: none !important; }
+      .drawflow .connection .main-path { stroke: #60a5fa; stroke-width: 4px; }
+    </style>
+  `);
+
+  // Smooth scroll for navigation
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (this.getAttribute('href').startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          // Update active state
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        }
+      }
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
