@@ -33,6 +33,13 @@
     #detail-panel { background: #1e293b; border-left: 1px solid #334155; }
     .red-accent { color: #ef4444; }
     #flow-container { height: 600px; border: 1px solid #334155; border-radius: 12px; overflow: hidden; }
+    
+    /* Drawflow Styling */
+    .drawflow .drawflow-node { background: #1e293b; border: 2px solid #475569; color: white; }
+    .drawflow .drawflow-node.success { border-color: #10b981; }
+    .drawflow .drawflow-node.trigger { border-color: #ef4444; }
+    .drawflow-delete { display: none !important; }
+    .drawflow .connection .main-path { stroke: #60a5fa; stroke-width: 4px; }
   </style>
 </head>
 <body class="h-full">
@@ -174,7 +181,7 @@
         layout: "fitColumns",
         pagination: "local",
         paginationSize: 25,
-        paginationSizeSelector: [25, 50, 100, "All"],
+        paginationSizeSelector: [25, 50, 100, 250],
         responsiveLayout: "collapse",
         columns: [
           {title:"ID", field:"id", width:80},
@@ -195,9 +202,10 @@
             return days;
           }},
           {title:"Urgency", field:"urgency", formatter: cell => {
-            const urgency = escapeHtml(cell.getValue() || 'future');
+            const rawValue = cell.getValue() || 'future';
+            const urgency = escapeHtml(rawValue);
             const colors = {urgent: '#ef4444', near: '#f59e0b', future: '#10b981'};
-            const colorKey = (cell.getValue() || 'future').toLowerCase();
+            const colorKey = rawValue.toLowerCase();
             return `<span style="color: ${colors[colorKey] || colors.future}; font-weight: bold;">${urgency.toUpperCase()}</span>`;
           }}
         ],
@@ -283,17 +291,6 @@
   editor.addConnection(4,5,5,1);
   editor.addConnection(5,6,6,1);
   editor.addConnection(5,7,7,1);
-
-  // Styling
-  document.head.insertAdjacentHTML("beforeend", `
-    <style>
-      .drawflow .drawflow-node { background: #1e293b; border: 2px solid #475569; color: white; }
-      .drawflow .drawflow-node.success { border-color: #10b981; }
-      .drawflow .drawflow-node.trigger { border-color: #ef4444; }
-      .drawflow-delete { display: none !important; }
-      .drawflow .connection .main-path { stroke: #60a5fa; stroke-width: 4px; }
-    </style>
-  `);
 
   // Smooth scroll for navigation
   document.querySelectorAll('.nav-link').forEach(link => {
