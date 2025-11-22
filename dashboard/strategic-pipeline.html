@@ -98,6 +98,29 @@
 </div>
 
 <script>
+  // Helper functions for validation and security
+  function isValidUrl(url) {
+    if (!url || url === '#') return false;
+    try {
+      const urlObj = new URL(url);
+      return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  }
+
+  function escapeHtml(text) {
+    if (!text) return '';
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.toString().replace(/[&<>"']/g, m => map[m]);
+  }
+
   // Toggle sidebar
   document.getElementById('toggle-sidebar').onclick = () => {
     document.getElementById('sidebar').classList.toggle('collapsed');
@@ -172,9 +195,10 @@
             return days;
           }},
           {title:"Urgency", field:"urgency", formatter: cell => {
-            const urgency = cell.getValue() || 'future';
+            const urgency = escapeHtml(cell.getValue() || 'future');
             const colors = {urgent: '#ef4444', near: '#f59e0b', future: '#10b981'};
-            return `<span style="color: ${colors[urgency] || colors.future}; font-weight: bold;">${urgency.toUpperCase()}</span>`;
+            const colorKey = (cell.getValue() || 'future').toLowerCase();
+            return `<span style="color: ${colors[colorKey] || colors.future}; font-weight: bold;">${urgency.toUpperCase()}</span>`;
           }}
         ],
         rowClick: (e, row) => showDetail(row.getData())
@@ -190,17 +214,6 @@
       document.getElementById('opportunities-table').innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
     });
 
-  function escapeHtml(text) {
-    if (!text) return '';
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-    return text.toString().replace(/[&<>"']/g, m => map[m]);
-  }
 
   function showDetail(row) {
     const d = document.getElementById('detail-content');
@@ -219,9 +232,9 @@
     const description = escapeHtml(row.description);
     const nextAction = escapeHtml(row.next_action);
     
-    // Validate URLs before using them
-    const link = row.link && row.link !== '#' ? escapeHtml(row.link) : null;
-    const agencyLink = row.agencyLink && row.agencyLink !== '#' ? escapeHtml(row.agencyLink) : null;
+    // Validate URLs - don't escape them, just validate
+    const link = isValidUrl(row.link) ? row.link : null;
+    const agencyLink = isValidUrl(row.agencyLink) ? row.agencyLink : null;
     
     d.innerHTML = `
       <h3>${title}</h3>
