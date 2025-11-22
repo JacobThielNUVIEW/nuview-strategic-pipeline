@@ -115,6 +115,26 @@ Potential improvements for future versions:
 - Integration with CRM systems
 - User authentication and personalization
 
+## Security Considerations
+
+### CDN Resources
+The dashboard loads external libraries from CDN providers. For production deployment:
+
+1. **Add SRI (Subresource Integrity) hashes** to all CDN resources
+2. Example:
+   ```html
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+         rel="stylesheet"
+         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+         crossorigin="anonymous"/>
+   ```
+3. Generate hashes using: `openssl dgst -sha384 -binary <file> | openssl base64 -A`
+
+### Data Validation
+- All numeric values are validated before display
+- Date parsing includes validation checks
+- Error messages are specific to the failure type
+
 ## Support
 
 For issues or questions about the Strategic Pipeline Dashboard, contact the NUVIEW development team.

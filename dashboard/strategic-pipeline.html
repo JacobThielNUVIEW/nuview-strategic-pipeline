@@ -6,14 +6,17 @@
   <title>NUVIEW Strategic Pipeline</title>
   
   <!-- Bootstrap 5 + Icons -->
+  <!-- TODO: Add SRI integrity hashes for production deployment -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
   
   <!-- Tabulator -->
+  <!-- TODO: Add SRI integrity hashes for production deployment -->
   <link href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator_bootstrap5.min.css" rel="stylesheet"/>
   <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js"></script>
   
   <!-- Drawflow (n8n style) -->
+  <!-- TODO: Add SRI integrity hashes for production deployment -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/drawflow@0.2.1/dist/drawflow.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/drawflow@0.2.1/dist/drawflow.min.js"></script>
   
@@ -107,7 +110,12 @@
   let tableInstance = null;
 
   fetch('../data/opportunities.json')
-    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) {
+        throw new Error(`HTTP error! status: ${r.status}`);
+      }
+      return r.json();
+    })
     .then(data => {
       opportunities = data.opportunities || [];
       const meta = data.meta || {};
@@ -120,7 +128,9 @@
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const newToday = opportunities.filter(o => {
+        if (!o.scrapedAt) return false;
         const scrapedDate = new Date(o.scrapedAt);
+        if (isNaN(scrapedDate.getTime())) return false;
         scrapedDate.setHours(0, 0, 0, 0);
         return scrapedDate.getTime() === today.getTime();
       }).length;
@@ -149,7 +159,10 @@
           {title:"Agency", field:"agency"},
           {title:"Value", field:"valueUSD", formatter: cell => {
             const val = cell.getValue() || cell.getRow().getData().amountUSD;
-            return val ? `$${Number(val).toLocaleString()}` : "N/A";
+            if (!val) return "N/A";
+            const numVal = parseFloat(val);
+            if (isNaN(numVal)) return "N/A";
+            return `$${numVal.toLocaleString()}`;
           }},
           {title:"Category", field:"category"},
           {title:"Due", field:"deadline", sorter:"date", formatter: cell => cell.getValue() ? new Date(cell.getValue()).toLocaleDateString() : "Open"},
@@ -169,18 +182,26 @@
     })
     .catch(err => {
       console.error('Error loading data:', err);
-      document.getElementById('opportunities-table').innerHTML = '<div class="alert alert-danger">Error loading opportunities data</div>';
+      const errorMessage = err.message.includes('HTTP error') 
+        ? `Failed to load data: ${err.message}` 
+        : err.name === 'SyntaxError' 
+          ? 'Failed to parse JSON data' 
+          : 'Network error: Unable to load opportunities data';
+      document.getElementById('opportunities-table').innerHTML = `<div class="alert alert-danger">${errorMessage}</div>`;
     });
 
   function showDetail(row) {
     const d = document.getElementById('detail-content');
     const value = row.valueUSD || row.amountUSD || 0;
+    const numValue = parseFloat(value);
+    const formattedValue = !isNaN(numValue) && numValue > 0 ? '$' + numValue.toLocaleString() : 'Undisclosed';
+    
     d.innerHTML = `
       <h3>${row.title}</h3>
       <p><strong>Agency:</strong> ${row.agency}</p>
       <p><strong>Category:</strong> ${row.category || 'N/A'}</p>
       <p><strong>Pillar:</strong> ${row.pillar || 'N/A'}</p>
-      <p><strong>Value:</strong> ${value ? '$'+Number(value).toLocaleString() : 'Undisclosed'}</p>
+      <p><strong>Value:</strong> ${formattedValue}</p>
       <p><strong>Deadline:</strong> ${row.deadline ? new Date(row.deadline).toLocaleDateString() : 'Open'}</p>
       <p><strong>Days Until:</strong> ${row.daysUntilDeadline !== undefined ? row.daysUntilDeadline : 'N/A'}</p>
       <p><strong>Urgency:</strong> ${row.urgency || 'N/A'}</p>
@@ -203,8 +224,8 @@
   }
 
   // Drawflow – n8n style pipeline
-  var id = document.getElementById("drawflow");
-  const editor = new Drawflow(id);
+  const drawflowContainer = document.getElementById("drawflow");
+  const editor = new Drawflow(drawflowContainer);
   editor.reroute = true;
   editor.start();
 
