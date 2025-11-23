@@ -185,7 +185,14 @@
         responsiveLayout: "collapse",
         columns: [
           {title:"ID", field:"id", width:80},
-          {title:"Title", field:"title", formatter:"link", formatterParams:{urlField:"link", target:"_blank", rel:"noopener noreferrer"}},
+          {title:"Title", field:"title", formatter: (cell) => {
+            const title = cell.getValue();
+            const link = cell.getRow().getData().link;
+            if (isValidUrl(link)) {
+              return `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`;
+            }
+            return escapeHtml(title);
+          }},
           {title:"Agency", field:"agency"},
           {title:"Value", field:"valueUSD", formatter: cell => {
             const val = cell.getValue() || cell.getRow().getData().amountUSD;
@@ -240,9 +247,9 @@
     const description = escapeHtml(row.description);
     const nextAction = escapeHtml(row.next_action);
     
-    // Validate URLs - don't escape them, just validate
-    const link = isValidUrl(row.link) ? row.link : null;
-    const agencyLink = isValidUrl(row.agencyLink) ? row.agencyLink : null;
+    // Validate and escape URLs
+    const link = isValidUrl(row.link) ? escapeHtml(row.link) : null;
+    const agencyLink = isValidUrl(row.agencyLink) ? escapeHtml(row.agencyLink) : null;
     
     d.innerHTML = `
       <h3>${title}</h3>
