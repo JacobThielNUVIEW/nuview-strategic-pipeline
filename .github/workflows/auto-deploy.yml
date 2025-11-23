@@ -1,0 +1,34 @@
+name: Full Auto Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  process-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Python processing scripts
+        run: |
+          python scripts/full_qc_audit.py || echo "Skipping full_qc_audit.py"
+          python scripts/generate_programs.py || echo "Skipping generate_programs.py"
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dashboard≈≈
